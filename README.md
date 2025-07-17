@@ -14,3 +14,28 @@ https://github.com/oomlout/oomlout_oobb_version_4_generated_parts
 * Surface Mount Electronic Component Magazines -- https://github.com/oomlout/oomlout_oobb_bundle_smd_magazine
 * OOBB Character Decorations -- https://github.com/oomlout/oomlout_oobb_bundle_decorations
 
+
+## Testing
+
+Install dependencies:
+```bash
+pip install -r requirements.txt
+# clone the opsc helper library
+git clone https://github.com/oomlout/oomlout_opsc_version_3 opsc
+export PYTHONPATH=$PYTHONPATH:$(pwd)/opsc
+```
+
+Generate all test models:
+```bash
+python tests/generate_tests.py
+```
+
+When the outputs look correct, store them as the baseline:
+```bash
+python tests/save_baseline.py
+```
+
+To check for regressions later run:
+```bash
+python tests/compare_tests.py
+```
