@@ -16,6 +16,26 @@ def run_case(name, idx, objs):
     ensure(path)
     opsc.opsc_make_object(os.path.join(path, 'working.scad'), objs, mode='3dpr', save_type='none')
 
+    # Dump the generated object as yaml and json for comparison
+    import json
+    import yaml
+
+    yaml_path = os.path.join(path, 'item.yaml')
+    json_path = os.path.join(path, 'item.json')
+
+    with open(yaml_path, 'w') as f:
+        yaml.dump(objs, f, indent=2)
+
+    with open(json_path, 'w') as f:
+        json.dump(objs, f, indent=2)
+
+    # Verify that reloaded yaml and json are identical
+    with open(yaml_path) as f_yaml, open(json_path) as f_json:
+        yaml_data = yaml.safe_load(f_yaml)
+        json_data = json.load(f_json)
+
+    assert yaml_data == json_data, f"YAML and JSON mismatch for {name} case {idx}"
+
 def main():
     cases = {
         'oobb_cube_center': (
