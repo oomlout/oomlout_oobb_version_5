@@ -37,35 +37,50 @@ def initialize_variables():
         m = yaml.safe_load(f)
 
     ##### hole variables
-    vl["hole_radius_md5"] = [m["d5"]/2, m["d5"]/2, m["d5_3dpr"]/2]
-    vl["hole_radius_md75"] = [m["d75"]/2, m["d75"]/2, m["d75_3dpr"]/2]
-    vl["hole_radius_m1"] = [m["1"]/2, m["1"]/2, m["1_3dpr"]/2]
-    vl["hole_radius_m1_4"] = [m["1d4"]/2, m["1d4"]/2, m["1d4_3dpr"]/2]
-    vl["hole_radius_m1_4_tight"] = [m["1d4_tight"]/2, m["1d4_tight"]/2, m["1d4_tight"]/2]
-    vl["hole_radius_m1d5"] = [m["1d5"]/2, m["1d5"]/2, m["1d5_3dpr"]/2]
-    vl["hole_radius_m1_5"] = [m["1d5"]/2, m["1d5"]/2, m["1d5_3dpr"]/2]
-    vl["hole_radius_m1_6"] = [m["1_6"]/2, m["1_6"]/2, m["1_6_3dpr"]/2]
-    vl["hole_radius_m2"] = [m["2"]/2, m["2"]/2, m["2_3dpr"]/2]
-    vl["hole_radius_m2d5"] = [m["2d5"]/2, m["2d5"]/2, m["2d5_3dpr"]/2]
-    vl["hole_radius_m2_5"] = [m["2d5"]/2, m["2d5"]/2, m["2d5_3dpr"]/2]
-    vl["hole_radius_m3"] = [m["3"]/2, m["3"]/2, m["3_3dpr"]/2]
-    vl["hole_radius_m3_screw_wood"] = [m["3_screw_wood"]/2, m["3_screw_wood"]/2, m["3_screw_wood_3dpr"]/2]
-    vl["hole_radius_m3d5"] = [m["3d5"]/2, m["3d5"]/2, m["3d5_3dpr"]/2]
-    vl["hole_radius_m3d5_screw_wood"] = [m["3d5_screw_wood"]/2, m["3d5_screw_wood"]/2, m["3d5_screw_wood_3dpr"]/2]
-    vl["hole_radius_m3_5"] = [m["3d5"]/2, m["3d5"]/2, m["3d5_3dpr"]/2]
-    vl["hole_radius_m3_sort"] = [m["3"]/2+0.5, m["3"]/2+0.5, m["3_3dpr"]/2+0.5]
-    vl["hole_radius_m4"] = [m["4"]/2, m["4"]/2, m["4_3dpr"]/2]
-    vl["hole_radius_m4_screw_wood"] = [m["4_screw_wood"]/2, m["4_screw_wood"]/2, m["4_screw_wood_3dpr"]/2]
-    vl["hole_radius_m5"] = [m["5"]/2, m["5"]/2, m["5_3dpr"]/2]
-    vl["hole_radius_m5_screw_wood"] = [m["5_screw_wood"]/2, m["5_screw_wood"]/2, m["5_screw_wood_3dpr"]/2]
-    vl["hole_radius_m6"] = [m["6"]/2, m["6"]/2, m["6_3dpr"]/2]
-    vl["hole_radius_m6_screw_wood"] = [m["6_screw_wood"]/2, m["6_screw_wood"]/2, m["6_screw_wood_3dpr"]/2]
-    vl["hole_radius_m7"] = [m["7"]/2, m["7"]/2, m["7_3dpr"]/2]
-    vl["hole_radius_m8"] = [m["8"]/2, m["8"]/2, m["8_3dpr"]/2]
-    vl["hole_radius_m10"] = [m["10"]/2, m["10"]/2, m["10_3dpr"]/2]
-    vl["hole_radius_m11"] = [m["11"]/2, m["11"]/2, m["11_3dpr"]/2]
-    vl["hole_radius_m12"] = [m["12"]/2, m["12"]/2, m["12_3dpr"]/2]
-    vl["hole_radius_little_m6"] = [m["6"]/2, m["6"]/2, m["6_3dpr"]/2-.4]
+    hole_map = {
+        "md5": "d5",
+        "md75": "d75",
+        "m1": "1",
+        "m1_4": "1d4",
+        "m1_4_tight": "1d4_tight",
+        "m1d5": "1d5",
+        "m1_5": "1d5",
+        "m1_6": "1_6",
+        "m2": "2",
+        "m2d5": "2d5",
+        "m2_5": "2d5",
+        "m3": "3",
+        "m3_screw_wood": "3_screw_wood",
+        "m3d5": "3d5",
+        "m3d5_screw_wood": "3d5_screw_wood",
+        "m3_5": "3d5",
+        "m3_sort": "3",
+        "m4": "4",
+        "m4_screw_wood": "4_screw_wood",
+        "m5": "5",
+        "m5_screw_wood": "5_screw_wood",
+        "m6": "6",
+        "m6_screw_wood": "6_screw_wood",
+        "m7": "7",
+        "m8": "8",
+        "m10": "10",
+        "m11": "11",
+        "m12": "12",
+        "little_m6": "6",
+    }
+
+    extras_map = {
+        "m3_sort": (0.5, 0.5, 0.5),
+        "little_m6": (0, 0, -0.4),
+    }
+
+    for hole_name, radius_key in hole_map.items():
+        extra = extras_map.get(hole_name, (0, 0, 0))
+        vl[f"hole_radius_{hole_name}"] = [
+            m[radius_key] / 2 + extra[0],
+            m[radius_key] / 2 + extra[1],
+            m[f"{radius_key}_3dpr"] / 2 + extra[2],
+        ]
 
 
 
