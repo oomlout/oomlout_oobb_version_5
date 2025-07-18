@@ -142,6 +142,7 @@ def main():
     for name,(func, params_list) in cases.items():
         for idx, params in enumerate(params_list,1):
             objs = func(**params)
+            print(f"    running {name} case {idx}")
             run_case(name, idx, objs)
 
 if __name__ == '__main__':

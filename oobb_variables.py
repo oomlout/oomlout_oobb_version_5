@@ -10,13 +10,13 @@ def initialize_variables():
     variables_path = os.path.join(os.path.dirname(__file__), "variables")
 
     # base variables
-    with open(os.path.join(variables_path, "base.yaml")) as f:
+    with open(os.path.join(variables_path, "data\\variable\\base.yaml")) as f:
         base_vars = yaml.safe_load(f)
     for k, v in base_vars.items():
         oobb_base.set_variable(k, v)
 
     # bearing variables
-    with open(os.path.join(variables_path, "bearings.yaml")) as f:
+    with open(os.path.join(variables_path, "data\\variable\\bearings.yaml")) as f:
         bearing_d = yaml.safe_load(f)
 
 
@@ -33,7 +33,7 @@ def initialize_variables():
         vl[f'bearing_{bn}_od_catch'] = [vl[f'bearing_{bn}_od'][0]-clear/2, vl[f'bearing_{bn}_od'][1]-clear/2, vl[f'bearing_{bn}_od'][2]-clear/2]
     
     ##### radiuses
-    with open(os.path.join(variables_path, "radii.yaml")) as f:
+    with open(os.path.join(variables_path, "data\\variable\\radii.yaml")) as f:
         m = yaml.safe_load(f)
 
     ##### hole variables
@@ -70,7 +70,7 @@ def initialize_variables():
 
 
     # nut variables
-    with open(os.path.join(variables_path, "lists.yaml")) as f:
+    with open(os.path.join(variables_path, "data\\variable\\lists.yaml")) as f:
         lists = yaml.safe_load(f)
     nuts = lists.get("nuts", [])
 
