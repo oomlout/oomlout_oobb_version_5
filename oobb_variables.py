@@ -1,23 +1,62 @@
 import oobb
 import oobb_base
-import yaml
-import os
 
 def initialize_variables():
     modes = ["laser", "true", "3dpr"]
     vl = {}
-
-    variables_path = os.path.join(os.path.dirname(__file__), "variables")
-
     # base variables
-    with open(os.path.join(variables_path, "data\\variable\\base.yaml")) as f:
-        base_vars = yaml.safe_load(f)
-    for k, v in base_vars.items():
-        oobb_base.set_variable(k, v)
+    oobb_base.set_variable("osp", 15)
+    oobb_base.set_variable("osp_minus", 1)
+    oobb_base.set_variable("osp_hole", "m6")
+    oobb_base.set_variable("ospe", 15/2)
+    oobb_base.set_variable("ospe_minus", 1/2)
+    oobb_base.set_variable("ospe_hole", "m3")
 
     # bearing variables
-    with open(os.path.join(variables_path, "data\\variable\\bearings.yaml")) as f:
-        bearing_d = yaml.safe_load(f)
+    bearing_d = {}
+    
+    # experience
+    #   15 prints as 15 id
+    #   27 prints as 26.8 od  01 too big
+    #   25.6 prints as 25.4 od 02 too small
+
+    bearing_d["606"] = {"id":6, "id_e":0, "od":17, "od_e":0.075, "depth":6, "depth_e":0, "inner_holes":0}
+    bearing_d["676"] = {"id":6, "id_e":0, "od":10, "od_e":0.05, "depth":3, "depth_e":0, "inner_holes":0}
+    bearing_d["696"] = {"id":6, "id_e":0, "od":15, "od_e":0.05, "depth":5, "depth_e":0, "inner_holes":0}
+    bearing_d["6701"] = {"id":12, "id_e":0, "od":18, "od_e":0.2, "depth":4, "depth_e":0, "inner_holes":1}
+    bearing_d["6702"] = {"id":15, "id_e":0, "od":21, "od_e":0.2, "depth":4, "depth_e":0, "inner_holes":1}
+    bearing_d["6703"] = {"id":17, "id_e":0, "od":23, "od_e":0.2, "depth":4, "depth_e":0, "inner_holes":1}
+    bearing_d["6704"] = {"id":20, "id_e":0, "od":27, "od_e":0.2, "depth":4, "depth_e":-0.4, "inner_holes":1}
+    bearing_d["6705"] = {"id":25, "id_e":0, "od":32, "od_e":0.15, "depth":4, "depth_e":-0.4, "inner_holes":1}
+    bearing_d["6706"] = {"id":30, "id_e":0, "od":37, "od_e":0.2, "depth":4, "depth_e":0, "inner_holes":1}
+    bearing_d["6707"] = {"id":35, "id_e":0, "od":44, "od_e":0.2, "depth":5, "depth_e":0, "inner_holes":1}
+    bearing_d["6800"] = {"id":10, "id_e":0, "od":19, "od_e":0.2, "depth":5, "depth_e":0, "inner_holes":1}
+    bearing_d["6801"] = {"id":12, "id_e":0, "od":21, "od_e":0.2, "depth":5, "depth_e":0, "inner_holes":1}
+    bearing_d["6802"] = {"id":15, "id_e":0, "od":24, "od_e":0.2, "depth":5, "depth_e":0, "inner_holes":1}
+    bearing_d["6803"] = {"id":17, "id_e":0, "od":26, "od_e":0.2, "depth":5, "depth_e":0, "inner_holes":1}
+    bearing_d["6804"] = {"id":20, "id_e":0, "od":32, "od_e":0.2, "depth":7, "depth_e":0, "inner_holes":0}
+    bearing_d["6805"] = {"id":25, "id_e":0, "od":37, "od_e":0.2, "depth":7, "depth_e":0, "inner_holes":0}
+    bearing_d["6806"] = {"id":30, "id_e":0, "od":42, "od_e":0.2, "depth":7, "depth_e":0, "inner_holes":0}
+    bearing_d["6807"] = {"id":35, "id_e":0, "od":47, "od_e":0.2, "depth":7, "depth_e":0, "inner_holes":3}
+    bearing_d["6808"] = {"id":40, "id_e":0, "od":52, "od_e":0.2, "depth":7, "depth_e":0, "inner_holes":3}
+    bearing_d["6809"] = {"id":45, "id_e":0, "od":58, "od_e":0.2, "depth":7, "depth_e":0, "inner_holes":3}
+    bearing_d["6810"] = {"id":50, "id_e":0.1, "od":65, "od_e":0.2, "depth":7, "depth_e":-0.2, "inner_holes":3}
+    bearing_d["6811"] = {"id":55, "id_e":0, "od":72, "od_e":0.2, "depth":9, "depth_e":0, "inner_holes":3}
+    bearing_d["6812"] = {"id":60, "id_e":0, "od":78, "od_e":0.2, "depth":10, "depth_e":0, "inner_holes":4}
+    bearing_d["6813"] = {"id":65, "id_e":0, "od":85, "od_e":0.2, "depth":10, "depth_e":0, "inner_holes":4}
+    bearing_d["6814"] = {"id":70, "id_e":0, "od":90, "od_e":0.2, "depth":10, "depth_e":0, "inner_holes":4}
+    bearing_d["6815"] = {"id":75, "id_e":0, "od":95, "od_e":0.2, "depth":10, "depth_e":0, "inner_holes":4}
+    bearing_d["6816"] = {"id":80, "id_e":0, "od":100, "od_e":0.2, "depth":10, "depth_e":0, "inner_holes":5}
+    bearing_d["6817"] = {"id":85, "id_e":0, "od":110, "od_e":0.2, "depth":13, "depth_e":0, "inner_holes":5}
+    bearing_d["6818"] = {"id":90, "id_e":0, "od":115, "od_e":0.2, "depth":13, "depth_e":0, "inner_holes":5}
+    bearing_d["6819"] = {"id":95, "id_e":0, "od":120, "od_e":0.2, "depth":13, "depth_e":0, "inner_holes":5}
+    bearing_d["6820"] = {"id":100, "id_e":0, "od":125, "od_e":0.2, "depth":13, "depth_e":0, "inner_holes":0}
+    bearing_d["6821"] = {"id":105, "id_e":0, "od":130, "od_e":0.2, "depth":13, "depth_e":0, "inner_holes":0}
+    bearing_d["6822"] = {"id":110, "id_e":0, "od":140, "od_e":0.2, "depth":16, "depth_e":0, "inner_holes":0}
+    bearing_d["6824"] = {"id":120, "id_e":0, "od":150, "od_e":0.2, "depth":16, "depth_e":0, "inner_holes":0}
+    bearing_d["6826"] = {"id":130, "id_e":0, "od":165, "od_e":0.2, "depth":18, "depth_e":0, "inner_holes":0}
+    bearing_d["6828"] = {"id":140, "id_e":0, "od":175, "od_e":0.2, "depth":18, "depth_e":0, "inner_holes":0}
+    bearing_d["6830"] = {"id":150, "id_e":0, "od":190, "od_e":0.2, "depth":20, "depth_e":0, "inner_holes":0}
 
 
     for bn in bearing_d:
@@ -33,61 +72,93 @@ def initialize_variables():
         vl[f'bearing_{bn}_od_catch'] = [vl[f'bearing_{bn}_od'][0]-clear/2, vl[f'bearing_{bn}_od'][1]-clear/2, vl[f'bearing_{bn}_od'][2]-clear/2]
     
     ##### radiuses
-    with open(os.path.join(variables_path, "data\\variable\\radii.yaml")) as f:
-        m = yaml.safe_load(f)
+    m = {}
+    m["d5"] = 0.5
+    m["d5_3dpr"] = 0.7
+    m["d75"] = 0.75
+    m["d75_3dpr"] = 0.95
+    m["1"] = 1
+    m["1_3dpr"] = 1.2
+    m["1d4"] = 1.5
+    m["1d4_3dpr"] = 2
+    m["1d4_tight"] = 1.4
+    m["1d5"] = 1.6
+    m["1d5_3dpr"] = 1.8
+    m["1_5"] = 1.6
+    m["1_5_3dpr"] = 2
+    m["1_6"] = 1.7
+    m["1_6_3dpr"] = 2.2
+    m["2"] = 2
+    m["2_3dpr"] = 2.7
+    m["2d5"] = 2.5
+    m["2d5_3dpr"] = 3.1
+    m["3"] = 3
+    m["3_3dpr"] = 3.6
+    m["3_screw_wood"] = 4
+    m["3_screw_wood_3dpr"] = 4.25
+    m["3d5"] = 3.5
+    m["3d5_3dpr"] = 3.9
+    m["3d5_screw_wood"] = 4.5
+    m["3d5_screw_wood_3dpr"] = 4.75
+    m["4"] = 4
+    m["4_3dpr"] = 4.5
+    m["4_screw_wood"] = 5.2
+    m["4_screw_wood_3dpr"] = 5.75
+    m["5"] = 5
+    m["5_3dpr"] = 5.5
+    m["5_screw_wood"] = 4.5
+    m["5_screw_wood_3dpr"] = 5.5
+    m["6"] = 6
+    m["6_screw_wood"] = 4.5
+    m["6_screw_wood_3dpr"] = 6.5
+    m["6_3dpr"] = 6.5
+    m["7"] = 7
+    m["7_3dpr"] = 7.5
+    m["8"] = 8
+    m["8_3dpr"] = 8.5
+    m["10"] = 10
+    m["10_3dpr"] = 10.5
+    m["11"] = 11
+    m["11_3dpr"] = 12
+    m["12"] = 12
+    m["12_3dpr"] = 12.5
 
     ##### hole variables
-    hole_map = {
-        "md5": "d5",
-        "md75": "d75",
-        "m1": "1",
-        "m1_4": "1d4",
-        "m1_4_tight": "1d4_tight",
-        "m1d5": "1d5",
-        "m1_5": "1d5",
-        "m1_6": "1_6",
-        "m2": "2",
-        "m2d5": "2d5",
-        "m2_5": "2d5",
-        "m3": "3",
-        "m3_screw_wood": "3_screw_wood",
-        "m3d5": "3d5",
-        "m3d5_screw_wood": "3d5_screw_wood",
-        "m3_5": "3d5",
-        "m3_sort": "3",
-        "m4": "4",
-        "m4_screw_wood": "4_screw_wood",
-        "m5": "5",
-        "m5_screw_wood": "5_screw_wood",
-        "m6": "6",
-        "m6_screw_wood": "6_screw_wood",
-        "m7": "7",
-        "m8": "8",
-        "m10": "10",
-        "m11": "11",
-        "m12": "12",
-        "little_m6": "6",
-    }
-
-    extras_map = {
-        "m3_sort": (0.5, 0.5, 0.5),
-        "little_m6": (0, 0, -0.4),
-    }
-
-    for hole_name, radius_key in hole_map.items():
-        extra = extras_map.get(hole_name, (0, 0, 0))
-        vl[f"hole_radius_{hole_name}"] = [
-            m[radius_key] / 2 + extra[0],
-            m[radius_key] / 2 + extra[1],
-            m[f"{radius_key}_3dpr"] / 2 + extra[2],
-        ]
+    vl["hole_radius_md5"] = [m["d5"]/2, m["d5"]/2, m["d5_3dpr"]/2]
+    vl["hole_radius_md75"] = [m["d75"]/2, m["d75"]/2, m["d75_3dpr"]/2]
+    vl["hole_radius_m1"] = [m["1"]/2, m["1"]/2, m["1_3dpr"]/2]
+    vl["hole_radius_m1_4"] = [m["1d4"]/2, m["1d4"]/2, m["1d4_3dpr"]/2]
+    vl["hole_radius_m1_4_tight"] = [m["1d4_tight"]/2, m["1d4_tight"]/2, m["1d4_tight"]/2]
+    vl["hole_radius_m1d5"] = [m["1d5"]/2, m["1d5"]/2, m["1d5_3dpr"]/2]
+    vl["hole_radius_m1_5"] = [m["1d5"]/2, m["1d5"]/2, m["1d5_3dpr"]/2]
+    vl["hole_radius_m1_6"] = [m["1_6"]/2, m["1_6"]/2, m["1_6_3dpr"]/2]
+    vl["hole_radius_m2"] = [m["2"]/2, m["2"]/2, m["2_3dpr"]/2]
+    vl["hole_radius_m2d5"] = [m["2d5"]/2, m["2d5"]/2, m["2d5_3dpr"]/2]
+    vl["hole_radius_m2_5"] = [m["2d5"]/2, m["2d5"]/2, m["2d5_3dpr"]/2]
+    vl["hole_radius_m3"] = [m["3"]/2, m["3"]/2, m["3_3dpr"]/2]
+    vl["hole_radius_m3_screw_wood"] = [m["3_screw_wood"]/2, m["3_screw_wood"]/2, m["3_screw_wood_3dpr"]/2]
+    vl["hole_radius_m3d5"] = [m["3d5"]/2, m["3d5"]/2, m["3d5_3dpr"]/2]
+    vl["hole_radius_m3d5_screw_wood"] = [m["3d5_screw_wood"]/2, m["3d5_screw_wood"]/2, m["3d5_screw_wood_3dpr"]/2]
+    vl["hole_radius_m3_5_screw_wood"] = [m["3d5_screw_wood"]/2, m["3d5_screw_wood"]/2, m["3d5_screw_wood_3dpr"]/2]
+    vl["hole_radius_m3_5"] = [m["3d5"]/2, m["3d5"]/2, m["3d5_3dpr"]/2]
+    vl["hole_radius_m3_sort"] = [m["3"]/2+0.5, m["3"]/2+0.5, m["3_3dpr"]/2+0.5]
+    vl["hole_radius_m4"] = [m["4"]/2, m["4"]/2, m["4_3dpr"]/2]
+    vl["hole_radius_m4_screw_wood"] = [m["4_screw_wood"]/2, m["4_screw_wood"]/2, m["4_screw_wood_3dpr"]/2]
+    vl["hole_radius_m5"] = [m["5"]/2, m["5"]/2, m["5_3dpr"]/2]
+    vl["hole_radius_m5_screw_wood"] = [m["5_screw_wood"]/2, m["5_screw_wood"]/2, m["5_screw_wood_3dpr"]/2]
+    vl["hole_radius_m6"] = [m["6"]/2, m["6"]/2, m["6_3dpr"]/2]
+    vl["hole_radius_m6_screw_wood"] = [m["6_screw_wood"]/2, m["6_screw_wood"]/2, m["6_screw_wood_3dpr"]/2]
+    vl["hole_radius_m7"] = [m["7"]/2, m["7"]/2, m["7_3dpr"]/2]
+    vl["hole_radius_m8"] = [m["8"]/2, m["8"]/2, m["8_3dpr"]/2]
+    vl["hole_radius_m10"] = [m["10"]/2, m["10"]/2, m["10_3dpr"]/2]
+    vl["hole_radius_m11"] = [m["11"]/2, m["11"]/2, m["11_3dpr"]/2]
+    vl["hole_radius_m12"] = [m["12"]/2, m["12"]/2, m["12_3dpr"]/2]
+    vl["hole_radius_little_m6"] = [m["6"]/2, m["6"]/2, m["6_3dpr"]/2-.4]
 
 
 
     # nut variables
-    with open(os.path.join(variables_path, "data\\variable\\lists.yaml")) as f:
-        lists = yaml.safe_load(f)
-    nuts = lists.get("nuts", [])
+    nuts = ["m1d5", "m3", "m6"]
 
     #normal nuts AND BOLTS
     vl["nut_radius_m1d5"] = [3.2*1.154/2, 3.2*1.154/2, 3.5 * 1.154/2]    
@@ -105,6 +176,8 @@ def initialize_variables():
 
     vl["nut_radius_m2d5"] = [5*1.154/2, 5*1.154/2, 5.4 * 1.154/2]
     vl["nut_depth_m2d5"] = [1.9, 1.9, 2.1]
+    vl["nut_radius_m2_5"] = vl["nut_radius_m2d5"]
+    vl["nut_depth_m2_5"] = vl["nut_depth_m2d5"]
 
     vl["nut_radius_m3"] = [5.5*1.154/2, 5.5*1.154/2, 6 * 1.154/2]
     vl["standoff_radius_m3"] = [5.8*1.154/2, 5.8*1.154/2, 6.3 * 1.154/2]
@@ -213,7 +286,7 @@ def initialize_variables():
             pass
 
     # screw variables
-    screws = lists.get("screws", [])
+    screws = ["m1d5", "m3", "m6"]
 
     vl["screw_radius_m1d5"] = m["1d5"]/2, m["1d5"]/2, m["1d5_3dpr"]/2
     vl["screw_countersunk_radius_m1d5"] = [2.35/2, 2.5/2, 3/2]    
@@ -270,6 +343,13 @@ def initialize_variables():
     vl["screw_countersunk_radius_m3d5_screw_wood"] = [7.8/2, 7.8/2, 9/2]
     vl["screw_countersunk_height_m3d5_screw_wood"] = [4, 4, 4.2]
     vl["screw_countersunk_depth_m3d5_screw_wood"] = vl["screw_countersunk_height_m3d5_screw_wood"]
+
+    vl["screw_radius_m3_5_screw_wood"] = m["3d5"]/2, m["3d5"]/2, m["3d5_3dpr"]/2
+    vl["screw_countersunk_radius_m3_5_screw_wood"] = [7.8/2, 7.8/2, 9/2]
+    vl["screw_countersunk_height_m3_5_screw_wood"] = [4, 4, 4.2]
+    vl["screw_countersunk_depth_m3_5_screw_wood"] = vl["screw_countersunk_height_m3d5_screw_wood"]
+
+
 
     vl["screw_radius_m4_screw_wood"] = m["4"]/2, m["4"]/2, m["4_3dpr"]/2
     vl["screw_countersunk_radius_m4_screw_wood"] = [9.8/2, 10.8/2, 10.8/2]

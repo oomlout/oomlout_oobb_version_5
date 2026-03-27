@@ -111,7 +111,8 @@ def main(**kwargs):
     # tray
     #filter = "tray"
     #filter = "tray_03_05_90"
-    #filter = "tray_vertical_05_05_60"
+    #filter = "tray_vertical"
+    filter = "tray_vertical_9_width_1_height_30_mm_depth"
 
 
     # wheel
@@ -153,18 +154,14 @@ def main(**kwargs):
     #filter = "tape_measure"
     #filter = "tool_knife_utility_blade_disposal_can_olfa_dc_3"
     #filter = "tool_timer_80_mm_diameter_30_mm_depth_black"
-    filter = "caliper_digital"
+    #filter = "caliper_digital"
 
     #filter = ""
 
 
     oobb_make_sets.make_all(filter=filter)
 
-    #dump = False
-    dump = True
-    if dump:
-        oobb_base.dump("json")
-        oobb_base.dump("folder")
+    
 
     
     save_type = "none"
@@ -177,10 +174,16 @@ def main(**kwargs):
     
     
     #modes = ["laser", "3dpr", "true"]
-    modes = ["3dpr", "laser", "true"]
-    #modes = ["3dpr"]
+    #modes = ["3dpr", "laser", "true"]
+    modes = ["3dpr"]
     #modes = ["laser"]
     oobb_base.build_things(overwrite=overwrite, filter=filter, save_type=save_type, modes=modes)
+
+    #dump = False
+    dump = True
+    if dump:
+        oobb_base.dump("json")
+        oobb_base.dump("folder")
 
     generate_release = False
     #generate_release = True

@@ -5,7 +5,7 @@ import json
 def main(**kwargs):
     print("action_generate_release_laser_cut")
     pass
-    folder_things = "C:\\gh\\oomlout_oobb_version_4_generated_parts\\things"
+    folder_things = "C:\\gh\\oomlout_oobb_version_4_generated_parts\\parts"
     folder_release = "C:/gh/oomlout_oobb_release_laser_cut"
 
     #if folder doesn't exist clone in from github

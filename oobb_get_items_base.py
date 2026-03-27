@@ -358,6 +358,274 @@ def get_oobb_rounded_rectangle_hollow(**kwargs):
 
         return return_value_2        
 
+def get_oobb_rounded_rectangle_rounded(**kwargs):
+    extra = kwargs.get("extra", "")
+    pos = kwargs.get("pos", [0, 0, 0])
+    #rot = kwargs.get("rot",[0,0,0])
+    rot = [0,0,0]
+    radius = kwargs.get("radius", 5)
+    radius_rounded = kwargs.get("radius_rounded", 2.5)
+    size = kwargs.get("size", [20, 10, 5])
+    wid = size[0]
+    hei = size[1]
+    dep = size[2]
+    if True:
+
+        # setting up for rotation object
+        typ = kwargs.get("type", "p")
+        kwargs["type"] = "positive" #needs to be positive for the difference to work
+        rot_original = get_rot(**kwargs)   
+        kwargs.pop("rot", None)
+        kwargs.pop("rot_x", None)
+        kwargs.pop("rot_y", None)
+        kwargs.pop("rot_z", None)
+
+        # storing pos and popping it out to add it in rotation element     
+        pos_original = copy.deepcopy(copy.deepcopy(kwargs.get("pos", [0, 0, 0])))
+        pos_original_original = copy.deepcopy(pos_original)
+        kwargs.pop("pos", None)
+        pos = [0,0,0]
+        kwargs["pos"] = pos
+
+        return_value = []
+
+        
+        #main_piece
+        if True:
+            size_main = copy.deepcopy(size)
+            size_main[2] = size_main[2] - radius_rounded * 2
+
+            #positive_rounded_rectangle
+            p3 = copy.deepcopy(kwargs)
+            p3["shape"] = "rounded_rectangle"
+            p3["type"] = "positive"
+            p3["size"] = size_main
+            pos1 = copy.deepcopy(pos)
+            pos1[2] += radius_rounded
+            p3["pos"] = pos1
+            return_value.append(opsc.opsc_easy(**p3))
+        #top and bottom piece and rounding
+        shift_z_1 = 0
+        shift_z_2 = dep - radius_rounded
+        if True:
+            shift_z = dep/2 - radius_rounded/2
+            dep_2 = radius_rounded
+            wid_little = wid - radius_rounded * 2
+            hei_little = hei - radius_rounded * 2
+            dep_little = radius_rounded
+            size_little = [wid_little, hei_little, dep_little]
+            p3 = copy.deepcopy(kwargs)
+            p3["shape"] = "rounded_rectangle"
+            p3["type"] = "positive"
+            p3["size"] = size_little
+            p3["radius"] = radius - radius_rounded
+            poss = []
+            pos1 = copy.deepcopy(pos)
+            pos11 = copy.deepcopy(pos1)
+            pos11[2] += shift_z_1
+            poss.append(pos11)
+            pos12 = copy.deepcopy(pos1)
+            pos12[2] = shift_z_2
+            poss.append(pos12)
+            p4 = copy.deepcopy(p3)
+            p4["pos"] = pos11
+            return_value.append(opsc.opsc_easy(**p4))
+            p5 = copy.deepcopy(p3)
+            p5["pos"] = pos12
+            return_value.append(opsc.opsc_easy(**p5))
+            #cylinders
+            shift_x_cyl = wid/2 - radius_rounded
+            dep_cyl = hei - radius*2
+            dep_cyl_short = wid - radius*2
+            shift_y_cyl = dep_cyl/2
+            shift_z_cyl = dep_cyl/2 + radius_rounded
+            shift_x_cyl_short = -dep_cyl_short/2# - radius
+            shift_y_cyl_short = hei/2 - radius_rounded
+            shift_z_cyl_short = dep_cyl_short/2 + radius_rounded
+            if True:
+                #cylinder long                
+                rad_cyl = radius_rounded
+                p3 = copy.deepcopy(kwargs)
+                p3["shape"] = "oobb_cylinder"
+                p3["type"] = "positive"
+                p3["depth"] = dep_cyl
+                p3["radius"] = rad_cyl
+                pos1 = copy.deepcopy(pos)
+                pos1[0] += shift_x_cyl
+                pos1[1] += shift_y_cyl
+                pos1[2] += shift_z_cyl
+                pos11 = copy.deepcopy(pos1)
+                p3["pos"] = pos11
+                #p3["m"] = "#"
+                rot1 = copy.deepcopy(rot)
+                rot1[0] += 90
+                p3["rot"] = rot1
+                p3.pop("size", None)
+                return_value.append(oobb_base.oobb_easy(**p3))
+                p4 = copy.deepcopy(p3)
+                pos12 = copy.deepcopy(pos1)
+                pos12[0] += -(wid - radius_rounded*2)
+                p4["pos"] = pos12
+                return_value.append(oobb_base.oobb_easy(**p4))
+                p5 = copy.deepcopy(p3)
+                pos13 = copy.deepcopy(pos1)
+                pos13[2] += dep - radius_rounded*2
+                p5["pos"] = pos13
+                return_value.append(oobb_base.oobb_easy(**p5))
+                p6 = copy.deepcopy(p3)
+                pos14 = copy.deepcopy(pos1)
+                pos14[0] += -(wid - radius_rounded*2)
+                pos14[2] += dep - radius_rounded*2
+                p6["pos"] = pos14
+                return_value.append(oobb_base.oobb_easy(**p6))
+                #cylinder_short
+                rad_cyl = radius_rounded
+                p3 = copy.deepcopy(kwargs)
+                p3["shape"] = "oobb_cylinder"
+                p3["type"] = "positive"
+                p3["depth"] = dep_cyl_short
+                p3["radius"] = rad_cyl
+                pos1 = copy.deepcopy(pos)
+                pos1[0] += shift_x_cyl_short
+                pos1[1] += shift_y_cyl_short
+                pos1[2] += shift_z_cyl_short
+                pos11 = copy.deepcopy(pos1)
+                p3["pos"] = pos11
+                #p3["m"] = "#"
+                rot1 = copy.deepcopy(rot)
+                rot1[1] += 90
+                p3["rot"] = rot1
+                p3.pop("size", None)
+                return_value.append(oobb_base.oobb_easy(**p3))
+                p4 = copy.deepcopy(p3)
+                pos12 = copy.deepcopy(pos1)
+                pos12[1] += -(hei - radius_rounded*2)
+                p4["pos"] = pos12
+                return_value.append(oobb_base.oobb_easy(**p4))
+                p5 = copy.deepcopy(p3)
+                pos13 = copy.deepcopy(pos1)
+                pos13[2] += dep - radius_rounded*2
+                p5["pos"] = pos13
+                return_value.append(oobb_base.oobb_easy(**p5))
+                p6 = copy.deepcopy(p3)
+                pos14 = copy.deepcopy(pos1)
+                pos14[1] += -(hei - radius_rounded*2)
+                pos14[2] += dep - radius_rounded*2
+                p6["pos"] = pos14
+                return_value.append(oobb_base.oobb_easy(**p6))
+                #corner_spheres
+                if True:
+                    p3 = copy.deepcopy(kwargs)
+                    p3["shape"] = "oring"
+                    p3["depth"] = radius_rounded * 2
+                    p3["id"] = radius - radius_rounded*2
+                    pos1 = copy.deepcopy(pos)
+                    pos1[2] += radius_rounded
+                    pos11 = copy.deepcopy(pos1)
+                    pos11[0] += -wid/2 + radius
+                    pos11[1] += -hei/2 + radius
+                    pos11[2] += 0
+                    p3["pos"] = pos11
+                    p3.pop("size", None)
+                    #p3["m"] = "#"   
+                    return_value.append(oobb_base.oobb_easy(**p3))
+                    p4 = copy.deepcopy(p3)
+                    pos12 = copy.deepcopy(pos1)
+                    pos12[0] += wid/2 - radius
+                    pos12[1] += -hei/2 + radius
+                    p4["pos"] = pos12
+                    return_value.append(oobb_base.oobb_easy(**p4))
+                    p5 = copy.deepcopy(p3)
+                    pos13 = copy.deepcopy(pos1)
+                    pos13[0] += wid/2 - radius
+                    pos13[1] += hei/2 - radius
+                    p5["pos"] = pos13
+                    return_value.append(oobb_base.oobb_easy(**p5))
+                    p6 = copy.deepcopy(p3)
+                    pos14 = copy.deepcopy(pos1)
+                    pos14[0] += -wid/2 + radius
+                    pos14[1] += hei/2 - radius
+                    p6["pos"] = pos14
+                    return_value.append(oobb_base.oobb_easy(**p6))
+                    p7 = copy.deepcopy(p3)
+                    pos15 = copy.deepcopy(pos1)
+                    pos15[0] += -wid/2 + radius
+                    pos15[1] += -hei/2 + radius
+                    pos15[2] += dep - radius_rounded*2
+                    p7["pos"] = pos15
+                    return_value.append(oobb_base.oobb_easy(**p7))
+                    p8 = copy.deepcopy(p3)
+                    pos16 = copy.deepcopy(pos1)
+                    pos16[0] += wid/2 - radius
+                    pos16[1] += -hei/2 + radius
+                    pos16[2] += dep - radius_rounded*2
+                    p8["pos"] = pos16
+                    return_value.append(oobb_base.oobb_easy(**p8))
+                    p9 = copy.deepcopy(p3)
+                    pos17 = copy.deepcopy(pos1)
+                    pos17[0] += wid/2 - radius
+                    pos17[1] += hei/2 - radius
+                    pos17[2] += dep - radius_rounded*2
+                    p9["pos"] = pos17
+                    return_value.append(oobb_base.oobb_easy(**p9))
+                    p10 = copy.deepcopy(p3)
+                    pos18 = copy.deepcopy(pos1)
+                    pos18[0] += -wid/2 + radius
+                    pos18[1] += hei/2 - radius
+                    pos18[2] += dep - radius_rounded*2
+                    p10["pos"] = pos18
+                    return_value.append(oobb_base.oobb_easy(**p10))
+
+        
+        
+        #pos = copy.deepcopy(p3.get("pos", [0, 0, 0]))
+        #pos[2] += 50
+        #p3["pos"] = pos
+
+        
+        #p3["m"] = "#"
+        return_value.append(opsc.opsc_easy(**p3))
+
+        # packaging as a rotation object
+        return_value_2 = {}
+        return_value_2["type"]  = "rotation"
+        return_value_2["typetype"]  = typ
+        return_value_2["pos"] = pos_original
+        return_value_2["rot"] = rot_original
+        return_value_2["objects"] = return_value
+        return_value_2 = [return_value_2]
+
+        return return_value_2     
+
+
+#sphere with squash ability
+def get_oobb_sphere(**kwargs):
+    radius_1 = kwargs.get("radius_1", None)
+    if radius_1 != None:
+        radius = radius_1
+    else:
+        radius = kwargs.get("radius", 10)    
+    radius_2 = kwargs.get("radius_2", None)
+    if radius_2 == None:
+        radius_2 = radius    
+    pos = kwargs.get("pos", [0, 0, 0])
+    zz = kwargs.get("zz", "bottom")
+    depth = radius_1 * 2
+    #zz 
+    if zz == "bottom":
+        pos[2] += 0
+    elif zz == "top":
+        pos[2] += -depth
+    elif zz == "middle":
+        pos[2] += -depth/2
+
+    p3 = copy.deepcopy(kwargs)
+    p3["shape"] = "sphere"
+    p3["r"] = radius
+    sc = (radius_2 / radius_1) * 2
+    return_value = ([opsc.opsc_easy(**p3)])
+    return_value[0]["scale"] = [1,1,sc]
+    return return_value
 
 
 # cylinder
@@ -1541,6 +1809,7 @@ def get_oobb_nut(**kwargs):
     clearance = kwargs.get("clearance", "")
     hole = kwargs.get("hole", False) #whether or not to include a hole
     extra_clearance = kwargs.get("extra_clearance", 0)
+    clearance_tightness = kwargs.get("clearance_tightness", 0) #tight or loose
 
     # setting up for rotation object
     typ = kwargs.get("type", "p")
@@ -1577,6 +1846,7 @@ def get_oobb_nut(**kwargs):
         #    extra_str = f"_{extra}"
         
         r = oobb_base.gv(f"nut_radius_{l_string}{radius_name}{extra_str}", mode)
+        r = r + clearance_tightness
         p2.update({"r": r})
         
         #getting depth of nut
@@ -1798,8 +2068,7 @@ def get_oobb_screw(**kwargs):
         depth_clearance_top = 250       
         pos_for_overhang = [0, 0, 0]
         pos_base = [0, 0, 0]
-        # screw top      
-        #   
+        #socket_cap stuff 
         if style == "socket_cap" or style == "self_tapping":
             depth_head = oobb_base.gv(f'screw_{style}_height_{radius_name}', mode)
             
@@ -1826,6 +2095,7 @@ def get_oobb_screw(**kwargs):
             p3.pop("radius", None)
             #p3["m"] = ""
             return_value.append(oobb_base.oobb_easy(**p3))
+        #countersunk stuff
         if style == "countersunk":
             if zz == "top":
                 pass
@@ -1846,7 +2116,7 @@ def get_oobb_screw(**kwargs):
             p3["r1"] = oobb_base.gv(f"hole_radius_{radius_name}", mode)
             #p3["m"] = "#"
             return_value.extend(oobb_base.oobb_easy(**p3))   
-            clearance = kwargs.get("clearance", "")
+            #clearance = kwargs.get("clearance", "")
             if "top" in clearance:      
                       
                 depth_head = depth_clearance_top  
@@ -1863,7 +2133,6 @@ def get_oobb_screw(**kwargs):
                 p3.pop("radius", None)
                 #p3["m"] = ""
                 return_value.append(oobb_base.oobb_easy(**p3))  
-        
         # hole    
         if hole:
             radius = oobb_base.gv(f"hole_radius_{radius_name}", mode)
@@ -1885,14 +2154,15 @@ def get_oobb_screw(**kwargs):
         if nut_include:
             pos1 = copy.deepcopy(pos_for_overhang)
             p3 = copy.deepcopy(kwargs)
-            clearance = copy.deepcopy(clearance)
-            if "top" in clearance:
-                if clearance == "top":
+            clearance_copy = copy.deepcopy(clearance)
+            if "top" in clearance_copy:
+                if clearance_copy == "top":
                     p3.pop("clearance", "")
-                elif "top" in clearance:
-                    for i in range(len(clearance)):
-                        if clearance[i] == "top":
-                            clearance.pop(i) 
+                elif "top" in clearance_copy:
+                    for i in range(len(clearance_copy)):
+                        if clearance_copy[i] == "top":
+                            clearance_copy.pop(i) 
+                            p3["clearance"] = clearance_copy
                             break                           
 
             p3.pop("zz","")
@@ -2135,6 +2405,130 @@ def get_oobb_tube(**kwargs):
 
 
     return return_value_2
+
+def get_oobb_tube_new(**kwargs):
+    
+    # setting up for rotation object
+    typ = kwargs.get("type", "p")
+    kwargs["type"] = "positive" #needs to be positive for the difference to work
+    rot_original = get_rot(**kwargs)   
+    kwargs.pop("rot", None)
+    kwargs.pop("rot_x", None)
+    kwargs.pop("rot_y", None)
+    kwargs.pop("rot_z", None)
+
+    # storing pos and popping it out to add it in rotation element     
+    pos_original = copy.deepcopy(copy.deepcopy(kwargs.get("pos", [0, 0, 0])))
+    pos_original_original = copy.deepcopy(pos_original)
+    kwargs.pop("pos", None)
+    
+    m_original = kwargs.get("m", "")
+    kwargs.pop("m", None)
+
+    r = kwargs.get("r", kwargs.get("r", ""))
+    if r == "":
+        r = kwargs.get("radius", "")
+        #update r
+        kwargs["r"] = r
+        # pop radius
+        kwargs.pop("radius", "")
+
+
+    if kwargs["type"] == "p" or kwargs["type"] == "positive":
+        kwargs["type"] = "negative"
+    else:
+        kwargs["type"] = "positive"
+    kwargs["wall_thickness"] = kwargs.get("wall_thickness", 0.5)
+    modes = kwargs.get("mode", ["laser", "3dpr", "true"])
+    if modes == "all":
+        modes = ["laser", "3dpr", "true"]
+    if type(modes) == str:
+        modes = [modes]
+
+    z = kwargs.get("z", 0)
+    if z == 0:
+        pos = kwargs.get("pos", [0, 0, 0])
+        pos = copy.deepcopy(pos)
+    return_value = []
+    try:
+        depth = kwargs["depth"]
+    except:
+        depth = 250
+        try:
+            kwargs["pos"][2] = pos[2] - depth / 2
+        except:
+            kwargs["z"] = z - depth / 2
+
+    try:
+        radius_name = kwargs["radius_name"]
+        for mode in modes:
+            kwargs["shape"] = "cylinder"
+            try:
+                kwargs.update({"r": ob.gv("hole_radius_"+radius_name, mode)})
+            except:
+                r = ob.gv(radius_name, mode)
+                kwargs.update({"r": r})                
+            kwargs.update({"h": depth})
+            kwargs.update({"inclusion": mode})
+            #tube innard
+            p2 = copy.deepcopy(kwargs)
+            p2["r"] = p2["r"] - p2["wall_thickness"] 
+            if p2["type"] == "p" or p2["type"] == "positive":
+                p2["type"] = "negative"
+            else:
+                p2["type"] = "positive"
+            return_value.append(opsc.opsc_easy(**p2))
+            
+            #tube outard
+            p2 = copy.deepcopy(kwargs)
+            p2['r'] = r
+            if p2["type"] == "p" or p2["type"] == "positive":
+                p2["type"] = "positive"
+            else:
+                p2["type"] = "negative"
+            #p2["r"] = p2["r"] - p2["wall_thickness"] 
+            return_value.append(opsc.opsc_easy(**p2))
+
+    except:
+        for mode in modes:
+            r = kwargs.get("r", kwargs.get("radius", 0))
+            kwargs["shape"] = "cylinder"
+            kwargs.update({"r": r})
+            kwargs.update({"h": depth})
+            kwargs.update({"inclusion": mode})
+            
+            #tube innard
+            p2 = copy.deepcopy(kwargs)
+            p2["r"] = p2["r"] - p2["wall_thickness"] 
+            if p2["type"] == "p" or p2["type"] == "positive":
+                p2["type"] = "positive"
+            else:
+                p2["type"] = "negative"
+            return_value.append(opsc.opsc_easy(**p2))
+            
+            #tube outard
+            p2 = copy.deepcopy(kwargs)
+            p2['r'] = r
+            if p2["type"] == "p" or p2["type"] == "positive":
+                p2["type"] = "negative"
+            else:
+                p2["type"] = "positive"
+            #p2["r"] = p2["r"] - p2["wall_thickness"] 
+            return_value.append(opsc.opsc_easy(**p2))
+    
+    # packaging as a rotation object
+    return_value_2 = {}
+    return_value_2["type"]  = "rotation"
+    return_value_2["typetype"]  = typ
+    return_value_2["pos"] = pos_original
+    return_value_2["rot"] = rot_original
+    return_value_2["objects"] = return_value
+    return_value_2["m"] = m_original
+    return_value_2 = [return_value_2]
+
+
+    return return_value_2
+
 
 # wire
 def get_oobb_wire_basic(**kwargs):

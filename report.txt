@@ -1,5 +1,0 @@
-Comparison Report
-=================
-
-
-All files match.

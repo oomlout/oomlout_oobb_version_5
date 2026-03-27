@@ -275,7 +275,7 @@ def get_oobb_holes(holes=["all"], **kwargs):
     if "top" in holes:
         # find the start point needs to be half the width_mm plus half osp
         pos_start = [xx + -(width*spacing/2) + spacing/2,
-                     yy + -(height*spacing/2) + spacing/2, 0]
+                     yy + -(height*spacing/2) + spacing/2, z]
         # pos_start = [0,0,0]
         for w in range(0, int(width)):
             for h in range(0, int(height)):
@@ -283,11 +283,11 @@ def get_oobb_holes(holes=["all"], **kwargs):
                     x = pos_start[0] + w*spacing
                     y = pos_start[1] + h*spacing
                     objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                   x, y, 0], radius_name=radius_name, m=m))
+                                   x, y, z], radius_name=radius_name, m=m,depth=depth))
     if "bottom" in holes:
         # find the start point needs to be half the width_mm plus half osp
         pos_start = [xx + -(width*spacing/2) + spacing/2,
-                     yy + -(height*spacing/2) + spacing/2, 0]
+                     yy + -(height*spacing/2) + spacing/2, z]
         # pos_start = [0,0,0]
         for w in range(0, int(width)):
             for h in range(0, int(height)):
@@ -295,11 +295,11 @@ def get_oobb_holes(holes=["all"], **kwargs):
                     x = pos_start[0] + w*spacing
                     y = pos_start[1] + h*spacing
                     objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                   x, y, 0], radius_name=radius_name, m=m))
+                                   x, y, z], radius_name=radius_name, m=m,depth=depth))
     if "right" in holes:
         # find the start point needs to be half the width_mm plus half osp
         pos_start = [xx + -(width*spacing/2) + spacing/2,
-                     yy + -(height*spacing/2) + spacing/2, 0]
+                     yy + -(height*spacing/2) + spacing/2, z]
         # pos_start = [0,0,0]
         for w in range(0, int(width)):
             for h in range(0, int(height)):
@@ -307,11 +307,11 @@ def get_oobb_holes(holes=["all"], **kwargs):
                     x = pos_start[0] + w*spacing
                     y = pos_start[1] + h*spacing
                     objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                   x, y, 0], radius_name=radius_name, m=m))
+                                   x, y, z], radius_name=radius_name, m=m,depth=depth))
     if "left" in holes:
         # find the start point needs to be half the width_mm plus half osp
         pos_start = [xx + -(width*spacing/2) + spacing/2,
-                     yy + -(height*spacing/2) + spacing/2, 0]
+                     yy + -(height*spacing/2) + spacing/2, z]
         # pos_start = [0,0,0]
         for w in range(0, int(width)):
             for h in range(0, int(height)):
@@ -319,8 +319,8 @@ def get_oobb_holes(holes=["all"], **kwargs):
                     x = pos_start[0] + w*spacing
                     y = pos_start[1] + h*spacing
                     objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                   x, y, 0], radius_name=radius_name, m=m))
-    if "bottom" in holes:
+                                   x, y, z], radius_name=radius_name, m=m,depth=depth))
+    if "bottom_bottom" in holes:
         # find the start point needs to be half the width_mm plus half osp
         pos_start = [xx + -(width*spacing/2) + spacing/2,
                      yy + -(height*spacing/2) + spacing/2, 0]
@@ -331,7 +331,7 @@ def get_oobb_holes(holes=["all"], **kwargs):
                     x = pos_start[0] + w*spacing
                     y = pos_start[1] + h*spacing
                     objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                   x, y, 0], radius_name=radius_name, m=m))
+                                   x, y, 0], radius_name=radius_name, m=m,depth=depth))
     if "circle" in holes:
         # find the start point needs to be half the width_mm plus half osp
         pos_start = [xx + -(width*spacing/2) + spacing/2,
@@ -557,6 +557,7 @@ def get_oobe_holes(**kwargs):
     holes = kwargs.get("holes", ["all"])
     radius_name = kwargs.get("radius_name", "m3")
     extra = kwargs.get("extra", "")
+    depth = kwargs.get("depth", 100)
     diameter_center_clearance = kwargs.get("diameter_center_clearance", 0)
     m = kwargs.get("m", "")
     x = kwargs["pos"][0]
@@ -667,7 +668,7 @@ def get_oobe_holes(**kwargs):
                             xx = pos_start[0] + w*spacing
                             yy = pos_start[1] + h*spacing
                             objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                        xx, yy, 0], radius_name=radius_name, m=m))
+                                        xx, yy, 0], radius_name=radius_name, m=m,depth=depth))
             if "perimeter" in holes:
                 # find the start point needs to be half the width_mm plus half osp
                 pos_start = [xx + -(width*spacing/2) + spacing/2,
@@ -678,7 +679,7 @@ def get_oobe_holes(**kwargs):
                         if w == 0 or w == width-1 or h == 0 or h == height-1:
                             xx = pos_start[0] + w*spacing
                             yy = pos_start[1] + h*spacing
-                            objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[xx, yy, 0], radius_name=radius_name, m=m))
+                            objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[xx, yy, 0], radius_name=radius_name, m=m,depth=depth))
             if "top" in holes:
                 # find the start point needs to be half the width_mm plus half osp
                 pos_start = [xx + -(width*spacing/2) + spacing/2,
@@ -690,7 +691,7 @@ def get_oobe_holes(**kwargs):
                             xxx = pos_start[0] + w*spacing
                             yyy = pos_start[1] + h*spacing
                             objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                        xxx, yyy, 0], radius_name=radius_name, m=m))
+                                        xxx, yyy, z], radius_name=radius_name, m=m,depth=depth))
             if "bottom" in holes:
                 # find the start point needs to be half the width_mm plus half osp
                 pos_start = [xx + -(width*spacing/2) + spacing/2,
@@ -702,7 +703,7 @@ def get_oobe_holes(**kwargs):
                             xxx = pos_start[0] + w*spacing
                             yyy = pos_start[1] + h*spacing
                             objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                        xxx, yyy, 0], radius_name=radius_name, m=m))
+                                        xxx, yyy, z], radius_name=radius_name, m=m,depth=depth))
             if "right" in holes:
                 # find the start point needs to be half the width_mm plus half osp
                 pos_start = [xx + -(width*spacing/2) + spacing/2,
@@ -714,7 +715,7 @@ def get_oobe_holes(**kwargs):
                             xxx = pos_start[0] + w*spacing
                             yyy = pos_start[1] + h*spacing
                             objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                        xxx, yyy, 0], radius_name=radius_name, m=m))
+                                        xxx, yyy, z], radius_name=radius_name, m=m,depth=depth))
             if "left" in holes:
                 # find the start point needs to be half the width_mm plus half osp
                 pos_start = [xx + -(width*spacing/2) + spacing/2,
@@ -726,7 +727,7 @@ def get_oobe_holes(**kwargs):
                             xxx = pos_start[0] + w*spacing
                             yyy = pos_start[1] + h*spacing
                             objects.extend(ob.oobb_easy(type="negative", shape="oobb_hole", pos=[
-                                        xxx, yyy, 0], radius_name=radius_name, m=m))
+                                        xxx, yyy, z], radius_name=radius_name, m=m,depth=depth))
         return objects
 
 
