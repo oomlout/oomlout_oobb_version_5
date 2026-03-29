@@ -1,6 +1,9 @@
 import copy
 import oobb_base
 import oobb_get_items_oobb
+from oobb_arch.helpers.component_helpers import (
+    get_plate_nut_dict as _shared_get_plate_nut_dict,
+)
 
 
 
@@ -135,38 +138,5 @@ def get_oobb_wire_base(**kwargs):
 
 # helpers
 def get_plate_nut_dict(**kwargs):
-    pos_plate = kwargs.get("pos_plate", [0, 0, 0])
-    thickness = kwargs.get("thickness", 3)
-    width = kwargs.get("width", 1)
-
-    poss = []
-    if thickness == 9:
-        dep = 3
-    else:
-        dep = -thickness
-    if width == 3:
-        poss.append([7.5,-15,dep])
-        poss.append([7.5,15,dep])
-    elif width == 2:
-        poss.append([0,-15,dep])
-        poss.append([0,15,dep])
-
-    pos1 = copy.deepcopy(pos_plate)
-    p3 = copy.deepcopy(kwargs)
-    p3["type"] = "negative" 
-    p3["shape"] = f"oobb_nut"    
-    p3["radius_name"] = "m3"
-    #p3["depth"] = thickness
-    if thickness == 9:
-        p3["zz"] = "top"
-    else:
-        p3["zz"] = "bottom"
-    p3["overhang"] = True
-    p3["rot"] = [0,0,0]
-    p3["nut"] = False
-    p3["hole"] = True
-    p3["pos"] = poss
-    p3.pop("extra","")
-
-    return p3
+    return _shared_get_plate_nut_dict(**kwargs)
 

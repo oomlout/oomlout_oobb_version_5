@@ -1,6 +1,10 @@
 import copy
 import oobb_base
 import oobb_get_items_oobb
+from oobb_arch.helpers.component_helpers import (
+    get_plate_cutout_dict as _shared_get_plate_cutout_dict,
+    get_plate_screw_dict as _shared_get_plate_screw_dict,
+)
 
 
 # battery_box
@@ -259,39 +263,9 @@ def get_holder_electronic_base(**kwargs):
 
 
 def get_plate_cutout_dict(**kwargs):
-    pos_plate = kwargs.get("pos_plate", [0, 0, 0])
-    plate_thickness = kwargs.get("plate_thickness", 1.5)
-    thickness = kwargs.get("thickness", 3)
-
-    pos1 = copy.deepcopy(pos_plate)
-    pos1[0] = pos1[0] + plate_thickness
-    p3 = copy.deepcopy(kwargs)
-    p3["type"] = "negative" 
-    p3["shape"] = f"rounded_rectangle"      
-    p3["size"] = [23,22,thickness-plate_thickness]
-    p3["pos"] = pos1
-    return p3    
+    return _shared_get_plate_cutout_dict(**kwargs)
 
 
 
 def get_plate_screw_dict(**kwargs):
-    pos_plate = kwargs.get("pos_plate", [0, 0, 0])
-    thickness = kwargs.get("thickness", 3)
-
-    poss = []
-    poss.append([7.5,-15,0])
-    poss.append([7.5,15,0])
-
-    pos1 = copy.deepcopy(pos_plate)
-    p3 = copy.deepcopy(kwargs)
-    p3["type"] = "p" 
-    p3["shape"] = f"oobb_screw_countersunk"    
-    #p3["shape"] = f"oobb_screw_socket_cap"    
-    #p3["zz"] = "top"
-    #p3["overhang"] = True
-    p3["radius_name"] = "m3"
-    p3["depth"] = thickness
-    p3["nut"] = False
-    p3["pos"] = poss
-
-    return p3
+    return _shared_get_plate_screw_dict(**kwargs)

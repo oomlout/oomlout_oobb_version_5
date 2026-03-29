@@ -1,0 +1,3574 @@
+{
+  "objects": [
+    {
+      "command": "oobb_object_bearing",
+      "name_long": "OOBB Object: Bearing",
+      "name_short_options": [
+        "bearing"
+      ],
+      "description": "Generates a bearing model (for example 606/608 series) for rotational assemblies.",
+      "summary": "Generates a bearing model (for example 606/608 series) for rotational assemblies.",
+      "variables": [
+        {
+          "name": "bearing_name",
+          "description": "Bearing designation (e.g. 606, 608).",
+          "type": "string",
+          "default": "608"
+        },
+        {
+          "name": "exclude_clearance",
+          "description": "Exclude outer clearance geometry if true.",
+          "type": "boolean",
+          "default": false
+        }
+      ],
+      "variable_names": [
+        "bearing_name",
+        "exclude_clearance"
+      ],
+      "category": "Hardware",
+      "returns": "",
+      "aliases": [
+        "bearing"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_circle",
+      "name_long": "OOBB Object: Bearing Circle",
+      "name_short_options": [
+        "bearing_circle"
+      ],
+      "description": "Auto-generated scaffold for bearing_circle. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_circle.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "bearing_circle"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate",
+      "name_long": "OOBB Object: Bearing Plate",
+      "name_short_options": [
+        "bearing_plate"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_connecting_screw_center",
+      "name_long": "OOBB Object: Bearing Plate Connecting Screw Center",
+      "name_short_options": [
+        "bearing_plate_connecting_screw_center"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_connecting_screw_center. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_connecting_screw_center.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_connecting_screw_center"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_connecting_screw_perimeter",
+      "name_long": "OOBB Object: Bearing Plate Connecting Screw Perimeter",
+      "name_short_options": [
+        "bearing_plate_connecting_screw_perimeter"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_connecting_screw_perimeter. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_connecting_screw_perimeter.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_connecting_screw_perimeter"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_hole_center",
+      "name_long": "OOBB Object: Bearing Plate Hole Center",
+      "name_short_options": [
+        "bearing_plate_hole_center"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_hole_center. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_hole_center.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_hole_center"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_hole_perimeter",
+      "name_long": "OOBB Object: Bearing Plate Hole Perimeter",
+      "name_short_options": [
+        "bearing_plate_hole_perimeter"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_hole_perimeter. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_hole_perimeter.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_hole_perimeter"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_hole_perimeter_base",
+      "name_long": "OOBB Object: Bearing Plate Hole Perimeter Base",
+      "name_short_options": [
+        "bearing_plate_hole_perimeter_base"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_hole_perimeter_base. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_hole_perimeter_base.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_hole_perimeter_base"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_hole_perimeter_shifted",
+      "name_long": "OOBB Object: Bearing Plate Hole Perimeter Shifted",
+      "name_short_options": [
+        "bearing_plate_hole_perimeter_shifted"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_hole_perimeter_shifted. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_hole_perimeter_shifted.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_hole_perimeter_shifted"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_hole_shaft",
+      "name_long": "OOBB Object: Bearing Plate Hole Shaft",
+      "name_short_options": [
+        "bearing_plate_hole_shaft"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_hole_shaft. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_hole_shaft.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_hole_shaft"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_jack",
+      "name_long": "OOBB Object: Bearing Plate Jack",
+      "name_short_options": [
+        "bearing_plate_jack"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_jack. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_jack.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_jack"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_jack_basic",
+      "name_long": "OOBB Object: Bearing Plate Jack Basic",
+      "name_short_options": [
+        "bearing_plate_jack_basic"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_jack_basic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_jack_basic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_jack_basic"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_old",
+      "name_long": "OOBB Object: Bearing Plate Old",
+      "name_short_options": [
+        "bearing_plate_old"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_old. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_old.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_old"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_plate",
+      "name_long": "OOBB Object: Bearing Plate Plate",
+      "name_short_options": [
+        "bearing_plate_plate"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_plate. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_plate.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Bearing Plate",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_plate"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_plate_shim",
+      "name_long": "OOBB Object: Bearing Plate Shim",
+      "name_short_options": [
+        "bearing_plate_shim"
+      ],
+      "description": "Auto-generated scaffold for bearing_plate_shim. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_plate_shim.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "bearing_plate_shim"
+      ]
+    },
+    {
+      "command": "oobb_object_bearing_wheel",
+      "name_long": "OOBB Object: Bearing Wheel",
+      "name_short_options": [
+        "bearing_wheel"
+      ],
+      "description": "Auto-generated scaffold for bearing_wheel. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bearing_wheel.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "bearing_wheel"
+      ]
+    },
+    {
+      "command": "oobb_object_bolt",
+      "name_long": "OOBB Object: Bolt",
+      "name_short_options": [
+        "bolt"
+      ],
+      "description": "Generates a bolt (hex-head fastener) with specified radius and depth.",
+      "summary": "Generates a bolt (hex-head fastener) with specified radius and depth.",
+      "variables": [
+        {
+          "name": "radius_name",
+          "description": "Bolt size designation (e.g. m5, m6).",
+          "type": "string",
+          "default": "m6"
+        },
+        {
+          "name": "depth",
+          "description": "Bolt length in mm.",
+          "type": "number",
+          "default": 20
+        }
+      ],
+      "variable_names": [
+        "radius_name",
+        "depth"
+      ],
+      "category": "Hardware",
+      "returns": "Thing dict with components list for OpenSCAD generation.",
+      "aliases": [
+        "bolt"
+      ]
+    },
+    {
+      "command": "oobb_object_bracket_2020_aluminium_extrusion",
+      "name_long": "OOBB Object: Bracket 2020 Aluminium Extrusion",
+      "name_short_options": [
+        "bracket_2020_aluminium_extrusion"
+      ],
+      "description": "Auto-generated scaffold for bracket_2020_aluminium_extrusion. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bracket_2020_aluminium_extrusion.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "bracket_2020_aluminium_extrusion"
+      ]
+    },
+    {
+      "command": "oobb_object_bunting_alphabet",
+      "name_long": "OOBB Object: Bunting Alphabet",
+      "name_short_options": [
+        "bunting_alphabet"
+      ],
+      "description": "Auto-generated scaffold for bunting_alphabet. EDIT THIS.",
+      "summary": "Auto-generated scaffold for bunting_alphabet.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "bunting_alphabet"
+      ]
+    },
+    {
+      "command": "oobb_object_ci_holes_center",
+      "name_long": "OOBB Object: Ci Holes Center",
+      "name_short_options": [
+        "ci_holes_center"
+      ],
+      "description": "Auto-generated scaffold for ci_holes_center. EDIT THIS.",
+      "summary": "Auto-generated scaffold for ci_holes_center.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "ci_holes_center"
+      ]
+    },
+    {
+      "command": "oobb_object_circle",
+      "name_long": "OOBB Object: Circle",
+      "name_short_options": [
+        "circle"
+      ],
+      "description": "Generates circular OOBB plates with optional doughnut, shaft, and bearing features.",
+      "summary": "Generates circular OOBB plates with optional doughnut, shaft, and bearing features.",
+      "variables": [
+        {
+          "name": "diameter",
+          "description": "Circle diameter in grid units.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "thickness",
+          "description": "Plate thickness in mm.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "size",
+          "description": "Grid system (oobb or oobe).",
+          "type": "string",
+          "default": "oobb"
+        },
+        {
+          "name": "shaft",
+          "description": "Optional shaft type (e.g. coupler_flanged, m3).",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "name": "extra",
+          "description": "Extra feature (e.g. doughnut_5).",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "name": "both_holes",
+          "description": "Whether to include both oobb and oobe hole patterns.",
+          "type": "boolean",
+          "default": true
+        }
+      ],
+      "variable_names": [
+        "diameter",
+        "thickness",
+        "size",
+        "shaft",
+        "extra",
+        "both_holes"
+      ],
+      "category": "OOBB Geometry",
+      "returns": "Thing dict with components list for OpenSCAD generation.",
+      "aliases": [
+        "circle"
+      ]
+    },
+    {
+      "command": "oobb_object_circle_base",
+      "name_long": "OOBB Object: Circle Base",
+      "name_short_options": [
+        "circle_base"
+      ],
+      "description": "Auto-generated scaffold for circle_base. EDIT THIS.",
+      "summary": "Auto-generated scaffold for circle_base.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "circle_base"
+      ]
+    },
+    {
+      "command": "oobb_object_circle_captive",
+      "name_long": "OOBB Object: Circle Captive",
+      "name_short_options": [
+        "circle_captive"
+      ],
+      "description": "Auto-generated scaffold for circle_captive. EDIT THIS.",
+      "summary": "Auto-generated scaffold for circle_captive.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "circle_captive"
+      ]
+    },
+    {
+      "command": "oobb_object_circle_old_1",
+      "name_long": "OOBB Object: Circle Old 1",
+      "name_short_options": [
+        "circle_old_1"
+      ],
+      "description": "Auto-generated scaffold for circle_old_1. EDIT THIS.",
+      "summary": "Auto-generated scaffold for circle_old_1.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "circle_old_1"
+      ]
+    },
+    {
+      "command": "oobb_object_gear",
+      "name_long": "OOBB Object: Gear",
+      "name_short_options": [
+        "gear"
+      ],
+      "description": "Generates parametric OOBB-compatible gears for rotational assemblies.",
+      "summary": "Generates parametric OOBB-compatible gears for rotational assemblies.",
+      "variables": [
+        {
+          "name": "teeth",
+          "description": "Number of gear teeth.",
+          "type": "number",
+          "default": 20
+        },
+        {
+          "name": "thickness",
+          "description": "Gear thickness in mm.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "size",
+          "description": "Grid system (oobb/oobe).",
+          "type": "string",
+          "default": "oobb"
+        }
+      ],
+      "variable_names": [
+        "teeth",
+        "thickness",
+        "size"
+      ],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "gear"
+      ]
+    },
+    {
+      "command": "oobb_object_gear_double_stack",
+      "name_long": "OOBB Object: Gear Double Stack",
+      "name_short_options": [
+        "gear_double_stack"
+      ],
+      "description": "Auto-generated scaffold for gear_double_stack. EDIT THIS.",
+      "summary": "Auto-generated scaffold for gear_double_stack.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "gear_double_stack"
+      ]
+    },
+    {
+      "command": "oobb_object_holder",
+      "name_long": "OOBB Object: Holder",
+      "name_short_options": [
+        "holder"
+      ],
+      "description": "Generates holder-style OOBB geometry for mounting electronic or mechanical components.",
+      "summary": "Generates holder-style OOBB geometry for mounting electronic or mechanical components.",
+      "variables": [
+        {
+          "name": "width",
+          "description": "Holder width in OOBB grid units.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "height",
+          "description": "Holder height in OOBB grid units.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "thickness",
+          "description": "Material thickness in mm.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "size",
+          "description": "Grid system (oobb/oobe).",
+          "type": "string",
+          "default": "oobb"
+        }
+      ],
+      "variable_names": [
+        "width",
+        "height",
+        "thickness",
+        "size"
+      ],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "holder"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronic_battery_box_aa_battery_4_cell",
+      "name_long": "OOBB Object: Holder Electronic Battery Box Aa Battery 4 Cell",
+      "name_short_options": [
+        "holder_electronic_battery_box_aa_battery_4_cell"
+      ],
+      "description": "Auto-generated scaffold for holder_electronic_battery_box_aa_battery_4_cell. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronic_battery_box_aa_battery_4_cell.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_electronic_battery_box_aa_battery_4_cell"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronic_button_11_mm_panel_mount",
+      "name_long": "OOBB Object: Holder Electronic Button 11 Mm Panel Mount",
+      "name_short_options": [
+        "holder_electronic_button_11_mm_panel_mount"
+      ],
+      "description": "Auto-generated scaffold for holder_electronic_button_11_mm_panel_mount. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronic_button_11_mm_panel_mount.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_electronic_button_11_mm_panel_mount"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronic_button_11_mm_panel_mount_x4",
+      "name_long": "OOBB Object: Holder Electronic Button 11 Mm Panel Mount X4",
+      "name_short_options": [
+        "holder_electronic_button_11_mm_panel_mount_x4"
+      ],
+      "description": "Auto-generated scaffold for holder_electronic_button_11_mm_panel_mount_x4. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronic_button_11_mm_panel_mount_x4.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_electronic_button_11_mm_panel_mount_x4"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronic_potentiometer_17_mm",
+      "name_long": "OOBB Object: Holder Electronic Potentiometer 17 Mm",
+      "name_short_options": [
+        "holder_electronic_potentiometer_17_mm"
+      ],
+      "description": "Auto-generated scaffold for holder_electronic_potentiometer_17_mm. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronic_potentiometer_17_mm.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_electronic_potentiometer_17_mm"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronic_potentiometer_stick_single_axis_16_mm",
+      "name_long": "OOBB Object: Holder Electronic Potentiometer Stick Single Axis 16 Mm",
+      "name_short_options": [
+        "holder_electronic_potentiometer_stick_single_axis_16_mm"
+      ],
+      "description": "Auto-generated scaffold for holder_electronic_potentiometer_stick_single_axis_16_mm. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronic_potentiometer_stick_single_axis_16_mm.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_electronic_potentiometer_stick_single_axis_16_mm"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronic_potentiometer_stick_single_axis_16_mm_arm",
+      "name_long": "OOBB Object: Holder Electronic Potentiometer Stick Single Axis 16 Mm Arm",
+      "name_short_options": [
+        "holder_electronic_potentiometer_stick_single_axis_16_mm_arm"
+      ],
+      "description": "Auto-generated scaffold for holder_electronic_potentiometer_stick_single_axis_16_mm_arm. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronic_potentiometer_stick_single_axis_16_mm_arm.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_electronic_potentiometer_stick_single_axis_16_mm_arm"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronics_base_03_03",
+      "name_long": "OOBB Object: Holder Electronics Base 03 03",
+      "name_short_options": [
+        "holder_electronics_base_03_03"
+      ],
+      "description": "Auto-generated scaffold for holder_electronics_base_03_03. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronics_base_03_03.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_electronics_base_03_03"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronics_mcu_atmega328_shennie",
+      "name_long": "OOBB Object: Holder Electronics Mcu Atmega328 Shennie",
+      "name_short_options": [
+        "holder_electronics_mcu_atmega328_shennie"
+      ],
+      "description": "Auto-generated scaffold for holder_electronics_mcu_atmega328_shennie. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronics_mcu_atmega328_shennie.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_electronics_mcu_atmega328_shennie"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronics_microswitch_standard",
+      "name_long": "OOBB Object: Holder Electronics Microswitch Standard",
+      "name_short_options": [
+        "holder_electronics_microswitch_standard"
+      ],
+      "description": "Auto-generated scaffold for holder_electronics_microswitch_standard. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronics_microswitch_standard.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_electronics_microswitch_standard"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronics_potentiometer_17",
+      "name_long": "OOBB Object: Holder Electronics Potentiometer 17",
+      "name_short_options": [
+        "holder_electronics_potentiometer_17"
+      ],
+      "description": "Auto-generated scaffold for holder_electronics_potentiometer_17. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronics_potentiometer_17.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_electronics_potentiometer_17"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronics_pushbutton_11",
+      "name_long": "OOBB Object: Holder Electronics Pushbutton 11",
+      "name_short_options": [
+        "holder_electronics_pushbutton_11"
+      ],
+      "description": "Auto-generated scaffold for holder_electronics_pushbutton_11. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronics_pushbutton_11.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_electronics_pushbutton_11"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_electronics_pushbutton_11_x4",
+      "name_long": "OOBB Object: Holder Electronics Pushbutton 11 X4",
+      "name_short_options": [
+        "holder_electronics_pushbutton_11_x4"
+      ],
+      "description": "Auto-generated scaffold for holder_electronics_pushbutton_11_x4. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_electronics_pushbutton_11_x4.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_electronics_pushbutton_11_x4"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_fan_120_mm",
+      "name_long": "OOBB Object: Holder Fan 120 Mm",
+      "name_short_options": [
+        "holder_fan_120_mm"
+      ],
+      "description": "Auto-generated scaffold for holder_fan_120_mm. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_fan_120_mm.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_fan_120_mm"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_building_block_large_01",
+      "name_long": "OOBB Object: Holder Motor Building Block Large 01",
+      "name_short_options": [
+        "holder_motor_building_block_large_01"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_building_block_large_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_building_block_large_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_building_block_large_01"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_building_block_large_01_bottom",
+      "name_long": "OOBB Object: Holder Motor Building Block Large 01 Bottom",
+      "name_short_options": [
+        "holder_motor_building_block_large_01_bottom"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_building_block_large_01_bottom. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_building_block_large_01_bottom.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_building_block_large_01_bottom"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_building_block_small_01_bottom",
+      "name_long": "OOBB Object: Holder Motor Building Block Small 01 Bottom",
+      "name_short_options": [
+        "holder_motor_building_block_small_01_bottom"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_building_block_small_01_bottom. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_building_block_small_01_bottom.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_building_block_small_01_bottom"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_gearmotor_01",
+      "name_long": "OOBB Object: Holder Motor Gearmotor 01",
+      "name_short_options": [
+        "holder_motor_gearmotor_01"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_gearmotor_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_gearmotor_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_gearmotor_01"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_gearmotor_01_old_01",
+      "name_long": "OOBB Object: Holder Motor Gearmotor 01 Old 01",
+      "name_short_options": [
+        "holder_motor_gearmotor_01_old_01"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_gearmotor_01_old_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_gearmotor_01_old_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_gearmotor_01_old_01"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_gearmotor_01_old_02",
+      "name_long": "OOBB Object: Holder Motor Gearmotor 01 Old 02",
+      "name_short_options": [
+        "holder_motor_gearmotor_01_old_02"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_gearmotor_01_old_02. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_gearmotor_01_old_02.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_gearmotor_01_old_02"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_generic",
+      "name_long": "OOBB Object: Holder Motor Generic",
+      "name_short_options": [
+        "holder_motor_generic"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_generic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_generic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_generic"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_micro_01",
+      "name_long": "OOBB Object: Holder Motor Servo Micro 01",
+      "name_short_options": [
+        "holder_motor_servo_micro_01"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_micro_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_micro_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_micro_01"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01",
+      "name_short_options": [
+        "holder_motor_servo_standard_01"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_all_debug",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 All Debug",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_all_debug"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_all_debug. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_all_debug.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_all_debug"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_all_print",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 All Print",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_all_print"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_all_print. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_all_print.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_all_print"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_base",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 Base",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_base"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_base. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_base.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_base"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_base_extra_variables",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 Base Extra Variables",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_base_extra_variables"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_base_extra_variables. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_base_extra_variables.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_base_extra_variables"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_bottom",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 Bottom",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_bottom"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_bottom. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_bottom.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_bottom"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_bottom_old_1",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 Bottom Old 1",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_bottom_old_1"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_bottom_old_1. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_bottom_old_1.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_bottom_old_1"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_old",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 Old",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_old"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_old. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_old.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_old"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_old_1",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 Old 1",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_old_1"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_old_1. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_old_1.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_old_1"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_servo_standard_01_top",
+      "name_long": "OOBB Object: Holder Motor Servo Standard 01 Top",
+      "name_short_options": [
+        "holder_motor_servo_standard_01_top"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_servo_standard_01_top. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_servo_standard_01_top.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_servo_standard_01_top"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_stepper_motor_nema_17_both",
+      "name_long": "OOBB Object: Holder Motor Stepper Motor Nema 17 Both",
+      "name_short_options": [
+        "holder_motor_stepper_motor_nema_17_both"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_stepper_motor_nema_17_both. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_stepper_motor_nema_17_both.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_stepper_motor_nema_17_both"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_stepper_motor_nema_17_flat",
+      "name_long": "OOBB Object: Holder Motor Stepper Motor Nema 17 Flat",
+      "name_short_options": [
+        "holder_motor_stepper_motor_nema_17_flat"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_stepper_motor_nema_17_flat. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_stepper_motor_nema_17_flat.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_stepper_motor_nema_17_flat"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_stepper_motor_nema_17_jack",
+      "name_long": "OOBB Object: Holder Motor Stepper Motor Nema 17 Jack",
+      "name_short_options": [
+        "holder_motor_stepper_motor_nema_17_jack"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_stepper_motor_nema_17_jack. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_stepper_motor_nema_17_jack.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_motor_stepper_motor_nema_17_jack"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_stepper_nema_17_flat",
+      "name_long": "OOBB Object: Holder Motor Stepper Nema 17 Flat",
+      "name_short_options": [
+        "holder_motor_stepper_nema_17_flat"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_stepper_nema_17_flat. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_stepper_nema_17_flat.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_stepper_nema_17_flat"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_stepper_nema_17_flat_shifted",
+      "name_long": "OOBB Object: Holder Motor Stepper Nema 17 Flat Shifted",
+      "name_short_options": [
+        "holder_motor_stepper_nema_17_flat_shifted"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_stepper_nema_17_flat_shifted. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_stepper_nema_17_flat_shifted.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_stepper_nema_17_flat_shifted"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_stepper_nema_17_flat_shifted_spacer_10_mm",
+      "name_long": "OOBB Object: Holder Motor Stepper Nema 17 Flat Shifted Spacer 10 Mm",
+      "name_short_options": [
+        "holder_motor_stepper_nema_17_flat_shifted_spacer_10_mm"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_stepper_nema_17_flat_shifted_spacer_10_mm. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_stepper_nema_17_flat_shifted_spacer_10_mm.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_stepper_nema_17_flat_shifted_spacer_10_mm"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_motor_tt_01",
+      "name_long": "OOBB Object: Holder Motor Tt 01",
+      "name_short_options": [
+        "holder_motor_tt_01"
+      ],
+      "description": "Auto-generated scaffold for holder_motor_tt_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_motor_tt_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Holder",
+      "returns": "",
+      "aliases": [
+        "holder_motor_tt_01"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_old",
+      "name_long": "OOBB Object: Holder Old",
+      "name_short_options": [
+        "holder_old"
+      ],
+      "description": "Auto-generated scaffold for holder_old. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_old.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_old"
+      ]
+    },
+    {
+      "command": "oobb_object_holder_powerbank_anker_323",
+      "name_long": "OOBB Object: Holder Powerbank Anker 323",
+      "name_short_options": [
+        "holder_powerbank_anker_323"
+      ],
+      "description": "Auto-generated scaffold for holder_powerbank_anker_323. EDIT THIS.",
+      "summary": "Auto-generated scaffold for holder_powerbank_anker_323.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "holder_powerbank_anker_323"
+      ]
+    },
+    {
+      "command": "oobb_object_jack",
+      "name_long": "OOBB Object: Jack",
+      "name_short_options": [
+        "jack"
+      ],
+      "description": "Auto-generated scaffold for jack. EDIT THIS.",
+      "summary": "Auto-generated scaffold for jack.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "jack"
+      ]
+    },
+    {
+      "command": "oobb_object_jack_basic",
+      "name_long": "OOBB Object: Jack Basic",
+      "name_short_options": [
+        "jack_basic"
+      ],
+      "description": "Auto-generated scaffold for jack_basic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for jack_basic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "jack_basic"
+      ]
+    },
+    {
+      "command": "oobb_object_jig",
+      "name_long": "OOBB Object: Jig",
+      "name_short_options": [
+        "jig"
+      ],
+      "description": "Auto-generated scaffold for jig. EDIT THIS.",
+      "summary": "Auto-generated scaffold for jig.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "jig"
+      ]
+    },
+    {
+      "command": "oobb_object_jig_screw_sorter_m3_03_03",
+      "name_long": "OOBB Object: Jig Screw Sorter M3 03 03",
+      "name_short_options": [
+        "jig_screw_sorter_m3_03_03"
+      ],
+      "description": "Auto-generated scaffold for jig_screw_sorter_m3_03_03. EDIT THIS.",
+      "summary": "Auto-generated scaffold for jig_screw_sorter_m3_03_03.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "jig_screw_sorter_m3_03_03"
+      ]
+    },
+    {
+      "command": "oobb_object_jig_tray_03_03",
+      "name_long": "OOBB Object: Jig Tray 03 03",
+      "name_short_options": [
+        "jig_tray_03_03"
+      ],
+      "description": "Auto-generated scaffold for jig_tray_03_03. EDIT THIS.",
+      "summary": "Auto-generated scaffold for jig_tray_03_03.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "jig_tray_03_03"
+      ]
+    },
+    {
+      "command": "oobb_object_mounting_plate",
+      "name_long": "OOBB Object: Mounting Plate",
+      "name_short_options": [
+        "mounting_plate"
+      ],
+      "description": "Auto-generated scaffold for mounting_plate. EDIT THIS.",
+      "summary": "Auto-generated scaffold for mounting_plate.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "mounting_plate"
+      ]
+    },
+    {
+      "command": "oobb_object_mounting_plate_generic",
+      "name_long": "OOBB Object: Mounting Plate Generic",
+      "name_short_options": [
+        "mounting_plate_generic"
+      ],
+      "description": "Auto-generated scaffold for mounting_plate_generic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for mounting_plate_generic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "mounting_plate_generic"
+      ]
+    },
+    {
+      "command": "oobb_object_mounting_plate_side",
+      "name_long": "OOBB Object: Mounting Plate Side",
+      "name_short_options": [
+        "mounting_plate_side"
+      ],
+      "description": "Auto-generated scaffold for mounting_plate_side. EDIT THIS.",
+      "summary": "Auto-generated scaffold for mounting_plate_side.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "mounting_plate_side"
+      ]
+    },
+    {
+      "command": "oobb_object_mounting_plate_top",
+      "name_long": "OOBB Object: Mounting Plate Top",
+      "name_short_options": [
+        "mounting_plate_top"
+      ],
+      "description": "Auto-generated scaffold for mounting_plate_top. EDIT THIS.",
+      "summary": "Auto-generated scaffold for mounting_plate_top.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "mounting_plate_top"
+      ]
+    },
+    {
+      "command": "oobb_object_mounting_plate_u",
+      "name_long": "OOBB Object: Mounting Plate U",
+      "name_short_options": [
+        "mounting_plate_u"
+      ],
+      "description": "Auto-generated scaffold for mounting_plate_u. EDIT THIS.",
+      "summary": "Auto-generated scaffold for mounting_plate_u.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "mounting_plate_u"
+      ]
+    },
+    {
+      "command": "oobb_object_nut",
+      "name_long": "OOBB Object: Nut",
+      "name_short_options": [
+        "nut"
+      ],
+      "description": "Generates a hex nut matching the requested hardware thread size.",
+      "summary": "Generates a hex nut matching the requested hardware thread size.",
+      "variables": [
+        {
+          "name": "radius_name",
+          "description": "Thread size designation (e.g. m3, m5).",
+          "type": "string",
+          "default": "m3"
+        },
+        {
+          "name": "depth",
+          "description": "Nut thickness/depth in mm.",
+          "type": "number",
+          "default": 3
+        }
+      ],
+      "variable_names": [
+        "radius_name",
+        "depth"
+      ],
+      "category": "Hardware",
+      "returns": "",
+      "aliases": [
+        "nut"
+      ]
+    },
+    {
+      "command": "oobb_object_nut_m3",
+      "name_long": "OOBB Object: Nut M3",
+      "name_short_options": [
+        "nut_m3"
+      ],
+      "description": "Auto-generated scaffold for nut_m3. EDIT THIS.",
+      "summary": "Auto-generated scaffold for nut_m3.",
+      "variables": [],
+      "variable_names": [],
+      "category": "Hardware",
+      "returns": "",
+      "aliases": [
+        "nut_m3"
+      ]
+    },
+    {
+      "command": "oobb_object_oobb_wire_base",
+      "name_long": "OOBB Object: Oobb Wire Base",
+      "name_short_options": [
+        "oobb_wire_base"
+      ],
+      "description": "Auto-generated scaffold for oobb_wire_base. EDIT THIS.",
+      "summary": "Auto-generated scaffold for oobb_wire_base.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "oobb_wire_base"
+      ]
+    },
+    {
+      "command": "oobb_object_other",
+      "name_long": "OOBB Object: Other",
+      "name_short_options": [
+        "other"
+      ],
+      "description": "Auto-generated scaffold for other. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "other"
+      ]
+    },
+    {
+      "command": "oobb_object_other_bolt_stacker",
+      "name_long": "OOBB Object: Other Bolt Stacker",
+      "name_short_options": [
+        "other_bolt_stacker"
+      ],
+      "description": "Auto-generated scaffold for other_bolt_stacker. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other_bolt_stacker.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Other",
+      "returns": "",
+      "aliases": [
+        "other_bolt_stacker"
+      ]
+    },
+    {
+      "command": "oobb_object_other_bolt_stacker_cylinder",
+      "name_long": "OOBB Object: Other Bolt Stacker Cylinder",
+      "name_short_options": [
+        "other_bolt_stacker_cylinder"
+      ],
+      "description": "Auto-generated scaffold for other_bolt_stacker_cylinder. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other_bolt_stacker_cylinder.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Other",
+      "returns": "",
+      "aliases": [
+        "other_bolt_stacker_cylinder"
+      ]
+    },
+    {
+      "command": "oobb_object_other_corner_cube",
+      "name_long": "OOBB Object: Other Corner Cube",
+      "name_short_options": [
+        "other_corner_cube"
+      ],
+      "description": "Auto-generated scaffold for other_corner_cube. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other_corner_cube.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Other",
+      "returns": "",
+      "aliases": [
+        "other_corner_cube"
+      ]
+    },
+    {
+      "command": "oobb_object_other_corner_cube_basic",
+      "name_long": "OOBB Object: Other Corner Cube Basic",
+      "name_short_options": [
+        "other_corner_cube_basic"
+      ],
+      "description": "Auto-generated scaffold for other_corner_cube_basic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other_corner_cube_basic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Other",
+      "returns": "",
+      "aliases": [
+        "other_corner_cube_basic"
+      ]
+    },
+    {
+      "command": "oobb_object_other_corner_cube_relief",
+      "name_long": "OOBB Object: Other Corner Cube Relief",
+      "name_short_options": [
+        "other_corner_cube_relief"
+      ],
+      "description": "Auto-generated scaffold for other_corner_cube_relief. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other_corner_cube_relief.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Other",
+      "returns": "",
+      "aliases": [
+        "other_corner_cube_relief"
+      ]
+    },
+    {
+      "command": "oobb_object_other_ptfe_tube_holder",
+      "name_long": "OOBB Object: Other Ptfe Tube Holder",
+      "name_short_options": [
+        "other_ptfe_tube_holder"
+      ],
+      "description": "Auto-generated scaffold for other_ptfe_tube_holder. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other_ptfe_tube_holder.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Other",
+      "returns": "",
+      "aliases": [
+        "other_ptfe_tube_holder"
+      ]
+    },
+    {
+      "command": "oobb_object_other_ptfe_tube_holder_ninety_degree",
+      "name_long": "OOBB Object: Other Ptfe Tube Holder Ninety Degree",
+      "name_short_options": [
+        "other_ptfe_tube_holder_ninety_degree"
+      ],
+      "description": "Auto-generated scaffold for other_ptfe_tube_holder_ninety_degree. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other_ptfe_tube_holder_ninety_degree.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Other",
+      "returns": "",
+      "aliases": [
+        "other_ptfe_tube_holder_ninety_degree"
+      ]
+    },
+    {
+      "command": "oobb_object_other_timing_belt_clamp_gt2",
+      "name_long": "OOBB Object: Other Timing Belt Clamp Gt2",
+      "name_short_options": [
+        "other_timing_belt_clamp_gt2"
+      ],
+      "description": "Auto-generated scaffold for other_timing_belt_clamp_gt2. EDIT THIS.",
+      "summary": "Auto-generated scaffold for other_timing_belt_clamp_gt2.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Other",
+      "returns": "",
+      "aliases": [
+        "other_timing_belt_clamp_gt2"
+      ]
+    },
+    {
+      "command": "oobb_object_plate",
+      "name_long": "OOBB Object: Plate",
+      "name_short_options": [
+        "plate"
+      ],
+      "description": "Generates rectangular OOBB plates with configurable width, height, and hole patterns.",
+      "summary": "Generates rectangular OOBB plates with configurable width, height, and hole patterns.",
+      "variables": [
+        {
+          "name": "width",
+          "description": "Plate width in OOBB grid units.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "height",
+          "description": "Plate height in OOBB grid units.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "thickness",
+          "description": "Plate thickness in mm.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "size",
+          "description": "Grid system (oobb/oobe).",
+          "type": "string",
+          "default": "oobb"
+        }
+      ],
+      "variable_names": [
+        "width",
+        "height",
+        "thickness",
+        "size"
+      ],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_base",
+      "name_long": "OOBB Object: Plate Base",
+      "name_short_options": [
+        "plate_base"
+      ],
+      "description": "Auto-generated scaffold for plate_base. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_base.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_base"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_dict",
+      "name_long": "OOBB Object: Plate Dict",
+      "name_short_options": [
+        "plate_dict"
+      ],
+      "description": "Auto-generated scaffold for plate_dict. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_dict.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_dict"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_hole_dict",
+      "name_long": "OOBB Object: Plate Hole Dict",
+      "name_short_options": [
+        "plate_hole_dict"
+      ],
+      "description": "Auto-generated scaffold for plate_hole_dict. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_hole_dict.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_hole_dict"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_l",
+      "name_long": "OOBB Object: Plate L",
+      "name_short_options": [
+        "plate_l"
+      ],
+      "description": "Auto-generated scaffold for plate_l. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_l.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_l"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_label",
+      "name_long": "OOBB Object: Plate Label",
+      "name_short_options": [
+        "plate_label"
+      ],
+      "description": "Auto-generated scaffold for plate_label. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_label.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_label"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_ninety_degree",
+      "name_long": "OOBB Object: Plate Ninety Degree",
+      "name_short_options": [
+        "plate_ninety_degree"
+      ],
+      "description": "Auto-generated scaffold for plate_ninety_degree. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_ninety_degree.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_ninety_degree"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_nut_dict",
+      "name_long": "OOBB Object: Plate Nut Dict",
+      "name_short_options": [
+        "plate_nut_dict"
+      ],
+      "description": "Auto-generated scaffold for plate_nut_dict. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_nut_dict.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "plate_nut_dict"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_old",
+      "name_long": "OOBB Object: Plate Old",
+      "name_short_options": [
+        "plate_old"
+      ],
+      "description": "Auto-generated scaffold for plate_old. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_old.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "plate_old"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_t",
+      "name_long": "OOBB Object: Plate T",
+      "name_short_options": [
+        "plate_t"
+      ],
+      "description": "Auto-generated scaffold for plate_t. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_t.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_t"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_u",
+      "name_long": "OOBB Object: Plate U",
+      "name_short_options": [
+        "plate_u"
+      ],
+      "description": "Auto-generated scaffold for plate_u. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_u.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_u"
+      ]
+    },
+    {
+      "command": "oobb_object_plate_u_double",
+      "name_long": "OOBB Object: Plate U Double",
+      "name_short_options": [
+        "plate_u_double"
+      ],
+      "description": "Auto-generated scaffold for plate_u_double. EDIT THIS.",
+      "summary": "Auto-generated scaffold for plate_u_double.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "plate_u_double"
+      ]
+    },
+    {
+      "command": "oobb_object_pulley_gt2",
+      "name_long": "OOBB Object: Pulley Gt2",
+      "name_short_options": [
+        "pulley_gt2"
+      ],
+      "description": "Auto-generated scaffold for pulley_gt2. EDIT THIS.",
+      "summary": "Auto-generated scaffold for pulley_gt2.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "pulley_gt2"
+      ]
+    },
+    {
+      "command": "oobb_object_pulley_gt2_shield_double",
+      "name_long": "OOBB Object: Pulley Gt2 Shield Double",
+      "name_short_options": [
+        "pulley_gt2_shield_double"
+      ],
+      "description": "Auto-generated scaffold for pulley_gt2_shield_double. EDIT THIS.",
+      "summary": "Auto-generated scaffold for pulley_gt2_shield_double.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "pulley_gt2_shield_double"
+      ]
+    },
+    {
+      "command": "oobb_object_screw_countersunk",
+      "name_long": "OOBB Object: Screw Countersunk",
+      "name_short_options": [
+        "screw_countersunk"
+      ],
+      "description": "Auto-generated scaffold for screw_countersunk. EDIT THIS.",
+      "summary": "Auto-generated scaffold for screw_countersunk.",
+      "variables": [],
+      "variable_names": [],
+      "category": "Hardware",
+      "returns": "",
+      "aliases": [
+        "screw_countersunk"
+      ]
+    },
+    {
+      "command": "oobb_object_screw_self_tapping",
+      "name_long": "OOBB Object: Screw Self Tapping",
+      "name_short_options": [
+        "screw_self_tapping"
+      ],
+      "description": "Auto-generated scaffold for screw_self_tapping. EDIT THIS.",
+      "summary": "Auto-generated scaffold for screw_self_tapping.",
+      "variables": [],
+      "variable_names": [],
+      "category": "Hardware",
+      "returns": "",
+      "aliases": [
+        "screw_self_tapping"
+      ]
+    },
+    {
+      "command": "oobb_object_screw_socket_cap",
+      "name_long": "OOBB Object: Screw Socket Cap",
+      "name_short_options": [
+        "screw_socket_cap"
+      ],
+      "description": "Generates a socket head cap screw with configurable thread size and length.",
+      "summary": "Generates a socket head cap screw with configurable thread size and length.",
+      "variables": [
+        {
+          "name": "radius_name",
+          "description": "Screw thread size (e.g. m3, m5).",
+          "type": "string",
+          "default": "m3"
+        },
+        {
+          "name": "depth",
+          "description": "Screw length/depth in mm.",
+          "type": "number",
+          "default": 12
+        }
+      ],
+      "variable_names": [
+        "radius_name",
+        "depth"
+      ],
+      "category": "Hardware",
+      "returns": "",
+      "aliases": [
+        "screw_socket_cap"
+      ]
+    },
+    {
+      "command": "oobb_object_shaft",
+      "name_long": "OOBB Object: Shaft",
+      "name_short_options": [
+        "shaft"
+      ],
+      "description": "Auto-generated scaffold for shaft. EDIT THIS.",
+      "summary": "Auto-generated scaffold for shaft.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "shaft"
+      ]
+    },
+    {
+      "command": "oobb_object_shaft_center",
+      "name_long": "OOBB Object: Shaft Center",
+      "name_short_options": [
+        "shaft_center"
+      ],
+      "description": "Auto-generated scaffold for shaft_center. EDIT THIS.",
+      "summary": "Auto-generated scaffold for shaft_center.",
+      "variables": [
+        {
+          "name": "thing",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "thing"
+      ],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "shaft_center"
+      ]
+    },
+    {
+      "command": "oobb_object_shaft_coupler",
+      "name_long": "OOBB Object: Shaft Coupler",
+      "name_short_options": [
+        "shaft_coupler"
+      ],
+      "description": "Auto-generated scaffold for shaft_coupler. EDIT THIS.",
+      "summary": "Auto-generated scaffold for shaft_coupler.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "shaft_coupler"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine",
+      "name_long": "OOBB Object: Smd Magazine",
+      "name_short_options": [
+        "smd_magazine"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine_joiner",
+      "name_long": "OOBB Object: Smd Magazine Joiner",
+      "name_short_options": [
+        "smd_magazine_joiner"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine_joiner. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine_joiner.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine_joiner"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine_label_holder",
+      "name_long": "OOBB Object: Smd Magazine Label Holder",
+      "name_short_options": [
+        "smd_magazine_label_holder"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine_label_holder. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine_label_holder.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine_label_holder"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine_large",
+      "name_long": "OOBB Object: Smd Magazine Large",
+      "name_short_options": [
+        "smd_magazine_large"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine_large. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine_large.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine_large"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine_lid",
+      "name_long": "OOBB Object: Smd Magazine Lid",
+      "name_short_options": [
+        "smd_magazine_lid"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine_lid. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine_lid.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine_lid"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine_old_1",
+      "name_long": "OOBB Object: Smd Magazine Old 1",
+      "name_short_options": [
+        "smd_magazine_old_1"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine_old_1. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine_old_1.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine_old_1"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine_refiller",
+      "name_long": "OOBB Object: Smd Magazine Refiller",
+      "name_short_options": [
+        "smd_magazine_refiller"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine_refiller. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine_refiller.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine_refiller"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine_small",
+      "name_long": "OOBB Object: Smd Magazine Small",
+      "name_short_options": [
+        "smd_magazine_small"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine_small. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine_small.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine_small"
+      ]
+    },
+    {
+      "command": "oobb_object_smd_magazine_small_old",
+      "name_long": "OOBB Object: Smd Magazine Small Old",
+      "name_short_options": [
+        "smd_magazine_small_old"
+      ],
+      "description": "Auto-generated scaffold for smd_magazine_small_old. EDIT THIS.",
+      "summary": "Auto-generated scaffold for smd_magazine_small_old.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "smd_magazine_small_old"
+      ]
+    },
+    {
+      "command": "oobb_object_soldering_jig",
+      "name_long": "OOBB Object: Soldering Jig",
+      "name_short_options": [
+        "soldering_jig"
+      ],
+      "description": "Auto-generated scaffold for soldering_jig. EDIT THIS.",
+      "summary": "Auto-generated scaffold for soldering_jig.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "soldering_jig"
+      ]
+    },
+    {
+      "command": "oobb_object_soldering_jig_electronics_mcu_pi_pico_socket",
+      "name_long": "OOBB Object: Soldering Jig Electronics Mcu Pi Pico Socket",
+      "name_short_options": [
+        "soldering_jig_electronics_mcu_pi_pico_socket"
+      ],
+      "description": "Auto-generated scaffold for soldering_jig_electronics_mcu_pi_pico_socket. EDIT THIS.",
+      "summary": "Auto-generated scaffold for soldering_jig_electronics_mcu_pi_pico_socket.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "soldering_jig_electronics_mcu_pi_pico_socket"
+      ]
+    },
+    {
+      "command": "oobb_object_standoff",
+      "name_long": "OOBB Object: Standoff",
+      "name_short_options": [
+        "standoff"
+      ],
+      "description": "Auto-generated scaffold for standoff. EDIT THIS.",
+      "summary": "Auto-generated scaffold for standoff.",
+      "variables": [],
+      "variable_names": [],
+      "category": "Hardware",
+      "returns": "",
+      "aliases": [
+        "standoff"
+      ]
+    },
+    {
+      "command": "oobb_object_test",
+      "name_long": "OOBB Object: Test",
+      "name_short_options": [
+        "test"
+      ],
+      "description": "Auto-generated scaffold for test. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "test"
+      ]
+    },
+    {
+      "command": "oobb_object_test_gear",
+      "name_long": "OOBB Object: Test Gear",
+      "name_short_options": [
+        "test_gear"
+      ],
+      "description": "Generates a parametric gear test plate exploring pressure_angle, clearance, and backlash variations.",
+      "summary": "Generates a parametric gear test plate exploring pressure_angle, clearance, and backlash variations.",
+      "variables": [
+        {
+          "name": "style",
+          "description": "Gear style variant.",
+          "type": "string",
+          "default": "socket_cap"
+        },
+        {
+          "name": "pos",
+          "description": "Position offset [x, y, z].",
+          "type": "array",
+          "default": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "full_object",
+          "description": "Whether to return full thing dict or just components.",
+          "type": "boolean",
+          "default": true
+        }
+      ],
+      "variable_names": [
+        "style",
+        "pos",
+        "full_object"
+      ],
+      "category": "OOBB Test",
+      "returns": "Thing dict with test gear components for OpenSCAD generation.",
+      "aliases": [
+        "test_gear"
+      ]
+    },
+    {
+      "command": "oobb_object_test_hole",
+      "name_long": "OOBB Object: Test Hole",
+      "name_short_options": [
+        "test_hole"
+      ],
+      "description": "Auto-generated scaffold for test_hole. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_hole.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_hole"
+      ]
+    },
+    {
+      "command": "oobb_object_test_motor_n20_shaft",
+      "name_long": "OOBB Object: Test Motor N20 Shaft",
+      "name_short_options": [
+        "test_motor_n20_shaft"
+      ],
+      "description": "Auto-generated scaffold for test_motor_n20_shaft. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_motor_n20_shaft.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_motor_n20_shaft"
+      ]
+    },
+    {
+      "command": "oobb_object_test_motor_tt_01",
+      "name_long": "OOBB Object: Test Motor Tt 01",
+      "name_short_options": [
+        "test_motor_tt_01"
+      ],
+      "description": "Auto-generated scaffold for test_motor_tt_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_motor_tt_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_motor_tt_01"
+      ]
+    },
+    {
+      "command": "oobb_object_test_motor_tt_01_shaft",
+      "name_long": "OOBB Object: Test Motor Tt 01 Shaft",
+      "name_short_options": [
+        "test_motor_tt_01_shaft"
+      ],
+      "description": "Auto-generated scaffold for test_motor_tt_01_shaft. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_motor_tt_01_shaft.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_motor_tt_01_shaft"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_motor_servo_standard_01",
+      "name_long": "OOBB Object: Test Oobb Motor Servo Standard 01",
+      "name_short_options": [
+        "test_oobb_motor_servo_standard_01"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_motor_servo_standard_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_motor_servo_standard_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_motor_servo_standard_01"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_nut",
+      "name_long": "OOBB Object: Test Oobb Nut",
+      "name_short_options": [
+        "test_oobb_nut"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_nut. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_nut.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_nut"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_screw",
+      "name_long": "OOBB Object: Test Oobb Screw",
+      "name_short_options": [
+        "test_oobb_screw"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_screw. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_screw.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_screw"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_screw_countersunk",
+      "name_long": "OOBB Object: Test Oobb Screw Countersunk",
+      "name_short_options": [
+        "test_oobb_screw_countersunk"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_screw_countersunk. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_screw_countersunk.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_screw_countersunk"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_screw_self_tapping",
+      "name_long": "OOBB Object: Test Oobb Screw Self Tapping",
+      "name_short_options": [
+        "test_oobb_screw_self_tapping"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_screw_self_tapping. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_screw_self_tapping.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_screw_self_tapping"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_screw_socket_cap",
+      "name_long": "OOBB Object: Test Oobb Screw Socket Cap",
+      "name_short_options": [
+        "test_oobb_screw_socket_cap"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_screw_socket_cap. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_screw_socket_cap.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_screw_socket_cap"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_screw_socket_cap_old_1",
+      "name_long": "OOBB Object: Test Oobb Screw Socket Cap Old 1",
+      "name_short_options": [
+        "test_oobb_screw_socket_cap_old_1"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_screw_socket_cap_old_1. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_screw_socket_cap_old_1.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_screw_socket_cap_old_1"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_shape_slot",
+      "name_long": "OOBB Object: Test Oobb Shape Slot",
+      "name_short_options": [
+        "test_oobb_shape_slot"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_shape_slot. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_shape_slot.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_shape_slot"
+      ]
+    },
+    {
+      "command": "oobb_object_test_oobb_wire",
+      "name_long": "OOBB Object: Test Oobb Wire",
+      "name_short_options": [
+        "test_oobb_wire"
+      ],
+      "description": "Auto-generated scaffold for test_oobb_wire. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_oobb_wire.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_oobb_wire"
+      ]
+    },
+    {
+      "command": "oobb_object_test_rotation",
+      "name_long": "OOBB Object: Test Rotation",
+      "name_short_options": [
+        "test_rotation"
+      ],
+      "description": "Auto-generated scaffold for test_rotation. EDIT THIS.",
+      "summary": "Auto-generated scaffold for test_rotation.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Test",
+      "returns": "",
+      "aliases": [
+        "test_rotation"
+      ]
+    },
+    {
+      "command": "oobb_object_threaded_insert",
+      "name_long": "OOBB Object: Threaded Insert",
+      "name_short_options": [
+        "threaded_insert"
+      ],
+      "description": "Auto-generated scaffold for threaded_insert. EDIT THIS.",
+      "summary": "Auto-generated scaffold for threaded_insert.",
+      "variables": [],
+      "variable_names": [],
+      "category": "Hardware",
+      "returns": "",
+      "aliases": [
+        "threaded_insert"
+      ]
+    },
+    {
+      "command": "oobb_object_tool_holder",
+      "name_long": "OOBB Object: Tool Holder",
+      "name_short_options": [
+        "tool_holder"
+      ],
+      "description": "Auto-generated scaffold for tool_holder. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tool_holder.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tool_holder"
+      ]
+    },
+    {
+      "command": "oobb_object_tool_holder_tool_holder_basic",
+      "name_long": "OOBB Object: Tool Holder Tool Holder Basic",
+      "name_short_options": [
+        "tool_holder_tool_holder_basic"
+      ],
+      "description": "Auto-generated scaffold for tool_holder_tool_holder_basic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tool_holder_tool_holder_basic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tool_holder_tool_holder_basic"
+      ]
+    },
+    {
+      "command": "oobb_object_tool_holder_tool_holder_basic_old_01",
+      "name_long": "OOBB Object: Tool Holder Tool Holder Basic Old 01",
+      "name_short_options": [
+        "tool_holder_tool_holder_basic_old_01"
+      ],
+      "description": "Auto-generated scaffold for tool_holder_tool_holder_basic_old_01. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tool_holder_tool_holder_basic_old_01.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tool_holder_tool_holder_basic_old_01"
+      ]
+    },
+    {
+      "command": "oobb_object_tool_holder_vertical",
+      "name_long": "OOBB Object: Tool Holder Vertical",
+      "name_short_options": [
+        "tool_holder_vertical"
+      ],
+      "description": "Auto-generated scaffold for tool_holder_vertical. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tool_holder_vertical.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tool_holder_vertical"
+      ]
+    },
+    {
+      "command": "oobb_object_tray",
+      "name_long": "OOBB Object: Tray",
+      "name_short_options": [
+        "tray"
+      ],
+      "description": "Auto-generated scaffold for tray. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tray.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tray"
+      ]
+    },
+    {
+      "command": "oobb_object_tray_lid",
+      "name_long": "OOBB Object: Tray Lid",
+      "name_short_options": [
+        "tray_lid"
+      ],
+      "description": "Auto-generated scaffold for tray_lid. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tray_lid.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tray_lid"
+      ]
+    },
+    {
+      "command": "oobb_object_tray_lid_thin",
+      "name_long": "OOBB Object: Tray Lid Thin",
+      "name_short_options": [
+        "tray_lid_thin"
+      ],
+      "description": "Auto-generated scaffold for tray_lid_thin. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tray_lid_thin.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tray_lid_thin"
+      ]
+    },
+    {
+      "command": "oobb_object_tray_lid_thin_spin",
+      "name_long": "OOBB Object: Tray Lid Thin Spin",
+      "name_short_options": [
+        "tray_lid_thin_spin"
+      ],
+      "description": "Auto-generated scaffold for tray_lid_thin_spin. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tray_lid_thin_spin.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tray_lid_thin_spin"
+      ]
+    },
+    {
+      "command": "oobb_object_tray_thin",
+      "name_long": "OOBB Object: Tray Thin",
+      "name_short_options": [
+        "tray_thin"
+      ],
+      "description": "Auto-generated scaffold for tray_thin. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tray_thin.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tray_thin"
+      ]
+    },
+    {
+      "command": "oobb_object_tray_thin_spin",
+      "name_long": "OOBB Object: Tray Thin Spin",
+      "name_short_options": [
+        "tray_thin_spin"
+      ],
+      "description": "Auto-generated scaffold for tray_thin_spin. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tray_thin_spin.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tray_thin_spin"
+      ]
+    },
+    {
+      "command": "oobb_object_tray_vertical",
+      "name_long": "OOBB Object: Tray Vertical",
+      "name_short_options": [
+        "tray_vertical"
+      ],
+      "description": "Auto-generated scaffold for tray_vertical. EDIT THIS.",
+      "summary": "Auto-generated scaffold for tray_vertical.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "tray_vertical"
+      ]
+    },
+    {
+      "command": "oobb_object_trt_old",
+      "name_long": "OOBB Object: Trt Old",
+      "name_short_options": [
+        "trt_old"
+      ],
+      "description": "Auto-generated scaffold for trt_old. EDIT THIS.",
+      "summary": "Auto-generated scaffold for trt_old.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "trt_old"
+      ]
+    },
+    {
+      "command": "oobb_object_wheel",
+      "name_long": "OOBB Object: Wheel",
+      "name_short_options": [
+        "wheel"
+      ],
+      "description": "Auto-generated scaffold for wheel. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wheel.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "wheel"
+      ]
+    },
+    {
+      "command": "oobb_object_wheel_old_1",
+      "name_long": "OOBB Object: Wheel Old 1",
+      "name_short_options": [
+        "wheel_old_1"
+      ],
+      "description": "Auto-generated scaffold for wheel_old_1. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wheel_old_1.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "wheel_old_1"
+      ]
+    },
+    {
+      "command": "oobb_object_wire",
+      "name_long": "OOBB Object: Wire",
+      "name_short_options": [
+        "wire"
+      ],
+      "description": "Auto-generated scaffold for wire. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry",
+      "returns": "",
+      "aliases": [
+        "wire"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_basic",
+      "name_long": "OOBB Object: Wire Basic",
+      "name_short_options": [
+        "wire_basic"
+      ],
+      "description": "Auto-generated scaffold for wire_basic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_basic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_basic"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_basic_basic_basic",
+      "name_long": "OOBB Object: Wire Basic Basic Basic",
+      "name_short_options": [
+        "wire_basic_basic_basic"
+      ],
+      "description": "Auto-generated scaffold for wire_basic_basic_basic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_basic_basic_basic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_basic_basic_basic"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_basic_basic_basic_basic",
+      "name_long": "OOBB Object: Wire Basic Basic Basic Basic",
+      "name_short_options": [
+        "wire_basic_basic_basic_basic"
+      ],
+      "description": "Auto-generated scaffold for wire_basic_basic_basic_basic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_basic_basic_basic_basic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_basic_basic_basic_basic"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_basic_basic_motor",
+      "name_long": "OOBB Object: Wire Basic Basic Motor",
+      "name_short_options": [
+        "wire_basic_basic_motor"
+      ],
+      "description": "Auto-generated scaffold for wire_basic_basic_motor. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_basic_basic_motor.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_basic_basic_motor"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_higher_voltage",
+      "name_long": "OOBB Object: Wire Higher Voltage",
+      "name_short_options": [
+        "wire_higher_voltage"
+      ],
+      "description": "Auto-generated scaffold for wire_higher_voltage. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_higher_voltage.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_higher_voltage"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_higher_voltage_basic_basic_motor_stepper",
+      "name_long": "OOBB Object: Wire Higher Voltage Basic Basic Motor Stepper",
+      "name_short_options": [
+        "wire_higher_voltage_basic_basic_motor_stepper"
+      ],
+      "description": "Auto-generated scaffold for wire_higher_voltage_basic_basic_motor_stepper. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_higher_voltage_basic_basic_motor_stepper.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_higher_voltage_basic_basic_motor_stepper"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_higher_voltage_motor_stepper",
+      "name_long": "OOBB Object: Wire Higher Voltage Motor Stepper",
+      "name_short_options": [
+        "wire_higher_voltage_motor_stepper"
+      ],
+      "description": "Auto-generated scaffold for wire_higher_voltage_motor_stepper. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_higher_voltage_motor_stepper.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_higher_voltage_motor_stepper"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_i2c",
+      "name_long": "OOBB Object: Wire I2C",
+      "name_short_options": [
+        "wire_i2c"
+      ],
+      "description": "Auto-generated scaffold for wire_i2c. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_i2c.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_i2c"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_motor",
+      "name_long": "OOBB Object: Wire Motor",
+      "name_short_options": [
+        "wire_motor"
+      ],
+      "description": "Auto-generated scaffold for wire_motor. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_motor.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_motor"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_motor_basic",
+      "name_long": "OOBB Object: Wire Motor Basic",
+      "name_short_options": [
+        "wire_motor_basic"
+      ],
+      "description": "Auto-generated scaffold for wire_motor_basic. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_motor_basic.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_motor_basic"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_motor_stepper",
+      "name_long": "OOBB Object: Wire Motor Stepper",
+      "name_short_options": [
+        "wire_motor_stepper"
+      ],
+      "description": "Auto-generated scaffold for wire_motor_stepper. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_motor_stepper.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_motor_stepper"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_old",
+      "name_long": "OOBB Object: Wire Old",
+      "name_short_options": [
+        "wire_old"
+      ],
+      "description": "Auto-generated scaffold for wire_old. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_old.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "wire_old"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_spacer",
+      "name_long": "OOBB Object: Wire Spacer",
+      "name_short_options": [
+        "wire_spacer"
+      ],
+      "description": "Auto-generated scaffold for wire_spacer. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_spacer.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_spacer"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_spacer_long",
+      "name_long": "OOBB Object: Wire Spacer Long",
+      "name_short_options": [
+        "wire_spacer_long"
+      ],
+      "description": "Auto-generated scaffold for wire_spacer_long. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_spacer_long.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_spacer_long"
+      ]
+    },
+    {
+      "command": "oobb_object_wire_spacer_u",
+      "name_long": "OOBB Object: Wire Spacer U",
+      "name_short_options": [
+        "wire_spacer_u"
+      ],
+      "description": "Auto-generated scaffold for wire_spacer_u. EDIT THIS.",
+      "summary": "Auto-generated scaffold for wire_spacer_u.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Wire",
+      "returns": "",
+      "aliases": [
+        "wire_spacer_u"
+      ]
+    },
+    {
+      "command": "oobb_object_ziptie_holder",
+      "name_long": "OOBB Object: Ziptie Holder",
+      "name_short_options": [
+        "ziptie_holder"
+      ],
+      "description": "Auto-generated scaffold for ziptie_holder. EDIT THIS.",
+      "summary": "Auto-generated scaffold for ziptie_holder.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "ziptie_holder"
+      ]
+    },
+    {
+      "command": "oobb_object_ziptie_holder_jack",
+      "name_long": "OOBB Object: Ziptie Holder Jack",
+      "name_short_options": [
+        "ziptie_holder_jack"
+      ],
+      "description": "Auto-generated scaffold for ziptie_holder_jack. EDIT THIS.",
+      "summary": "Auto-generated scaffold for ziptie_holder_jack.",
+      "variables": [],
+      "variable_names": [],
+      "category": "OOBB Geometry (Legacy)",
+      "returns": "",
+      "aliases": [
+        "ziptie_holder_jack"
+      ]
+    }
+  ],
+  "part_sets": [
+    {
+      "command": "bearing_circles",
+      "name_long": "bearing_circles",
+      "name_short_options": [
+        "bcs"
+      ],
+      "description": "Bearing circle part-set definitions.",
+      "summary": "Bearing circle part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": [
+        "bcs"
+      ]
+    },
+    {
+      "command": "bearing_plates",
+      "name_long": "OOBB Part Set: Bearing Plates",
+      "name_short_options": [],
+      "description": "bearing_plates part-set definitions.",
+      "summary": "bearing_plates part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "bearings",
+      "name_long": "OOBB Part Set: Bearings",
+      "name_short_options": [],
+      "description": "bearings part-set definitions.",
+      "summary": "bearings part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "buntings",
+      "name_long": "OOBB Part Set: Buntings",
+      "name_short_options": [],
+      "description": "buntings part-set definitions.",
+      "summary": "buntings part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "circles",
+      "name_long": "OOBB Part Set: Circles",
+      "name_short_options": [],
+      "description": "All circular OOBB plate variants across standard sizes.",
+      "summary": "All circular OOBB plate variants across standard sizes.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "gears",
+      "name_long": "OOBB Part Set: Gears",
+      "name_short_options": [],
+      "description": "Parametric OOBB gear variants for different tooth counts and build scenarios.",
+      "summary": "Parametric OOBB gear variants for different tooth counts and build scenarios.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "holders",
+      "name_long": "OOBB Part Set: Holders",
+      "name_short_options": [],
+      "description": "Electronic and mechanical holder variants, including motor mounts and accessory holders.",
+      "summary": "Electronic and mechanical holder variants, including motor mounts and accessory holders.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "jacks",
+      "name_long": "OOBB Part Set: Jacks",
+      "name_short_options": [],
+      "description": "jacks part-set definitions.",
+      "summary": "jacks part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "jigs",
+      "name_long": "jigs",
+      "name_short_options": [
+        "jgs"
+      ],
+      "description": "Jig part-set definitions.",
+      "summary": "Jig part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": [
+        "jgs"
+      ]
+    },
+    {
+      "command": "mounting_plates",
+      "name_long": "OOBB Part Set: Mounting Plates",
+      "name_short_options": [],
+      "description": "mounting_plates part-set definitions.",
+      "summary": "mounting_plates part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "nuts",
+      "name_long": "OOBB Part Set: Nuts",
+      "name_short_options": [],
+      "description": "nuts part-set definitions.",
+      "summary": "nuts part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "others",
+      "name_long": "others",
+      "name_short_options": [
+        "ots"
+      ],
+      "description": "Other utility part-set definitions.",
+      "summary": "Other utility part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": [
+        "ots"
+      ]
+    },
+    {
+      "command": "plates",
+      "name_long": "OOBB Part Set: Plates",
+      "name_short_options": [],
+      "description": "Rectangular OOBB plates in a broad range of width and height combinations.",
+      "summary": "Rectangular OOBB plates in a broad range of width and height combinations.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "pulleys",
+      "name_long": "OOBB Part Set: Pulleys",
+      "name_short_options": [],
+      "description": "pulleys part-set definitions.",
+      "summary": "pulleys part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "screws",
+      "name_long": "OOBB Part Set: Screws",
+      "name_short_options": [],
+      "description": "screws part-set definitions.",
+      "summary": "screws part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "shaft_couplers",
+      "name_long": "OOBB Part Set: Shaft Couplers",
+      "name_short_options": [],
+      "description": "shaft_couplers part-set definitions.",
+      "summary": "shaft_couplers part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "shafts",
+      "name_long": "OOBB Part Set: Shafts",
+      "name_short_options": [],
+      "description": "shafts part-set definitions.",
+      "summary": "shafts part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "smd_magazines",
+      "name_long": "OOBB Part Set: Smd Magazines",
+      "name_short_options": [],
+      "description": "smd_magazines part-set definitions.",
+      "summary": "smd_magazines part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "soldering_jigs",
+      "name_long": "OOBB Part Set: Soldering Jigs",
+      "name_short_options": [],
+      "description": "soldering_jigs part-set definitions.",
+      "summary": "soldering_jigs part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "tests",
+      "name_long": "OOBB Part Set: Tests",
+      "name_short_options": [],
+      "description": "tests part-set definitions.",
+      "summary": "tests part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "tool_holders",
+      "name_long": "OOBB Part Set: Tool Holders",
+      "name_short_options": [],
+      "description": "tool_holders part-set definitions.",
+      "summary": "tool_holders part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "trays",
+      "name_long": "OOBB Part Set: Trays",
+      "name_short_options": [],
+      "description": "trays part-set definitions.",
+      "summary": "trays part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "wheels",
+      "name_long": "OOBB Part Set: Wheels",
+      "name_short_options": [],
+      "description": "wheels part-set definitions.",
+      "summary": "wheels part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "wires",
+      "name_long": "OOBB Part Set: Wires",
+      "name_short_options": [],
+      "description": "wires part-set definitions.",
+      "summary": "wires part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    },
+    {
+      "command": "ziptie_holders",
+      "name_long": "OOBB Part Set: Ziptie Holders",
+      "name_short_options": [],
+      "description": "ziptie_holders part-set definitions.",
+      "summary": "ziptie_holders part-set definitions.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "",
+          "type": "",
+          "default": ""
+        }
+      ],
+      "variable_names": [
+        "size"
+      ],
+      "category": "Part Sets",
+      "returns": "",
+      "aliases": []
+    }
+  ],
+  "generated_date": "2026-03-28",
+  "total_objects": 170,
+  "total_part_sets": 25
+}

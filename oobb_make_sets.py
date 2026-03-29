@@ -2,6 +2,41 @@
 #import oobb_get_items_oobb
 import oobb_base
 
+try:
+    from oobb_arch.catalog.part_set_discovery import build_part_set_lookup
+except Exception:
+    build_part_set_lookup = None
+
+
+_DISCOVERED_PART_SET_LOOKUP = None
+
+
+def _get_discovered_part_set_lookup():
+    global _DISCOVERED_PART_SET_LOOKUP
+    if _DISCOVERED_PART_SET_LOOKUP is None and build_part_set_lookup is not None:
+        try:
+            _DISCOVERED_PART_SET_LOOKUP = build_part_set_lookup()
+        except Exception:
+            _DISCOVERED_PART_SET_LOOKUP = {}
+    return _DISCOVERED_PART_SET_LOOKUP or {}
+
+
+def _get_discovered_set_items(set_name, size="oobb", **kwargs):
+    lookup = _get_discovered_part_set_lookup()
+    discovered = lookup.get(set_name)
+    if discovered is None:
+        return None
+    try:
+        return discovered.items_fn(size=size, **kwargs)
+    except Exception:
+        return None
+
+
+def get_set_items_discovered(set_name, size="oobb", **kwargs):
+    """Compatibility bridge for legacy getters to consume discovered part sets."""
+
+    return _get_discovered_set_items(set_name=set_name, size=size, **kwargs)
+
 
 def make_all(filter=""):
     # typs = ["bps","jas","mps","pls","nuts","screws_countersunk","tests","zts"]
@@ -10,8 +45,17 @@ def make_all(filter=""):
     #typs = ["bearing_plates", "bearing_circles", "mounting_plates", "trays", "tests","plates"]
    
     all_things = []
+    discovered_lookup = _get_discovered_part_set_lookup()
 
     for type in typs:
+        discovered = discovered_lookup.get(type)
+        if discovered is not None:
+            try:
+                all_things.extend(discovered.items_fn(size="oobb"))
+                continue
+            except Exception:
+                pass
+
         func = globals()["get_"+type]
         all_things.extend(func())
 
@@ -81,6 +125,10 @@ def get_bearing_plates(size="oobb"):
     return bps
 
 def get_bearing_circles(size="oobb"):
+    discovered = get_set_items_discovered("bearing_circles", size=size)
+    if discovered is not None:
+        return discovered
+
     bcs = []
     bcs.append({"type": "bearing_circle", "diameter": 3, "thickness": 12, "bearing": "606","size": size})
 

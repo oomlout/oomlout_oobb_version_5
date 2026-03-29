@@ -3,129 +3,51 @@ import oobb_base as ob
 
 
 def get_bolt(**kwargs):
-    wid = kwargs["radius_name"]
-    depth = kwargs["depth"]
-    thing = ob.get_default_thing(**kwargs)
-    thing.update({"description": f"bolt {wid}x{depth}"})
-    thing.update({"depth_mm": depth})
+    from part_calls.objects.oobb_object_bolt.working import action
 
-    thing.update({"components": []})
-    thing["components"].extend(ob.oe(
-        t="positive", s="oobb_bolt", rn=wid, depth=depth, rotY=0, include_nut=False))
-
-    return thing
+    return action(**kwargs)
 
 
 def get_nut_m3():
-    nut = get_nut(3)
+    nut = get_nut(radius_name="m3", type="nut")
     return nut
 
 
 def get_nut(**kwargs):
+    from part_calls.objects.oobb_object_nut.working import action
 
-    wid = kwargs["radius_name"]
-
-    thing = ob.get_default_thing(**kwargs)
-    width = ob.gv(f"nut_radius_{wid}_true")
-    depth = ob.gv(f"nut_depth_{wid}_true")
-    thing.update({"description": f"nut {wid}x{depth}"})
-    thing.update({"width_mm": width})
-    thing.update({"depth_mm": depth})
-    thing.update({"height_mm": width/1.154})
-
-    th = thing["components"]
-    th.extend(ob.oe(t="p", s="oobb_nut", rn=wid))
-    th.extend(ob.oe(t="n", s="oobb_hole", rn=wid, depth=100, z=-10, m=""))
-
-    return thing
+    return action(**kwargs)
 
 
 def get_screw_countersunk(**kwargs):
-    wid = kwargs["radius_name"]
-    depth = kwargs["depth"]
-    thing = ob.get_default_thing(**kwargs)
-    thing.update({"description": f"screw countersunk {wid}x{depth}"})
-    thing.update({"depth_mm": depth})
+    from part_calls.objects.oobb_object_screw_countersunk.working import action
 
-    thing.update({"components": []})
-    thing["components"].extend(ob.oe(
-        t="positive", s="oobb_screw_countersunk", rn=wid, depth=depth, include_nut=False))
-
-    return thing
+    return action(**kwargs)
 
 def get_screw_self_tapping(**kwargs):
-    wid = kwargs["radius_name"]
-    depth = kwargs["depth"]
-    thing = ob.get_default_thing(**kwargs)
-    thing.update({"description": f"screw self tapping {wid}x{depth}"})
-    thing.update({"depth_mm": depth})
+    from part_calls.objects.oobb_object_screw_self_tapping.working import action
 
-    thing.update({"components": []})
-    thing["components"].extend(ob.oe(
-        t="positive", s="oobb_screw_self_tapping", rn=wid, depth=depth, include_nut=False))
-
-    return thing
+    return action(**kwargs)
 
 def get_screw_socket_cap(**kwargs):
-    wid = kwargs["radius_name"]
-    depth = kwargs["depth"]
-    thing = ob.get_default_thing(**kwargs)
-    thing.update({"description": f"screw socket cap {wid}x{depth}"})
-    thing.update({"depth_mm": depth})
+    from part_calls.objects.oobb_object_screw_socket_cap.working import action
 
-    thing.update({"components": []})
-    thing["components"].extend(ob.oe(
-        t="positive", s="oobb_screw_socket_cap", rn=wid, depth=depth, include_nut=False))
-
-    return thing
+    return action(**kwargs)
 
 
 def get_standoff(**kwargs):
+    from part_calls.objects.oobb_object_standoff.working import action
 
-    wid = kwargs["radius_name"]
-    depth = kwargs["depth"]
-    thing = ob.get_default_thing(**kwargs)
-    width = ob.gv(f"nut_radius_{wid}_true")
-
-    thing.update({"description": f"standoff {wid}x{depth}x{depth}"})
-    thing.update({"width_mm": width})
-    thing.update({"depth_mm": depth})
-    thing.update({"height_mm": width/1.154})
-
-    th = thing["components"]
-    th.extend(ob.oe(t="p", s="oobb_standoff", rn=wid, hole=True, depth=depth))
-    # th.extend(ob.oe(t="n",s="oobb_hole", rn=wid,depth=100,z=-10,m=""))
-
-    return thing
+    return action(**kwargs)
 
 
 def get_threaded_insert(**kwargs):
+    from part_calls.objects.oobb_object_threaded_insert.working import action
 
-    wid = kwargs["radius_name"]
-    style = kwargs.get("style", "01")
-    thing = ob.get_default_thing(**kwargs)
-    width = ob.gv(f"threaded_insert_{style}_radius_{wid}_true")
-    depth = ob.gv(f"threaded_insert_{style}_depth_{wid}_true")
-    thing.update({"description": f"threaded insert {wid}x{depth}"})
-    thing.update({"width_mm": width})
-    thing.update({"depth_mm": depth})
-
-    th = thing["components"]
-    th.extend(ob.oe(t="p", s="oobb_threaded_insert", rn=wid, hole=False))
-    th.extend(ob.oe(t="n", s="oobb_hole", rn=wid, depth=100, z=-10, m=""))
-
-    return thing
+    return action(**kwargs)
 
 
 def get_bearing(**kwargs):
-    bearing_name = kwargs["bearing_name"]
-    thing = ob.get_default_thing(**kwargs)
-    thing.update({"description": f"bearing {bearing_name}"})
+    from part_calls.objects.oobb_object_bearing.working import action
 
-    th = thing["components"]
-    th.extend(ob.oe(t="positive", s="oobb_cylinder",
-              radius_name=f'bearing_{bearing_name}_od', depth=f"bearing_{bearing_name}_depth"))
-    th.extend(ob.oe(t="negative", s="oobb_cylinder",
-              radius_name=f'bearing_{bearing_name}_id', depth=f"bearing_{bearing_name}_depth"))
-
-    return thing
+    return action(**kwargs)

@@ -8,17 +8,70 @@ import oobb_get_items_base
 import oobb_get_items_oobb
 import oobb_get_items_test
 
+try:
+    from oobb_arch.catalog.legacy_registry import build_legacy_builder_registry
+except Exception:
+    build_legacy_builder_registry = None
+
+try:
+    from oobb_arch.catalog.object_discovery import build_object_lookup
+except Exception:
+    build_object_lookup = None
+
+
+_LEGACY_BUILDER_REGISTRY = None
+_OBJECT_LOOKUP = None
+
+
+def _get_legacy_builder_registry():
+    global _LEGACY_BUILDER_REGISTRY
+    if _LEGACY_BUILDER_REGISTRY is None and build_legacy_builder_registry is not None:
+        try:
+            _LEGACY_BUILDER_REGISTRY = build_legacy_builder_registry(
+                [oobb_get_items_oobb, oobb_get_items_other, oobb_get_items_test]
+            )
+        except Exception:
+            _LEGACY_BUILDER_REGISTRY = None
+    return _LEGACY_BUILDER_REGISTRY
+
+
+def _get_object_lookup():
+    global _OBJECT_LOOKUP
+    if _OBJECT_LOOKUP is None and build_object_lookup is not None:
+        try:
+            _OBJECT_LOOKUP = build_object_lookup()
+        except Exception:
+            _OBJECT_LOOKUP = {}
+    return _OBJECT_LOOKUP or {}
+
 
 
 def get_thing_from_dict(thing_dict):
     full_object = thing_dict.get("full_object", False)
-    try:
-        func = getattr(oobb_get_items_oobb, "get_"+thing_dict["type"])
-    except AttributeError:
+
+    func = None
+
+    object_lookup = _get_object_lookup()
+    discovered_obj = object_lookup.get(thing_dict["type"])
+    if discovered_obj is not None:
+        func = discovered_obj.action_fn
+
+    if func is None:
+        registry = _get_legacy_builder_registry()
+        if registry is not None:
+            try:
+                func = registry.resolve(thing_dict["type"])
+            except KeyError:
+                func = None
+
+    if func is None:
         try:
-            func = getattr(oobb_get_items_other, "get_"+thing_dict["type"])
+            func = getattr(oobb_get_items_oobb, "get_"+thing_dict["type"])
         except:
-            func = getattr(oobb_get_items_test, "get_"+thing_dict["type"])
+            try:
+                func = getattr(oobb_get_items_other, "get_"+thing_dict["type"])
+            except:
+                func = getattr(oobb_get_items_test, "get_"+thing_dict["type"])
 
     thing = func(**thing_dict)
 

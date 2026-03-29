@@ -5,11 +5,12 @@ import json
 def main(**kwargs):
     print("action_generate_release_laser_cut")
     pass
-    folder_things = "C:\\gh\\oomlout_oobb_version_4_generated_parts\\parts"
-    folder_release = "C:/gh/oomlout_oobb_release_laser_cut"
+    folder_things = kwargs.get("folder_things", "C:\\gh\\oomlout_oobb_version_4_generated_parts\\parts")
+    folder_release = kwargs.get("folder_release", "C:/gh/oomlout_oobb_release_laser_cut")
+    clone_if_missing = kwargs.get("clone_if_missing", True)
 
     #if folder doesn't exist clone in from github
-    if not os.path.exists(folder_release):
+    if clone_if_missing and not os.path.exists(folder_release):
         #save cwd
         cwd = os.getcwd()
         #change to folder c:\gh

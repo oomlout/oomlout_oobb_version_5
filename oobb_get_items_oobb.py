@@ -4,171 +4,38 @@ from oobb_get_items_oobb_bearing_plate import *
 #from oobb_get_items_oobb_holder import *
 import oobb_get_items_oobb_holder
 import oobb_base
+from oobb_arch.helpers.plate_helpers import (
+    get_plate_dict as _shared_get_plate_dict,
+    get_plate_hole_dict as _shared_get_plate_hole_dict,
+)
+from oobb_arch.helpers.shaft_helpers import (
+    add_oobb_shaft as _shared_add_oobb_shaft,
+    get_shaft_center as _shared_get_shaft_center,
+)
 
 import copy
 
 # helpers
 def get_plate_dict(**kwargs):
-    size = kwargs.get("size", "oobb")
-    thickness = kwargs.get("thickness", 3)
-    pos_plate = kwargs.get("pos_plate", [0, 0, 0])
+    from part_calls.objects.oobb_object_plate_dict.working import action
 
-    pos1 = copy.deepcopy(pos_plate)
-    p3 = copy.deepcopy(kwargs)
-    p3["type"] = "positive" 
-    p3["shape"] = f"{size}_plate"      
-    p3["depth"] = thickness
-    p3["pos"] = pos1
-    return p3
+    return action(**kwargs)
 
 def get_plate_hole_dict(**kwargs):
-    pos_plate = kwargs.get("pos_plate", [0, 0, 0])
-    size = kwargs.get("size", "oobb")
-    hole_sides = kwargs.get("hole_sides", ["left","right","top"])
+    from part_calls.objects.oobb_object_plate_hole_dict.working import action
 
-    pos1 = copy.deepcopy(pos_plate)
-    p3 = copy.deepcopy(kwargs)
-    p3["type"] = "p" 
-    p3["shape"] = f"{size}_holes"    
-    p3["holes"] = hole_sides
-    p3["both_holes"] = True
-    p3["pos"] = pos1
-
-    return p3
+    return action(**kwargs)
 
 # circle
 def get_circle(**kwargs):    
-    p3 = copy.deepcopy(kwargs)
-    extra = p3.get("extra", "")    
-    thickness = p3.get("thickness", 3)
-    zz = p3.get("zz", "bottom")
-    pos = p3.get("pos", [0, 0, 0])
-    #extra     
-    p3.pop("extra", "")
-    p3["type"] = f'plate_{extra}'
-    
+    from part_calls.objects.oobb_object_circle.working import action
 
-
-    #zz
-    if zz == "bottom":
-        pos[2] += 0
-    elif zz == "middle":
-        pos[2] += -thickness/2
-    elif zz == "top":
-        pos[2] += -thickness
-
-    if extra != "" and "doughnut" not in extra:        
-        # Get the module object for the current file        
-        function_name = "get_plate_" + extra
-        # Call the function using the string variable
-        import sys
-        import importlib
-        importlib.reload(sys.modules[__name__])
-        function_to_call = getattr(sys.modules[__name__],function_name)
-        return function_to_call(**kwargs)
-    else:
-        return get_circle_base(**kwargs)
+    return action(**kwargs)
 
 def get_circle_base(**kwargs):
-
-    # default sets
-    width = kwargs.get("width", 1)
-    height = kwargs.get("height", 1)
-    diameter = kwargs.get("diameter", 1)
-    width = diameter
-    height = diameter   
-    thickness = kwargs.get("thickness", 3)
-    size = kwargs.get("size", "oobb")
-    pos = kwargs.get("pos", [0, 0, 0])
-    extra = kwargs.get("extra", "")
-    full_object = kwargs.get("full_object", True)
-    shaft = kwargs.get("shaft", "")
-        
-    # extra sets
-    holes = kwargs.get("holes", True)
-    both_holes = kwargs.get("both_holes", True)    
-    kwargs["pos"] = pos
-    
-    # get the default thing
-    thing = oobb_base.get_default_thing(**kwargs)
-    th = thing["components"]
-    kwargs.pop("size","")
-
-    th.append(oobb_base.get_comment("circle main","p"))
-    # add plate
-    p3 = copy.deepcopy(kwargs)
-    p3["type"] = "p"   
-    p3["shape"] = f"{size}_circle"
-    p3["width"] = width
-    p3["height"] = height  
-    p3["depth"] = thickness
-    p3["pos"] = pos
-    #p3["m"] = ""  
-    oobb_base.append_full(thing,**p3)      
-    
-    doughnut_diameter = 0
-    #doughnut_cutout
-    if "doughnut" in extra:
-        doughnut_diameter = float(extra.replace("doughnut_",""))
-        p3 = copy.deepcopy(kwargs)
-        p3["type"] = "n"
-        p3["shape"] = f"{size}_circle"
-        p3["width"] = doughnut_diameter
-        p3["height"] = doughnut_diameter
-        p3["depth"] = thickness
-        p3["pos"] = pos
-        p3["diameter"] = doughnut_diameter
-        #p3["m"] = "#"
-        oobb_base.append_full(thing,**p3)
-
-    
-    # add holes
-    if holes:
-        th.append(oobb_base.get_comment("holes main","n"))
-        p3 = copy.deepcopy(kwargs)
-        p3["type"] = "n"
-        p3["shape"] = f"{size}_holes"
-        p3["width"] = width
-        p3["height"] = height
-        p3["pos"] = pos
-        p3["holes"] = "all"
-        p3["both_holes"] = both_holes
-        p3["circle"] = True        
-        if shaft != "":
-            p3["middle"] = False
-            pass
-        
-        #p3["m"] = "#"
-        oobb_base.append_full(thing,**p3)      
-        #th.extend(oobb_base.oobb_easy(**p3))   
-        
-        if diameter == 1.5:
-            p3 = copy.deepcopy(kwargs)
-            p3["type"] = "n"
-            p3["shape"] = f"{size}_hole"
-            p3["width"] = width
-            p3["height"] = height
-            p3["pos"] = pos            
-            p3["radius_name"] = "m3"
-            poss = []
-            shift = 5.303
-            poss.append([shift,shift,0])
-            poss.append([-shift,shift,0])
-            poss.append([shift,-shift,0])
-            poss.append([-shift,-shift,0])
-            p3["pos"] = poss            
-            p3["m"] = "#"
-            oobb_base.append_full(thing,**p3)    
-            
-
-
-    if shaft != "":
-        get_shaft_center(thing, **kwargs)    
-
-    if full_object:   
-        return thing
-    else: # only return the elements
-        return th
+    # MIGRATED → part_calls/objects/oobb_object_circle_base/
+    from part_calls.objects.oobb_object_circle_base.working import action
+    return action(**kwargs)
 
 # gear
 def get_gear(**kwargs):
@@ -340,44 +207,7 @@ def get_gear(**kwargs):
         return th
 
 def add_oobb_shaft(**kwargs):
-    thing = kwargs.get("thing")
-    kwargs.pop("thing","")
-    pos = kwargs.get("pos", [0,0,0])
-    size = kwargs.get("size", "oobb")
-    shaft = kwargs.get("shaft", "m6")
-    thickness = kwargs.get("thickness", 3)
-    # shaft
-    if shaft == "":
-        shaft = "m6"
-    if shaft.startswith("m6") or shaft.startswith("m3"):
-        p3 = copy.deepcopy(kwargs)
-        p3["type"] = "n"
-        p3["shape"] = f"{size}_hole"
-        p3["radius_name"] = shaft.split("_")[0]      
-        pos1 = copy.deepcopy(pos)        
-        p3["pos"] = pos1
-        #p3["m"] = "#"  
-        oobb_base.append_full(thing, **p3)
-    else:
-        p3 = copy.deepcopy(kwargs)
-        p3.pop("extra","")
-        p3["type"] = "n"
-        p3["shape"] = f"oobb_{shaft}"     
-        p3["part"] = "shaft"   
-        pos1 = copy.deepcopy(pos)        
-        
-        
-        if shaft == "motor_servo_standard_01":
-            p3["rot"] = [0,0,45]
-            pos1[2] += 2
-            p3["overhang"] = False
-        elif shaft == "motor_tt_01":            
-            pos1[2] += thickness - 1
-            p3["depth"] = 50
-            
-        p3["pos"] = pos1
-        p3["m"] = "#"  
-        oobb_base.append_full(thing, **p3)
+    return _shared_add_oobb_shaft(**kwargs)
 
 def get_gear_double_stack(**kwargs):
 
@@ -453,127 +283,20 @@ def get_holder(**kwargs):
 
 # holder
 def get_other(**kwargs):
-    p3 = copy.deepcopy(kwargs)
-    extra = p3.get("extra", "")
-    p3.pop("extra")
-    p3["type"] = f'holder_{extra}'
-    if extra != "":
-        # Get the module object for the current file
-        current_module = __import__("oobb_get_items_oobb_other")
-        function_name = "get_other_" + extra
-        # Call the function using the string variable
-        function_to_call = getattr(current_module, function_name)
-        return function_to_call(**kwargs)
-    else:
-        Exception("No extra")
+    from part_calls.objects.oobb_object_other.working import action
+
+    return action(**kwargs)
 
 # plate
 def get_plate(**kwargs):
-    p3 = copy.deepcopy(kwargs)
-    extra = p3.get("extra", "")
-    p3.pop("extra", "")
-    p3["type"] = f'plate_{extra}'
-    if extra != "":
-        # Get the module object for the current file        
-        function_name = "get_plate_" + extra
-        # Call the function using the string variable
-        import sys
-        import importlib
-        importlib.reload(sys.modules[__name__])
-        #try function with extra added
-        try:
-            function_to_call = getattr(sys.modules[__name__],function_name)
-            return function_to_call(**kwargs)
-        except:            
-            print(f"Function {function_name} not found using basic plate")
-            return get_plate_base(**kwargs)        
-    else:
-        return get_plate_base(**kwargs)
+    from part_calls.objects.oobb_object_plate.working import action
+
+    return action(**kwargs)
 
 def get_plate_base(**kwargs):
-
-    # default sets
-    width = kwargs.get("width", 1)
-    height = kwargs.get("height", 1)
-    thickness = kwargs.get("thickness", 3)
-    size = kwargs.get("size", "oobb")
-    pos = kwargs.get("pos", [0, 0, 0])
-    extra = kwargs.get("extra", "")
-    full_object = kwargs.get("full_object", True)
-        
-    # extra sets
-    holes = kwargs.get("holes", True)
-    both_holes = kwargs.get("both_holes", True)    
-    kwargs["pos"] = pos
-    
-    
-
-    # get the default thing
-    thing = oobb_base.get_default_thing(**kwargs)
-    th = thing["components"]
-    kwargs.pop("size","")
-
-    th.append(oobb_base.get_comment("plate main","p"))
-    # add plate
-    p3 = copy.deepcopy(kwargs)
-    p3["type"] = "p"   
-    p3["shape"] = f"{size}_plate"
-    p3["width"] = width
-    p3["height"] = height  
-    p3["depth"] = thickness
-    p3["pos"] = pos
-    #p3["m"] = ""  
-    oobb_base.append_full(thing,**p3)      
-    #th.append(oobb_base.oobb_easy(**p3))
-    
-    # add holes
-    if holes:
-        th.append(oobb_base.get_comment("holes main","n"))
-        p3 = copy.deepcopy(kwargs)
-        p3["type"] = "n"
-        p3["shape"] = f"{size}_holes"
-        p3["width"] = width
-        p3["height"] = height
-        p3["pos"] = pos
-        p3["both_holes"] = both_holes
-        #p3["m"] = ""
-        oobb_base.append_full(thing,**p3)      
-        #th.extend(oobb_base.oobb_easy(**p3))   
-        
-    ##extra
-    
-    if "gorm" in extra:
-        th.append(oobb_base.get_comment("extra gorm","n"))
-        holes = [10,25,40]
-        for h in holes:
-            y = (math.floor(height/2) + height%2 ) * oobb_base.gv("osp")
-            posa = [h,y,0]
-            th.extend(oobb_base.oobb_easy(t="n", s=f"oobb_hole", radius_name="m6", pos=posa, m="#"))
-            posa = [-h,0,0]
-            th.extend(oobb_base.oobb_easy(t="n", s=f"oobb_hole", radius_name="m6", pos=posa, m="#"))
-    if "slip_center" in extra:
-        th.append(oobb_base.get_comment("extra slip_center","n"))
-        posa = [0,0,0]
-        th.extend(oobb_base.oobb_easy(t="n", s=f"oobb_hole", radius=9.4/2, pos=posa, m=""))
-        posb = [0,0,thickness/2]
-        th.extend(oobb_base.oobb_easy(t="p", s=f"oobb_cylinder", radius=20/2, depth=thickness, pos=posb, m=""))
-    if "slip_end" in extra:
-        th.append(oobb_base.get_comment("slip_end","n"))
-        posa = [(width-1)/2 * 15,0,0]
-        th.extend(oobb_base.oobb_easy(t="n", s=f"oobb_hole", radius=9.4/2, pos=posa, m=""))
-        posb = [(width-1)/2 * 15,0,thickness/2]
-        th.extend(oobb_base.oobb_easy(t="p", s=f"oobb_cylinder", radius=20/2, depth=thickness, pos=posb, m=""))
-    if "slip_corner" in extra:
-        th.append(oobb_base.get_comment("slip_corner","n"))
-        posa = [(width-1)/2 * 15,(height-1)/2 * 15,0]
-        th.extend(oobb_base.oobb_easy(t="n", s=f"oobb_hole", radius=9.4/2, pos=posa, m=""))
-        posb = [(width-1)/2 * 15,(height-1)/2 * 15,thickness/2]
-        th.extend(oobb_base.oobb_easy(t="p", s=f"oobb_cylinder", radius=20/2, depth=thickness, pos=posb, m=""))
-    
-    if full_object:   
-        return thing
-    else: # only return the elements
-        return th
+    # MIGRATED → part_calls/objects/oobb_object_plate_base/
+    from part_calls.objects.oobb_object_plate_base.working import action
+    return action(**kwargs)
 
 def get_plate_l(**kwargs):
 
@@ -633,157 +356,15 @@ def get_plate_l(**kwargs):
         return th
 
 def get_plate_label(**kwargs):
-
-    # default sets
-    width = kwargs.get("width", 1)
-    height = kwargs.get("height", 1)
-    thickness = kwargs.get("thickness", 3)
-    size = kwargs.get("size", "oobb")
-    pos = kwargs.get("pos", [0, 0, 0])
-    extra = kwargs.get("extra", "")
-    full_object = kwargs.get("full_object", True)
-        
-    # extra sets
-    holes = kwargs.get("holes", True)
-    both_holes = kwargs.get("both_holes", True)    
-    kwargs["pos"] = pos
-    
-    
-
-    # get the default thing
-    thing = oobb_base.get_default_thing(**kwargs)
-    th = thing["components"]
-    kwargs.pop("size","")
-
-    #get the plate
-    p3 = copy.deepcopy(kwargs)
-    pos1 = copy.deepcopy(pos)
-    shift_x = 0
-    shift_y = 0
-    shift_z = 0
-    pos1 = [pos1[0] + shift_x, pos1[1] + shift_y, pos1[2] + shift_z]
-    p3["pos"] = pos1
-    p3["type"] = "plate"
-    p3["width"] = width
-    p3["height"] = height
-    p3["holes"] = "right"
-    p3["full_object"] = False
-
-    p3.pop("extra","")
-    width_plate = oobb_base.get_thing_from_dict(p3)
-    th.append(width_plate)
-
-
-    
-    if full_object:   
-        return thing
-    else: # only return the elements
-        return th
+    # MIGRATED → part_calls/objects/oobb_object_plate_label/
+    from part_calls.objects.oobb_object_plate_label.working import action
+    return action(**kwargs)
 
 
 def get_plate_ninety_degree(**kwargs):
-
-    # default sets
-    width = kwargs.get("width", 1)
-    height = kwargs.get("height", 1)
-    thickness = kwargs.get("thickness", 3)
-    thickness_oobb = 0
-    if thickness >= 14:
-        thickness_oobb = (thickness + 1) /15
-        
-    size = kwargs.get("size", "oobb")
-    pos = kwargs.get("pos", [0, 0, 0])
-    extra = kwargs.get("extra", "")
-    full_object = kwargs.get("full_object", True)
-        
-    # extra sets
-    holes = kwargs.get("holes", True)
-    both_holes = kwargs.get("both_holes", True)    
-    kwargs["pos"] = pos
-    
-    plate_pos = [0,0,-thickness/2]
-    plate_pos = [pos[0] + plate_pos[0], pos[1] + plate_pos[1], pos[2] + plate_pos[2]]
-
-
-    # get the default thing
-    thing = oobb_base.get_default_thing(**kwargs)
-    th = thing["components"]
-    kwargs.pop("size","")
-
-    th.append(oobb_base.get_comment("plate main","p"))
-    # add plate
-    p3 = copy.deepcopy(kwargs)
-    p3["type"] = "p"   
-    p3["shape"] = f"{size}_plate"
-    p3["width"] = width
-    p3["height"] = height  
-    p3["depth"] = thickness
-    p3["pos"] = plate_pos
-    p3["r"] = 2.5
-    #p3["m"] = ""  
-    oobb_base.append_full(thing,**p3)      
-    #th.append(oobb_base.oobb_easy(**p3))
-    
-    holes_m6_vertical = []
-    holes_m6_horizontal = []
-    holes_m3_vertical = []
-    holes_m3_horizontal = []    
-    
-    for w in range(1,width+1):
-        for h in range(1,height+1):
-            for t in range(1,int(thickness_oobb)+1):
-                #vertical even horizontal odd                
-                if w%2 == 0:
-                    holes_m6_vertical.append([[h,w,t],[0,0,0],"m6"])    
-                else:
-                    holes_m6_horizontal.append([[h,w,t],[90,0,0],"m6"])
-
-                if w+1 <= width:
-                    holes_m3_horizontal.append([[h,w+0.5,t],[90,0,0],"m3"])
-                    holes_m3_vertical.append([[h,w+0.5,t],[0,0,0],"m3"])
-    hole_list = []
-    hole_list.extend(holes_m6_vertical)
-    hole_list.extend(holes_m6_horizontal)
-    hole_list.extend(holes_m3_vertical)
-    hole_list.extend(holes_m3_horizontal)
-    if holes:
-        for hole in hole_list:
-            p3 = copy.deepcopy(kwargs)
-            pos1 = copy.deepcopy(pos)
-            #x
-            x_shift = (hole[0][1]-1) * 15 - width/2 * 15 + 7.5
-            
-            #y
-            y_shift = (hole[0][0]-1) * 15 - height/2 * 15 + 7.5
-            
-            #z            
-            z_shift = (hole[0][2]-1) * 15 - thickness_oobb/2 * 15 + 7.5
-            
-
-            pos1[0] += x_shift            
-            pos1[1] += y_shift
-            pos1[2] += z_shift
-            p3["type"] = "n"
-            p3["shape"] = f"{size}_hole_new"
-            p3["width"] = width
-            p3["height"] = height
-            p3["pos"] = pos1
-            p3["both_holes"] = both_holes
-            p3["holes"] = "single"
-            p3["radius_name"] = hole[2]
-            p3["rot"] = hole[1]
-            p3["zz"] = "middle"
-            #p3["m"] = "#"
-            p3["depth"] = 250
-            oobb_base.append_full(thing,**p3)      
-        
-        
-    
-    
-    if full_object:   
-        return thing
-    else: # only return the elements
-        return th
+    # MIGRATED → part_calls/objects/oobb_object_plate_ninety_degree/
+    from part_calls.objects.oobb_object_plate_ninety_degree.working import action
+    return action(**kwargs)
 
 def get_plate_t(**kwargs):
 
@@ -1400,91 +981,23 @@ def get_pulley_gt2_shield_double(**kwargs):
 
 
 def get_shaft_center(thing, **kwargs):
-    shaft = kwargs.get("shaft", "")
-    size = kwargs.get("size", "oobb")
-    pos = kwargs.get("pos", [0,0,0])
-    # shaft
-    if shaft == "":
-        shaft = "m6"
-    if shaft.startswith("m6") or shaft.startswith("m3"):
-        p3 = copy.deepcopy(kwargs)
-        p3["type"] = "n"
-        p3["shape"] = f"{size}_hole"
-        p3["radius_name"] = shaft        
-        pos1 = copy.deepcopy(pos)        
-        p3["pos"] = pos1
-        #p3["m"] = "#"  
-        oobb_base.append_full(thing,**p3)        
-    else:
-        p3 = copy.deepcopy(kwargs)
-        p3.pop("extra","")
-        p3["type"] = "n"
-        p3["shape"] = f"oobb_{shaft}"     
-        p3["part"] = "shaft"   
-        pos1 = copy.deepcopy(pos)        
-        
-        
-        if shaft == "motor_servo_standard_01":
-            p3["rot"] = [0,0,45]
-            pos1[2] += 2
-            p3["overhang"] = False
-        p3["pos"] = pos1
-        #p3["m"] = "#"  
-        oobb_base.append_full(thing,**p3)
+    return _shared_get_shaft_center(thing, **kwargs)
 
 # test    
 def get_test(**kwargs):
-    p3 = copy.deepcopy(kwargs)
-    extra = p3.get("extra", "")
-    p3.pop("extra")
-    p3["type"] = f'test_{extra}'
-    if extra != "":
-        # Get the module object for the current file
-        current_module = __import__("oobb_get_items_test")
-        function_name = "get_test_" + extra
-        # Call the function using the string variable
-        function_to_call = getattr(current_module, function_name)
-        return function_to_call(**kwargs)
-    else:
-        Exception("No extra")
+    from part_calls.objects.oobb_object_test.working import action
+
+    return action(**kwargs)
 
 # wheel
 def get_wheel(**kwargs):
-    p3 = copy.deepcopy(kwargs)
-    extra = p3.get("extra", "")
-    p3.pop("extra","")
-    p3["type"] = f'wheel_{extra}'
-    
-    if type(extra) == list:
-        extra = "_".join(extra)
-    # Get the module object for the current file
-    current_module = __import__("oobb_get_items_oobb_wheel")
-    if extra != "":
-        function_name = "get_wheel_" + extra
-    else:
-        function_name = "get_wheel"
-    # Call the function using the string variable
-    function_to_call = getattr(current_module, function_name)
-    return function_to_call(**kwargs)
+    from part_calls.objects.oobb_object_wheel.working import action
+
+    return action(**kwargs)
     
 
 # wire
 def get_wire(**kwargs):
-    p3 = copy.deepcopy(kwargs)
-    extra = p3.get("extra", "")
-    p3.pop("extra")
-    p3["type"] = f'wire_{extra}'
-    if extra != "":        
-        if type(extra) == list:
-            extra = "_".join(extra)
-        # Get the module object for the current file
-        current_module = __import__("oobb_get_items_oobb_wire")
-        function_name = "get_wire_" + extra
-        # Call the function using the string variable
-        try:
-            function_to_call = getattr(current_module, function_name)
-        except:
-            function_to_call = getattr(current_module, "get_oobb_wire_base")
-        return function_to_call(**kwargs)
-    else:
-        Exception("No extra")
+    from part_calls.objects.oobb_object_wire.working import action
+
+    return action(**kwargs)
