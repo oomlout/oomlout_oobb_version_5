@@ -3,7 +3,6 @@ from types import SimpleNamespace
 from unittest import mock
 
 import oobb
-import oobb_base
 
 
 class ObjectDispatchIntegrationTests(unittest.TestCase):
@@ -12,10 +11,10 @@ class ObjectDispatchIntegrationTests(unittest.TestCase):
         discovered = SimpleNamespace(action_fn=lambda **kwargs: sentinel)
         legacy_registry = SimpleNamespace(resolve=lambda typ: (lambda **kwargs: {"source": "legacy", "components": []}))
 
-        with mock.patch.object(oobb_base, "_get_object_lookup", return_value={"demo": discovered}), mock.patch.object(
-            oobb_base, "_get_legacy_builder_registry", return_value=legacy_registry
+        with mock.patch.object(oobb, "_get_object_lookup", return_value={"demo": discovered}), mock.patch.object(
+            oobb, "_get_legacy_builder_registry", return_value=legacy_registry
         ):
-            result = oobb_base.get_thing_from_dict({"type": "demo"})
+            result = oobb.get_thing_from_dict({"type": "demo"})
 
         self.assertEqual(result, sentinel)
 
@@ -23,15 +22,15 @@ class ObjectDispatchIntegrationTests(unittest.TestCase):
         expected = {"source": "legacy", "components": []}
         legacy_registry = SimpleNamespace(resolve=lambda typ: (lambda **kwargs: expected))
 
-        with mock.patch.object(oobb_base, "_get_object_lookup", return_value={}), mock.patch.object(
-            oobb_base, "_get_legacy_builder_registry", return_value=legacy_registry
+        with mock.patch.object(oobb, "_get_object_lookup", return_value={}), mock.patch.object(
+            oobb, "_get_legacy_builder_registry", return_value=legacy_registry
         ):
-            result = oobb_base.get_thing_from_dict({"type": "plate"})
+            result = oobb.get_thing_from_dict({"type": "plate"})
 
         self.assertEqual(result, expected)
 
     def test_dispatch_circle_via_discovery(self):
-        oobb_base._OBJECT_LOOKUP = None
+        oobb._OBJECT_LOOKUP = None
         payload = {"type": "circle", "diameter": 3, "thickness": 3, "size": "oobb"}
         result = oobb_base.get_thing_from_dict(payload)
         self.assertIsInstance(result, dict)

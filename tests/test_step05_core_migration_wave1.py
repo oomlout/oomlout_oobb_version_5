@@ -1,7 +1,6 @@
 import unittest
 
 import oobb
-import oobb_base
 import oobb_get_items_oobb
 
 from oobb_arch.testing.output_compare import compare_outputs
@@ -9,7 +8,7 @@ from oobb_arch.testing.output_compare import compare_outputs
 
 class TestCoreMigrationWave1(unittest.TestCase):
     def test_plate_dict_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_plate_dict.working import action
+        from components.plate_dict.working import action
 
         kwargs = {"type": "plate_dict", "size": "oobb", "thickness": 3, "pos_plate": [1, 2, 3]}
         legacy = oobb_get_items_oobb.get_plate_dict(**kwargs)
@@ -18,7 +17,7 @@ class TestCoreMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_plate_hole_dict_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_plate_hole_dict.working import action
+        from components.plate_hole_dict.working import action
 
         kwargs = {
             "type": "plate_hole_dict",
@@ -32,7 +31,7 @@ class TestCoreMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_other_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_other.working import action
+        from components.others.working import action
 
         kwargs = {
             "type": "other",
@@ -69,7 +68,7 @@ class TestCoreMigrationWave1(unittest.TestCase):
                 self.assertIsInstance(result, dict)
 
     def test_test_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test.working import action
+        from components.tests.working import action
 
         kwargs = {"type": "test", "extra": "rotation", "size": "oobb", "thickness": 3}
         legacy = oobb_get_items_oobb.get_test(**kwargs)
@@ -78,7 +77,7 @@ class TestCoreMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_wheel_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_wheel.working import action
+        from components.wheels.working import action
 
         kwargs = {"type": "wheel", "extra": "no_tire", "size": "oobb", "thickness": 3}
         legacy = oobb_get_items_oobb.get_wheel(**kwargs)
@@ -87,7 +86,7 @@ class TestCoreMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_wire_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_wire.working import action
+        from components.wires.working import action
 
         kwargs = {"type": "wire", "extra": "motor", "size": "oobb", "width": 3, "height": 3}
         legacy = oobb_get_items_oobb.get_wire(**kwargs)
@@ -96,7 +95,7 @@ class TestCoreMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_plate_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_plate.working import action
+        from components.plates.working import action
 
         kwargs = {"type": "plate", "size": "oobb", "width": 3, "height": 3, "thickness": 3}
         legacy = oobb_get_items_oobb.get_plate(**kwargs)
@@ -105,7 +104,7 @@ class TestCoreMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_circle_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_circle.working import action
+        from components.circles.working import action
 
         kwargs = {"type": "circle", "size": "oobb", "diameter": 3, "thickness": 3}
         legacy = oobb_get_items_oobb.get_circle(**kwargs)

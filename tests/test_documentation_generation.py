@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from part_calls.documentation import (
+from components.documentation import (
     export_documentation_html,
     export_documentation_json,
     export_documentation_markdown,
@@ -13,8 +13,8 @@ from part_calls.documentation import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OBJECTS_ROOT = ROOT / "part_calls" / "objects"
-SETS_ROOT = ROOT / "part_calls" / "sets"
+OBJECTS_ROOT = ROOT / "components"
+SETS_ROOT = ROOT / "components"
 
 
 class DocumentationGenerationTests(unittest.TestCase):
@@ -56,7 +56,7 @@ class DocumentationGenerationTests(unittest.TestCase):
         docs = get_all_objects_documentation(objects_root=OBJECTS_ROOT)
         target = None
         for item in docs:
-            if item.get("command") == "oobb_object_circle":
+            if item.get("command") == "circles":
                 target = item
                 break
         self.assertIsNotNone(target)
@@ -87,7 +87,7 @@ class DocumentationGenerationTests(unittest.TestCase):
             self.assertTrue(output.exists())
             text = output.read_text(encoding="utf-8")
             self.assertIn("DOCUMENTATION_DATA", text)
-            self.assertIn("oobb_object_circle", text)
+            self.assertIn("circles", text)
 
     def test_export_markdown_creates_index(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -95,13 +95,13 @@ class DocumentationGenerationTests(unittest.TestCase):
             objects_root = tmp_path / "objects"
             sets_root = tmp_path / "sets"
 
-            obj_folder = objects_root / "oobb_object_sample"
+            obj_folder = objects_root / "sample"
             obj_folder.mkdir(parents=True)
             (obj_folder / "working.py").write_text(
                 """
 def define():
     return {
-        "name": "oobb_object_sample",
+        "name": "sample",
         "name_short": ["sample"],
         "name_long": "Sample Object",
         "description": "Sample object description.",
@@ -141,7 +141,7 @@ def items(size="oobb", **kwargs):
             self.assertTrue(objects_index.exists())
             self.assertTrue(sets_index.exists())
             self.assertIn("|", objects_index.read_text(encoding="utf-8"))
-            self.assertIn("oobb_object_sample", objects_index.read_text(encoding="utf-8"))
+            self.assertIn("sample", objects_index.read_text(encoding="utf-8"))
             self.assertIn("sample_set", sets_index.read_text(encoding="utf-8"))
 
     def test_per_folder_readme_generated(self):
@@ -150,13 +150,13 @@ def items(size="oobb", **kwargs):
             objects_root = tmp_path / "objects"
             sets_root = tmp_path / "sets"
 
-            obj_folder = objects_root / "oobb_object_sample"
+            obj_folder = objects_root / "sample"
             obj_folder.mkdir(parents=True)
             (obj_folder / "working.py").write_text(
                 """
 def define():
     return {
-        "name": "oobb_object_sample",
+        "name": "sample",
         "name_long": "Sample Object",
         "description": "Sample object description.",
         "category": "Sample",

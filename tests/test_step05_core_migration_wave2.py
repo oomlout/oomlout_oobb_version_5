@@ -13,7 +13,6 @@ import unittest
 import copy
 
 import oobb
-import oobb_base
 import oobb_get_items_oobb
 
 from oobb_arch.testing.output_compare import compare_outputs
@@ -23,14 +22,14 @@ class TestCircleBaseMigration(unittest.TestCase):
     """Verify circle_base folder owns its geometry code."""
 
     def test_basic_circle(self):
-        from part_calls.objects.oobb_object_circle_base.working import action
+        from components.circle_base.working import action
         kwargs = {"type": "circle_base", "diameter": 3, "thickness": 3, "size": "oobb"}
         result = action(**kwargs)
         self.assertIsInstance(result, dict)
         self.assertIn("components", result)
 
     def test_circle_with_shaft(self):
-        from part_calls.objects.oobb_object_circle_base.working import action
+        from components.circle_base.working import action
         kwargs = {"type": "circle_base", "diameter": 5, "thickness": 6,
                   "size": "oobb", "shaft": "m6"}
         result = action(**kwargs)
@@ -38,7 +37,7 @@ class TestCircleBaseMigration(unittest.TestCase):
         self.assertIn("components", result)
 
     def test_circle_doughnut(self):
-        from part_calls.objects.oobb_object_circle_base.working import action
+        from components.circle_base.working import action
         kwargs = {"type": "circle_base", "diameter": 3, "thickness": 3,
                   "size": "oobb", "extra": "doughnut_5"}
         result = action(**kwargs)
@@ -62,7 +61,7 @@ class TestPlateBaseMigration(unittest.TestCase):
     """Verify plate_base folder owns its geometry code."""
 
     def test_basic_plate(self):
-        from part_calls.objects.oobb_object_plate_base.working import action
+        from components.plate_base.working import action
         kwargs = {"type": "plate_base", "width": 3, "height": 2,
                   "thickness": 3, "size": "oobb"}
         result = action(**kwargs)
@@ -70,7 +69,7 @@ class TestPlateBaseMigration(unittest.TestCase):
         self.assertIn("components", result)
 
     def test_plate_1x1(self):
-        from part_calls.objects.oobb_object_plate_base.working import action
+        from components.plate_base.working import action
         kwargs = {"type": "plate_base", "width": 1, "height": 1,
                   "thickness": 6, "size": "oobb"}
         result = action(**kwargs)
@@ -78,7 +77,7 @@ class TestPlateBaseMigration(unittest.TestCase):
         self.assertIn("components", result)
 
     def test_plate_gorm_extra(self):
-        from part_calls.objects.oobb_object_plate_base.working import action
+        from components.plate_base.working import action
         kwargs = {"type": "plate_base", "width": 5, "height": 3,
                   "thickness": 3, "size": "oobb", "extra": "gorm"}
         result = action(**kwargs)
@@ -103,7 +102,7 @@ class TestPlateLabelMigration(unittest.TestCase):
     """Verify plate_label folder owns its geometry code."""
 
     def test_basic_label(self):
-        from part_calls.objects.oobb_object_plate_label.working import action
+        from components.plate_label.working import action
         kwargs = {"type": "plate_label", "width": 3, "height": 2,
                   "thickness": 3, "size": "oobb"}
         result = action(**kwargs)
@@ -128,7 +127,7 @@ class TestPlateNinetyDegreeMigration(unittest.TestCase):
     """Verify plate_ninety_degree folder owns its geometry code."""
 
     def test_basic_ninety_degree(self):
-        from part_calls.objects.oobb_object_plate_ninety_degree.working import action
+        from components.plate_ninety_degree.working import action
         kwargs = {"type": "plate_ninety_degree", "width": 3, "height": 2,
                   "thickness": 15, "size": "oobb"}
         result = action(**kwargs)
@@ -155,28 +154,28 @@ class TestFolderCodeIsNotDelegating(unittest.TestCase):
 
     def test_circle_base_not_delegating(self):
         import inspect
-        from part_calls.objects.oobb_object_circle_base.working import action
+        from components.circle_base.working import action
         source = inspect.getsource(action)
         self.assertNotIn("import oobb_get_items_oobb", source)
         self.assertIn("oobb_base.get_default_thing", source)
 
     def test_plate_base_not_delegating(self):
         import inspect
-        from part_calls.objects.oobb_object_plate_base.working import action
+        from components.plate_base.working import action
         source = inspect.getsource(action)
         self.assertNotIn("import oobb_get_items_oobb", source)
         self.assertIn("oobb_base.get_default_thing", source)
 
     def test_plate_label_not_delegating(self):
         import inspect
-        from part_calls.objects.oobb_object_plate_label.working import action
+        from components.plate_label.working import action
         source = inspect.getsource(action)
         self.assertNotIn("import oobb_get_items_oobb", source)
         self.assertIn("oobb_base.get_default_thing", source)
 
     def test_plate_ninety_degree_not_delegating(self):
         import inspect
-        from part_calls.objects.oobb_object_plate_ninety_degree.working import action
+        from components.plate_ninety_degree.working import action
         source = inspect.getsource(action)
         self.assertNotIn("import oobb_get_items_oobb", source)
         self.assertIn("oobb_base.get_default_thing", source)

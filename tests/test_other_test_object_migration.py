@@ -6,7 +6,21 @@ from oobb_arch.catalog.object_discovery import discover_objects
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OBJECTS_ROOT = ROOT / "part_calls" / "objects"
+OBJECTS_ROOT = ROOT / "components"
+
+_MERGE_MAP = {
+    "bearing": "bearings", "bearing_circle": "bearing_circles", "bearing_plate": "bearing_plates",
+    "circle": "circles", "gear": "gears", "holder": "holders", "jack": "jacks", "jig": "jigs",
+    "mounting_plate": "mounting_plates", "nut": "nuts", "other": "others", "plate": "plates",
+    "pulley_gt2": "pulleys", "shaft": "shafts", "shaft_coupler": "shaft_couplers",
+    "smd_magazine": "smd_magazines", "soldering_jig": "soldering_jigs", "test": "tests",
+    "tool_holder": "tool_holders", "tray": "trays", "wheel": "wheels", "wire": "wires",
+    "ziptie_holder": "ziptie_holders", "bunting_alphabet": "buntings",
+}
+
+
+def _resolve_folder(type_name: str) -> str:
+    return _MERGE_MAP.get(type_name, type_name)
 
 
 class OtherTestObjectMigrationTests(unittest.TestCase):
@@ -15,12 +29,12 @@ class OtherTestObjectMigrationTests(unittest.TestCase):
 
     def test_all_other_functions_have_folders(self):
         for item in self._legacy_from_module("oobb_get_items_other"):
-            path = OBJECTS_ROOT / f"oobb_object_{item['type_name']}" / "working.py"
+            path = OBJECTS_ROOT / _resolve_folder(item['type_name']) / "working.py"
             self.assertTrue(path.exists(), msg=f"Missing folder for {item['function_name']}")
 
     def test_all_test_functions_have_folders(self):
         for item in self._legacy_from_module("oobb_get_items_test"):
-            path = OBJECTS_ROOT / f"oobb_object_{item['type_name']}" / "working.py"
+            path = OBJECTS_ROOT / _resolve_folder(item['type_name']) / "working.py"
             self.assertTrue(path.exists(), msg=f"Missing folder for {item['function_name']}")
 
     def test_zero_pending_objects(self):
@@ -32,7 +46,7 @@ class OtherTestObjectMigrationTests(unittest.TestCase):
 
     def test_hardware_objects_have_enhanced_metadata(self):
         discovered = discover_objects(objects_root=OBJECTS_ROOT)
-        for name in ["oobb_object_nut", "oobb_object_screw_socket_cap", "oobb_object_bearing"]:
+        for name in ["nuts", "screw_socket_cap", "bearings"]:
             self.assertIn(name, discovered)
             description = discovered[name].metadata.get("description", "")
             self.assertTrue(description)

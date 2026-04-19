@@ -19,7 +19,6 @@ if str(PROJECT_ROOT) not in sys.path:
 import action_generate_release_3d_printable
 import action_generate_release_laser_cut
 import oobb
-import oobb_base
 import oobb_dxf_laser_copy
 import oobb_make_sets
 import oobb_markdown

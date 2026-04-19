@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from part_calls.generate_set_scaffold import create_set_scaffold
+from components.generate_set_scaffold import create_set_scaffold
 
 
 class PartSetScaffoldGeneratorTests(unittest.TestCase):

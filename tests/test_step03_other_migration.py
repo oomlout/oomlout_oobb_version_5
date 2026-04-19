@@ -1,7 +1,6 @@
 import unittest
 
 import oobb
-import oobb_base
 import oobb_get_items_other
 
 from oobb_arch.testing.output_compare import compare_outputs
@@ -9,7 +8,7 @@ from oobb_arch.testing.output_compare import compare_outputs
 
 class OtherModuleFolderMigrationTests(unittest.TestCase):
     def test_bolt_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_bolt.working import action
+        from components.bolt.working import action
 
         kwargs = {"type": "bolt", "radius_name": "m6", "depth": 10}
         legacy = oobb_get_items_other.get_bolt(**kwargs)
@@ -18,7 +17,7 @@ class OtherModuleFolderMigrationTests(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_nut_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_nut.working import action
+        from components.nuts.working import action
 
         kwargs = {"type": "nut", "radius_name": "m3"}
         legacy = oobb_get_items_other.get_nut(**kwargs)
@@ -28,16 +27,16 @@ class OtherModuleFolderMigrationTests(unittest.TestCase):
 
     def test_screw_variants_forwarders(self):
         cases = [
-            ("get_screw_countersunk", "oobb_object_screw_countersunk", {"type": "screw_countersunk", "radius_name": "m3", "depth": 10}),
-            ("get_screw_self_tapping", "oobb_object_screw_self_tapping", {"type": "screw_self_tapping", "radius_name": "m3", "depth": 10}),
-            ("get_screw_socket_cap", "oobb_object_screw_socket_cap", {"type": "screw_socket_cap", "radius_name": "m3", "depth": 10}),
+            ("get_screw_countersunk", "screw_countersunk", {"type": "screw_countersunk", "radius_name": "m3", "depth": 10}),
+            ("get_screw_self_tapping", "screw_self_tapping", {"type": "screw_self_tapping", "radius_name": "m3", "depth": 10}),
+            ("get_screw_socket_cap", "screw_socket_cap", {"type": "screw_socket_cap", "radius_name": "m3", "depth": 10}),
         ]
         for legacy_name, folder_name, kwargs in cases:
             with self.subTest(legacy_name=legacy_name):
                 legacy_func = getattr(oobb_get_items_other, legacy_name)
                 legacy = legacy_func(**kwargs)
 
-                module = __import__(f"part_calls.objects.{folder_name}.working", fromlist=["action"])
+                module = __import__(f"components.{folder_name}.working", fromlist=["action"])
                 folder = module.action(**kwargs)
                 equal, diff = compare_outputs(legacy, folder)
                 self.assertTrue(equal, diff)

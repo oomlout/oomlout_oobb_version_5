@@ -1,16 +1,15 @@
 import oobb
-import oobb_base
 
 def initialize_variables():
     modes = ["laser", "true", "3dpr"]
     vl = {}
     # base variables
-    oobb_base.set_variable("osp", 15)
-    oobb_base.set_variable("osp_minus", 1)
-    oobb_base.set_variable("osp_hole", "m6")
-    oobb_base.set_variable("ospe", 15/2)
-    oobb_base.set_variable("ospe_minus", 1/2)
-    oobb_base.set_variable("ospe_hole", "m3")
+    oobb.set_variable("osp", 15)
+    oobb.set_variable("osp_minus", 1)
+    oobb.set_variable("osp_hole", "m6")
+    oobb.set_variable("ospe", 15/2)
+    oobb.set_variable("ospe_minus", 1/2)
+    oobb.set_variable("ospe_hole", "m3")
 
     # bearing variables
     bearing_d = {}
@@ -415,7 +414,7 @@ def initialize_variables():
     for var in vl:
         values = vl[var]
         for i in range(0, len(modes)):
-            oobb_base.set_variable(var, values[i], modes[i])
+            oobb.set_variable(var, values[i], modes[i])
 
 
 

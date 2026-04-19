@@ -2,12 +2,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from part_calls.run_tests import run_all_object_tests, run_all_set_tests, run_all_tests
+from components.run_tests import run_all_object_tests, run_all_set_tests, run_all_tests
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OBJECTS_ROOT = ROOT / "part_calls" / "objects"
-SETS_ROOT = ROOT / "part_calls" / "sets"
+OBJECTS_ROOT = ROOT / "components"
+SETS_ROOT = ROOT / "components"
 
 
 class PerFolderTestRunnerTests(unittest.TestCase):
@@ -33,12 +33,12 @@ class PerFolderTestRunnerTests(unittest.TestCase):
     def test_skip_result_for_missing_test_fn(self):
         with tempfile.TemporaryDirectory() as tmp:
             objects_root = Path(tmp) / "objects"
-            folder = objects_root / "oobb_object_skip_demo"
+            folder = objects_root / "skip_demo"
             folder.mkdir(parents=True)
             (folder / "working.py").write_text(
                 """
 def define():
-    return {"name": "oobb_object_skip_demo", "description": "skip demo", "variables": []}
+    return {"name": "skip_demo", "description": "skip demo", "variables": []}
 
 def action(**kwargs):
     return {"type": "skip_demo", "components": []}
@@ -47,7 +47,7 @@ def action(**kwargs):
             )
 
             results = run_all_object_tests(objects_root=objects_root)
-            target = [result for result in results if result.name == "oobb_object_skip_demo"]
+            target = [result for result in results if result.name == "skip_demo"]
             self.assertEqual(len(target), 1)
             self.assertEqual(target[0].status, "SKIP")
 

@@ -11,7 +11,7 @@ from oobb_arch.catalog.part_set_discovery import discover_part_sets
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SETS_ROOT = ROOT / "part_calls" / "sets"
+SETS_ROOT = ROOT / "components"
 
 
 class PartSetBulkMigrationTests(unittest.TestCase):

@@ -6,12 +6,12 @@ from pathlib import Path
 from oobb_arch.catalog.migration_status import get_migration_status
 from oobb_arch.catalog.object_discovery import discover_objects
 from oobb_arch.catalog.part_set_discovery import discover_part_sets
-from part_calls.documentation import export_documentation_json
+from components.documentation import export_documentation_json
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OBJECTS_ROOT = ROOT / "part_calls" / "objects"
-SETS_ROOT = ROOT / "part_calls" / "sets"
+OBJECTS_ROOT = ROOT / "components"
+SETS_ROOT = ROOT / "components"
 
 
 class FinalMigrationCompleteTests(unittest.TestCase):

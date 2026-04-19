@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OOBB Parts Documentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Pastel Rainbow Palette */
+      --pastel-pink: #ffd6e0;
+      --pastel-peach: #ffecd2;
+      --pastel-yellow: #fff9c4;
+      --pastel-mint: #c8f7dc;
+      --pastel-aqua: #c4f1f9;
+      --pastel-sky: #c3e0ff;
+      --pastel-lavender: #e5d4ff;
+      --pastel-rose: #ffc8dd;
+
+      /* Accent Colors */
+      --accent-coral: #ff8fab;
+      --accent-peach: #ffb5a7;
+      --accent-mint: #80ed99;
+      --accent-sky: #90e0ef;
+      --accent-lavender: #b8c0ff;
+      --accent-pink: #ffc8dd;
+
+      /* UI Colors */
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --glass-shadow: 0 8px 32px rgba(180, 130, 200, 0.2);
+      --text-dark: #2d3748;
+      --text-medium: #4a5568;
+      --text-light: #718096;
+      --border-radius: 24px;
+      --border-radius-sm: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.02); }
+    }
+    @keyframes rainbow-border {
+      0%   { border-color: var(--pastel-pink); }
+      14%  { border-color: var(--pastel-peach); }
+      28%  { border-color: var(--pastel-yellow); }
+      42%  { border-color: var(--pastel-mint); }
+      56%  { border-color: var(--pastel-aqua); }
+      70%  { border-color: var(--pastel-sky); }
+      84%  { border-color: var(--pastel-lavender); }
+      100% { border-color: var(--pastel-pink); }
+    }
+
+    body {
+      font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(-45deg,
+        var(--pastel-pink),
+        var(--pastel-peach),
+        var(--pastel-yellow),
+        var(--pastel-mint),
+        var(--pastel-aqua),
+        var(--pastel-sky),
+        var(--pastel-lavender),
+        var(--pastel-rose)
+      );
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      color: var(--text-dark);
+    }
+
+    /* Decorative floating blobs */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      z-index: -1;
+      pointer-events: none;
+    }
+    body::before {
+      width: 400px; height: 400px;
+      background: var(--pastel-lavender);
+      top: -100px; right: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+    body::after {
+      width: 300px; height: 300px;
+      background: var(--pastel-mint);
+      bottom: -80px; left: -80px;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1em 2vw 4em 2vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 1em;
+      z-index: 100;
+      max-width: 820px;
+      width: 100%;
+      margin: 1.5em auto 2em auto;
+      padding: 2em 2.5em 1.8em 2.5em;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 2px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.2em;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin: 0;
+      background: linear-gradient(135deg,
+        #ff6b9d, #c44ce0, #7b68ee, #00bcd4, #4caf50, #ffeb3b, #ff9800, #ff6b9d
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .header-subtitle {
+      font-size: 0.95em;
+      color: var(--text-medium);
+      margin-top: 0.4em;
+      font-weight: 500;
+    }
+
+    .header-controls {
+      margin-top: 1.5em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8em;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    #search-box, #category-filter {
+      border: 2px solid rgba(180, 130, 200, 0.25);
+      border-radius: 14px;
+      font-size: 0.95em;
+      padding: 0.75em 1.2em;
+      background: rgba(255,255,255,0.7);
+      color: var(--text-dark);
+      outline: none;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+    #search-box::placeholder { color: var(--text-light); }
+    #search-box:focus, #category-filter:focus {
+      background: rgba(255,255,255,0.9);
+      border-color: var(--accent-lavender);
+      box-shadow: 0 0 0 4px rgba(184,192,255,0.3);
+    }
+    #search-box  { width: 280px; }
+    #category-filter { min-width: 160px; cursor: pointer; }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      display: flex;
+      gap: 2em;
+      justify-content: center;
+      margin-bottom: 1.5em;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease 0.2s backwards;
+    }
+
+    .stat-item {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      padding: 0.8em 1.5em;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 16px rgba(180,130,200,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stat-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(180,130,200,0.2); }
+    .stat-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8em;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-coral), var(--accent-lavender));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-label {
+      font-size: 0.8em;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* ===== CARD GRID ===== */
+    #objects-container {
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8em;
+      width: 100%;
+    }
+
+    /* ===== OBJECT CARDS ===== */
+    .object-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 24px rgba(180,130,200,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+      padding: 1.6em 1.8em 1.5em 1.8em;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid rgba(255,255,255,0.5);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease backwards;
+    }
+
+    /* Rainbow top-bar accent */
+    .object-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg,
+        var(--pastel-pink), var(--pastel-peach), var(--pastel-yellow),
+        var(--pastel-mint), var(--pastel-aqua), var(--pastel-sky), var(--pastel-lavender)
+      );
+      background-size: 200% 100%;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      transition: background-position 0.5s ease;
+    }
+
+    .object-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(180,130,200,0.25), inset 0 1px 0 rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.8);
+      animation: rainbow-border 3s linear infinite;
+    }
+    .object-card:hover::before { animation: shimmer 2s linear infinite; }
+
+    .card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2em;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.15em;
+      margin-top: 0.5em;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    .card-name-long {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.72em;
+      color: var(--text-light);
+      letter-spacing: 0.2px;
+      margin-bottom: 0.5em;
+      word-break: break-word;
+    }
+
+    .card-category {
+      margin-bottom: 0.5em;
+    }
+
+    .category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      padding: 0.3em 1em;
+      border-radius: 50px;
+      font-size: 0.82em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .cat-OOBB-Geometry-Primitives    { background: linear-gradient(135deg, var(--pastel-aqua),     var(--pastel-sky));      color: #1d4e89; }
+    .cat-OOBB-Geometry-Helpers       { background: linear-gradient(135deg, var(--pastel-mint),     var(--pastel-aqua));     color: #1b4332; }
+    .cat-Fasteners                   { background: linear-gradient(135deg, var(--pastel-peach),    var(--pastel-yellow));   color: #7c4a03; }
+    .cat-Gridfinity                  { background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-sky));      color: #4a3470; }
+    .cat-Other                       { background: linear-gradient(135deg, var(--pastel-pink),     var(--pastel-rose));     color: #89023e; }
+    .cat-General                     { background: linear-gradient(135deg, #dfe7fd,                #cddafd);                color: #4a5568; }
+
+    .card-description {
+      margin: 0.3em 0 0.8em 0;
+      font-size: 0.93em;
+      color: var(--text-medium);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .card-variables {
+      margin: 0.3em 0 0 0;
+      padding-top: 0.8em;
+      border-top: 1px solid rgba(180,130,200,0.15);
+    }
+    .card-variables strong {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.83em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .var-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.5em 0 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4em;
+    }
+    .var-list li { margin: 0; padding: 0; }
+
+    .var-chip {
+      background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-sky));
+      color: var(--text-dark);
+      border: 0;
+      border-radius: 50px;
+      display: inline-block;
+      font-size: 0.82em;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(180,130,200,0.15);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      padding: 0.35em 0.9em;
+      font-family: inherit;
+    }
+    .var-chip:hover  { transform: scale(1.08); box-shadow: 0 4px 12px rgba(180,130,200,0.25); }
+    .var-chip:focus-visible { outline: 3px solid rgba(144,224,239,0.6); outline-offset: 2px; }
+    .var-chip-empty { background: #f0f0f0; color: #888; cursor: default; box-shadow: none; }
+
+    .variable-popup {
+      margin-top: 0.75em;
+      padding: 0.7em 0.9em;
+      border-radius: 12px;
+      border: 1px solid rgba(180,130,200,0.25);
+      background: rgba(255,255,255,0.78);
+      color: var(--text-dark);
+      font-size: 0.84em;
+      line-height: 1.5;
+    }
+    .variable-popup strong { display: block; margin-bottom: 0.25em; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) { #objects-container { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px) {
+      #objects-container { grid-template-columns: 1fr; }
+      .header { padding: 1.5em 1.2em; border-radius: var(--border-radius-sm); margin: 1em auto; max-width: 96%; }
+      h1 { font-size: 1.6em; }
+      #search-box { width: 100%; }
+      .main-content { padding: 0.5em 3vw 2em 3vw; }
+      .stats-bar { gap: 1em; }
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state { text-align: center; padding: 4em 2em; grid-column: 1 / -1; }
+    .empty-state-emoji { font-size: 4em; margin-bottom: 0.3em; animation: float 3s ease-in-out infinite; }
+    .empty-state-text { font-size: 1.2em; color: var(--text-medium); }
+
+    /* ===== FOOTER ===== */
+    .footer { text-align: center; padding: 2em; margin-top: 3em; color: var(--text-light); font-size: 0.9em; }
+    .footer-heart { color: var(--accent-coral); animation: pulse 1.5s ease-in-out infinite; display: inline-block; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--pastel-lavender), var(--pastel-pink)); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--accent-lavender), var(--accent-pink)); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>✨ OOBB Parts ✨</h1>
+    <div class="header-subtitle">Component reference — auto-generated</div>
+    <div class="header-controls">
+      <input id="search-box" type="text" placeholder="🔍 Search components...">
+      <select id="category-filter">
+        <option value="">🌈 All Categories</option>
+      </select>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="stats-bar" id="stats-bar"></div>
+    <div id="objects-container"></div>
+    <div class="footer">
+      Made with <span class="footer-heart">♥</span> by OOBB &bull; Documentation auto-generated
+    </div>
+  </div>
+
+  <script>
+    // DOCUMENTATION_DATA will be injected by the Python script
+    window.DOCUMENTATION_DATA = {"objects": [{"command": "_example_shell", "name_long": "Category: Short human name", "name_short_options": [], "description": "One sentence describing what this component produces.", "summary": "One sentence describing what this component produces.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "depth", "description": "Depth / height of the shape (mm).", "type": "number", "default": 10}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}], "variable_names": ["pos", "depth", "mode"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "bolt", "name_long": "Fasteners: Bolt", "name_short_options": [], "description": "Generates a hex-head bolt with specified size and length.", "summary": "Generates a hex-head bolt with specified size and length.", "variables": [{"name": "radius_name", "description": "Bolt size designation, e.g. m5, m6.", "type": "string", "default": "\"m6\""}, {"name": "depth", "description": "Bolt length in mm.", "type": "number", "default": 20}], "variable_names": ["radius_name", "depth"], "category": "Fasteners", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "gridfinity_base_tile", "name_long": "Gridfinity: Base Tile", "name_short_options": [], "description": "Returns the raw OpenSCAD source for a Gridfinity base tile.", "summary": "Returns the raw OpenSCAD source for a Gridfinity base tile.", "variables": [{"name": "distancex", "description": "Distance in X direction (mm).", "type": "number", "default": 0}, {"name": "distancey", "description": "Distance in Y direction (mm).", "type": "number", "default": 0}, {"name": "fitx", "description": "Fit adjustment in X (mm).", "type": "number", "default": 0}, {"name": "fity", "description": "Fit adjustment in Y (mm).", "type": "number", "default": 0}, {"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: positive or negative.", "type": "string", "default": "\"positive\""}], "variable_names": ["distancex", "distancey", "fitx", "fity", "pos", "rot", "type"], "category": "Gridfinity", "returns": "SCAD source string.", "aliases": []}, {"command": "oobb_circle", "name_long": "OOBB Geometry Primitives: Circle", "name_short_options": [], "description": "Renders a cylinder (solid or cutout) sized to an OOBB grid position.", "summary": "Renders a cylinder (solid or cutout) sized to an OOBB grid position.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "width", "description": "Width in OOBB grid units.", "type": "number", "default": 1}, {"name": "height", "description": "Height in OOBB grid units.", "type": "number", "default": 1}, {"name": "depth", "description": "Z depth (height) of the cylinder in mm.", "type": "number", "default": 3}, {"name": "extra_mm", "description": "Adds 1/15 to width/height for clearance fit.", "type": "bool", "default": false}, {"name": "zz", "description": "Z anchor point: bottom, top, middle.", "type": "string", "default": "\"bottom\""}], "variable_names": ["pos", "width", "height", "depth", "extra_mm", "zz"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_coupler_flanged", "name_long": "OOBB Mechanical: Flanged Coupler", "name_short_options": [], "description": "Flanged coupler with shaft holes and flange M3/M8 cutouts, wrapped in a rotation object.", "summary": "Flanged coupler with shaft holes and flange M3/M8 cutouts, wrapped in a rotation object.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "part", "description": "Which part to generate: all, only_holes, shaft.", "type": "string", "default": "\"all\""}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "part", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Mechanical", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_cube", "name_long": "OOBB Geometry Primitives: Cube", "name_short_options": [], "description": "Cube geometry primitive; delegates to oobb_cube_center.", "summary": "Cube geometry primitive; delegates to oobb_cube_center.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "size", "description": "[x,y,z] dimensions in mm.", "type": "list", "default": "(required)"}, {"name": "zz", "description": "Z anchor point: bottom, top, center/middle.", "type": "string", "default": "\"bottom\""}], "variable_names": ["pos", "size", "zz"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_cube_center", "name_long": "OOBB Geometry Primitives: Cube Center", "name_short_options": [], "description": "Center-aligned cube that shifts pos by -size/2 on x/y before passing to OpenSCAD.", "summary": "Center-aligned cube that shifts pos by -size/2 on x/y before passing to OpenSCAD.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "size", "description": "[x,y,z] dimensions in mm.", "type": "list", "default": "(required)"}, {"name": "zz", "description": "Z anchor point: bottom, top, center/middle.", "type": "string", "default": "\"bottom\""}], "variable_names": ["pos", "size", "zz"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_cube_new", "name_long": "OOBB Geometry Primitives: Cube New", "name_short_options": [], "description": "Cube with full rotation-object support and mode filtering.", "summary": "Cube with full rotation-object support and mode filtering.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "size", "description": "[x,y,z] dimensions in mm.", "type": "list", "default": "(required)"}, {"name": "zz", "description": "Z anchor point: bottom, top, center/middle.", "type": "string", "default": "\"bottom\""}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "size", "zz", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_cylinder", "name_long": "OOBB Geometry Primitives: Cylinder", "name_short_options": [], "description": "Cylinder geometry across all render modes, supporting named or explicit radius and z-centering.", "summary": "Cylinder geometry across all render modes, supporting named or explicit radius and z-centering.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "depth", "description": "Cylinder height in mm.", "type": "number", "default": 250}, {"name": "radius_name", "description": "Named radius for mode-aware lookup.", "type": "string", "default": "\"\""}, {"name": "radius", "description": "Explicit radius in mm.", "type": "number", "default": 0}, {"name": "zz", "description": "Z anchor point: center, bottom, top.", "type": "string", "default": "\"center\""}], "variable_names": ["pos", "depth", "radius_name", "radius", "zz"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_cylinder_hollow", "name_long": "OOBB Geometry Primitives: Hollow Cylinder", "name_short_options": [], "description": "Hollow cylinder (positive outer minus negative inner) wrapped in a rotation object.", "summary": "Hollow cylinder (positive outer minus negative inner) wrapped in a rotation object.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "r", "description": "Outer radius in mm.", "type": "number", "default": "(required)"}, {"name": "wall_thickness", "description": "Wall thickness for inner cylinder.", "type": "number", "default": 2}, {"name": "depth", "description": "Cylinder height in mm.", "type": "number", "default": "(required)"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "r", "wall_thickness", "depth", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_hole", "name_long": "OOBB Geometry Primitives: Hole (legacy)", "name_short_options": [], "description": "Cylindrical screw hole for all render modes, resolved from a named or explicit radius.", "summary": "Cylindrical screw hole for all render modes, resolved from a named or explicit radius.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "depth", "description": "Hole depth in mm.", "type": "number", "default": 200}, {"name": "radius_name", "description": "Named radius key, e.g. m3, m6.  Takes priority over radius.", "type": "string", "default": "\"\""}, {"name": "radius", "description": "Explicit radius in mm, used when radius_name is empty.", "type": "number", "default": 0}, {"name": "r", "description": "Alias for radius.", "type": "number", "default": 0}, {"name": "mode", "description": "Render modes to emit: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "m", "description": "OpenSCAD modifier prefix, e.g. #, %, *.", "type": "string", "default": "\"\""}], "variable_names": ["pos", "depth", "radius_name", "radius", "r", "mode", "m"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_hole_new", "name_long": "OOBB Geometry Primitives: Hole", "name_short_options": [], "description": "Cylindrical hole with rotation-object support, mode filtering, and named/explicit radius.", "summary": "Cylindrical hole with rotation-object support, mode filtering, and named/explicit radius.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "depth", "description": "Hole depth in mm.", "type": "number", "default": 100}, {"name": "radius_name", "description": "Named radius for mode-aware lookup.", "type": "string", "default": "\"\""}, {"name": "radius", "description": "Explicit radius in mm.", "type": "number", "default": 0}, {"name": "zz", "description": "Z anchor: bottom, top, middle.", "type": "string", "default": "\"middle\""}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "depth", "radius_name", "radius", "zz", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_holes", "name_long": "OOBB Geometry Helpers: Hole Array", "name_short_options": [], "description": "Places OOBB-grid-aligned screw holes across a rectangular or circular area using named hole patterns.", "summary": "Places OOBB-grid-aligned screw holes across a rectangular or circular area using named hole patterns.", "variables": [{"name": "holes", "description": "Hole pattern(s): all, perimeter, perimeter_miss_middle, u, top, bottom, left, right, corners, single, missing_middle, just_middle, circle.", "type": "list", "default": "[\"all\"]"}, {"name": "width", "description": "Width in OOBB grid units.", "type": "number", "default": 0}, {"name": "height", "description": "Height in OOBB grid units.", "type": "number", "default": 0}, {"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "depth", "description": "Hole depth in mm.", "type": "number", "default": 100}, {"name": "radius_name", "description": "Named radius key, e.g. m6, m3.", "type": "string", "default": "\"m6\""}, {"name": "middle", "description": "Include the centre hole.", "type": "bool", "default": true}, {"name": "size", "description": "Grid spacing scale: oobb or oobe.", "type": "string", "default": "\"oobb\""}, {"name": "both_holes", "description": "Also add matching oobe half-grid holes.", "type": "bool", "default": false}, {"name": "circle", "description": "Filter holes to lie inside a circle boundary.", "type": "bool", "default": false}, {"name": "diameter", "description": "Diameter in OOBB units (overrides width/height).", "type": "number", "default": 0}, {"name": "diameter_clearance", "description": "Clearance from circle edge (mm) when circle=True.", "type": "number", "default": 7.5}, {"name": "diameter_center_clearance", "description": "Minimum distance from centre to include hole (mm).", "type": "number", "default": 0}, {"name": "loc", "description": "Grid location(s) [x,y] for single pattern.", "type": "list", "default": "[0,0]"}], "variable_names": ["holes", "width", "height", "pos", "depth", "radius_name", "middle", "size", "both_holes", "circle", "diameter", "diameter_clearance", "diameter_center_clearance", "loc"], "category": "OOBB Geometry Helpers", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_nut", "name_long": "OOBB Geometry Primitives: Nut", "name_short_options": [], "description": "Hexagonal nut pocket with optional through-hole, overhang, and clearance, across all render modes.", "summary": "Hexagonal nut pocket with optional through-hole, overhang, and clearance, across all render modes.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "radius_name", "description": "Named radius key, e.g. m3, m6.", "type": "string", "default": "\"m3\""}, {"name": "zz", "description": "Z anchor: bottom, top, middle.", "type": "string", "default": "\"bottom\""}, {"name": "depth", "description": "Nut pocket depth in mm.", "type": "number", "default": "\"\""}, {"name": "overhang", "description": "Add overhang support geometry.", "type": "bool", "default": false}, {"name": "clearance", "description": "Clearance extension sides.", "type": "string", "default": "\"\""}, {"name": "hole", "description": "Include a through-hole below the nut.", "type": "bool", "default": false}, {"name": "extra_clearance", "description": "Extra mm added to side clearance height.", "type": "number", "default": 0}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "radius_name", "zz", "depth", "overhang", "clearance", "hole", "extra_clearance", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "Fasteners", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_plate", "name_long": "OOBB Geometry Primitives: Plate", "name_short_options": [], "description": "OOBB grid-sized plate (cylinder for 1\u00d71, rounded rectangle otherwise) with optional hole pattern.", "summary": "OOBB grid-sized plate (cylinder for 1\u00d71, rounded rectangle otherwise) with optional hole pattern.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "width", "description": "Width in OOBB grid units.", "type": "number", "default": 1}, {"name": "height", "description": "Height in OOBB grid units.", "type": "number", "default": 1}, {"name": "depth", "description": "Plate thickness in mm.", "type": "number", "default": 3}, {"name": "zz", "description": "Z anchor: bottom, top, middle.", "type": "string", "default": "\"bottom\""}, {"name": "extra_mm", "description": "Adds 1/15 to size for clearance fit.", "type": "bool", "default": false}, {"name": "holes", "description": "Include OOBB hole pattern.", "type": "bool", "default": false}], "variable_names": ["pos", "width", "height", "depth", "zz", "extra_mm", "holes"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_rot", "name_long": "OOBB Geometry Helpers: Rotation Helper", "name_short_options": [], "description": "Helper that extracts and returns a [rx,ry,rz] rotation list from kwargs.", "summary": "Helper that extracts and returns a [rx,ry,rz] rotation list from kwargs.", "variables": [{"name": "rot", "description": "Explicit [rx,ry,rz] rotation list; returned directly if present.", "type": "list", "default": "\"\""}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Helpers", "returns": "List [rx, ry, rz].", "aliases": []}, {"command": "oobb_rounded_rectangle_hollow", "name_long": "OOBB Geometry Primitives: Hollow Rounded Rectangle", "name_short_options": [], "description": "Hollow rounded rectangle (positive outer minus negative inner wall) wrapped in a rotation object.", "summary": "Hollow rounded rectangle (positive outer minus negative inner wall) wrapped in a rotation object.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "size", "description": "Outer [x,y,z] dimensions in mm.", "type": "list", "default": "(required)"}, {"name": "radius", "description": "Corner radius of outer shape.", "type": "number", "default": "(required)"}, {"name": "wall_thickness", "description": "Wall thickness from outer to inner.", "type": "number", "default": 2}, {"name": "extra", "description": "Extra variant/modifier string.", "type": "string", "default": "\"\""}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "size", "radius", "wall_thickness", "extra", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_rounded_rectangle_rounded", "name_long": "OOBB Geometry Primitives: Rounded Rectangle (Rounded Edges)", "name_short_options": [], "description": "Rounded rectangle with rounded top and bottom edges (sphere-swept corners) wrapped in a rotation object.", "summary": "Rounded rectangle with rounded top and bottom edges (sphere-swept corners) wrapped in a rotation object.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "size", "description": "Overall [x,y,z] dimensions in mm.", "type": "list", "default": "[20,10,5]"}, {"name": "radius", "description": "Corner radius of the base shape.", "type": "number", "default": 5}, {"name": "radius_rounded", "description": "Rounding radius for top/bottom edges.", "type": "number", "default": 2.5}, {"name": "extra", "description": "Extra variant/modifier string.", "type": "string", "default": "\"\""}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "size", "radius", "radius_rounded", "extra", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_screw", "name_long": "OOBB Geometry Primitives: Screw", "name_short_options": [], "description": "Screw cutout (socket_cap, countersunk, or self_tapping) with optional through-hole, nut pocket, overhang, and clearance.", "summary": "Screw cutout (socket_cap, countersunk, or self_tapping) with optional through-hole, nut pocket, overhang, and clearance.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "radius_name", "description": "Named radius key, e.g. m3, m6.", "type": "string", "default": "\"m3\""}, {"name": "style", "description": "Screw head style: socket_cap, countersunk, self_tapping.", "type": "string", "default": "\"socket_cap\""}, {"name": "depth", "description": "Shaft hole depth in mm.", "type": "number", "default": 250}, {"name": "zz", "description": "Z anchor: none, top, bottom.", "type": "string", "default": "\"none\""}, {"name": "hole", "description": "Include a through shaft hole.", "type": "bool", "default": true}, {"name": "clearance", "description": "Clearance extension sides: top, bottom.", "type": "string", "default": "\"\""}, {"name": "nut_include", "description": "Include a nut pocket.", "type": "bool", "default": false}, {"name": "overhang", "description": "Add overhang geometry.", "type": "bool", "default": true}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "radius_name", "style", "depth", "zz", "hole", "clearance", "nut_include", "overhang", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "Fasteners", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_screw_countersunk", "name_long": "OOBB Geometry Primitives: Countersunk Screw", "name_short_options": [], "description": "Countersunk screw cutout; wrapper over oobb_screw with style='countersunk' pre-set.", "summary": "Countersunk screw cutout; wrapper over oobb_screw with style='countersunk' pre-set.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "radius_name", "description": "Named radius key, e.g. m3, m6.", "type": "string", "default": "\"m3\""}, {"name": "depth", "description": "Shaft hole depth in mm.", "type": "number", "default": 250}, {"name": "zz", "description": "Z anchor: none, top, bottom.", "type": "string", "default": "\"none\""}, {"name": "hole", "description": "Include a through shaft hole.", "type": "bool", "default": true}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "radius_name", "depth", "zz", "hole", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "Fasteners", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_screw_self_tapping", "name_long": "OOBB Geometry Primitives: Self-Tapping Screw", "name_short_options": [], "description": "Self-tapping screw cutout; wrapper over oobb_screw with style='self_tapping' pre-set.", "summary": "Self-tapping screw cutout; wrapper over oobb_screw with style='self_tapping' pre-set.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "radius_name", "description": "Named radius key, e.g. m3, m6.", "type": "string", "default": "\"m3\""}, {"name": "depth", "description": "Shaft hole depth in mm.", "type": "number", "default": 250}, {"name": "zz", "description": "Z anchor: none, top, bottom.", "type": "string", "default": "\"none\""}, {"name": "hole", "description": "Include a through shaft hole.", "type": "bool", "default": true}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "radius_name", "depth", "zz", "hole", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "Fasteners", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_screw_socket_cap", "name_long": "OOBB Geometry Primitives: Socket Cap Screw", "name_short_options": [], "description": "Socket-cap screw cutout; wrapper over oobb_screw with style='socket_cap' pre-set.", "summary": "Socket-cap screw cutout; wrapper over oobb_screw with style='socket_cap' pre-set.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "radius_name", "description": "Named radius key, e.g. m3, m6.", "type": "string", "default": "\"m3\""}, {"name": "depth", "description": "Shaft hole depth in mm.", "type": "number", "default": 250}, {"name": "zz", "description": "Z anchor: none, top, bottom.", "type": "string", "default": "\"none\""}, {"name": "hole", "description": "Include a through shaft hole.", "type": "bool", "default": true}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "radius_name", "depth", "zz", "hole", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "Fasteners", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_slice", "name_long": "OOBB Geometry Primitives: Slice", "name_short_options": [], "description": "Large cube slice used to clip/intersect geometry.", "summary": "Large cube slice used to clip/intersect geometry.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "size", "description": "[x,y,z] dimensions of the slice cube in mm.", "type": "list", "default": "[500,500,500]"}, {"name": "zz", "description": "Z anchor: bottom or top.", "type": "string", "default": "\"bottom\""}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}], "variable_names": ["pos", "size", "zz", "mode"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_slot", "name_long": "OOBB Geometry Primitives: Slot", "name_short_options": [], "description": "Slot (two-ended rounded cutout) with rotation-object support, mode filtering, and named/explicit radius.", "summary": "Slot (two-ended rounded cutout) with rotation-object support, mode filtering, and named/explicit radius.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "depth", "description": "Slot depth in mm.", "type": "number", "default": 250}, {"name": "radius", "description": "Slot end-cap radius in mm.", "type": "number", "default": "\"\""}, {"name": "radius_name", "description": "Named radius for mode-aware lookup.", "type": "string", "default": "\"\""}, {"name": "zz", "description": "Z anchor: middle, bottom, top.", "type": "string", "default": "\"middle\""}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "depth", "radius", "radius_name", "zz", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_sphere", "name_long": "OOBB Geometry Primitives: Sphere", "name_short_options": [], "description": "Sphere (optionally ellipsoidal via radius_1/radius_2 scale) with z-anchor support.", "summary": "Sphere (optionally ellipsoidal via radius_1/radius_2 scale) with z-anchor support.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "radius", "description": "Sphere radius in mm.", "type": "number", "default": 10}, {"name": "radius_1", "description": "Base radius for ellipsoid scaling.", "type": "number", "default": "(optional)"}, {"name": "radius_2", "description": "Z-scale radius for ellipsoid.", "type": "number", "default": "(optional)"}, {"name": "zz", "description": "Z anchor: bottom, top, middle.", "type": "string", "default": "\"bottom\""}], "variable_names": ["pos", "radius", "radius_1", "radius_2", "zz"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_tube", "name_long": "OOBB Geometry Primitives: Tube", "name_short_options": [], "description": "Tube cutout (hollow cylinder) across all render modes, with named/explicit radius and rotation support.", "summary": "Tube cutout (hollow cylinder) across all render modes, with named/explicit radius and rotation support.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "r", "description": "Outer radius in mm.", "type": "number", "default": "\"\""}, {"name": "radius_name", "description": "Named radius for mode-aware lookup.", "type": "string", "default": "\"\""}, {"name": "wall_thickness", "description": "Wall thickness for inner cylinder.", "type": "number", "default": 0.5}, {"name": "depth", "description": "Tube height in mm.", "type": "number", "default": 250}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "r", "radius_name", "wall_thickness", "depth", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}, {"command": "oobb_tube_new", "name_long": "OOBB Geometry Primitives: Tube (New)", "name_short_options": [], "description": "Tube cutout with updated rendering pipeline; identical interface to oobb_tube.", "summary": "Tube cutout with updated rendering pipeline; identical interface to oobb_tube.", "variables": [{"name": "pos", "description": "3-element [x,y,z] position.", "type": "list", "default": "[0,0,0]"}, {"name": "type", "description": "Geometry type: p/positive or n/negative.", "type": "string", "default": "p"}, {"name": "r", "description": "Outer radius in mm.", "type": "number", "default": "\"\""}, {"name": "radius_name", "description": "Named radius for mode-aware lookup.", "type": "string", "default": "\"\""}, {"name": "wall_thickness", "description": "Wall thickness for inner cylinder.", "type": "number", "default": 0.5}, {"name": "depth", "description": "Tube height in mm.", "type": "number", "default": 250}, {"name": "mode", "description": "Render modes: laser, 3dpr, true.", "type": "list", "default": "[\"laser\",\"3dpr\",\"true\"]"}, {"name": "rot", "description": "Rotation [rx,ry,rz] in degrees.", "type": "list", "default": "[0,0,0]"}, {"name": "rot_x", "description": "X rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_y", "description": "Y rotation in degrees.", "type": "number", "default": 0}, {"name": "rot_z", "description": "Z rotation in degrees.", "type": "number", "default": 0}], "variable_names": ["pos", "type", "r", "radius_name", "wall_thickness", "depth", "mode", "rot", "rot_x", "rot_y", "rot_z"], "category": "OOBB Geometry Primitives", "returns": "List of geometry component dicts.", "aliases": []}], "part_sets": [], "generated_date": "2026-04-19", "total_objects": 27, "total_part_sets": 0};
+
+    const CATEGORY_EMOJI = {
+      'OOBB Geometry Primitives': '🔷',
+      'OOBB Geometry Helpers':    '🔧',
+      'Fasteners':                '🔩',
+      'Gridfinity':               '🟦',
+      'Other':                    '🛠️',
+      'General':                  '📦',
+    };
+
+    function escapeHtml(text) {
+      return (text || '').toString()
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function getCategoryClass(category) {
+      return (category || 'General').replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-]/g, '');
+    }
+
+    function getCategoryBadge(category) {
+      const emoji = CATEGORY_EMOJI[category] || '📦';
+      const cls   = getCategoryClass(category);
+      return `<span class="category-badge cat-${cls}">${emoji} ${escapeHtml(category || 'General')}</span>`;
+    }
+
+    function getVariables(obj) {
+      if (!Array.isArray(obj.variables)) return [];
+      return obj.variables;
+    }
+
+    function getSearchHaystack(obj) {
+      const v = getVariables(obj).map(v => (typeof v === 'string' ? v : (v.name || ''))).join(' ');
+      return [obj.command, obj.name_long, obj.description, obj.summary, obj.category, v].join(' ').toLowerCase();
+    }
+
+    function renderCard(obj, index) {
+      const div = document.createElement('div');
+      div.className = 'object-card';
+      div.style.animationDelay = `${index * 0.05}s`;
+
+      const title    = escapeHtml(obj.command || obj.name || '');
+      const nameLong = escapeHtml(obj.name_long || '');
+      const desc     = escapeHtml(obj.description || obj.summary || 'No description available.');
+      const showLong = nameLong && nameLong !== title;
+
+      const vars = getVariables(obj);
+      const varHtml = vars.length > 0
+        ? vars.map((v, i) => {
+            const name = typeof v === 'string' ? v : (v.name || '');
+            return `<li><button type="button" class="var-chip" data-var-index="${i}">${escapeHtml(name)}</button></li>`;
+          }).join('')
+        : '<li><button type="button" class="var-chip var-chip-empty" disabled>none</button></li>';
+
+      div.innerHTML = `
+        <div class="card-title">${title}</div>
+        ${showLong ? `<div class="card-name-long">${nameLong}</div>` : ''}
+        <div class="card-category">${getCategoryBadge(obj.category)}</div>
+        <div class="card-description">${desc}</div>
+        <div class="card-variables">
+          <strong>Variables</strong>
+          <ul class="var-list">${varHtml}</ul>
+          <div class="variable-popup" hidden></div>
+        </div>
+      `;
+
+      const popup = div.querySelector('.variable-popup');
+      div.querySelectorAll('.var-chip[data-var-index]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.getAttribute('data-var-index'));
+          const variable = vars[idx];
+          const vName = typeof variable === 'string' ? variable : (variable && variable.name ? variable.name : '');
+          const vDesc = (variable && typeof variable === 'object' && variable.description) ? variable.description.trim() : '';
+          const vType = (variable && typeof variable === 'object' && variable.type) ? variable.type : '';
+          const vDef  = (variable && typeof variable === 'object' && variable.default != null) ? String(variable.default) : '';
+
+          if (!popup.hidden && popup.getAttribute('data-active-index') === String(idx)) {
+            popup.hidden = true;
+            popup.removeAttribute('data-active-index');
+            popup.innerHTML = '';
+            return;
+          }
+
+          const detail = [
+            vDesc || 'No description.',
+            vType ? `<em>Type: ${escapeHtml(vType)}</em>` : '',
+            vDef  ? `<em>Default: <code>${escapeHtml(vDef)}</code></em>` : '',
+          ].filter(Boolean).join('<br>');
+
+          popup.innerHTML = `<strong>${escapeHtml(vName)}</strong>${detail}`;
+          popup.hidden = false;
+          popup.setAttribute('data-active-index', String(idx));
+        });
+      });
+
+      return div;
+    }
+
+    function populateCategoryFilter(objects) {
+      const cats = [...new Set(objects.map(o => o.category || 'General'))].sort();
+      const sel  = document.getElementById('category-filter');
+      cats.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = `${CATEGORY_EMOJI[cat] ? CATEGORY_EMOJI[cat] + ' ' : ''}${cat}`;
+        sel.appendChild(opt);
+      });
+    }
+
+    function renderStatsBar(total) {
+      const bar = document.getElementById('stats-bar');
+      bar.innerHTML = `
+        <div class="stat-item">
+          <div class="stat-number">${total}</div>
+          <div class="stat-label">Components</div>
+        </div>
+      `;
+    }
+
+    function renderDocumentation() {
+      if (typeof window.DOCUMENTATION_DATA === 'undefined') return;
+
+      const data    = window.DOCUMENTATION_DATA;
+      const objects = (data.objects || []).concat(data.part_sets || []);
+      const container = document.getElementById('objects-container');
+      const search  = (document.getElementById('search-box').value || '').trim().toLowerCase();
+      const catSel  = (document.getElementById('category-filter').value || '');
+
+      const filtered = objects.filter(o => {
+        const matchCat  = !catSel  || (o.category === catSel);
+        const matchText = !search  || getSearchHaystack(o).includes(search);
+        return matchCat && matchText;
+      });
+
+      container.innerHTML = '';
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-emoji">🔍</div>
+            <div class="empty-state-text">No components found.<br>Try a different search term!</div>
+          </div>`;
+        return;
+      }
+      filtered.forEach((obj, i) => container.appendChild(renderCard(obj, i)));
+    }
+
+    // Initialise once data is available
+    (function init() {
+      if (typeof window.DOCUMENTATION_DATA === 'undefined') return;
+      const data    = window.DOCUMENTATION_DATA;
+      const objects = (data.objects || []).concat(data.part_sets || []);
+      populateCategoryFilter(objects);
+      renderStatsBar(objects.length);
+      renderDocumentation();
+
+      document.getElementById('search-box').addEventListener('input', renderDocumentation);
+      document.getElementById('category-filter').addEventListener('change', renderDocumentation);
+    })();
+  </script>
+</body>
+</html>

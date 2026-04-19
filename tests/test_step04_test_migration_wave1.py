@@ -1,7 +1,6 @@
 import unittest
 
 import oobb
-import oobb_base
 import oobb_get_items_test
 
 from oobb_arch.testing.output_compare import compare_outputs
@@ -9,7 +8,7 @@ from oobb_arch.testing.output_compare import compare_outputs
 
 class TestModuleMigrationWave1(unittest.TestCase):
     def test_test_gear_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_gear.working import action
+        from components.test_gear.working import action
 
         kwargs = {"type": "test_gear", "size": "oobb", "extra": "gear"}
         legacy = oobb_get_items_test.get_test_gear(**kwargs)
@@ -18,7 +17,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_hole_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_hole.working import action
+        from components.test_hole.working import action
 
         kwargs = {
             "type": "test_hole",
@@ -34,7 +33,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_rotation_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_rotation.working import action
+        from components.test_rotation.working import action
 
         kwargs = {"type": "test_rotation", "thickness": 3, "size": "oobb"}
         legacy = oobb_get_items_test.get_test_rotation(**kwargs)
@@ -67,7 +66,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
                 self.assertIn("components", result)
 
     def test_test_motor_tt_01_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_motor_tt_01.working import action
+        from components.test_motor_tt_01.working import action
 
         kwargs = {"type": "test_motor_tt_01", "size": "oobb"}
         legacy = oobb_get_items_test.get_test_motor_tt_01(**kwargs)
@@ -76,7 +75,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_motor_tt_01_shaft_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_motor_tt_01_shaft.working import action
+        from components.test_motor_tt_01_shaft.working import action
 
         kwargs = {"type": "test_motor_tt_01_shaft", "size": "oobb"}
         legacy = oobb_get_items_test.get_test_motor_tt_01_shaft(**kwargs)
@@ -85,7 +84,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_motor_n20_shaft_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_motor_n20_shaft.working import action
+        from components.test_motor_n20_shaft.working import action
 
         kwargs = {"type": "test_motor_n20_shaft", "size": "oobb"}
         legacy = oobb_get_items_test.get_test_motor_n20_shaft(**kwargs)
@@ -94,7 +93,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_oobb_motor_servo_standard_01_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_oobb_motor_servo_standard_01.working import action
+        from components.test_oobb_motor_servo_standard_01.working import action
 
         kwargs = {"type": "test_oobb_motor_servo_standard_01", "size": "oobb"}
         legacy = oobb_get_items_test.get_test_oobb_motor_servo_standard_01(**kwargs)
@@ -103,7 +102,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_oobb_nut_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_oobb_nut.working import action
+        from components.test_oobb_nut.working import action
 
         kwargs = {"type": "test_oobb_nut", "size": "oobb"}
         legacy = oobb_get_items_test.get_test_oobb_nut(**kwargs)
@@ -112,7 +111,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_oobb_screw_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_oobb_screw.working import action
+        from components.test_oobb_screw.working import action
 
         kwargs = {"type": "test_oobb_screw", "size": "oobb", "style": "socket_cap"}
         legacy = oobb_get_items_test.get_test_oobb_screw(**kwargs)
@@ -122,9 +121,9 @@ class TestModuleMigrationWave1(unittest.TestCase):
 
     def test_test_oobb_screw_wrappers_forwarders_match(self):
         wrapper_cases = [
-            ("get_test_oobb_screw_socket_cap", "part_calls.objects.oobb_object_test_oobb_screw_socket_cap.working", "test_oobb_screw_socket_cap"),
-            ("get_test_oobb_screw_countersunk", "part_calls.objects.oobb_object_test_oobb_screw_countersunk.working", "test_oobb_screw_countersunk"),
-            ("get_test_oobb_screw_self_tapping", "part_calls.objects.oobb_object_test_oobb_screw_self_tapping.working", "test_oobb_screw_self_tapping"),
+            ("get_test_oobb_screw_socket_cap", "components.test_oobb_screw_socket_cap.working", "test_oobb_screw_socket_cap"),
+            ("get_test_oobb_screw_countersunk", "components.test_oobb_screw_countersunk.working", "test_oobb_screw_countersunk"),
+            ("get_test_oobb_screw_self_tapping", "components.test_oobb_screw_self_tapping.working", "test_oobb_screw_self_tapping"),
         ]
         for legacy_name, module_path, obj_type in wrapper_cases:
             with self.subTest(wrapper=legacy_name):
@@ -135,7 +134,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
                 self.assertTrue(equal, diff)
 
     def test_test_oobb_screw_socket_cap_old_1_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_oobb_screw_socket_cap_old_1.working import action
+        from components.test_oobb_screw_socket_cap_old_1.working import action
 
         kwargs = {"type": "test_oobb_screw_socket_cap_old_1", "size": "oobb"}
         legacy = oobb_get_items_test.get_test_oobb_screw_socket_cap_old_1(**kwargs)
@@ -144,7 +143,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_oobb_shape_slot_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_oobb_shape_slot.working import action
+        from components.test_oobb_shape_slot.working import action
 
         kwargs = {"type": "test_oobb_shape_slot", "size": "oobb"}
         legacy = oobb_get_items_test.get_test_oobb_shape_slot(**kwargs)
@@ -153,7 +152,7 @@ class TestModuleMigrationWave1(unittest.TestCase):
         self.assertTrue(equal, diff)
 
     def test_test_oobb_wire_forwarder_matches_folder(self):
-        from part_calls.objects.oobb_object_test_oobb_wire.working import action
+        from components.test_oobb_wire.working import action
 
         kwargs = {"type": "test_oobb_wire", "size": "oobb"}
         legacy = oobb_get_items_test.get_test_oobb_wire(**kwargs)

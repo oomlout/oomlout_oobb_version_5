@@ -33,7 +33,7 @@ class ObjectScaffoldGeneratorTests(unittest.TestCase):
             self.assertTrue(callable(getattr(module, "test", None)))
 
             metadata = module.define()
-            self.assertEqual(metadata.get("name"), "oobb_object_test_type")
+            self.assertEqual(metadata.get("name"), "test_type")
             self.assertEqual(metadata.get("source_module"), "oobb_get_items_test")
 
     def test_scaffold_respects_overwrite_flag(self):
@@ -83,8 +83,8 @@ class ObjectScaffoldGeneratorTests(unittest.TestCase):
             generate_object_scaffold("discoverable", "oobb_get_items_other", "get_bolt", output_dir=output)
 
             discovered = discover_objects(objects_root=output)
-            self.assertIn("oobb_object_discoverable", discovered)
-            self.assertTrue(callable(discovered["oobb_object_discoverable"].action_fn))
+            self.assertIn("discoverable", discovered)
+            self.assertTrue(callable(discovered["discoverable"].action_fn))
 
 
 if __name__ == "__main__":

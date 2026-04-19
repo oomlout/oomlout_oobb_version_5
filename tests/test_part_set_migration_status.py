@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from part_calls.report_migration_status import build_status
+from components.report_migration_status import build_status
 
 
 class PartSetMigrationStatusTests(unittest.TestCase):
