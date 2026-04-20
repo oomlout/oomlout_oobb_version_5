@@ -2,8 +2,7 @@ import oobb
 import oobb_base
 import yaml
 import os
-from solid import *
-from solid.utils import *
+from solid2 import *
 
 import os
 import shutil

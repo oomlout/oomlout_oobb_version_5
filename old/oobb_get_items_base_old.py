@@ -8,7 +8,7 @@ import os
 
 
 import opsc
-import solid as sp
+import solid2 as sp
 
 import oobb_base as ob
 from oobb_variables import *

@@ -1,7 +1,13 @@
-from solid import *
+from solid2 import *
 import copy
 import hashlib
+import importlib.util
 import os
+import re
+import shlex
+import subprocess
+
+from solidpython_compat import apply_modifier
 
 mode = "laser"
 #mode = "3d_print"
@@ -11,6 +17,28 @@ defined_objects = {}
 radius_dict = {}
 countersunk_dict = {}
 _RAW_SCAD_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_raw_scad_cache")
+_COMPONENT_RENDER_LOOKUP = None
+
+
+def _cleanup_raw_scad_artifacts(output_dir):
+    if not output_dir or not os.path.isdir(output_dir):
+        return
+
+    hex_pattern = re.compile(r"^(?P<stem>.+)_[0-9a-f]{16}\.scad$")
+    for entry in os.listdir(output_dir):
+        match = hex_pattern.match(entry)
+        if not match:
+            continue
+
+        friendly_name = f"{match.group('stem')}.scad"
+        friendly_path = os.path.join(output_dir, friendly_name)
+        hashed_path = os.path.join(output_dir, entry)
+
+        if os.path.exists(friendly_path):
+            try:
+                os.remove(hashed_path)
+            except OSError:
+                pass
 
 def set_mode(m):
     global mode
@@ -30,6 +58,63 @@ def set_mode(m):
 
     countersunk_dict['m3']['height'] = 1.7
 
+
+def _load_component_module(file_path, object_name):
+    module_name = f"opsc_component_{object_name}_{abs(hash(str(file_path)))}"
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Unable to load component module from {file_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _build_component_render_lookup():
+    lookup = {}
+    components_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "components")
+    if not os.path.isdir(components_root):
+        return lookup
+
+    for entry in sorted(os.listdir(components_root)):
+        folder_path = os.path.join(components_root, entry)
+        working_file = os.path.join(folder_path, "working.py")
+        if not os.path.isdir(folder_path) or not os.path.isfile(working_file):
+            continue
+        try:
+            module = _load_component_module(working_file, entry)
+        except Exception:
+            continue
+        render_fn = getattr(module, "render", None)
+        if not callable(render_fn):
+            continue
+
+        metadata = {}
+        define_fn = getattr(module, "define", None)
+        if callable(define_fn):
+            try:
+                metadata = define_fn()
+            except Exception:
+                metadata = {}
+
+        if entry not in lookup:
+            lookup[entry] = render_fn
+
+        aliases = metadata.get("shape_aliases", [])
+        if isinstance(aliases, str):
+            aliases = [aliases]
+        for alias in aliases:
+            alias = alias.strip()
+            if alias and alias not in lookup:
+                lookup[alias] = render_fn
+    return lookup
+
+
+def _get_component_render_lookup():
+    global _COMPONENT_RENDER_LOOKUP
+    if _COMPONENT_RENDER_LOOKUP is None:
+        _COMPONENT_RENDER_LOOKUP = _build_component_render_lookup()
+    return _COMPONENT_RENDER_LOOKUP
+
 def opsc_make_object(filename, objects, save_type="none",resolution=50, layers = 1, tilediff = 200, mode="laser", overwrite=True, start = 1.5, render=True):
     filename_test = filename.replace(".scad",".png")
     if overwrite or not os.path.exists(filename_test):
@@ -38,20 +123,23 @@ def opsc_make_object(filename, objects, save_type="none",resolution=50, layers =
         path = os.path.dirname(filename)
         if not os.path.exists(path) and path != "":
             os.makedirs(path)
-        final_object = opsc_get_object(objects, mode = mode)
+        output_dir = os.path.dirname(os.path.abspath(filename))
+        final_object = opsc_get_object(objects, mode=mode, output_dir=output_dir)
         # Save the final object to the specified filename    
         #file_header = """$fn = %s;
 #use <MCAD/involute_gears.scad>
 #"""
         file_header = "$fn = %s;"
-        scad_render_to_file(final_object, filename, file_header=file_header % resolution, include_orig_code=False)
+        scad_render_to_file(final_object, filename, file_header=file_header % resolution)
+        _cleanup_raw_scad_artifacts(output_dir)
         if save_type == "all":
             saveToAll(filename, render=render)
         elif save_type == "dxf":
             saveToDxf(filename)
         if mode == "laser":
             filename_laser = filename.replace(".scad","_flat.scad")
-            scad_render_to_file(getLaser(final_object, layers=layers, tilediff=tilediff, start = start), filename_laser, file_header='$fn = %s;' % resolution, include_orig_code=False) 
+            scad_render_to_file(getLaser(final_object, layers=layers, tilediff=tilediff, start = start), filename_laser, file_header='$fn = %s;' % resolution)
+            _cleanup_raw_scad_artifacts(output_dir)
             if save_type == "all":
                 saveToAll(filename_laser, render=render)
             elif save_type == "dxf" or save_type == "laser":
@@ -60,7 +148,7 @@ def opsc_make_object(filename, objects, save_type="none",resolution=50, layers =
     else:
         print("File already exists: " + filename)
 
-def opsc_get_object(objects, mode = "laser"):
+def opsc_get_object(objects, mode="laser", output_dir=None):
     # Create the solidpython objects only include the positive objects and if they don't have inclusion or their inclusion is either all or mode
     # Initialize an empty list to store the results
     
@@ -139,7 +227,7 @@ def opsc_get_object(objects, mode = "laser"):
                 inclusion = obj.get('inclusion',"all")
                 if inclusion == "all" or inclusion == mode:                    
                     if typ != "rotation":
-                        opsc_item = get_opsc_item(obj)
+                        opsc_item = get_opsc_item(obj, output_dir=output_dir)
                         types[typ].append(opsc_item)
                     else:
                         obj_original = copy.deepcopy(obj)
@@ -164,7 +252,7 @@ def opsc_get_object(objects, mode = "laser"):
                         #    obj["type"] = "p"
 
 
-                        opsc_objects = opsc_get_object(objects_2, mode = mode)
+                        opsc_objects = opsc_get_object(objects_2, mode=mode, output_dir=output_dir)
                         
                         if rot == "":
                             rot_x = obj.get('rot_x',0)
@@ -178,7 +266,7 @@ def opsc_get_object(objects, mode = "laser"):
                         
                         
 
-                        opsc_objects = translate(pos)(rotate(a=rot)((opsc_objects))).set_modifier(m_original)
+                        opsc_objects = apply_modifier(translate(pos)(rotate(a=rot)(opsc_objects)), m_original)
 
                         # dealing with rot_shift
                         rot_shift = obj_original.get('rot_shift', [])
@@ -223,7 +311,7 @@ def opsc_get_object(objects, mode = "laser"):
         return_value = difference()(return_value, negative_negative_object)
     return return_value
 
-def get_opsc_item(params):
+def get_opsc_item(params, output_dir=None):
     # An array of function names for basic shapes
     basic_shapes = ['cube', 'sphere', 'cylinder', 'import_stl']
     # An array of function names for other shapes
@@ -252,7 +340,7 @@ def get_opsc_item(params):
         func = globals()[params['shape']]
         
         return_value = get_opsc_transform(params,func(**shape_params))
-        return_value = (return_value).set_modifier(m)
+        return_value = apply_modifier(return_value, m)
         return return_value
         
     elif params['shape'] == 'polygon':
@@ -268,7 +356,7 @@ def get_opsc_item(params):
         m = params.get('m', '')
         func = globals()[params['shape']]
         return_value = get_opsc_transform(params,linear_extrude(h)(globals()[params['shape']](**shape_params)))
-        return_value = (return_value).set_modifier(m)
+        return_value = apply_modifier(return_value, m)
         return return_value
     
     elif params['shape'] == 'text':        
@@ -285,17 +373,31 @@ def get_opsc_item(params):
             return_value = get_opsc_transform(params,linear_extrude(h)(globals()[params['shape']](**shape_params)))
         else:
             return_value = get_opsc_transform(params,globals()[params['shape']](**shape_params))
-        return_value = (return_value).set_modifier(m)
+        return_value = apply_modifier(return_value, m)
         #strip translations away if they are
         return return_value
         
-    # If the object type is not a basic shape, check if it's a defined object or one of the other shapes
-    elif params['shape'] in other_shapes:
+    component_renderers = _get_component_render_lookup()
+    renderer = component_renderers.get(params['shape'])
+    if renderer is not None:
         p2 = copy.deepcopy(params)
         p2["pos"] = [0,0,0]
+        if output_dir is not None and p2.get("shape") == "raw_scad":
+            p2["cache_dir"] = output_dir
+        m = params.get('m', '')
+        return_value = get_opsc_transform(params, renderer(p2))
+        return_value = apply_modifier(return_value, m)
+        return return_value
+
+    # If the object type is not a basic shape, check if it's a defined object or one of the other shapes
+    if params['shape'] in other_shapes:
+        p2 = copy.deepcopy(params)
+        p2["pos"] = [0,0,0]
+        if output_dir is not None and p2.get("shape") == "raw_scad":
+            p2["cache_dir"] = output_dir
         m = params.get('m', '')
         return_value = get_opsc_transform(params, globals()[params['shape']](p2))
-        return_value = (return_value).set_modifier(m)
+        return_value = apply_modifier(return_value, m)
         return return_value
 
 
@@ -340,36 +442,6 @@ def get_opsc_transform(params, solid_obj):
     return solid_obj
 
 
-def _write_raw_scad_source(source, module_name):
-    os.makedirs(_RAW_SCAD_CACHE_DIR, exist_ok=True)
-    digest = hashlib.sha256(f"{module_name}\n{source}".encode("utf-8")).hexdigest()[:16]
-    filename = os.path.join(_RAW_SCAD_CACHE_DIR, f"{module_name}_{digest}.scad")
-    if not os.path.exists(filename):
-        with open(filename, "w", encoding="utf-8") as handle:
-            handle.write(source)
-    return filename
-
-
-def raw_scad(params):
-    source = params.get("source", "")
-    filename = params.get("file", "")
-    module_name = params.get("module", "main")
-    module_kwargs = params.get("module_kwargs", {})
-
-    if source:
-        filename = _write_raw_scad_source(source, module_name)
-
-    if not filename:
-        raise ValueError("raw_scad requires either 'source' or 'file'.")
-
-    scad_object = import_scad(filename)
-    module_fn = getattr(scad_object, module_name, None)
-    if module_fn is None:
-        raise ValueError(f"raw_scad module '{module_name}' not found in {filename}")
-
-    return module_fn(**module_kwargs)
-
-
 import random
 
 def opsc_easy_array(type, shape, repeats, pos_start, shift_arr, **kwargs):
@@ -400,745 +472,9 @@ def opsc_easy(type, shape, **kwargs):
             obj[param] = kwargs[param]
     return obj
 
-def hole(params):
-    try:
-        params["r"] = params["r"]
-    except:
-        params["r"] = params["radius"]
-    
-    p2 = copy.deepcopy(params) 
-
-    # Check if the radius is a string and replace it with the corresponding value from the dictionary
-    if isinstance(p2['r'], str):
-        p2['r'] = radius_dict[p2['r']]
-    
-    # Set the height to 100 if not specified
-    if 'h' not in p2:
-        p2['h'] = 200
-        p2["pos"] = [0,0,-100]
-    p2["center"] = True
-    # Create the cylinder object
-    p2["shape"] = "cylinder"
-    p2["type"] = "positive"
-
-    return get_opsc_item(p2)
-
-def tube(params):
-    try:
-        params["r"] = params["r"]
-    except:
-        params["r"] = params["radius"]
-    p2 = copy.deepcopy(params)  
-    # Check if the radius is a string and replace it with the corresponding value from the dictionary
-    if isinstance(p2['r'], str):
-        p2['r'] = radius_dict[p2['r']]
-    
-    # Set the height to 100 if not specified
-    if 'h' not in p2:
-        if 'height' in p2:
-            p2['h'] = p2['height']
-        elif 'depth' in p2:
-            p2['h'] = p2['depth']
-        else:
-            p2['h'] = 100
-            p2["pos"] = [0,0,-50]
-    p2["center"] = True
-    # Create the cylinder object
-    p2["shape"] = "cylinder"
-    p2["type"] = "negative"
-    inside = get_opsc_item(p2) 
-    p2 = copy.deepcopy(p2)
-    p2["type"] = "positive"
-    p2["r"] = p2["r"] + p2["wall_thickness"]    
-    outside = get_opsc_item(p2)
-    return difference()(outside,inside)
-
-def tube_new(params):
-    p2 = copy.deepcopy(params)
-    if "wall_thickness" not in p2:        
-        p2["wall_thickness"] = 1
-    if "r1" in params:        
-        
-        # Set the height to 100 if not specified
-        if 'h' not in p2:
-            if 'height' in p2:
-                p2['h'] = p2['height']
-            elif 'depth' in p2:
-                p2['h'] = p2['depth']
-            else:
-                p2['h'] = 100
-                p2["pos"] = [0,0,-50]
-        p2["center"] = True
-        # Create the cylinder object
-        p2["shape"] = "cylinder"
-        p2["type"] = "negative"
-        inside = get_opsc_item(p2) 
-        p2 = copy.deepcopy(p2)
-        p2["type"] = "positive"
-        p2["r1"] = p2["r1"] + p2["wall_thickness"]    
-        p2["r2"] = p2["r2"] + p2["wall_thickness"]
-        outside = get_opsc_item(p2)
-        return difference()(outside,inside)
-    else:
-        return tube(params)
-    
-
-def gear(params):
-    default = True
-    if default:
-        number_of_teeth = params.get("number_of_teeth", 24)
-        circular_pitch = params.get("circular_pitch", False) # couldn't figure this one out
-        diametral_pitch = params.get("diametral_pitch", 0.533333) #(teeth / diameter mm) gear 15 mm wide has 8 teeth
-        pressure_angle = params.get("pressure_angle", 20) #internet thinks legos is about 20
-        clearance = params.get("clearance", 0.5)
-        gear_thickness = params.get("gear_thickness", None)
-        if gear_thickness == None:
-            gear_thickness = params.get("depth", 10)
-        rim_thickness = params.get("rim_thickness", gear_thickness)
-        rim_width = params.get("rim_width", 0)
-        hub_thickness = params.get("hub_thickness", 0)
-        hub_diameter = params.get("hub_diameter", 0)
-        bore_diameter = params.get("bore_diameter", 0)
-        circles = params.get("circles", 0)
-        backlash = params.get("backlash", 0.5)
-        twist = params.get("twist", 0)
-        involute_facets = params.get("involute_facets", 0)
-        flat = params.get("flat", False)
-    else:
-        number_of_teeth = params.get("number_of_teeth", 24)
-        circular_pitch = params.get("circular_pitch", False) # couldn't figure this one out
-        diametral_pitch = params.get("diametral_pitch", 0.533333) #(teeth / diameter mm) gear 15 mm wide has 8 teeth
-        pressure_angle = params.get("pressure_angle", 35) #internet thinks legos is about 20
-        clearance = params.get("clearance", 0.5)
-        gear_thickness = params.get("gear_thickness", None)
-        if gear_thickness == None:
-            gear_thickness = params.get("depth", 10)
-        rim_thickness = params.get("rim_thickness", gear_thickness)
-        rim_width = params.get("rim_width", 0)
-        hub_thickness = params.get("hub_thickness", 0)
-        hub_diameter = params.get("hub_diameter", 0)
-        bore_diameter = params.get("bore_diameter", 0)
-        circles = params.get("circles", 0)
-        backlash = params.get("backlash", 0.5)
-        twist = params.get("twist", 0)
-        involute_facets = params.get("involute_facets", 0)
-        flat = params.get("flat", False)
-
-    involute_gear = import_scad("MCAD/involute_gears.scad")
-
-    return involute_gear.gear(number_of_teeth=number_of_teeth, circular_pitch=circular_pitch, diametral_pitch=diametral_pitch, pressure_angle=pressure_angle, clearance=clearance, gear_thickness=gear_thickness, rim_thickness=rim_thickness, rim_width=rim_width, hub_thickness=hub_thickness, hub_diameter=hub_diameter, bore_diameter=bore_diameter, circles=circles, backlash=backlash, twist=twist, involute_facets=involute_facets, flat=flat)
-
-def countersunk(params):
-    p2 = copy.deepcopy(params)
-    counter_rad = p2['r']
-    p2['r'] = radius_dict[p2['r']]
-    hp = copy.deepcopy(p2)
-    hp["type"] = "positive"
-    hp["shape"] = "hole"
-    del hp["rot"]
-    hol = get_opsc_item(hp)
-    
-    cp = copy.deepcopy(p2)
-    cp["h"] = countersunk_dict[counter_rad]["height"]
-    cp["r2"] = countersunk_dict[counter_rad]["little_rad"]
-    cp["r1"] = countersunk_dict[counter_rad]["big_rad"]
-    del cp["r"]
-    del cp["rot"]
-    cp["type"] = "positive"
-    cp["shape"] = "cylinder"
-    cp["pos"] = [0,0,0]
-
-    top = get_opsc_item(cp)
-    return union()(hol,top)
-
-def d_shaft(kwargs):
-    
-    #p2["m"] = "#"
-    radius = kwargs.get("radius", kwargs.get("r", ""))
-    id = kwargs.get("id", "") #the radius of the d side
-    depth = kwargs.get("depth", kwargs.get("h", ""))
-    typ = kwargs.get("type", kwargs.get("t", "positive"))
-    pos = kwargs.get("pos", [0,0,0])
-    typ_other = ""
-    #if typ = negative make it n
-    if typ == "negative":
-        typ = "n"
-    if typ == "positive":
-        typ = "p"
-    if typ == "n":
-        typ_other = "p"
-    if typ == "p":
-        typ_other = "n"
-    if typ == "pp":
-        typ_other = "nn"
-    if typ == "nn":
-        typ_other = "pp"
-    
-
-
-    shaft = copy.deepcopy(kwargs) 
-    shaft["shape"] = "cylinder"
-    shaft["h"] = depth
-    shaft["r"] = radius
-    pos_shift = [0,0,-depth]
-    shaft["pos"]  = [pos[0] + pos_shift[0], pos[1] + pos_shift[1], pos[2] + pos_shift[2]]
-    shaft["type"] = typ
-    shaft_shape = get_opsc_item(shaft)
-
-    indent = copy.deepcopy(kwargs) 
-    indent["shape"] = "cube"
-    indent.pop("r","")
-    dif = radius*2-(id)
-    width = radius*2
-    height = dif
-    depth = depth
-    indent["size"] = [width,height,depth]
-    pos1 = copy.deepcopy(pos)
-    pos1[0] += -radius
-    pos1[1] += radius - dif
-    pos1[2] += -depth
-    indent["pos"]  = pos1
-    indent["type"] = typ_other
-    #indent["m"] = "#"
-    indent_shape = get_opsc_item(indent)    
-
-    return difference()(shaft_shape, indent_shape)
-
-def slot_small(params):  
-    p2 = copy.deepcopy(params) 
-    if isinstance(p2['r'], str):
-        p2['r'] = radius_dict[p2['r']]
-    p2["type"] = "positive"
-    p2["shape"] = "hole"
-    try:
-        del p2["rot"]
-    except:
-        pass
-    p2["pos"] = [0,0,0]
-    left = copy.deepcopy(p2)
-    right = copy.deepcopy(p2)
-    left["pos"][0] = p2["w"] / 2 
-    
-    right["pos"][0] = -p2["w"] / 2
-    pass
-    leftObj = get_opsc_item(left)
-    rightObj = get_opsc_item(right)
-    return hull()(leftObj, rightObj)
-
-def slot(params):  
-    p3 = copy.deepcopy(params) 
-    pos = p3.get("pos", [0,0,0])
-    width = p3.get("width", p3.get("w", 1))
-
-    #make radius_1 and radius_2 r1 and r2 and pop them
-    p3["r1"] = p3.get("radius_1", p3.get("r1", 0))
-    p3["r2"] = p3.get("radius_2", p3.get("r2", 0))
-
-    #pull named radiuses into p3
-    radiuses = ["r1", "r2", "r"]
-    for rad in radiuses:
-        test = p3.get(rad, "")
-        if isinstance(test, str) and test != "":
-            p3[rad] = radius_dict[p3[rad]]
-
-    #get radiuses
-    r = p3.get("r", "")
-    r1 = p3.get("r1", "")
-    r2 = p3.get("r2", "")
-
-    #for just r provided
-    if r != "":
-        r1 = r
-        p3["r1"] = r
-        r2 = r
-        p3["r2"] = r
-
-    
-    p3["type"] = "positive"
-    p3["shape"] = "cylinder"
-    
-    pos1 = copy.deepcopy(pos)
-    left = copy.deepcopy(p3)
-    pos_left = copy.deepcopy(pos1)
-    pos_left[0] += width / 2
-    left["pos"] = pos_left
-    #left["m"] = "#"
-    right = copy.deepcopy(p3)
-    pos_right = copy.deepcopy(pos1)
-    pos_right[0] += -width / 2
-    right["pos"] = pos_right
-
-    leftObj = get_opsc_item(left)
-    rightObj = get_opsc_item(right)
-    return hull()(leftObj, rightObj).set_modifier(p3.get("m", ""))
-
-def pulley_gt2(params):
-    number_of_teeth = params.get("number_of_teeth", 24)
-    depth = params.get("depth", 6)
-    pulley_gt2_scad = import_scad("pulley_gt2.scad")
-
-    return pulley_gt2_scad.pulley_gt2(number_of_teeth=number_of_teeth, depth=depth)
-
-def rounded_rectangle(params): 
-    m = params.get("m", "")  
-    p2 = copy.deepcopy(params) 
-    p2["m"] = ""
-    p2["h"] = p2["size"][2]
-    p2["pos"] = p2.get("pos", [0, 0, 0]) 
-    p2["type"] = "positive"
-    p2["shape"] = "hole"
-    p2["pos"] = [0,0,0]
-    
-    if 'rot' in p2:
-        del p2["rot"]   
-    if 'r' not in p2:
-        p2["r"] = 5 
-    tl = copy.deepcopy(p2)
-    tr = copy.deepcopy(p2)
-    bl = copy.deepcopy(p2)
-    br = copy.deepcopy(p2)
-    tl["pos"][0] = -(p2["size"][0] - p2["r"]*2)/2
-    tl["pos"][1] = (p2["size"][1] - p2["r"]*2)/2
-    tr["pos"][0] = (p2["size"][0] - p2["r"]*2)/2
-    tr["pos"][1] = (p2["size"][1] - p2["r"]*2)/2
-    bl["pos"][0] = -(p2["size"][0] - p2["r"]*2)/2
-    bl["pos"][1] = -(p2["size"][1] - p2["r"]*2)/2
-    br["pos"][0] = (p2["size"][0] - p2["r"]*2)/2
-    br["pos"][1] = -(p2["size"][1] - p2["r"]*2)/2
-    del tl["size"]
-    del tr["size"]
-    del bl["size"]
-    del br["size"]
-    tlo = get_opsc_item(tl)
-    tro = get_opsc_item(tr)
-    blo = get_opsc_item(bl)
-    bro = get_opsc_item(br)    
-    return hull()(tlo, tro, blo, bro).set_modifier(m)
-
-def rounded_octagon(params): 
-    width = params.get("width", 10)
-    width = width / 0.92388    
-    radius = params.get("r", 5)
-    depth = params.get("depth", 10)
-
-    params = copy.deepcopy(params)
-    params.pop("radius",None)
-    params.pop("width",None)
-    params.pop("depth",None)
-
-
-    params["h"] = depth
-
-    pos = params.get("pos", [0, 0, 0])
-
-    m = params.get("m", "")  
-    
-    p2 = copy.deepcopy(params) 
-    p2["m"] = ""    
-    p2["pos"] = p2.get("pos", [0, 0, 0]) 
-    p2["type"] = "positive"
-    p2["shape"] = "hole"
-    p2["pos"] = copy.deepcopy(pos)
-    
-    if 'rot' in p2:
-        del p2["rot"]   
-    if 'r' not in p2:
-        p2["r"] = 5 
-
-    #figure out the points on the octagon
-    import math
-    points = []
-    for i in range(0,8):
-        x = math.cos(math.radians(i*45+ 45/2)) * (width/2 - radius)
-        y = math.sin(math.radians(i*45+ 45/2)) * (width/2 - radius)
-        points.append([x,y])
-
-    #create the points
-    cylinders = []
-    for i in range(0,8):
-        p3 = copy.deepcopy(p2)
-        pos1 = copy.deepcopy(p2["pos"])
-        pos1[0] += points[i][0]
-        pos1[1] += points[i][1]
-        p3["pos"] = pos1
-        cylinders.append(get_opsc_item(p3))
-
-
-    return hull()(cylinders).set_modifier(m)
-
-
-def tray(params):
-    wall_thickness = params.get("wall_thickness", 1)
-    #see if size is there is not then set to width height depth_mm
-    try:
-        params["size"] = params["size"]
-    except:
-        params["size"] = [params["width"], params["height"], params["depth"]]
-        del params["width"]
-        del params["height"]
-        del params["depth"]
-
-    radius =   params.get("radius", 5)
-    
-    outside = rounded_rectangle(params)
-    p2 = copy.deepcopy(params)
-    inside_radius = radius - wall_thickness/2
-    p2["r"] = inside_radius
-    #remove wall thickness from size
-    p2["size"][0] = p2["size"][0] - wall_thickness
-    p2["size"][1] = p2["size"][1] - wall_thickness
-    p2["size"][2] = p2["size"][2] + 100    
-    inside = sphere_rectangle(p2)
-
-    return difference()(outside, translate([0,0,wall_thickness/2])(inside))
-
-def rounded_rectangle_extra(params): 
-    m = params.get("m", "")
-
-    inset = params.get("inset", 0)
-    radius = params.get("r", 5)
-    rotY = params.get("rotY", 0)
-    params.pop("r","")    
-    
-    params["r1"] = radius
-    params["r2"] = radius - inset/2
-    change = params["r1"]
-    if rotY == 180:        
-        params["r2"] = radius
-        params["r1"] = radius - inset/2
-        change = params["r2"]
-
-
-    p2 = copy.deepcopy(params) 
-    p2["m"] = ""
-    p2["h"] = p2["size"][2]
-    p2["pos"] = p2.get("pos", [0, 0, 0]) 
-    p2["type"] = "positive"
-    p2["shape"] = "cylinder"
-    p2["pos"] = [0,0,0]
-    
-    if 'rot' in p2:
-        del p2["rot"]   
-    
-    tl = copy.deepcopy(p2)
-    tr = copy.deepcopy(p2)
-    bl = copy.deepcopy(p2)
-    br = copy.deepcopy(p2)
-    tl["pos"][0] = -(p2["size"][0] - change*2)/2
-    tl["pos"][1] = (p2["size"][1] - change*2)/2
-    tr["pos"][0] = (p2["size"][0] - change*2)/2
-    tr["pos"][1] = (p2["size"][1] - change*2)/2
-    bl["pos"][0] = -(p2["size"][0] - change*2)/2
-    bl["pos"][1] = -(p2["size"][1] - change*2)/2
-    br["pos"][0] = (p2["size"][0] - change*2)/2
-    br["pos"][1] = -(p2["size"][1] - change*2)/2
-    del tl["size"]
-    del tr["size"]
-    del bl["size"]
-    del br["size"]
-    tlo = get_opsc_item(tl)
-    tro = get_opsc_item(tr)
-    blo = get_opsc_item(bl)
-    bro = get_opsc_item(br)    
-    return hull()(tlo, tro, blo, bro).set_modifier(m)
-
-
-
-def sphere_rectangle(params): 
-    m = params.get("m", "")  
-    
-    
-    #radius
-    if 'rot' in params:
-        del params["rot"]   
-    if 'r' not in params:
-        params["r"] = 5 
-    
-    p2 = copy.deepcopy(params) 
-
-
-    
-
-    height = p2["size"][2]
-    radius = p2["r"]
-    p2["m"] = ""
-    p2["h"] = height-radius*2
-    p2["pos"] = p2.get("pos", [0, 0, 0]) 
-    p2["type"] = "positive"
-    p2["shape"] = "hole"
-    p2["pos"] = [0,0,radius]
-    
-    p3 = copy.deepcopy(params)
-    radius = p3["r"]
-    p3["m"] = ""    
-    p3["pos"] = p3.get("pos", [0, 0, 0]) 
-    p3["type"] = "positive"
-    p3["shape"] = "sphere"
-    p3["pos"] = [0,0,radius]
-    
-    p4 = copy.deepcopy(params)
-    radius = p4["r"]
-    p4["m"] = ""    
-    p4["pos"] = p4.get("pos", [0, 0, 0]) 
-    p4["type"] = "positive"
-    p4["shape"] = "sphere"
-    #p4["m"] = "#"
-    p4["pos"] = [0,0,height-radius]
-    
-
-    tls = [copy.deepcopy(p2), copy.deepcopy(p3), copy.deepcopy(p4)]
-    trs = [copy.deepcopy(p2), copy.deepcopy(p3), copy.deepcopy(p4)]
-    bls = [copy.deepcopy(p2), copy.deepcopy(p3), copy.deepcopy(p4)]
-    brs = [copy.deepcopy(p2), copy.deepcopy(p3), copy.deepcopy(p4)]
-
-    for tl in tls:     
-        tl["pos"][0] = -(p2["size"][0] - p2["r"]*2)/2
-        tl["pos"][1] = (p2["size"][1] - p2["r"]*2)/2
-        del tl["size"]
-    
-    for tr in trs:
-        tr["pos"][0] = (p2["size"][0] - p2["r"]*2)/2
-        tr["pos"][1] = (p2["size"][1] - p2["r"]*2)/2
-        del tr["size"]
-    
-    for bl in bls:
-        bl["pos"][0] = -(p2["size"][0] - p2["r"]*2)/2
-        bl["pos"][1] = -(p2["size"][1] - p2["r"]*2)/2
-        del bl["size"]
-    
-    for br in brs:
-        br["pos"][0] = (p2["size"][0] - p2["r"]*2)/2
-        br["pos"][1] = -(p2["size"][1] - p2["r"]*2)/2
-        del br["size"]
-
-    
-    tlo = []
-    for tl in tls:
-        tlo.append(get_opsc_item(tl))
-    tlo = union()(tlo)
-    tro = []
-    for tr in trs:
-        tro.append(get_opsc_item(tr))
-    tro = union()(tro)
-    blo = []
-    for bl in bls:
-        blo.append(get_opsc_item(bl))
-    blo = union()(blo)
-    bro = []
-    for br in brs:
-        bro.append(get_opsc_item(br))
-    bro = union()(bro)
-
-    #return tlo.set_modifier(m)
-
-    return hull()(tlo, tro, blo, bro).set_modifier(m)
-
-def cycloid(kwargs):
-    offset_value = kwargs.get("offset", 0)
-    lobe_number = kwargs.get("lobe_number", 3)
-    radius_offset = kwargs.get("radius_offset", 10)
-    radius_pin = kwargs.get("radius_pin", 5)    
-    scad_file = import_scad("cycloid.scad")
-    depth = kwargs.get("depth", 10)
-    if offset_value == 0:        
-        return linear_extrude(depth)(scad_file.cycloid(lobe_number=lobe_number, radius_offset=radius_offset, radius_pin=radius_pin))
-    else:
-        return linear_extrude(depth)(offset(offset_value)(scad_file.cycloid(lobe_number=lobe_number, radius_offset=radius_offset, radius_pin=radius_pin)))
-
-
-def bearing(params):
-    p2 = copy.deepcopy(params) 
-    #p2["m"] = "#"
-    id = params["id"]
-    od = params["od"]
-    pos = params["pos"]
-    depth = params["depth"]
-    depth_extra = params.get("depth_extra", 100)
-    clearance_bearing_original = params.get("clearance_bearing", 2)
-    clearance = params.get("clearance", "")
-
-    depth_bearing = depth
-    if clearance != "":
-        depth_bearing = depth + 250
-    p2["shape"] = "cylinder"
-    p2["h"] = depth_bearing
-    main_inner = copy.deepcopy(p2)
-    main_inner["r"] = id
-    main_outer = copy.deepcopy(p2)
-    pos1 = copy.deepcopy(pos)
-    if clearance == "bottom":
-        pos1[2] += -depth_bearing
-
-    main_outer["pos"] = pos1
-    main_outer["r"] = od
-    
-    ## Extra clearance
-    p2["h"] = 100
-    p2["pos"] = [pos[0], pos[1], pos[2] - 50]
-    extra_inner = copy.deepcopy(p2)
-    extra_outer = copy.deepcopy(p2)
-
-    clearance_bearing = (od - id - clearance_bearing_original/2 )
-    exclude_clearance = params.get("exclude_clearance", False)
-
-    
-    extra_inner["r"] = id + clearance_bearing/2
-    extra_outer["r"] = od - clearance_bearing/2
-
-    mi = get_opsc_item(main_inner)
-    mo = get_opsc_item(main_outer)
-    
-    eo = get_opsc_item(extra_outer)
-
-    if not exclude_clearance:        
-        ei = get_opsc_item(extra_inner)
-        if id > 10: # make sure middle remains
-            shape = translate([0,0,-depth/2])(union()(difference()(mo,mi), difference()(eo,ei)))
-        else: #no need for middle on smaller bearings
-            shape = translate([0,0,-depth/2])(union()(difference()(mo,mi), difference()(eo)))
-    else:
-        ex = 4
-        extra_inner["h"] = depth+ex+depth_extra
-        extra_inner["pos"] = [pos[0], pos[1], pos[2] - ex/2 - depth_extra/2]
-        
-        ei = get_opsc_item(extra_inner)
-        shape = translate([0,0,-depth/2])(mo, ei)
-    return shape
-
-
-
-    return get_opsc_item(p2)
-
-def oring(params):
-    p2 = copy.deepcopy(params) 
-    m = params.get("m", "")
-    id = params["id"]
-    depth = params["depth"]    
-
-    p2["shape"] = "cylinder"
-    p2["h"] = depth
-
-    rot_rad = id + depth/2
-    rv = (rotate_extrude(angle=360)(translate([rot_rad,0,0])(circle(r=depth/2)))).set_modifier(m)   
-
-    return rv
-
-def vpulley(params):
-    id = params["id"]     
-
-    b_y = 0
-    b_x = 3.6
-    t_y = 23
-    t_x = 12
-    points = []
-    points.append([b_x, b_y])
-    points.append([t_x, t_y])
-    points.append([-t_x, t_y])
-    points.append([-b_x, b_y])
-
-    rot_rad = id
-    shape = rotate([0,0,-90])(polygon(points=points))
-    rv = rotate_extrude(angle=360)(translate([rot_rad,0,0])(shape))
-
-    return rv    
-
-def polyg_tube(params):
-    p2 = copy.deepcopy(params)
-    p2["r"] = p2["r1"]
-    p2["type"] = "positive"
-    outer_tube = polyg(p2)
-    p2 = copy.deepcopy(params)
-    p2["r"] = p2["r2"]
-    p2["type"] = "negative"
-    inner_tube = polyg(p2)
-    return get_opsc_transform(params,difference()(outer_tube,inner_tube))
-
-def polyg_tube_half(params):
-    p2 = copy.deepcopy(params)
-    
-    keys = ["pos", "rotX", "rotY", "rotZ"]
-    # remove all keys in key from p2
-    for key in keys:
-        if key in p2:
-            del p2[key]
-
-    
-    item = polyg_tube(p2)
-    width = p2.get("r1", 10) *2 
-    height = p2.get("r1", 10)
-    depth = p2.get("depth", 10)
-    size = [width, height, depth]
-    cut_cube = translate([0,height/2,depth/2])(cube(size=size, center=True))
-    #cut difference away cube
-    item = difference()(item,cut_cube)
-    #item = get_opsc_transform(params,item)
-    return item
-
-def polyg(params):
-    p2 = copy.deepcopy(params)
-    p2.pop("rot", "")    
-    p2.pop("rotX", "")   
-    p2.pop("rotY", "")   
-    p2.pop("rotZ", "")   
-
-    p2["type"] = "positive"
-    p2["shape"] = "polygon"
-    p2["pos"] = [0,0,0]
-    sides = p2.get("sides", 6)
-    radius = p2["r"]    
-    extra_clearance = p2.get("extra_clearance", 0)
-    if extra_clearance != 0:
-        h = p2.get("height", 0)
-        p2["height"] = h + extra_clearance
-    radius_full = radius + extra_clearance/2
-    angles = [i * 360 / sides for i in range(sides)]
-    points = regular_polygon(sides, radius_full)
-    
-    p2["points"] = points
-    return get_opsc_item(p2)
-
-import math
-
-def regular_polygon(num_sides, radius):
-    # Calculate the angle between each side
-    angle = 2 * math.pi / num_sides
-
-    # Calculate the points of the polygon
-    points = []
-    for i in range(num_sides):
-        x = radius * math.cos(i * angle)
-        y = radius * math.sin(i * angle)
-        points.append((x, y))
-    return points
-
-def text_hollow(params):
-    wall_thickness = params.get("wall_thickness", 0.5)
-    extra = params.get("extra", "")
-    params["shape"] = "text"
-    p2 = copy.deepcopy(params)
-    text_big = get_opsc_item(p2)    
-    p2 = copy.deepcopy(params)
-    little_text = text(text=p2["text"], size=p2["size"], font=p2["font"], halign=p2["halign"], valign=p2["valign"])
-    little_text = offset(r=-wall_thickness)(little_text)
-    little_text = linear_extrude(p2["height"]-wall_thickness)(little_text)
-    #move z down wall_thickness in p2
-    p2["pos"][2] = p2["pos"][2] - wall_thickness
-    if extra == "reverse":
-        p2["pos"][2] = p2["pos"][2] + wall_thickness * 2
-    little_text = get_opsc_transform(p2,little_text)
-    return difference()(text_big, little_text)
-
-
-def import_scad_object(filename):
-    # Import the .scad file and convert it to a solidpython object
-    #filename = "parts"
-    obj = import_scad(filename)
-    return obj.main()
-
 
 
 import os
-import solid as solidpython
 
 
 
@@ -1198,7 +534,53 @@ def save_to_png(fileIn, fileOut=""):
 def saveToPng(fileIn, fileOut="",extra="--render"):
     if fileOut == "":
         fileOut = fileIn.replace(".scad",".png")
-    saveToFile(fileIn, fileOut)
+    saveToFile(fileIn, fileOut, extra=extra)
+    if os.path.basename(fileOut).lower() == "image.png":
+        preview_400_path = os.path.join(os.path.dirname(fileOut), "image_400.png")
+        preview_extra = f"{extra} --imgsize 400,400".strip()
+        saveToFile(fileIn, preview_400_path, extra=preview_extra)
+
+def save_preview_images(fileIn, output_dir):
+    iso_path = os.path.join(output_dir, "image.png")
+    iso_400_path = os.path.join(output_dir, "image_400.png")
+    iso_120_path = os.path.join(output_dir, "image_120.png")
+    top_path = os.path.join(output_dir, "image_top.png")
+    top_400_path = os.path.join(output_dir, "image_top_400.png")
+    top_120_path = os.path.join(output_dir, "image_top_120.png")
+    side_path = os.path.join(output_dir, "image_side.png")
+    side_400_path = os.path.join(output_dir, "image_side_400.png")
+    side_120_path = os.path.join(output_dir, "image_side_120.png")
+
+    view_common = "--autocenter --viewall --projection o"
+    iso_extra = f"{view_common} --camera=0,0,0,55,0,25,500"
+    top_extra = f"{view_common} --camera=0,0,0,90,0,0,500"
+    side_extra = f"{view_common} --camera=0,0,0,0,90,0,500"
+    iso_120_extra = f"{iso_extra} --imgsize 120,120"
+    top_400_extra = f"{top_extra} --imgsize 400,400"
+    top_120_extra = f"{top_extra} --imgsize 120,120"
+    side_400_extra = f"{side_extra} --imgsize 400,400"
+    side_120_extra = f"{side_extra} --imgsize 120,120"
+
+    saveToPng(fileIn, fileOut=iso_path, extra=iso_extra)
+    saveToFile(fileIn, iso_120_path, extra=iso_120_extra)
+    saveToPng(fileIn, fileOut=top_path, extra=top_extra)
+    saveToFile(fileIn, top_400_path, extra=top_400_extra)
+    saveToFile(fileIn, top_120_path, extra=top_120_extra)
+    saveToPng(fileIn, fileOut=side_path, extra=side_extra)
+    saveToFile(fileIn, side_400_path, extra=side_400_extra)
+    saveToFile(fileIn, side_120_path, extra=side_120_extra)
+
+    return {
+        "iso": iso_path,
+        "iso_400": iso_400_path,
+        "iso_120": iso_120_path,
+        "top": top_path,
+        "top_400": top_400_path,
+        "top_120": top_120_path,
+        "side": side_path,
+        "side_400": side_400_path,
+        "side_120": side_120_path,
+    }
 
 def save_to_stl(fileIn, fileOut=""):
     saveToStl(fileIn, fileOut=fileOut)
@@ -1215,13 +597,16 @@ def saveToSvg(fileIn, fileOut=""):
     saveToFile(fileIn, fileOut)
 
 def save_to_file(fileIn, fileOut,extra=""):
-    saveToFile(fileIn, fileOut,extra="")
+    saveToFile(fileIn, fileOut,extra=extra)
 def saveToFile(fileIn, fileOut,extra=""):
-    launchStr = f'openscad -o {fileOut} "{extra}" {fileIn}'
-    if ".png" in fileOut:
-        launchStr = launchStr + " --render"
-    print(f"saving to file: {launchStr}")
-    os.system(launchStr)    
+    launch_args = ["openscad", "-o", fileOut]
+    if extra:
+        launch_args.extend(shlex.split(extra, posix=False))
+    launch_args.append(fileIn)
+    if fileOut.lower().endswith(".png") and "--render" not in launch_args:
+        launch_args.append("--render")
+    print(f"saving to file: {' '.join(launch_args)}")
+    subprocess.run(launch_args, check=False)
 
 def save_to_file_all(fileIn, extra="", render=True):
     saveToFileAll(fileIn, extra=extra, render=render)

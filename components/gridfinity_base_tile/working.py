@@ -1,9 +1,15 @@
-d = {}
+﻿d = {}
 
 
 SCAD_SOURCE = """module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=0, fity=0) {
     $fa = 8;
     $fs = 0.25;
+    clearance = 0.5;
+    grid_pitch = 42;
+    tile_size = grid_pitch - clearance;
+    outer_diameter = 8;
+    inner_span = tile_size - outer_diameter;
+    fill_cube_size = 35.15 - clearance;
 
     function _rx(a) = [
         [1, 0, 0, 0],
@@ -26,13 +32,14 @@ SCAD_SOURCE = """module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=
         [0, 0, 0, 1]
     ];
 
-    module sweep_rounded_square_34() {
+    module sweep_rounded_square_34(size = inner_span) {
+        half_size = size / 2;
         path_points = [
-            [-17, 17],
-            [17, 17],
-            [17, -17],
-            [-17, -17],
-            [-17, 17]
+            [-half_size, half_size],
+            [half_size, half_size],
+            [half_size, -half_size],
+            [-half_size, -half_size],
+            [-half_size, half_size]
         ];
 
         path_vectors = [
@@ -80,7 +87,7 @@ SCAD_SOURCE = """module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=
         union() {
             for (i = [0 : 3]) {
                 multmatrix(walls[i])
-                linear_extrude(34)
+                linear_extrude(size)
                 children();
 
                 multmatrix(walls[i] * (_rz(0) * _ry(0) * _rx(-90)))
@@ -92,7 +99,7 @@ SCAD_SOURCE = """module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=
 
     grid_size = [1, 1];
 
-    grid_size_mm = [grid_size.x * 42, grid_size.y * 42, 4.631];
+    grid_size_mm = [grid_size.x * tile_size, grid_size.y * tile_size, 4.631];
     size_mm = [
         max(grid_size_mm.x, distancex),
         max(grid_size_mm.y, distancey),
@@ -120,7 +127,7 @@ SCAD_SOURCE = """module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=
     translate(padding_start_point)
     for (x = [0 : grid_size.x - 1]) {
         for (y = [0 : grid_size.y - 1]) {
-            translate([(x + 0.5) * 42, (y + 0.5) * 42, -0.01])
+            translate([(x + 0.5) * tile_size, (y + 0.5) * tile_size, -0.01])
             union() {
                 sweep_rounded_square_34() {
                     polygon([
@@ -135,7 +142,7 @@ SCAD_SOURCE = """module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=
                 }
 
                 translate([0, 0, 4.651 / 2])
-                cube([35.15, 35.15, 4.651], center = true);
+                cube([fill_cube_size, fill_cube_size, 4.651], center = true);
             }
         }
     }
@@ -200,3 +207,64 @@ def action(**kwargs):
         "inclusion": inclusion,
         "m": m,
     }
+
+
+def test():
+    import copy
+    import os
+    import opsc
+
+    folder = os.path.dirname(os.path.abspath(__file__))
+    test_dir = os.path.join(folder, "test")
+    os.makedirs(test_dir, exist_ok=True)
+
+    samples = [{'filename': 'test_1',
+      'preview_rot': [55, 0, 25],
+      'kwargs': {'distancex': 0,
+                 'distancey': 0,
+                 'fitx': 0,
+                 'fity': 0,
+                 'pos': [0, 0, 0],
+                 'rot': [0, 0, 0],
+                 'type': 'positive'}},
+     {'filename': 'test_2',
+      'preview_rot': [55, 0, 25],
+      'kwargs': {'distancex': 0,
+                 'distancey': 0,
+                 'fitx': 0.25,
+                 'fity': 0.25,
+                 'pos': [0, 0, 0],
+                 'rot': [0, 0, 0],
+                 'type': 'positive'}}]
+
+    generated_files = []
+
+    for sample in samples:
+        kwargs = copy.deepcopy(sample["kwargs"])
+        result = action(**kwargs)
+        if isinstance(result, dict) and "components" in result:
+            components = copy.deepcopy(result["components"])
+        elif isinstance(result, list):
+            components = result
+        else:
+            components = [result]
+
+        sample_dir = os.path.join(test_dir, sample["filename"])
+        os.makedirs(sample_dir, exist_ok=True)
+        scad_path = os.path.join(sample_dir, "working.scad")
+        png_path = os.path.join(sample_dir, "image.png")
+
+        opsc.opsc_make_object(
+            scad_path,
+            components,
+            mode="true",
+            save_type="none",
+            overwrite=True,
+            render=True,
+        )
+        opsc.save_preview_images(scad_path, sample_dir)
+        generated_files.append(png_path)
+
+    return generated_files
+
+

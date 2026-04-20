@@ -1,4 +1,4 @@
-import copy
+﻿import copy
 import os
 import sys
 
@@ -40,7 +40,7 @@ def define():
 def action(**kwargs):
     import oobb
     import opsc
-    """Circle geometry — cylinder cutout or solid at OOBB grid position."""
+    """Circle geometry â€” cylinder cutout or solid at OOBB grid position."""
     width = kwargs.get("width", 1)
     height = kwargs.get("height", 1)
     extra_mm = kwargs.get("extra_mm", False)
@@ -73,3 +73,57 @@ def action(**kwargs):
     p3["r"] = (width * oobb.gv("osp") - oobb.gv("osp_minus"))/2
     p3["h"] = depth
     return [opsc.opsc_easy(**p3)]
+
+
+def test():
+    import copy
+    import os
+    import opsc
+
+    folder = os.path.dirname(os.path.abspath(__file__))
+    test_dir = os.path.join(folder, "test")
+    os.makedirs(test_dir, exist_ok=True)
+
+    samples = [{'filename': 'test_1',
+      'preview_rot': [60, 0, 25],
+      'kwargs': {'pos': [0, 0, 0], 'width': 3, 'height': 3, 'depth': 3, 'zz': 'bottom'}},
+     {'filename': 'test_2',
+      'preview_rot': [60, 0, 25],
+      'kwargs': {'pos': [0, 0, 0],
+                 'width': 5,
+                 'height': 5,
+                 'depth': 3,
+                 'extra_mm': True,
+                 'zz': 'bottom'}}]
+
+    generated_files = []
+
+    for sample in samples:
+        kwargs = copy.deepcopy(sample["kwargs"])
+        result = action(**kwargs)
+        if isinstance(result, dict) and "components" in result:
+            components = copy.deepcopy(result["components"])
+        elif isinstance(result, list):
+            components = result
+        else:
+            components = [result]
+
+        sample_dir = os.path.join(test_dir, sample["filename"])
+        os.makedirs(sample_dir, exist_ok=True)
+        scad_path = os.path.join(sample_dir, "working.scad")
+        png_path = os.path.join(sample_dir, "image.png")
+
+        opsc.opsc_make_object(
+            scad_path,
+            components,
+            mode="true",
+            save_type="none",
+            overwrite=True,
+            render=True,
+        )
+        opsc.save_preview_images(scad_path, sample_dir)
+        generated_files.append(png_path)
+
+    return generated_files
+
+

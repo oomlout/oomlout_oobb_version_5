@@ -389,6 +389,120 @@
     }
     .variable-popup strong { display: block; margin-bottom: 0.25em; }
 
+    .card-detail-hint {
+      margin-top: 0.9em;
+      font-size: 0.82em;
+      font-weight: 700;
+      color: #7b68ee;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .object-card.is-clickable {
+      cursor: pointer;
+    }
+
+    .object-card:focus-visible {
+      outline: 4px solid rgba(144,224,239,0.65);
+      outline-offset: 3px;
+    }
+
+    .detail-modal[hidden] {
+      display: none !important;
+    }
+
+    .detail-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2em;
+      background: rgba(38, 28, 64, 0.42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .detail-modal-panel {
+      width: min(1200px, 100%);
+      height: min(88vh, 900px);
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 28px;
+      box-shadow: 0 24px 80px rgba(54, 35, 96, 0.28);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1em;
+      padding: 1em 1.2em;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(244,240,255,0.88));
+      border-bottom: 1px solid rgba(180,130,200,0.15);
+    }
+
+    .detail-modal-title {
+      min-width: 0;
+    }
+
+    .detail-modal-title strong {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05em;
+      color: var(--text-dark);
+    }
+
+    .detail-modal-title span {
+      display: block;
+      font-size: 0.86em;
+      color: var(--text-light);
+      margin-top: 0.2em;
+    }
+
+    .detail-modal-close {
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-lavender));
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 0.95em;
+      padding: 0.75em 1em;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(180,130,200,0.18);
+    }
+
+    .detail-modal-close:hover {
+      transform: translateY(-1px);
+    }
+
+    .detail-modal-body {
+      flex: 1;
+      min-height: 0;
+      background: rgba(255,255,255,0.5);
+    }
+
+    .detail-modal-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: rgba(255,255,255,0.4);
+    }
+
+    .detail-modal-empty {
+      padding: 2em;
+      color: var(--text-medium);
+      line-height: 1.7;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1100px) { #objects-container { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 700px) {
@@ -398,6 +512,13 @@
       #search-box { width: 100%; }
       .main-content { padding: 0.5em 3vw 2em 3vw; }
       .stats-bar { gap: 1em; }
+      .detail-modal {
+        padding: 0.75em;
+      }
+      .detail-modal-panel {
+        height: min(92vh, 980px);
+        border-radius: 20px;
+      }
     }
 
     /* ===== EMPTY STATE ===== */
@@ -432,6 +553,21 @@
     <div id="objects-container"></div>
     <div class="footer">
       Made with <span class="footer-heart">♥</span> by OOBB &bull; Documentation auto-generated
+    </div>
+  </div>
+
+  <div class="detail-modal" id="detail-modal" hidden>
+    <div class="detail-modal-panel" role="dialog" aria-modal="true" aria-labelledby="detail-modal-heading">
+      <div class="detail-modal-header">
+        <div class="detail-modal-title">
+          <strong id="detail-modal-heading">Component details</strong>
+          <span id="detail-modal-subtitle">Open a component card to view the full documentation.</span>
+        </div>
+        <button type="button" class="detail-modal-close" id="detail-modal-close">Close</button>
+      </div>
+      <div class="detail-modal-body" id="detail-modal-body">
+        <div class="detail-modal-empty">Click any component card to open its richer documentation here.</div>
+      </div>
     </div>
   </div>
 
@@ -479,6 +615,14 @@
       const div = document.createElement('div');
       div.className = 'object-card';
       div.style.animationDelay = `${index * 0.05}s`;
+      div.tabIndex = 0;
+      div.setAttribute('role', 'button');
+      div.setAttribute('aria-label', `Open details for ${obj.command || obj.name || 'component'}`);
+
+      const hasDetails = !!obj.detail_page;
+      if (hasDetails) {
+        div.classList.add('is-clickable');
+      }
 
       const title    = escapeHtml(obj.command || obj.name || '');
       const nameLong = escapeHtml(obj.name_long || '');
@@ -503,11 +647,13 @@
           <ul class="var-list">${varHtml}</ul>
           <div class="variable-popup" hidden></div>
         </div>
+        ${hasDetails ? '<div class="card-detail-hint">Click For Details</div>' : ''}
       `;
 
       const popup = div.querySelector('.variable-popup');
       div.querySelectorAll('.var-chip[data-var-index]').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', evt => {
+          evt.stopPropagation();
           const idx = Number(btn.getAttribute('data-var-index'));
           const variable = vars[idx];
           const vName = typeof variable === 'string' ? variable : (variable && variable.name ? variable.name : '');
@@ -532,9 +678,52 @@
           popup.hidden = false;
           popup.setAttribute('data-active-index', String(idx));
         });
+        btn.addEventListener('keydown', evt => evt.stopPropagation());
+        btn.addEventListener('mousedown', evt => evt.stopPropagation());
       });
 
+      if (hasDetails) {
+        div.addEventListener('click', evt => {
+          if (evt.target.closest('.var-chip')) return;
+          openComponentModal(obj);
+        });
+        div.addEventListener('keydown', evt => {
+          if (evt.key === 'Enter' || evt.key === ' ') {
+            evt.preventDefault();
+            openComponentModal(obj);
+          }
+        });
+      }
+
       return div;
+    }
+
+    function buildDetailFrame(obj) {
+      if (obj.detail_page) {
+        return `<iframe class="detail-modal-frame" src="${encodeURI(obj.detail_page)}" title="Details for ${escapeHtml(obj.command || '')}"></iframe>`;
+      }
+      return '<div class="detail-modal-empty">No detail page has been generated for this component yet.</div>';
+    }
+
+    function openComponentModal(obj) {
+      const modal = document.getElementById('detail-modal');
+      const heading = document.getElementById('detail-modal-heading');
+      const subtitle = document.getElementById('detail-modal-subtitle');
+      const body = document.getElementById('detail-modal-body');
+
+      heading.textContent = obj.command || 'Component';
+      subtitle.textContent = obj.name_long || obj.category || 'Documentation detail';
+      body.innerHTML = buildDetailFrame(obj);
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+    }
+
+    function closeComponentModal() {
+      const modal = document.getElementById('detail-modal');
+      const body = document.getElementById('detail-modal-body');
+      modal.hidden = true;
+      body.innerHTML = '<div class="detail-modal-empty">Click any component card to open its richer documentation here.</div>';
+      document.body.classList.remove('modal-open');
     }
 
     function populateCategoryFilter(objects) {
@@ -596,6 +785,17 @@
 
       document.getElementById('search-box').addEventListener('input', renderDocumentation);
       document.getElementById('category-filter').addEventListener('change', renderDocumentation);
+      document.getElementById('detail-modal-close').addEventListener('click', closeComponentModal);
+      document.getElementById('detail-modal').addEventListener('click', evt => {
+        if (evt.target.id === 'detail-modal') {
+          closeComponentModal();
+        }
+      });
+      document.addEventListener('keydown', evt => {
+        if (evt.key === 'Escape' && !document.getElementById('detail-modal').hidden) {
+          closeComponentModal();
+        }
+      });
     })();
   </script>
 </body>

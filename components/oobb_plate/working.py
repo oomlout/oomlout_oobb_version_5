@@ -1,4 +1,4 @@
-import copy
+﻿import copy
 import os
 import sys
 
@@ -27,7 +27,7 @@ def describe():
     d = {}
     d["name"] = 'oobb_plate'
     d["name_long"] = 'OOBB Geometry Primitives: Plate'
-    d["description"] = 'OOBB grid-sized plate (cylinder for 1×1, rounded rectangle otherwise) with optional hole pattern.'
+    d["description"] = 'OOBB grid-sized plate (cylinder for 1Ã—1, rounded rectangle otherwise) with optional hole pattern.'
     d["category"] = 'OOBB Geometry Primitives'
     d["shape_aliases"] = ['plate']
     d["returns"] = 'List of geometry component dicts.'
@@ -119,3 +119,57 @@ def action(**kwargs):
     return return_value
 
     #screw
+
+
+def test():
+    import copy
+    import os
+    import opsc
+
+    folder = os.path.dirname(os.path.abspath(__file__))
+    test_dir = os.path.join(folder, "test")
+    os.makedirs(test_dir, exist_ok=True)
+
+    samples = [{'filename': 'test_1',
+      'preview_rot': [55, 0, 25],
+      'kwargs': {'pos': [0, 0, 0],
+                 'width': 3,
+                 'height': 2,
+                 'depth': 3,
+                 'zz': 'bottom',
+                 'holes': False}},
+     {'filename': 'test_2',
+      'preview_rot': [55, 0, 25],
+      'kwargs': {'pos': [0, 0, 0], 'width': 3, 'height': 2, 'depth': 3, 'zz': 'bottom', 'holes': True}}]
+
+    generated_files = []
+
+    for sample in samples:
+        kwargs = copy.deepcopy(sample["kwargs"])
+        result = action(**kwargs)
+        if isinstance(result, dict) and "components" in result:
+            components = copy.deepcopy(result["components"])
+        elif isinstance(result, list):
+            components = result
+        else:
+            components = [result]
+
+        sample_dir = os.path.join(test_dir, sample["filename"])
+        os.makedirs(sample_dir, exist_ok=True)
+        scad_path = os.path.join(sample_dir, "working.scad")
+        png_path = os.path.join(sample_dir, "image.png")
+
+        opsc.opsc_make_object(
+            scad_path,
+            components,
+            mode="true",
+            save_type="none",
+            overwrite=True,
+            render=True,
+        )
+        opsc.save_preview_images(scad_path, sample_dir)
+        generated_files.append(png_path)
+
+    return generated_files
+
+

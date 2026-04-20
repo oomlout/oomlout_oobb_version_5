@@ -1,7 +1,7 @@
 import copy
 
 from oobb_get_items_base_old import *
-from solid import *
+from solid2 import *
 
 # circle
 def get_oobb_circle(**kwargs):

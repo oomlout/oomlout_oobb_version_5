@@ -1,4 +1,4 @@
-import copy
+﻿import copy
 import os
 import sys
 
@@ -257,3 +257,88 @@ def action(**kwargs):
 
 
     # slot
+
+
+def test():
+    import copy
+    import os
+    import opsc
+
+    folder = os.path.dirname(os.path.abspath(__file__))
+    test_dir = os.path.join(folder, "test")
+    os.makedirs(test_dir, exist_ok=True)
+
+    samples = [{'filename': 'test_1',
+      'preview_rot': [70, 0, 20],
+      'kwargs': {'pos': [0, 0, 0],
+                 'type': 'positive',
+                 'radius_name': 'm3',
+                 'style': 'socket_cap',
+                 'depth': 16,
+                 'zz': 'none',
+                 'hole': True,
+                 'clearance': '',
+                 'nut_include': False,
+                 'overhang': False,
+                 'mode': 'true',
+                 'rot': [0, 0, 0]}},
+     {'filename': 'test_2',
+      'preview_rot': [70, 0, 20],
+      'kwargs': {'pos': [0, 0, 0],
+                 'type': 'positive',
+                 'radius_name': 'm3',
+                 'style': 'countersunk',
+                 'depth': 16,
+                 'zz': 'none',
+                 'hole': True,
+                 'clearance': '',
+                 'nut_include': False,
+                 'overhang': False,
+                 'mode': 'true',
+                 'rot': [0, 0, 0]}},
+     {'filename': 'test_3',
+      'preview_rot': [70, 0, 20],
+      'kwargs': {'pos': [0, 0, 0],
+                 'type': 'positive',
+                 'radius_name': 'm3',
+                 'style': 'self_tapping',
+                 'depth': 16,
+                 'zz': 'none',
+                 'hole': True,
+                 'clearance': '',
+                 'nut_include': False,
+                 'overhang': False,
+                 'mode': 'true',
+                 'rot': [0, 0, 0]}}]
+
+    generated_files = []
+
+    for sample in samples:
+        kwargs = copy.deepcopy(sample["kwargs"])
+        result = action(**kwargs)
+        if isinstance(result, dict) and "components" in result:
+            components = copy.deepcopy(result["components"])
+        elif isinstance(result, list):
+            components = result
+        else:
+            components = [result]
+
+        sample_dir = os.path.join(test_dir, sample["filename"])
+        os.makedirs(sample_dir, exist_ok=True)
+        scad_path = os.path.join(sample_dir, "working.scad")
+        png_path = os.path.join(sample_dir, "image.png")
+
+        opsc.opsc_make_object(
+            scad_path,
+            components,
+            mode="true",
+            save_type="none",
+            overwrite=True,
+            render=True,
+        )
+        opsc.save_preview_images(scad_path, sample_dir)
+        generated_files.append(png_path)
+
+    return generated_files
+
+

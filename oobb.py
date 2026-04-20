@@ -899,16 +899,11 @@ def oobb_easy(**kwargs):
                 else:
                     raise ValueError(f"Unknown shape: {shape}")
             else:
-                # Non-oobb shapes: check component lookup before falling to opsc
                 shape_lookup = _get_shape_lookup()
                 if shape in shape_lookup:
                     return_value_2.append(_call_shape_action(shape_lookup[shape], kwargs))
                 else:
-                    import opsc
-                    return_value = opsc.opsc_easy(**kwargs)
-                    if type(return_value) == dict:
-                        return_value = [return_value]
-                    return_value_2.append(return_value)
+                    raise ValueError(f"Unknown shape: {shape}")
     return return_value_2
 
 def oobb_easy_array(**kwargs):

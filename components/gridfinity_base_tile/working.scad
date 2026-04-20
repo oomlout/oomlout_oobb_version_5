@@ -1,6 +1,12 @@
 module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=0, fity=0) {
     $fa = 8;
     $fs = 0.25;
+    clearance = 1;
+    grid_pitch = 42;
+    tile_size = grid_pitch - clearance;
+    outer_diameter = 8;
+    inner_span = tile_size - outer_diameter;
+    fill_cube_size = 35.15 - clearance;
 
     function _rx(a) = [
         [1, 0, 0, 0],
@@ -23,13 +29,14 @@ module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=0, fity=0) {
         [0, 0, 0, 1]
     ];
 
-    module sweep_rounded_square_34() {
+    module sweep_rounded_square_34(size = inner_span) {
+        half_size = size / 2;
         path_points = [
-            [-17, 17],
-            [17, 17],
-            [17, -17],
-            [-17, -17],
-            [-17, 17]
+            [-half_size, half_size],
+            [half_size, half_size],
+            [half_size, -half_size],
+            [-half_size, -half_size],
+            [-half_size, half_size]
         ];
 
         path_vectors = [
@@ -77,7 +84,7 @@ module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=0, fity=0) {
         union() {
             for (i = [0 : 3]) {
                 multmatrix(walls[i])
-                linear_extrude(34)
+                linear_extrude(size)
                 children();
 
                 multmatrix(walls[i] * (_rz(0) * _ry(0) * _rx(-90)))
@@ -89,7 +96,7 @@ module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=0, fity=0) {
 
     grid_size = [1, 1];
 
-    grid_size_mm = [grid_size.x * 42, grid_size.y * 42, 4.631];
+    grid_size_mm = [grid_size.x * tile_size, grid_size.y * tile_size, 4.631];
     size_mm = [
         max(grid_size_mm.x, distancex),
         max(grid_size_mm.y, distancey),
@@ -117,7 +124,7 @@ module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=0, fity=0) {
     translate(padding_start_point)
     for (x = [0 : grid_size.x - 1]) {
         for (y = [0 : grid_size.y - 1]) {
-            translate([(x + 0.5) * 42, (y + 0.5) * 42, -0.01])
+            translate([(x + 0.5) * tile_size, (y + 0.5) * tile_size, -0.01])
             union() {
                 sweep_rounded_square_34() {
                     polygon([
@@ -132,7 +139,7 @@ module gridfinity_base_tile_raw(distancex=0, distancey=0, fitx=0, fity=0) {
                 }
 
                 translate([0, 0, 4.651 / 2])
-                cube([35.15, 35.15, 4.651], center = true);
+                cube([fill_cube_size, fill_cube_size, 4.651], center = true);
             }
         }
     }

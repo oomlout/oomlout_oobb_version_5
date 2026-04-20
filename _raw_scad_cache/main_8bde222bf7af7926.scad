@@ -1,0 +1,1 @@
+module main(){cube([1,1,1]);}
