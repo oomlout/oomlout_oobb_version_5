@@ -13,9 +13,11 @@ from typing import Any
 # oobb_arch lives in old/ after the restructure; add it to the path so the
 # import below works regardless of the working directory.
 sys.path.insert(0, str(Path(__file__).parent.parent / "old"))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from oobb_arch.catalog.object_discovery import discover_objects
 from oobb_arch.catalog.part_set_discovery import discover_part_sets
+import oobb
 
 
 def _coerce_text(value: Any) -> str:
@@ -1082,10 +1084,64 @@ def _build_documentation_payload(
     return {
         "objects": objects,
         "part_sets": part_sets,
+        "variable_catalog": _build_variable_catalog(),
         "generated_date": str(date.today()),
         "total_objects": len(objects),
         "total_part_sets": len(part_sets),
     }
+
+
+def _serialize_catalog_value(value: Any) -> str:
+    if isinstance(value, str):
+        return value
+    return json.dumps(value, sort_keys=False)
+
+
+def _build_variable_catalog() -> list[dict[str, Any]]:
+    raw_variables = getattr(oobb, "variables", {}) or {}
+    if not isinstance(raw_variables, dict):
+        return []
+
+    modes = ("laser", "true", "3dpr")
+    grouped: dict[str, dict[str, Any]] = {}
+
+    for name in sorted(raw_variables.keys()):
+        base_name = name
+        mode_name = ""
+        for mode in modes:
+            suffix = f"_{mode}"
+            if name.endswith(suffix):
+                base_name = name[: -len(suffix)]
+                mode_name = mode
+                break
+
+        entry = grouped.setdefault(
+            base_name,
+            {
+                "name": base_name,
+                "value": "",
+                "modes": {},
+                "has_mode_values": False,
+            },
+        )
+
+        serialized = _serialize_catalog_value(raw_variables[name])
+        if mode_name:
+            entry["modes"][mode_name] = serialized
+            entry["has_mode_values"] = True
+        else:
+            entry["value"] = serialized
+
+    catalog: list[dict[str, Any]] = []
+    for _, entry in sorted(grouped.items(), key=lambda item: item[0]):
+        if entry["has_mode_values"] and not entry["value"]:
+            mode_values = entry["modes"]
+            ordered_values = [mode_values.get(mode, "") for mode in modes if mode in mode_values]
+            if ordered_values and all(value == ordered_values[0] for value in ordered_values):
+                entry["value"] = ordered_values[0]
+        catalog.append(entry)
+
+    return catalog
 
 
 def export_documentation_json(

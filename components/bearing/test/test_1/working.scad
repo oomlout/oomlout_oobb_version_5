@@ -1,4 +1,6 @@
-$fn = 50;difference() {
+$fn = 50;
+
+difference() {
 	union() {
 		translate(v = [0, 0, -2.0]) {
 			union() {

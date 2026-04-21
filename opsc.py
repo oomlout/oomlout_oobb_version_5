@@ -27,6 +27,18 @@ except Exception:
     module_cache_by_resolved_filename = None
 
 
+def _skip_existing_images_enabled():
+    value = os.environ.get("OOBB_SKIP_EXISTING_IMAGES", "").strip().lower()
+    return value in {"1", "true", "yes", "on"}
+
+
+def _file_exists_with_content(path):
+    try:
+        return os.path.exists(path) and os.path.getsize(path) > 0
+    except OSError:
+        return False
+
+
 def _cleanup_raw_scad_artifacts(output_dir):
     if not output_dir or not os.path.isdir(output_dir):
         return
@@ -639,6 +651,31 @@ def save_preview_images(fileIn, output_dir):
     side_400_path = os.path.join(output_dir, "image_side_400.png")
     side_120_path = os.path.join(output_dir, "image_side_120.png")
 
+    preview_targets = [
+        iso_path,
+        iso_400_path,
+        iso_120_path,
+        top_path,
+        top_400_path,
+        top_120_path,
+        side_path,
+        side_400_path,
+        side_120_path,
+    ]
+
+    if _skip_existing_images_enabled() and all(_file_exists_with_content(path) for path in preview_targets):
+        return {
+            "iso": iso_path,
+            "iso_400": iso_400_path,
+            "iso_120": iso_120_path,
+            "top": top_path,
+            "top_400": top_400_path,
+            "top_120": top_120_path,
+            "side": side_path,
+            "side_400": side_400_path,
+            "side_120": side_120_path,
+        }
+
     view_common = "--autocenter --viewall --projection o"
     iso_extra = f"{view_common} --camera=0,0,0,55,0,25,500"
     top_extra = f"{view_common} --camera=0,0,0,90,0,0,500"
@@ -687,6 +724,13 @@ def saveToSvg(fileIn, fileOut=""):
 def save_to_file(fileIn, fileOut,extra=""):
     saveToFile(fileIn, fileOut,extra=extra)
 def saveToFile(fileIn, fileOut,extra=""):
+    if (
+        _skip_existing_images_enabled()
+        and fileOut.lower().endswith(".png")
+        and _file_exists_with_content(fileOut)
+    ):
+        print(f"skipping existing image: {fileOut}")
+        return
     launch_args = ["openscad", "-o", fileOut]
     if extra:
         launch_args.extend(shlex.split(extra, posix=False))

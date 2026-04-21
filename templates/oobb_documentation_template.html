@@ -166,6 +166,39 @@
       font-weight: 500;
     }
 
+    .header-meta-links {
+      margin-top: 0.9em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8em;
+      flex-wrap: wrap;
+    }
+
+    .header-link-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.7em 1.1em;
+      font-size: 0.82em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      background: linear-gradient(135deg, var(--pastel-yellow), var(--pastel-lavender));
+      box-shadow: 0 4px 12px rgba(180,130,200,0.16);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: inherit;
+    }
+    .header-link-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(180,130,200,0.24);
+    }
+    .header-link-button:focus-visible {
+      outline: 3px solid rgba(184,192,255,0.55);
+      outline-offset: 2px;
+    }
+
     .header-controls {
       margin-top: 1.5em;
       display: flex;
@@ -349,6 +382,38 @@
       letter-spacing: 0.5px;
     }
 
+    .card-variables-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75em;
+      flex-wrap: wrap;
+    }
+
+    .variable-summary-toggle {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.45em 0.95em;
+      font-size: 0.76em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      background: linear-gradient(135deg, var(--pastel-yellow), var(--pastel-peach));
+      box-shadow: 0 2px 8px rgba(180,130,200,0.14);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: inherit;
+    }
+    .variable-summary-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(180,130,200,0.22);
+    }
+    .variable-summary-toggle:focus-visible {
+      outline: 3px solid rgba(255, 181, 167, 0.6);
+      outline-offset: 2px;
+    }
+
     .var-list {
       list-style: none;
       padding-left: 0;
@@ -388,6 +453,61 @@
       line-height: 1.5;
     }
     .variable-popup strong { display: block; margin-bottom: 0.25em; }
+
+    .variable-summary-popup {
+      margin-top: 0.75em;
+      padding: 0.9em 1em;
+      border-radius: 14px;
+      border: 1px solid rgba(180,130,200,0.24);
+      background: rgba(255,255,255,0.84);
+      color: var(--text-dark);
+      font-size: 0.84em;
+      line-height: 1.55;
+    }
+
+    .variable-summary-popup-title {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 0.65em;
+      color: var(--text-dark);
+    }
+
+    .variable-summary-list {
+      display: grid;
+      gap: 0.55em;
+    }
+
+    .variable-summary-item {
+      padding: 0.6em 0.7em;
+      border-radius: 12px;
+      background: rgba(245, 243, 255, 0.95);
+      border: 1px solid rgba(184, 192, 255, 0.22);
+    }
+
+    .variable-summary-name {
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .variable-summary-default {
+      display: inline-block;
+      margin-top: 0.25em;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+      color: #5a4c8f;
+      word-break: break-word;
+    }
+
+    .variable-summary-meta {
+      display: block;
+      margin-top: 0.28em;
+      color: var(--text-light);
+      font-size: 0.95em;
+    }
+
+    .variable-summary-empty {
+      color: var(--text-light);
+    }
 
     .card-detail-hint {
       margin-top: 0.9em;
@@ -499,6 +619,136 @@
       line-height: 1.7;
     }
 
+    .variable-catalog-shell {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .variable-catalog-toolbar {
+      padding: 1em 1.2em;
+      border-bottom: 1px solid rgba(180,130,200,0.15);
+      background: rgba(255,255,255,0.62);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1em;
+      flex-wrap: wrap;
+    }
+
+    .variable-catalog-toolbar-main {
+      display: grid;
+      gap: 0.25em;
+      min-width: 0;
+    }
+
+    .variable-catalog-toolbar strong {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      font-size: 1em;
+    }
+
+    .variable-catalog-toolbar span {
+      color: var(--text-light);
+      font-size: 0.9em;
+    }
+
+    .variable-catalog-filter {
+      border: 2px solid rgba(180, 130, 200, 0.2);
+      border-radius: 14px;
+      font-size: 0.92em;
+      padding: 0.75em 1em;
+      background: rgba(255,255,255,0.82);
+      color: var(--text-dark);
+      outline: none;
+      min-width: min(360px, 100%);
+      width: 360px;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+    .variable-catalog-filter:focus {
+      border-color: var(--accent-lavender);
+      box-shadow: 0 0 0 4px rgba(184,192,255,0.22);
+      background: rgba(255,255,255,0.95);
+    }
+
+    .variable-catalog-body {
+      flex: 1;
+      overflow: auto;
+      padding: 1.2em;
+    }
+
+    .variable-catalog-table-wrap {
+      overflow: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(180,130,200,0.14);
+      background: rgba(255,255,255,0.82);
+      box-shadow: 0 4px 14px rgba(180,130,200,0.08);
+    }
+
+    .variable-catalog-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+    }
+
+    .variable-catalog-table th,
+    .variable-catalog-table td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.9em 1em;
+      border-bottom: 1px solid rgba(180,130,200,0.12);
+    }
+
+    .variable-catalog-table th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(245,243,255,0.96));
+      color: var(--text-light);
+      font-size: 0.78em;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .variable-catalog-row:hover td {
+      background: rgba(250,248,255,0.8);
+    }
+
+    .variable-catalog-name {
+      font-weight: 800;
+      color: var(--text-dark);
+      word-break: break-word;
+    }
+
+    .variable-catalog-value {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+      color: #5a4c8f;
+      background: rgba(245,243,255,0.95);
+      border-radius: 12px;
+      padding: 0.45em 0.6em;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    .variable-catalog-mode-cell {
+      min-width: 140px;
+    }
+
+    .variable-catalog-empty {
+      padding: 2em;
+      color: var(--text-medium);
+      text-align: center;
+    }
+
+    .variable-catalog-empty[hidden] {
+      display: none !important;
+    }
+
     body.modal-open {
       overflow: hidden;
     }
@@ -541,6 +791,9 @@
   <div class="header">
     <h1>✨ OOBB Parts ✨</h1>
     <div class="header-subtitle">Component reference — auto-generated</div>
+    <div class="header-meta-links">
+      <button type="button" class="header-link-button" id="variables-summary-link">OOBB Variables Summary</button>
+    </div>
     <div class="header-controls">
       <input id="search-box" type="text" placeholder="🔍 Search components...">
       <select id="category-filter">
@@ -606,8 +859,46 @@
       return obj.variables;
     }
 
+    function getVariableDefault(variable) {
+      if (!variable || typeof variable !== 'object') return '';
+      if (!Object.prototype.hasOwnProperty.call(variable, 'default')) return '';
+      const value = variable.default;
+      if (value == null || value === '') return '';
+      return typeof value === 'string' ? value : JSON.stringify(value);
+    }
+
+    function buildVariableSummaryHtml(vars) {
+      if (!vars.length) {
+        return '<div class="variable-summary-empty">No documented variables yet.</div>';
+      }
+
+      const items = vars.map(variable => {
+        const name = typeof variable === 'string' ? variable : (variable.name || '');
+        const description = variable && typeof variable === 'object' ? (variable.description || '') : '';
+        const type = variable && typeof variable === 'object' ? (variable.type || '') : '';
+        const defaultValue = getVariableDefault(variable);
+
+        return `
+          <div class="variable-summary-item">
+            <div class="variable-summary-name">${escapeHtml(name || 'unnamed')}</div>
+            <div class="variable-summary-default">${defaultValue ? escapeHtml(defaultValue) : 'undocumented'}</div>
+            ${type ? `<span class="variable-summary-meta">Type: ${escapeHtml(type)}</span>` : ''}
+            ${description ? `<span class="variable-summary-meta">${escapeHtml(description)}</span>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <strong class="variable-summary-popup-title">Available Variables And Values</strong>
+        <div class="variable-summary-list">${items}</div>
+      `;
+    }
+
     function getSearchHaystack(obj) {
-      const v = getVariables(obj).map(v => (typeof v === 'string' ? v : (v.name || ''))).join(' ');
+      const v = getVariables(obj).map(v => {
+        if (typeof v === 'string') return v;
+        return [v.name || '', getVariableDefault(v), v.type || '', v.description || ''].join(' ');
+      }).join(' ');
       return [obj.command, obj.name_long, obj.description, obj.summary, obj.category, v].join(' ').toLowerCase();
     }
 
@@ -643,17 +934,48 @@
         <div class="card-category">${getCategoryBadge(obj.category)}</div>
         <div class="card-description">${desc}</div>
         <div class="card-variables">
-          <strong>Variables</strong>
+          <div class="card-variables-header">
+            <strong>Variables</strong>
+            <button type="button" class="variable-summary-toggle">Variable Summary</button>
+          </div>
           <ul class="var-list">${varHtml}</ul>
           <div class="variable-popup" hidden></div>
+          <div class="variable-summary-popup" hidden></div>
         </div>
         ${hasDetails ? '<div class="card-detail-hint">Click For Details</div>' : ''}
       `;
 
       const popup = div.querySelector('.variable-popup');
+      const summaryPopup = div.querySelector('.variable-summary-popup');
+      const summaryToggle = div.querySelector('.variable-summary-toggle');
+
+      summaryToggle.addEventListener('click', evt => {
+        evt.stopPropagation();
+        popup.hidden = true;
+        popup.removeAttribute('data-active-index');
+        popup.innerHTML = '';
+
+        const expanded = summaryToggle.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          summaryPopup.hidden = true;
+          summaryPopup.innerHTML = '';
+          summaryToggle.setAttribute('aria-expanded', 'false');
+          return;
+        }
+
+        summaryPopup.innerHTML = buildVariableSummaryHtml(vars);
+        summaryPopup.hidden = false;
+        summaryToggle.setAttribute('aria-expanded', 'true');
+      });
+      summaryToggle.addEventListener('keydown', evt => evt.stopPropagation());
+      summaryToggle.addEventListener('mousedown', evt => evt.stopPropagation());
+
       div.querySelectorAll('.var-chip[data-var-index]').forEach(btn => {
         btn.addEventListener('click', evt => {
           evt.stopPropagation();
+          summaryPopup.hidden = true;
+          summaryPopup.innerHTML = '';
+          summaryToggle.setAttribute('aria-expanded', 'false');
           const idx = Number(btn.getAttribute('data-var-index'));
           const variable = vars[idx];
           const vName = typeof variable === 'string' ? variable : (variable && variable.name ? variable.name : '');
@@ -705,6 +1027,115 @@
       return '<div class="detail-modal-empty">No detail page has been generated for this component yet.</div>';
     }
 
+    function buildVariableCatalogFrame() {
+      const catalog = Array.isArray(window.DOCUMENTATION_DATA?.variable_catalog)
+        ? window.DOCUMENTATION_DATA.variable_catalog
+        : [];
+
+      if (!catalog.length) {
+        return '<div class="variable-catalog-empty">No OOBB variables were found.</div>';
+      }
+
+      const rows = catalog.map(entry => {
+        const baseValue = entry.value
+          ? `<div class="variable-catalog-value">${escapeHtml(entry.value)}</div>`
+          : '<span class="variable-catalog-empty-value">-</span>';
+
+        const modes = entry.modes && typeof entry.modes === 'object'
+          ? entry.modes
+          : {};
+        const laserValue = modes.laser
+          ? `<div class="variable-catalog-value">${escapeHtml(modes.laser)}</div>`
+          : '<span class="variable-catalog-empty-value">-</span>';
+        const trueValue = modes.true
+          ? `<div class="variable-catalog-value">${escapeHtml(modes.true)}</div>`
+          : '<span class="variable-catalog-empty-value">-</span>';
+        const threeDprValue = modes['3dpr']
+          ? `<div class="variable-catalog-value">${escapeHtml(modes['3dpr'])}</div>`
+          : '<span class="variable-catalog-empty-value">-</span>';
+
+        const searchText = [
+          entry.name || '',
+          entry.value || '',
+          modes.laser || '',
+          modes.true || '',
+          modes['3dpr'] || '',
+        ].join(' ').toLowerCase();
+
+        return `
+          <tr class="variable-catalog-row" data-search="${escapeHtml(searchText)}">
+            <td><div class="variable-catalog-name">${escapeHtml(entry.name || '')}</div></td>
+            <td>${baseValue}</td>
+            <td class="variable-catalog-mode-cell">${laserValue}</td>
+            <td class="variable-catalog-mode-cell">${trueValue}</td>
+            <td class="variable-catalog-mode-cell">${threeDprValue}</td>
+          </tr>
+        `;
+      }).join('');
+
+      return `
+        <div class="variable-catalog-shell">
+          <div class="variable-catalog-toolbar">
+            <div class="variable-catalog-toolbar-main">
+              <strong>OOBB Variables</strong>
+              <span id="variable-catalog-count">${catalog.length} entries</span>
+            </div>
+            <input
+              type="text"
+              class="variable-catalog-filter"
+              id="variable-catalog-filter"
+              placeholder="Filter by name or value..."
+            >
+          </div>
+          <div class="variable-catalog-body">
+            <div class="variable-catalog-table-wrap">
+              <table class="variable-catalog-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Laser</th>
+                    <th>True</th>
+                    <th>3DPR</th>
+                  </tr>
+                </thead>
+                <tbody id="variable-catalog-table-body">${rows}</tbody>
+              </table>
+            </div>
+            <div class="variable-catalog-empty" id="variable-catalog-empty" hidden>No variables match this filter.</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function initializeVariableCatalogFilter() {
+      const input = document.getElementById('variable-catalog-filter');
+      const rows = Array.from(document.querySelectorAll('.variable-catalog-row'));
+      const count = document.getElementById('variable-catalog-count');
+      const empty = document.getElementById('variable-catalog-empty');
+      if (!input || !rows.length || !count || !empty) return;
+
+      const update = () => {
+        const query = (input.value || '').trim().toLowerCase();
+        const terms = query ? query.split(/\s+/).filter(Boolean) : [];
+        let visible = 0;
+
+        rows.forEach(row => {
+          const haystack = row.getAttribute('data-search') || '';
+          const match = !terms.length || terms.every(term => haystack.includes(term));
+          row.hidden = !match;
+          if (match) visible += 1;
+        });
+
+        count.textContent = `${visible} entries`;
+        empty.hidden = visible !== 0;
+      };
+
+      input.addEventListener('input', update);
+      input.focus();
+      update();
+    }
+
     function openComponentModal(obj) {
       const modal = document.getElementById('detail-modal');
       const heading = document.getElementById('detail-modal-heading');
@@ -716,6 +1147,20 @@
       body.innerHTML = buildDetailFrame(obj);
       modal.hidden = false;
       document.body.classList.add('modal-open');
+    }
+
+    function openVariableCatalogModal() {
+      const modal = document.getElementById('detail-modal');
+      const heading = document.getElementById('detail-modal-heading');
+      const subtitle = document.getElementById('detail-modal-subtitle');
+      const body = document.getElementById('detail-modal-body');
+
+      heading.textContent = 'OOBB Variables Summary';
+      subtitle.textContent = 'Auto-generated from oobb_variables.py';
+      body.innerHTML = buildVariableCatalogFrame();
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+      initializeVariableCatalogFilter();
     }
 
     function closeComponentModal() {
@@ -785,6 +1230,7 @@
 
       document.getElementById('search-box').addEventListener('input', renderDocumentation);
       document.getElementById('category-filter').addEventListener('change', renderDocumentation);
+      document.getElementById('variables-summary-link').addEventListener('click', openVariableCatalogModal);
       document.getElementById('detail-modal-close').addEventListener('click', closeComponentModal);
       document.getElementById('detail-modal').addEventListener('click', evt => {
         if (evt.target.id === 'detail-modal') {

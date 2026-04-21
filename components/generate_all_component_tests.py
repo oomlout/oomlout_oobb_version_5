@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import os
 import sys
 from pathlib import Path
 
@@ -15,11 +16,17 @@ def _load_module(path: Path, module_name: str):
     return module
 
 
-def generate_all_component_tests(objects_root: str | Path = "components") -> int:
+def generate_all_component_tests(
+    objects_root: str | Path = "components",
+    skip_existing_images: bool = False,
+) -> int:
     root = Path(objects_root).resolve()
     working_files = sorted(
         path for path in root.glob("*/working.py") if path.parent.name != "__pycache__"
     )
+
+    if skip_existing_images:
+        os.environ["OOBB_SKIP_EXISTING_IMAGES"] = "1"
 
     attempted = 0
     completed = 0
@@ -55,8 +62,12 @@ def generate_all_component_tests(objects_root: str | Path = "components") -> int
 def cli() -> int:
     parser = argparse.ArgumentParser(description="Generate all component test assets")
     parser.add_argument("--objects-root", default="components")
+    parser.add_argument("--skip-existing-images", action="store_true")
     args = parser.parse_args()
-    return generate_all_component_tests(objects_root=args.objects_root)
+    return generate_all_component_tests(
+        objects_root=args.objects_root,
+        skip_existing_images=args.skip_existing_images,
+    )
 
 
 if __name__ == "__main__":

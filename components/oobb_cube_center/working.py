@@ -40,6 +40,13 @@ def action(**kwargs):
     p3 = copy.deepcopy(kwargs)
     zz = kwargs.get("zz", "bottom")
     
+    #if size doesn't exist build it from width height and depth
+    if "size" not in kwargs:
+        width = kwargs.get("width", 1)
+        height = kwargs.get("height", 1)
+        depth = kwargs.get("depth", 1)
+        p3["size"] = [width, height, depth]
+
     p3["shape"] = "cube"
     pos1 = copy.deepcopy(p3["pos"])
     pos1[0] = pos1[0] - p3["size"][0]/2
