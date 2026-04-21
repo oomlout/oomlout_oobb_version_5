@@ -18,6 +18,13 @@ radius_dict = {}
 countersunk_dict = {}
 _RAW_SCAD_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_raw_scad_cache")
 _COMPONENT_RENDER_LOOKUP = None
+_PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+try:
+    from solid2.core.scad_import import extra_scad_includes, module_cache_by_resolved_filename
+except Exception:
+    extra_scad_includes = None
+    module_cache_by_resolved_filename = None
 
 
 def _cleanup_raw_scad_artifacts(output_dir):
@@ -39,6 +46,83 @@ def _cleanup_raw_scad_artifacts(output_dir):
                 os.remove(hashed_path)
             except OSError:
                 pass
+
+
+def _reset_scad_import_state():
+    if module_cache_by_resolved_filename is not None:
+        module_cache_by_resolved_filename.clear()
+    if extra_scad_includes is not None:
+        extra_scad_includes.clear()
+
+
+def _normalize_scad_use_lines(filename):
+    if not filename or not os.path.isfile(filename):
+        return
+
+    try:
+        with open(filename, "r", encoding="utf-8") as handle:
+            content = handle.read()
+    except OSError:
+        return
+
+    include_re = re.compile(r"(use|include)\s+<([^>]+)>;")
+    file_dir = os.path.dirname(os.path.abspath(filename))
+    include_lines = []
+    seen_lines = set()
+
+    for match in include_re.finditer(content):
+        directive = match.group(1)
+        original_target = match.group(2).strip()
+        normalized_target = original_target
+
+        if os.path.isabs(original_target):
+            try:
+                target_abs = os.path.abspath(original_target)
+                normalized_target = os.path.relpath(target_abs, file_dir).replace("\\", "/")
+            except ValueError:
+                # Different drive roots on Windows cannot be relativized.
+                normalized_target = original_target
+
+        replacement = f"{directive} <{normalized_target}>;"
+        if replacement not in seen_lines:
+            seen_lines.add(replacement)
+            include_lines.append(replacement)
+
+    content_without_includes = include_re.sub("", content)
+    changed = content_without_includes != content
+
+    header_line = ""
+    body = content_without_includes
+    first_newline = content_without_includes.find("\n")
+    if first_newline != -1:
+        header_candidate = content_without_includes[:first_newline].rstrip("\r")
+        if header_candidate.strip().startswith("$fn"):
+            header_line = header_candidate
+            body = content_without_includes[first_newline + 1 :].lstrip("\r\n")
+    elif content_without_includes.strip().startswith("$fn"):
+        header_line = content_without_includes.strip()
+        body = ""
+
+    rebuilt_parts = []
+    if header_line:
+        rebuilt_parts.append(header_line)
+    if include_lines:
+        if rebuilt_parts:
+            rebuilt_parts.append("")
+        rebuilt_parts.extend(include_lines)
+    rebuilt_content = "\n".join(rebuilt_parts)
+    if rebuilt_content:
+        rebuilt_content += "\n\n"
+    rebuilt_content += body.lstrip("\r\n")
+
+    if rebuilt_content == content and not changed:
+        return
+
+    try:
+        with open(filename, "w", encoding="utf-8") as handle:
+            handle.write(rebuilt_content)
+    except OSError:
+        return
 
 def set_mode(m):
     global mode
@@ -123,14 +207,16 @@ def opsc_make_object(filename, objects, save_type="none",resolution=50, layers =
         path = os.path.dirname(filename)
         if not os.path.exists(path) and path != "":
             os.makedirs(path)
+        _reset_scad_import_state()
         output_dir = os.path.dirname(os.path.abspath(filename))
         final_object = opsc_get_object(objects, mode=mode, output_dir=output_dir)
         # Save the final object to the specified filename    
         #file_header = """$fn = %s;
 #use <MCAD/involute_gears.scad>
 #"""
-        file_header = "$fn = %s;"
+        file_header = "$fn = %s;\n"
         scad_render_to_file(final_object, filename, file_header=file_header % resolution)
+        _normalize_scad_use_lines(filename)
         _cleanup_raw_scad_artifacts(output_dir)
         if save_type == "all":
             saveToAll(filename, render=render)
@@ -138,12 +224,14 @@ def opsc_make_object(filename, objects, save_type="none",resolution=50, layers =
             saveToDxf(filename)
         if mode == "laser":
             filename_laser = filename.replace(".scad","_flat.scad")
-            scad_render_to_file(getLaser(final_object, layers=layers, tilediff=tilediff, start = start), filename_laser, file_header='$fn = %s;' % resolution)
+            scad_render_to_file(getLaser(final_object, layers=layers, tilediff=tilediff, start = start), filename_laser, file_header='$fn = %s;\n' % resolution)
+            _normalize_scad_use_lines(filename_laser)
             _cleanup_raw_scad_artifacts(output_dir)
             if save_type == "all":
                 saveToAll(filename_laser, render=render)
             elif save_type == "dxf" or save_type == "laser":
                 saveToDxf(filename_laser)
+        _reset_scad_import_state()
             
     else:
         print("File already exists: " + filename)
