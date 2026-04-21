@@ -2,6 +2,7 @@
 import math
 import os
 import sys
+import oobb
 
 _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if _PROJECT_ROOT not in sys.path:

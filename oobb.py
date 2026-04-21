@@ -144,9 +144,9 @@ def get_default_thing(**kwargs):
         thing.update({"description": f"{type_string}"})
 
     var_names = ["type", "width", "height", "diameter", "thickness", "radius_name", "depth",
-                 "radius_hole", "width_mounting", "name", "bearing_name", "bearing", "oring_type","extra","shaft"]
+                 "radius_hole", "width_mounting", "oobb_name", "bearing_name", "bearing", "oring_type","extra","shaft"]
     zfill_values = ["width", "height", "thickness", "depth", "diameter"]
-    acronyms = {"width": "", "height": "", "diameter": "", "thickness": "", "depth": "", "size": "", "type": "", "radius_hole": "rh","radius_name": "", "width_mounting": "mo", "height_mounting": "hm","name": "nm", "bearing_name": "", "bearing": "","oring_type":"or", "extra":"ex", "shaft": "sh"}
+    acronyms = {"width": "", "height": "", "diameter": "", "thickness": "", "depth": "", "size": "", "type": "", "radius_hole": "rh","radius_name": "", "width_mounting": "mo", "height_mounting": "hm","oobb_name": "nm", "bearing_name": "", "bearing": "","oring_type":"or", "extra":"ex", "shaft": "sh"}
 
     if type == "test":
         var_names.append("radius_name")
@@ -300,7 +300,7 @@ def get_default_thing(**kwargs):
         
         name = id.replace("_"," ").title()
         name = name.replace("Mm","mm")
-        thing.update({"name": name})
+        thing.update({"name_text": name})
 
         short_name = name
         short_name = short_name.replace("Oobb Part ","")
@@ -326,20 +326,8 @@ def get_default_thing(**kwargs):
             
         thing.update({"name_short": short_name})
 
-    #deciding folder
-    if True:
-        folder = f"{things_folder_absolute}\\{id}"
-        thing.update({"folder": folder})
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-
-    import yaml    
-    with open(f'{folder}/working.yaml', 'w') as outfile:
-        yaml.dump(thing, outfile, indent=4)
     
-    if "caliper_digital" in str(extra):
-        pass
-
+    
     return thing
 
 
@@ -435,9 +423,9 @@ def get_default_thing_old_1(**kwargs):
         thing.update({"description": f"{type_dict[type]}"})
 
     var_names = ["type", "width", "height", "diameter", "thickness", "radius_name", "depth",
-                 "radius_hole", "width_mounting", "name", "bearing_name", "bearing", "oring_type","extra","shaft"]
+                 "radius_hole", "width_mounting", "oobb_name", "bearing_name", "bearing", "oring_type","extra","shaft"]
     zfill_values = ["width", "height", "thickness", "depth", "diameter"]
-    acronyms = {"width": "", "height": "", "diameter": "", "thickness": "", "depth": "", "size": "", "type": "", "radius_hole": "rh","radius_name": "", "width_mounting": "mo", "height_mounting": "hm","name": "nm", "bearing_name": "", "bearing": "","oring_type":"or", "extra":"ex", "shaft": "sh"}
+    acronyms = {"width": "", "height": "", "diameter": "", "thickness": "", "depth": "", "size": "", "type": "", "radius_hole": "rh","radius_name": "", "width_mounting": "mo", "height_mounting": "hm","oobb_name": "nm", "bearing_name": "", "bearing": "","oring_type":"or", "extra":"ex", "shaft": "sh"}
 
     if type == "test":
         var_names.append("radius_name")
