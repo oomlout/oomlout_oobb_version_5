@@ -37,6 +37,7 @@
 | [oobb_slice](oobb_slice/) | Large cube slice used to clip/intersect geometry. | OOBB Geometry Primitives |
 | [oobb_slot](oobb_slot/) | Slot (two-ended rounded cutout) with rotation-object support, mode filtering, and named/explicit radius. | OOBB Geometry Primitives |
 | [oobb_sphere](oobb_sphere/) | Sphere (optionally ellipsoidal via radius_1/radius_2 scale) with z-anchor support. | OOBB Geometry Primitives |
+| [oobb_text](oobb_text/) | Legacy OOBB text helper that creates centered extruded text with OOBB defaults. | OOBB Geometry Primitives |
 | [oobb_tube](oobb_tube/) | Tube cutout (hollow cylinder) across all render modes, with named/explicit radius and rotation support. | OOBB Geometry Primitives |
 | [oobb_tube_new](oobb_tube_new/) | Tube cutout with updated rendering pipeline; identical interface to oobb_tube. | OOBB Geometry Primitives |
 | [oring](oring/) | Legacy opsc o-ring profile shape migrated into the component system. | OPSC Mechanical Shapes |
