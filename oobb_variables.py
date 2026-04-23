@@ -379,6 +379,14 @@ def initialize_variables():
     vl["screw_self_tapping_height_m3"] = [1.5, 1.5, 2]
     vl["screw_self_tapping_depth_m3"] = vl["screw_self_tapping_height_m3"]
 
+    current = 2.3
+    vl["screw_self_tapping_hole_radius_m2_3"] = [current-0.5/2, current-0.5/2, current/2]
+    vl["screw_self_tapping_hole_loose_radius_m2_3"] = [current/2, current/2, (current+0.5)/2]
+    vl["screw_self_tapping_washer_radius_m2_3"] = [(current*2)/2, (current*2)/2,    (current*2+0.4)/2]        
+    vl["screw_self_tapping_radius_m2_3"] = [3.7/2, 3.7/2,    (3.7+0.4)/2]
+    vl["screw_self_tapping_height_m2_3"] = [1, 1, 1.5]
+    vl["screw_self_tapping_depth_m2_3"] = vl["screw_self_tapping_height_m2_3"]
+
 
     vl["screw_radius_m6"] = m["6"]/2, m["6"]/2, m["6_3dpr"]/2
     vl["screw_countersunk_radius_m6"] = [6/2, 6/2, 7.2/2]
