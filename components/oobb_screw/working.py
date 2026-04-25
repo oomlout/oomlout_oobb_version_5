@@ -42,6 +42,7 @@ def describe():
     v.append({"name": 'clearance', "description": 'Clearance extension sides: top, bottom.', "type": 'string', "default": '""'})
     v.append({"name": 'nut_include', "description": 'Include a nut pocket.', "type": 'bool', "default": False})
     v.append({"name": 'overhang', "description": 'Add overhang geometry.', "type": 'bool', "default": True})
+    v.append({"name": 'slot', "description": 'Slot length in mm between two screw centres. Default 0 creates a single screw with no hull.', "type": 'number', "default": 0})
     v.append({"name": 'mode', "description": 'Render modes: laser, 3dpr, true.', "type": 'list', "default": '["laser","3dpr","true"]'})
     v.append({"name": 'rot', "description": 'Rotation [rx,ry,rz] in degrees.', "type": 'list', "default": '[0,0,0]'})
     v.append({"name": 'rot_x', "description": 'X rotation in degrees.', "type": 'number', "default": 0})
@@ -58,6 +59,37 @@ def define():
     defined_variable = {}
     defined_variable.update(d)
     return defined_variable
+
+
+def _slot_wrap_objects(objects, slot, typetype="positive", modifier=""):
+    if float(slot) == 0:
+        return objects
+
+    left = {
+        "type": "rotation",
+        "typetype": typetype,
+        "pos": [-float(slot) / 2, 0, 0],
+        "rot": [0, 0, 0],
+        "objects": copy.deepcopy(objects),
+    }
+    right = {
+        "type": "rotation",
+        "typetype": typetype,
+        "pos": [float(slot) / 2, 0, 0],
+        "rot": [0, 0, 0],
+        "objects": copy.deepcopy(objects),
+    }
+
+    return {
+        "type": "hull",
+        "typetype": typetype,
+        "pos": [0, 0, 0],
+        "rot": [0, 0, 0],
+        "m": modifier,
+        "objects": [left, right],
+    }
+
+
 def action(**kwargs):
     import oobb
     import opsc
@@ -73,6 +105,7 @@ def action(**kwargs):
     loose = kwargs.get("loose", "")
     depth = float(kwargs.get("depth", 250))
     zz = kwargs.get("zz", "none")
+    slot = float(kwargs.get("slot", 0))
 
     # setting up for rotation object
     typ = kwargs.get("type", "p")
@@ -128,7 +161,10 @@ def action(**kwargs):
             p3.pop("radius_name", None)
             p3.pop("radius", None)
             #p3["m"] = ""
-            return_value.append(oobb.oobb_easy(**p3))
+            if slot == 0:
+                return_value.append(oobb.oobb_easy(**p3))
+            else:
+                return_value.append(_slot_wrap_objects([copy.deepcopy(p3)], slot, typetype=p3.get("type", "positive"), modifier=p3.get("m", "")))
         #countersunk stuff
         if style == "countersunk":
             if zz == "top":
@@ -149,7 +185,10 @@ def action(**kwargs):
             p3["r2"] = oobb.gv(f"screw_countersunk_radius_{radius_name}", mode)
             p3["r1"] = oobb.gv(f"hole_radius_{radius_name}", mode)
             #p3["m"] = "#"
-            return_value.extend(oobb.oobb_easy(**p3))   
+            if slot == 0:
+                return_value.extend(oobb.oobb_easy(**p3))
+            else:
+                return_value.append(_slot_wrap_objects([copy.deepcopy(p3)], slot, typetype=p3.get("type", "positive"), modifier=p3.get("m", "")))
             #clearance = kwargs.get("clearance", "")
             if "top" in clearance:      
 
@@ -166,7 +205,10 @@ def action(**kwargs):
                 p3.pop("radius_name", None)
                 p3.pop("radius", None)
                 #p3["m"] = ""
-                return_value.append(oobb.oobb_easy(**p3))  
+                if slot == 0:
+                    return_value.append(oobb.oobb_easy(**p3))
+                else:
+                    return_value.append(_slot_wrap_objects([copy.deepcopy(p3)], slot, typetype=p3.get("type", "positive"), modifier=p3.get("m", "")))
         # hole    
         if hole:
             radius = oobb.gv(f"hole_radius_{radius_name}", mode)
@@ -183,7 +225,10 @@ def action(**kwargs):
             p3["pos"] = [pos1[0], pos1[1], pos1[2] - depth]
             p3["inclusion"] = mode        
             #p3["m"] = "#"
-            return_value.extend(oobb.oobb_easy(**p3))
+            if slot == 0:
+                return_value.extend(oobb.oobb_easy(**p3))
+            else:
+                return_value.append(_slot_wrap_objects(oobb.oobb_easy(**p3), slot, typetype=p3.get("type", "positive"), modifier=p3.get("m", "")))
         # nut
         if nut_include:
             pos1 = copy.deepcopy(pos_for_overhang)
@@ -224,7 +269,10 @@ def action(**kwargs):
                 p3["rot"] = rotation_nut    
 
             #p3["m"] = "#"
-            return_value.extend(oobb.oobb_easy(**p3))
+            if slot == 0:
+                return_value.extend(oobb.oobb_easy(**p3))
+            else:
+                return_value.append(_slot_wrap_objects(oobb.oobb_easy(**p3), slot, typetype=p3.get("type", "positive"), modifier=p3.get("m", "")))
         # overhang    
         if overhang and style != "countersunk" and mode == "3dpr":        
             p3 = copy.deepcopy(kwargs)
@@ -241,7 +289,10 @@ def action(**kwargs):
             #if rot_y == 180:
             #    p3["zz"] = "bottom"     
             #    p3["pos"] = [pos[0], pos[1], pos[2]-0.3]         
-            return_value.extend(oobb.oobb_easy(**p3))
+            if slot == 0:
+                return_value.extend(oobb.oobb_easy(**p3))
+            else:
+                return_value.append(_slot_wrap_objects(oobb.oobb_easy(**p3), slot, typetype=p3.get("type", "positive"), modifier=p3.get("m", "")))
 
     # packaging as a rotation object
     return_value_2 = {}
@@ -280,6 +331,7 @@ def test():
                  'clearance': '',
                  'nut_include': False,
                  'overhang': False,
+                 'slot': 0,
                  'mode': 'true',
                  'rot': [0, 0, 0]}},
      {'filename': 'test_2',
@@ -294,6 +346,7 @@ def test():
                  'clearance': '',
                  'nut_include': False,
                  'overhang': False,
+                 'slot': 0,
                  'mode': 'true',
                  'rot': [0, 0, 0]}},
      {'filename': 'test_3',
@@ -308,6 +361,22 @@ def test():
                  'clearance': '',
                  'nut_include': False,
                  'overhang': False,
+                 'slot': 0,
+                 'mode': 'true',
+                 'rot': [0, 0, 0]}},
+     {'filename': 'test_4',
+      'preview_rot': [70, 0, 20],
+      'kwargs': {'pos': [0, 0, 0],
+                 'type': 'positive',
+                 'radius_name': 'm3',
+                 'style': 'socket_cap',
+                 'depth': 16,
+                 'zz': 'none',
+                 'hole': True,
+                 'clearance': '',
+                 'nut_include': False,
+                 'overhang': False,
+                 'slot': 10,
                  'mode': 'true',
                  'rot': [0, 0, 0]}}]
 

@@ -309,6 +309,7 @@ def opsc_get_object(objects, mode="laser", output_dir=None):
 
     types = {}
     types["rotation"] = []
+    types["hull"] = []
     types["positive"] = []
     types["negative"] = []
     types["positive_positive"] = []
@@ -326,7 +327,7 @@ def opsc_get_object(objects, mode="laser", output_dir=None):
             if obj['type'] == typ:
                 inclusion = obj.get('inclusion',"all")
                 if inclusion == "all" or inclusion == mode:                    
-                    if typ != "rotation":
+                    if typ != "rotation" and typ != "hull":
                         opsc_item = get_opsc_item(obj, output_dir=output_dir)
                         types[typ].append(opsc_item)
                     else:
@@ -365,6 +366,8 @@ def opsc_get_object(objects, mode="laser", output_dir=None):
                             obj.pop('rot_z', None)
                         
                         
+                        if typ == "hull":
+                            opsc_objects = hull()(opsc_objects)
 
                         opsc_objects = apply_modifier(translate(pos)(rotate(a=rot)(opsc_objects)), m_original)
 

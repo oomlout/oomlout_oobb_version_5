@@ -49,6 +49,15 @@ def _write_raw_scad_source(source, module_name, cache_dir=None):
     filename = os.path.join(cache_root, f"{module_name}_{digest}.scad")
     with open(filename, "w", encoding="utf-8") as handle:
         handle.write(source)
+
+    # Keep a stable friendly filename in output caches so normalized `use <...>`
+    # lines always point at the current source rather than an older stale file.
+    friendly_filename = os.path.join(cache_root, f"{module_name}.scad")
+    with open(friendly_filename, "w", encoding="utf-8") as handle:
+        handle.write(source)
+
+    if cache_dir is not None:
+        return friendly_filename
     return filename
 
 

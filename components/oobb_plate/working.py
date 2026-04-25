@@ -86,7 +86,7 @@ def action(**kwargs):
 
 
     # if 1 x 1 than just cylinder
-    if kwargs["width"] == 1 and kwargs["height"] == 1:
+    if width == 1 and height == 1:
 
         p3 = copy.deepcopy(kwargs)
         p3["shape"] = "cylinder"
