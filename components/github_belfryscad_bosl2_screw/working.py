@@ -6,6 +6,8 @@ _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 if _PROJECT_ROOT not in sys.path:
     sys.path.insert(0, _PROJECT_ROOT)
 
+_COMPONENT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 d = {}
 
 _HEAD_TYPES = [
@@ -102,7 +104,7 @@ def define():
 
 
 def _bosl2_root():
-    return os.path.join(_PROJECT_ROOT, "git", "BOSL2")
+    return os.path.join(_COMPONENT_ROOT, "git", "BOSL2")
 
 
 def _build_wrapper_source():

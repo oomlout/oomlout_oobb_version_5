@@ -2,6 +2,7 @@ from solid2 import *
 import copy
 import hashlib
 import importlib.util
+import ntpath
 import os
 import re
 import shlex
@@ -67,6 +68,27 @@ def _reset_scad_import_state():
         extra_scad_includes.clear()
 
 
+def _is_scad_absolute_path(path):
+    return (
+        os.path.isabs(path)
+        or ntpath.isabs(path)
+        or re.match(r"^[A-Za-z]:[\\/]", path) is not None
+    )
+
+
+def _make_relative_scad_path(target, base_dir):
+    try:
+        if re.match(r"^[A-Za-z]:[\\/]", target) is not None or "\\" in target:
+            relative_path = ntpath.relpath(ntpath.abspath(target), ntpath.abspath(base_dir))
+        else:
+            relative_path = os.path.relpath(os.path.abspath(target), base_dir)
+    except ValueError:
+        # Different drive roots on Windows cannot be relativized.
+        return target
+
+    return relative_path.replace("\\", "/")
+
+
 def _normalize_scad_use_lines(filename):
     if not filename or not os.path.isfile(filename):
         return
@@ -77,7 +99,7 @@ def _normalize_scad_use_lines(filename):
     except OSError:
         return
 
-    include_re = re.compile(r"(use|include)\s+<([^>]+)>;")
+    include_re = re.compile(r"(use|include)\s+<([^>]+)>\s*;?")
     file_dir = os.path.dirname(os.path.abspath(filename))
     include_lines = []
     seen_lines = set()
@@ -87,13 +109,8 @@ def _normalize_scad_use_lines(filename):
         original_target = match.group(2).strip()
         normalized_target = original_target
 
-        if os.path.isabs(original_target):
-            try:
-                target_abs = os.path.abspath(original_target)
-                normalized_target = os.path.relpath(target_abs, file_dir).replace("\\", "/")
-            except ValueError:
-                # Different drive roots on Windows cannot be relativized.
-                normalized_target = original_target
+        if _is_scad_absolute_path(original_target):
+            normalized_target = _make_relative_scad_path(original_target, file_dir)
 
         replacement = f"{directive} <{normalized_target}>;"
         if replacement not in seen_lines:

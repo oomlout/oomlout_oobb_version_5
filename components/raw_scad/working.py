@@ -84,7 +84,7 @@ def render(params):
     if cache_dir is not None:
         basename = os.path.basename(filename)
         result.include_file_path = basename
-        result.include_string = f"use <{basename}>\n"
+        result.include_string = f"use <{basename}>;\n"
     return result
 
 
