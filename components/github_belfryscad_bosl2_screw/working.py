@@ -108,9 +108,8 @@ def _bosl2_root():
 
 
 def _build_wrapper_source():
-    bosl2_root = _bosl2_root().replace("\\", "/")
-    return f'''include <{bosl2_root}/std.scad>
-include <{bosl2_root}/screws.scad>
+    return '''include <git/BOSL2/std.scad>
+include <git/BOSL2/screws.scad>
 
 module github_belfryscad_bosl2_screw_raw(
     spec="M3,12",
