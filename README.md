@@ -1,114 +1,92 @@
-# OOBB Generator
+# oomlout_oobb_version_5
 
-This repository is the working codebase behind the OOBB part generator.
+Working repository for OOBB part and shape generation.
 
-It is the place where parts, variables, component definitions, documentation tooling, and generation workflows are developed before they are packaged into cleaner end-user releases. In other words: this is the workshop, not the showroom.
+This repo appears to be the workshop version of the OOBB generator rather than a packaged end-user release. It contains the Python/OpenSCAD tooling, component definitions, dimensional data, generated previews, and migration scaffolding used to build and document OOBB geometry.
+
+## What This Repo Is For
+
+- Developing and tuning OOBB geometry and fastener/component helpers
+- Discovering components from per-folder `working.py` files under `components/`
+- Rendering OpenSCAD outputs and preview images
+- Generating JSON, HTML, and Markdown documentation for components
+- Keeping migration and regression tests around while the codebase is being restructured
 
 ## What This Repo Contains
 
-- Python code for building OOBB parts and shapes
-- Shared dimensional variables and fit/tolerance settings
-- Component-based object discovery under `components/`
-- Documentation generation tools for JSON, HTML, and Markdown outputs
-- Regression tests for part discovery, generation, and documentation
+- Core runtime modules such as `oobb.py`, `opsc.py`, and `oobb_variables.py`
+- `components/` with 60+ component folders, each centered on a `working.py`
+- Generated per-component docs such as `components/*/README.md` and `components/*/documentation_detail.html`
+- Test coverage under `tests/` plus generated test artifacts in `tests/test_runs/`
+- CSV-backed reference data in `data/oring/`
+- Archived legacy code and migration notes in `old/`
 
 ## Quick Tour
 
-- [`oobb.py`](./oobb.py)  
-  Core runtime for variables, object dispatch, and part-building helpers.
+- [`oobb.py`](./oobb.py): main OOBB runtime, variable access, dispatch, and part-building helpers
+- [`opsc.py`](./opsc.py): OpenSCAD/SolidPython rendering pipeline and image generation helpers
+- [`oobb_variables.py`](./oobb_variables.py): shared dimensional data, tolerances, screw sizes, bearings, and mode-specific values
+- [`components/`](./components/): component library, per-component docs, tests, and discovery-based tooling
+- [`components/documentation.py`](./components/documentation.py): exports JSON/HTML/Markdown documentation
+- [`components/run_tests.py`](./components/run_tests.py): per-folder object/set test runner
+- [`components/generate_all_component_tests.py`](./components/generate_all_component_tests.py): regenerates component preview assets
+- [`templates/`](./templates/): documentation templates used by the batch scripts
+- [`data/`](./data/): supporting data, including O-ring CSV tables and sample architecture experiments
+- [`tests/`](./tests/): regression tests, snapshots, and generated reports
+- [`old/`](./old/): archived code, migration helpers, and the current `oobb_arch` compatibility path
 
-- [`oobb_variables.py`](./oobb_variables.py)  
-  Central source of OOBB dimensions, hole sizes, bearing data, nut sizes, and print/laser variants.
+## Installation / Setup
 
-- [`oobb_generate.py`](./oobb_generate.py)  
-  Small generation helpers for common batches such as plates and circles.
-
-- [`components/`](./components/)  
-  Modular component definitions used by the discovery and documentation systems.
-
-- [`tests/`](./tests/)  
-  Regression coverage for generation, migration work, and documentation export.
-
-- [`old/`](./old/)  
-  Archived or compatibility-layer code kept around during the ongoing restructure.
-
-## Working Model
-
-The current codebase is in a transition from older generator logic toward a more structured component/discovery architecture.
-
-That means this repo intentionally contains a mix of:
-
-- active generator code
-- compatibility shims
-- migration scaffolding
-- archived legacy logic
-
-If you are looking for the cleanest outputs rather than the internals, the release repositories below are usually a better starting point.
-
-## Related Repositories
-
-### Generated Parts
-
-- Generated parts repo: <https://github.com/oomlout/oomlout_oobb_version_4_generated_parts>
-
-### More Organized Releases
-
-- 3D printing files: <https://github.com/oomlout/oomlout_oobb_release_3d_print>
-- Laser cutting files: <https://github.com/oomlout/oomlout_oobb_release_laser_cut>
-
-### Bundles
-
-- Basic plates: <https://github.com/oomlout/oomlout_oobe_bundle_plates_basic>
-- Alphabet bunting: <https://github.com/oomlout/oomlout_oobb_bundle_bunting_alphabet>
-- SMD magazines: <https://github.com/oomlout/oomlout_oobb_bundle_smd_magazine>
-- Character decorations: <https://github.com/oomlout/oomlout_oobb_bundle_decorations>
-
-## Getting Started
-
-This project is Python-based and expects a local environment with the repo checked out.
-
-Typical setup:
+Setup is currently manual.
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
-python -m pip install -U pip
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
-Some tests also expect OpenSCAD to be installed and available on `PATH`.
+Also install OpenSCAD and make sure `openscad` or `openscad.com` is available on `PATH`.
 
-## Running the Tests
+Notes:
 
-```powershell
-python -m unittest discover -s tests -p "test_*.py"
-```
+- The rendering pipeline in [`opsc.py`](./opsc.py) shells out to OpenSCAD for `.scad` and preview image generation.
+- Some older scripts appear to expect adjacent local tooling or paths, including OOMP/`oomB`, generated-parts repos, and Windows-specific absolute paths.
+- The component/documentation system currently imports `oobb_arch` from [`old/`](./old/), which is intentional in this repo state.
 
-More detail on the test harness is available in [`tests/README.md`](./tests/README.md).
+## Examples
+
+Representative preview images already checked into the repo:
+
+### `oobb_screw`
+
+![oobb_screw preview](./components/oobb_screw/test/test_1/image_400.png)
+
+### `rounded_rectangle`
+
+![rounded_rectangle preview](./components/rounded_rectangle/test/test_1/image_400.png)
+
+More examples live under `components/*/test/`.
 
 ## Documentation Generation
 
-The repository includes a documentation generator for discovered objects and part sets.
+Documentation output is generated into:
 
-Examples:
+- [`components/documentation_data.json`](./components/documentation_data.json)
+- [`components/documentation.html`](./components/documentation.html)
+- per-component `README.md` files under `components/*/`
+- per-component `documentation_detail.html` files under `components/*/`
 
-```powershell
-python components/documentation.py --markdown
-```
+The batch scripts regenerate those outputs and, in the `all` variant, also refresh component preview/test assets before regenerating docs again.
 
-```powershell
-python components/documentation.py --json documentation_data.json
-```
+## Related Repositories
 
-```powershell
-python components/documentation.py --html-template templates/documentation_template.html --html-output documentation.html
-```
+- [`oomlout/oomlout_oomp_version_5`](https://github.com/oomlout/oomlout_oomp_version_5): appears to be related OOMP data/tooling used elsewhere in the Oomlout stack
+- [`oomlout/oomlout_roboclick`](https://github.com/oomlout/oomlout_roboclick): related automation/action repo; this repo includes `data/sample architecture/` material that references RoboClick-style actions
 
-## Notes
+## Notes / Current State
 
-- The repo name may lag behind the current internal architecture and generated-output locations.
-- Some hard-coded paths still reflect local development workflows.
-- The codebase is actively being cleaned up, so structure is improving but not fully finished yet.
-
-## Why This Repo Exists
-
-This repository optimizes for making and evolving parts quickly. It is where new ideas get encoded, dimensions get tuned, and generators get refactored. It is intentionally practical, a bit experimental, and much closer to the machinery of OOBB than to a polished public release.
+- This repo is mid-transition from older generator code to a per-component discovery architecture.
+- `old/` is not just archive material; some live compatibility imports still come from there.
+- A few scripts still contain hard-coded Windows paths or references to older generated-parts repositories.
+- Some generated `.scad` test artifacts contain absolute include paths, so this repo is best treated as a developer/workshop environment rather than a clean portable package.

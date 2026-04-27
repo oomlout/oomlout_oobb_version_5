@@ -310,6 +310,7 @@
   &quot;clearance&quot;: &quot;\&quot;\&quot;&quot;,
   &quot;nut_include&quot;: false,
   &quot;overhang&quot;: true,
+  &quot;slot&quot;: 0,
   &quot;mode&quot;: &quot;[\&quot;laser\&quot;,\&quot;3dpr\&quot;,\&quot;true\&quot;]&quot;,
   &quot;rot&quot;: &quot;[0,0,0]&quot;,
   &quot;rot_x&quot;: 0,
@@ -357,6 +358,7 @@
   &quot;clearance&quot;: &quot;\&quot;\&quot;&quot;,
   &quot;nut_include&quot;: false,
   &quot;overhang&quot;: true,
+  &quot;slot&quot;: 0,
   &quot;mode&quot;: &quot;[\&quot;laser\&quot;,\&quot;3dpr\&quot;,\&quot;true\&quot;]&quot;,
   &quot;rot&quot;: &quot;[0,0,0]&quot;,
   &quot;rot_x&quot;: 0,
@@ -404,6 +406,7 @@
   &quot;clearance&quot;: &quot;\&quot;\&quot;&quot;,
   &quot;nut_include&quot;: false,
   &quot;overhang&quot;: true,
+  &quot;slot&quot;: 0,
   &quot;mode&quot;: &quot;[\&quot;laser\&quot;,\&quot;3dpr\&quot;,\&quot;true\&quot;]&quot;,
   &quot;rot&quot;: &quot;[0,0,0]&quot;,
   &quot;rot_x&quot;: 0,
@@ -426,7 +429,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>pos</code></td><td>3-element [x,y,z] position.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td><code>type</code></td><td>Geometry type: p/positive or n/negative.</td><td>string</td><td><code>p</code></td></tr><tr><td><code>radius_name</code></td><td>Named radius key, e.g. m3, m6.</td><td>string</td><td><code>&quot;m3&quot;</code></td></tr><tr><td><code>style</code></td><td>Screw head style: socket_cap, countersunk, self_tapping.</td><td>string</td><td><code>&quot;socket_cap&quot;</code></td></tr><tr><td><code>depth</code></td><td>Shaft hole depth in mm.</td><td>number</td><td><code>250</code></td></tr><tr><td><code>zz</code></td><td>Z anchor: none, top, bottom.</td><td>string</td><td><code>&quot;none&quot;</code></td></tr><tr><td><code>hole</code></td><td>Include a through shaft hole.</td><td>bool</td><td><code>True</code></td></tr><tr><td><code>clearance</code></td><td>Clearance extension sides: top, bottom.</td><td>string</td><td><code>&quot;&quot;</code></td></tr><tr><td><code>nut_include</code></td><td>Include a nut pocket.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>overhang</code></td><td>Add overhang geometry.</td><td>bool</td><td><code>True</code></td></tr><tr><td><code>mode</code></td><td>Render modes: laser, 3dpr, true.</td><td>list</td><td><code>[&quot;laser&quot;,&quot;3dpr&quot;,&quot;true&quot;]</code></td></tr><tr><td><code>rot</code></td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td><code>rot_x</code></td><td>X rotation in degrees.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>rot_y</code></td><td>Y rotation in degrees.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>rot_z</code></td><td>Z rotation in degrees.</td><td>number</td><td><code>0</code></td></tr>
+          <tr><td><code>pos</code></td><td>3-element [x,y,z] position.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td><code>type</code></td><td>Geometry type: p/positive or n/negative.</td><td>string</td><td><code>p</code></td></tr><tr><td><code>radius_name</code></td><td>Named radius key, e.g. m3, m6.</td><td>string</td><td><code>&quot;m3&quot;</code></td></tr><tr><td><code>style</code></td><td>Screw head style: socket_cap, countersunk, self_tapping.</td><td>string</td><td><code>&quot;socket_cap&quot;</code></td></tr><tr><td><code>depth</code></td><td>Shaft hole depth in mm.</td><td>number</td><td><code>250</code></td></tr><tr><td><code>zz</code></td><td>Z anchor: none, top, bottom.</td><td>string</td><td><code>&quot;none&quot;</code></td></tr><tr><td><code>hole</code></td><td>Include a through shaft hole.</td><td>bool</td><td><code>True</code></td></tr><tr><td><code>clearance</code></td><td>Clearance extension sides: top, bottom.</td><td>string</td><td><code>&quot;&quot;</code></td></tr><tr><td><code>nut_include</code></td><td>Include a nut pocket.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>overhang</code></td><td>Add overhang geometry.</td><td>bool</td><td><code>True</code></td></tr><tr><td><code>slot</code></td><td>Slot length in mm between two screw centres. Default 0 creates a single screw with no hull.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>mode</code></td><td>Render modes: laser, 3dpr, true.</td><td>list</td><td><code>[&quot;laser&quot;,&quot;3dpr&quot;,&quot;true&quot;]</code></td></tr><tr><td><code>rot</code></td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td><code>rot_x</code></td><td>X rotation in degrees.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>rot_y</code></td><td>Y rotation in degrees.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>rot_z</code></td><td>Z rotation in degrees.</td><td>number</td><td><code>0</code></td></tr>
         </tbody>
       </table>
     </section>
