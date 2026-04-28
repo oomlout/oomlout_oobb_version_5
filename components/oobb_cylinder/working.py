@@ -15,7 +15,7 @@ def describe():
     d = {}
     d["name"] = 'oobb_cylinder'
     d["name_long"] = 'OOBB Geometry Primitives: Cylinder'
-    d["description"] = 'Cylinder geometry across all render modes, supporting named or explicit radius and z-centering.'
+    d["description"] = 'Cylinder geometry across all render modes, supporting named, explicit, or dual-end radii and z-centering.'
     d["category"] = 'OOBB Geometry Primitives'
     d["shape_aliases"] = []
     d["returns"] = 'List of geometry component dicts.'
@@ -24,6 +24,8 @@ def describe():
     v.append({"name": 'depth', "description": 'Cylinder height in mm.', "type": 'number', "default": 250})
     v.append({"name": 'radius_name', "description": 'Named radius for mode-aware lookup.', "type": 'string', "default": '""'})
     v.append({"name": 'radius', "description": 'Explicit radius in mm.', "type": 'number', "default": 0})
+    v.append({"name": 'radius_1', "description": 'Explicit start radius in mm for tapered cylinders.', "type": 'number', "default": 0})
+    v.append({"name": 'radius_2', "description": 'Explicit end radius in mm for tapered cylinders.', "type": 'number', "default": 0})
     v.append({"name": 'zz', "description": 'Z anchor point: center, bottom, top.', "type": 'string', "default": '"center"'})
     d["variables"] = v
     return d
