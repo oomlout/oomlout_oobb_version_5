@@ -110,7 +110,13 @@ samples = [{'filename': 'test_1',
   'kwargs': {'type': 'positive', 'size': [24, 14, 4], 'r': 3, 'pos': [0, 0, 0]}},
  {'filename': 'test_2',
   'preview_rot': [55, 0, 25],
-  'kwargs': {'type': 'positive', 'size': [36, 18, 5], 'r': 4, 'pos': [0, 0, 0]}}]
+    'kwargs': {'type': 'positive', 'size': [36, 18, 5], 'r': 4, 'pos': [0, 0, 0]}},
+ {'filename': 'test_3',
+    'preview_rot': [55, 0, 25],
+    'kwargs': {'type': 'positive', 'size': [30, 20, 5], 'r': 4, 'omit_corner': 'top_right', 'pos': [0, 0, 0]}},
+ {'filename': 'test_4',
+    'preview_rot': [55, 0, 25],
+    'kwargs': {'type': 'positive', 'size': [30, 20, 5], 'r': 4, 'omit_corner': ['top_right', 'bottom_left'], 'pos': [0, 0, 0]}}]
 ```
 
 ## Sample-by-sample meaning
@@ -127,9 +133,21 @@ samples = [{'filename': 'test_1',
 - kwargs: `{"type":"positive","size":[36,18,5],"r":4,"pos":[0,0,0]}`
 - Implementation rule: keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.
 
+### Sample 3: `test_3.png`
+- Intent: show `omit_corner` used as a single string to remove the top-right corner from the hull.
+- preview_rot: `[55, 0, 25]`
+- kwargs: `{"type":"positive","size":[30,20,5],"r":4,"omit_corner":"top_right","pos":[0,0,0]}`
+- Implementation rule: keep the sample values exactly as written. This sample exists specifically to demonstrate the single-string `omit_corner` form.
+
+### Sample 4: `test_4.png`
+- Intent: show `omit_corner` used as a list to remove multiple corners from the hull.
+- preview_rot: `[55, 0, 25]`
+- kwargs: `{"type":"positive","size":[30,20,5],"r":4,"omit_corner":["top_right","bottom_left"],"pos":[0,0,0]}`
+- Implementation rule: keep the sample values exactly as written. This sample exists specifically to demonstrate the list form of `omit_corner`.
+
 ## Folder-specific notes
 
 - Output folder: `images`
-- Output files: `test_1.png`, `test_2.png`
-- Notes: use the listed `preview_rot` and keep the top outline easy to read.
+- Output files: `test_1.png`, `test_2.png`, `test_3.png`, `test_4.png`
+- Notes: use the listed `preview_rot`, keep the top outline easy to read, and preserve the omit-corner examples because they document both accepted input forms.
 - Final instruction: do not invent new sample values, do not invent extra camera settings, and do not swap in a different rotation than the `preview_rot` listed above.
