@@ -9092,14 +9092,23 @@
       "name_short_options": [],
       "description": "Legacy opsc rounded rectangle shape migrated into the component system.",
       "summary": "Legacy opsc rounded rectangle shape migrated into the component system.",
-      "variables": [],
-      "variable_names": [],
+      "variables": [
+        {
+          "name": "omit_corner",
+          "description": "Corner or list of corners to leave out of the hull: none, bottom_left, bottom_right, top_left, or top_right.",
+          "type": "string",
+          "default": "\"none\""
+        }
+      ],
+      "variable_names": [
+        "omit_corner"
+      ],
       "category": "OPSC Composite Shapes",
       "returns": "List of geometry component dicts.",
       "aliases": [],
       "detail_page": "rounded_rectangle/documentation_detail.html",
-      "detail_markdown": "# rounded_rectangle\n\n**OPSC Composite Shapes: Rounded Rectangle**\n\nLegacy opsc rounded rectangle shape migrated into the component system.\n\n## Returns\n\nList of geometry component dicts.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| - | - | - | - |\n\n## Sample Notes\n\nuse the listed `preview_rot` and keep the top outline easy to read.",
-      "detail_html": "<h1>rounded_rectangle</h1>\n<p><strong>OPSC Composite Shapes: Rounded Rectangle</strong></p>\n<p>Legacy opsc rounded rectangle shape migrated into the component system.</p>\n<h2>Returns</h2>\n<p>List of geometry component dicts.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>-</td><td>-</td><td>-</td><td>-</td></tr></tbody></table></div>\n<h2>Sample Notes</h2>\n<p>use the listed <code>preview_rot</code> and keep the top outline easy to read.</p>",
+      "detail_markdown": "# rounded_rectangle\n\n**OPSC Composite Shapes: Rounded Rectangle**\n\nLegacy opsc rounded rectangle shape migrated into the component system.\n\n## Returns\n\nList of geometry component dicts.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| omit_corner | Corner or list of corners to leave out of the hull: none, bottom_left, bottom_right, top_left, or top_right. | string | \"none\" |\n\n## Sample Notes\n\nuse the listed `preview_rot`, keep the top outline easy to read, and include omit-corner samples to show both the single-string and list forms.",
+      "detail_html": "<h1>rounded_rectangle</h1>\n<p><strong>OPSC Composite Shapes: Rounded Rectangle</strong></p>\n<p>Legacy opsc rounded rectangle shape migrated into the component system.</p>\n<h2>Returns</h2>\n<p>List of geometry component dicts.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>omit_corner</td><td>Corner or list of corners to leave out of the hull: none, bottom_left, bottom_right, top_left, or top_right.</td><td>string</td><td>\"none\"</td></tr></tbody></table></div>\n<h2>Sample Notes</h2>\n<p>use the listed <code>preview_rot</code>, keep the top outline easy to read, and include omit-corner samples to show both the single-string and list forms.</p>",
       "sample_images": [
         {
           "sample_id": "test_1",
@@ -9141,7 +9150,9 @@
               0
             ]
           },
-          "default_values": {},
+          "default_values": {
+            "omit_corner": "\"none\""
+          },
           "implementation_rule": "keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.",
           "exists": true,
           "image_path": "rounded_rectangle/test/test_1/image_400.png",
@@ -9198,7 +9209,9 @@
               0
             ]
           },
-          "default_values": {},
+          "default_values": {
+            "omit_corner": "\"none\""
+          },
           "implementation_rule": "keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.",
           "exists": true,
           "image_path": "rounded_rectangle/test/test_2/image_400.png",
@@ -9214,12 +9227,142 @@
           "scad_exists": true,
           "scad_path": "rounded_rectangle/test/test_2/working.scad",
           "detail_scad_path": "test/test_2/working.scad"
+        },
+        {
+          "sample_id": "test_3",
+          "filename": "test_3.png",
+          "title": "show `omit_corner` used as a single string to remove the top-right corner from the hull.",
+          "intent": "show `omit_corner` used as a single string to remove the top-right corner from the hull.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              5
+            ],
+            "r": 4,
+            "omit_corner": "top_right",
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              5
+            ],
+            "r": 4,
+            "omit_corner": "top_right",
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "omit_corner": "\"none\""
+          },
+          "implementation_rule": "keep the sample values exactly as written. This sample exists specifically to demonstrate the single-string `omit_corner` form.",
+          "exists": false,
+          "image_path": "rounded_rectangle/test/test_3/image.png",
+          "detail_image_path": "test/test_3/image.png",
+          "full_image_path": "rounded_rectangle/test/test_3/image.png",
+          "detail_full_image_path": "test/test_3/image.png",
+          "detail_iso_400_path": "test/test_3/image.png",
+          "detail_iso_120_path": "test/test_3/image.png",
+          "detail_top_400_path": "test/test_3/image.png",
+          "detail_top_120_path": "test/test_3/image.png",
+          "detail_side_400_path": "test/test_3/image.png",
+          "detail_side_120_path": "test/test_3/image.png",
+          "scad_exists": false,
+          "scad_path": "rounded_rectangle/test/test_3/working.scad",
+          "detail_scad_path": "test/test_3/working.scad"
+        },
+        {
+          "sample_id": "test_4",
+          "filename": "test_4.png",
+          "title": "show `omit_corner` used as a list to remove multiple corners from the hull.",
+          "intent": "show `omit_corner` used as a list to remove multiple corners from the hull.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              5
+            ],
+            "r": 4,
+            "omit_corner": [
+              "top_right",
+              "bottom_left"
+            ],
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              5
+            ],
+            "r": 4,
+            "omit_corner": [
+              "top_right",
+              "bottom_left"
+            ],
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "omit_corner": "\"none\""
+          },
+          "implementation_rule": "keep the sample values exactly as written. This sample exists specifically to demonstrate the list form of `omit_corner`.",
+          "exists": false,
+          "image_path": "rounded_rectangle/test/test_4/image.png",
+          "detail_image_path": "test/test_4/image.png",
+          "full_image_path": "rounded_rectangle/test/test_4/image.png",
+          "detail_full_image_path": "test/test_4/image.png",
+          "detail_iso_400_path": "test/test_4/image.png",
+          "detail_iso_120_path": "test/test_4/image.png",
+          "detail_top_400_path": "test/test_4/image.png",
+          "detail_top_120_path": "test/test_4/image.png",
+          "detail_side_400_path": "test/test_4/image.png",
+          "detail_side_120_path": "test/test_4/image.png",
+          "scad_exists": false,
+          "scad_path": "rounded_rectangle/test/test_4/working.scad",
+          "detail_scad_path": "test/test_4/working.scad"
         }
       ],
-      "sample_notes": "use the listed `preview_rot` and keep the top outline easy to read.",
+      "sample_notes": "use the listed `preview_rot`, keep the top outline easy to read, and preserve the omit-corner examples because they document both accepted input forms.",
       "has_test_images": true,
       "has_detail_page": true,
-      "default_values": {},
+      "default_values": {
+        "omit_corner": "\"none\""
+      },
       "readme_path": "rounded_rectangle/README.md",
       "test_samples_path": "rounded_rectangle/TEST_SAMPLES.md"
     },
@@ -33527,7 +33670,7 @@
       "has_mode_values": true
     }
   ],
-  "generated_date": "2026-05-05",
+  "generated_date": "2026-05-09",
   "total_objects": 61,
   "total_part_sets": 0
 }

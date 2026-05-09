@@ -271,7 +271,7 @@
       </div>
     </section>
 
-    <section class="panel"><h2>Sample Images</h2><p class="panel-intro">use the listed `preview_rot` and keep the top outline easy to read.</p><div class="sample-grid">
+    <section class="panel"><h2>Sample Images</h2><p class="panel-intro">use the listed `preview_rot`, keep the top outline easy to read, and preserve the omit-corner examples because they document both accepted input forms.</p><div class="sample-grid">
             <article class="sample-card">
               <div class="sample-image-wrap"><img id="sample-main-test_1" src="test/test_1/image_400.png" alt="standard rounded rectangle block."></div>
               <div class="sample-thumbs"><button class="sample-thumb" type="button" data-target="sample-main-test_1" data-full="test/test_1/image_400.png" data-alt="standard rounded rectangle block. iso view"><img src="test/test_1/image_120.png" alt="standard rounded rectangle block. iso thumbnail"><span>Iso</span></button><button class="sample-thumb" type="button" data-target="sample-main-test_1" data-full="test/test_1/image_top_400.png" data-alt="standard rounded rectangle block. top view"><img src="test/test_1/image_top_120.png" alt="standard rounded rectangle block. top thumbnail"><span>Top</span></button><button class="sample-thumb" type="button" data-target="sample-main-test_1" data-full="test/test_1/image_side_400.png" data-alt="standard rounded rectangle block. side view"><img src="test/test_1/image_side_120.png" alt="standard rounded rectangle block. side thumbnail"><span>Side</span></button></div>
@@ -291,7 +291,9 @@
     0,
     0
   ]
-}</code></pre></details><details><summary>Default Values</summary><pre><code>{}</code></pre></details><div><strong>rule:</strong> keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.</div>
+}</code></pre></details><details><summary>Default Values</summary><pre><code>{
+  &quot;omit_corner&quot;: &quot;\&quot;none\&quot;&quot;
+}</code></pre></details><div><strong>rule:</strong> keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.</div>
               </div>
             </article>
             
@@ -314,7 +316,64 @@
     0,
     0
   ]
-}</code></pre></details><details><summary>Default Values</summary><pre><code>{}</code></pre></details><div><strong>rule:</strong> keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.</div>
+}</code></pre></details><details><summary>Default Values</summary><pre><code>{
+  &quot;omit_corner&quot;: &quot;\&quot;none\&quot;&quot;
+}</code></pre></details><div><strong>rule:</strong> keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.</div>
+              </div>
+            </article>
+            
+            <article class="sample-card">
+              <div class="sample-image-wrap"><div class="sample-missing">Image not generated yet</div></div>
+              
+              <div class="sample-body">
+                <h3>show `omit_corner` used as a single string to remove the top-right corner from the hull.</h3>
+                <p>show `omit_corner` used as a single string to remove the top-right corner from the hull.</p>
+                <div class="sample-link-row"><span class="sample-link-disabled">SCAD not generated yet</span></div><details><summary>Set Values</summary><pre><code>{
+  &quot;type&quot;: &quot;positive&quot;,
+  &quot;size&quot;: [
+    30,
+    20,
+    5
+  ],
+  &quot;r&quot;: 4,
+  &quot;omit_corner&quot;: &quot;top_right&quot;,
+  &quot;pos&quot;: [
+    0,
+    0,
+    0
+  ]
+}</code></pre></details><details><summary>Default Values</summary><pre><code>{
+  &quot;omit_corner&quot;: &quot;\&quot;none\&quot;&quot;
+}</code></pre></details><div><strong>rule:</strong> keep the sample values exactly as written. This sample exists specifically to demonstrate the single-string `omit_corner` form.</div>
+              </div>
+            </article>
+            
+            <article class="sample-card">
+              <div class="sample-image-wrap"><div class="sample-missing">Image not generated yet</div></div>
+              
+              <div class="sample-body">
+                <h3>show `omit_corner` used as a list to remove multiple corners from the hull.</h3>
+                <p>show `omit_corner` used as a list to remove multiple corners from the hull.</p>
+                <div class="sample-link-row"><span class="sample-link-disabled">SCAD not generated yet</span></div><details><summary>Set Values</summary><pre><code>{
+  &quot;type&quot;: &quot;positive&quot;,
+  &quot;size&quot;: [
+    30,
+    20,
+    5
+  ],
+  &quot;r&quot;: 4,
+  &quot;omit_corner&quot;: [
+    &quot;top_right&quot;,
+    &quot;bottom_left&quot;
+  ],
+  &quot;pos&quot;: [
+    0,
+    0,
+    0
+  ]
+}</code></pre></details><details><summary>Default Values</summary><pre><code>{
+  &quot;omit_corner&quot;: &quot;\&quot;none\&quot;&quot;
+}</code></pre></details><div><strong>rule:</strong> keep the sample values exactly as written. This sample exists specifically to demonstrate the list form of `omit_corner`.</div>
               </div>
             </article>
             </div></section>
@@ -331,7 +390,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td colspan="4">No variables documented.</td></tr>
+          <tr><td><code>omit_corner</code></td><td>Corner or list of corners to leave out of the hull: none, bottom_left, bottom_right, top_left, or top_right.</td><td>string</td><td><code>&quot;none&quot;</code></td></tr>
         </tbody>
       </table>
     </section>
@@ -342,9 +401,9 @@
 <h2>Returns</h2>
 <p>List of geometry component dicts.</p>
 <h2>Variables</h2>
-<div class="markdown-table-wrap"><table class="markdown-table"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>-</td><td>-</td><td>-</td><td>-</td></tr></tbody></table></div>
+<div class="markdown-table-wrap"><table class="markdown-table"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>omit_corner</td><td>Corner or list of corners to leave out of the hull: none, bottom_left, bottom_right, top_left, or top_right.</td><td>string</td><td>"none"</td></tr></tbody></table></div>
 <h2>Sample Notes</h2>
-<p>use the listed <code>preview_rot</code> and keep the top outline easy to read.</p></section>
+<p>use the listed <code>preview_rot</code>, keep the top outline easy to read, and include omit-corner samples to show both the single-string and list forms.</p></section>
   </main>
   <script>
     document.querySelectorAll('.sample-thumb').forEach((button) => {
