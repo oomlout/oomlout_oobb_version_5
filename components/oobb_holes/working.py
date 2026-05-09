@@ -17,25 +17,25 @@ def describe():
     d = {}
     d["name"] = 'oobb_holes'
     d["name_long"] = 'OOBB Geometry Helpers: Hole Array'
-    d["description"] = 'Places OOBB-grid-aligned screw holes across a rectangular or circular area using named hole patterns.'
+    d["description"] = 'Places OOBB-grid-aligned screw holes across a rectangular or circular area using named hole patterns. Use `holes` to choose one or more layouts such as `["all"]`, `["perimeter"]`, or `["single"]` with `loc=[x,y]`.'
     d["category"] = 'OOBB Geometry Helpers'
     d["shape_aliases"] = ['oobb_holes']
     d["returns"] = 'List of geometry component dicts.'
     v = []
-    v.append({"name": 'holes', "description": 'Hole pattern(s): all, perimeter, perimeter_miss_middle, u, top, bottom, left, right, corners, single, missing_middle, just_middle, circle.', "type": 'list', "default": '["all"]'})
-    v.append({"name": 'width', "description": 'Width in OOBB grid units.', "type": 'number', "default": 0})
-    v.append({"name": 'height', "description": 'Height in OOBB grid units.', "type": 'number', "default": 0})
-    v.append({"name": 'pos', "description": '3-element [x,y,z] position.', "type": 'list', "default": '[0,0,0]'})
-    v.append({"name": 'depth', "description": 'Hole depth in mm.', "type": 'number', "default": 100})
-    v.append({"name": 'radius_name', "description": 'Named radius key, e.g. m6, m3.', "type": 'string', "default": '"m6"'})
-    v.append({"name": 'middle', "description": 'Include the centre hole.', "type": 'bool', "default": True})
-    v.append({"name": 'size', "description": 'Grid spacing scale: oobb or oobe.', "type": 'string', "default": '"oobb"'})
-    v.append({"name": 'both_holes', "description": 'Also add matching oobe half-grid holes.', "type": 'bool', "default": False})
-    v.append({"name": 'circle', "description": 'Filter holes to lie inside a circle boundary.', "type": 'bool', "default": False})
-    v.append({"name": 'diameter', "description": 'Diameter in OOBB units (overrides width/height).', "type": 'number', "default": 0})
-    v.append({"name": 'diameter_clearance', "description": 'Clearance from circle edge (mm) when circle=True.', "type": 'number', "default": 7.5})
-    v.append({"name": 'diameter_center_clearance', "description": 'Minimum distance from centre to include hole (mm).', "type": 'number', "default": 0})
-    v.append({"name": 'loc', "description": 'Grid location(s) [x,y] for single pattern.', "type": 'list', "default": '[0,0]'})
+    v.append({"name": 'holes', "description": 'Hole pattern or list of patterns to generate. Accepts a single string or a list such as `["all"]`, `["perimeter", "just_middle"]`, or `["single"]`. Supported values: `all`, `perimeter`, `perimeter_miss_middle`, `u`, `top`, `bottom`, `left`, `right`, `corners`, `single`, `missing_middle`, `just_middle`, `circle`.', "type": 'list', "default": '["all"]'})
+    v.append({"name": 'width', "description": 'Width of the hole grid in OOBB units. Example: `width=3` gives 3 hole positions across.', "type": 'number', "default": 0})
+    v.append({"name": 'height', "description": 'Height of the hole grid in OOBB units. Example: `height=2` gives 2 hole positions vertically.', "type": 'number', "default": 0})
+    v.append({"name": 'pos', "description": 'Base position `[x, y, z]` in mm for the whole pattern. Usually leave as `[0,0,0]` unless you want to offset the array.', "type": 'list', "default": '[0,0,0]'})
+    v.append({"name": 'depth', "description": 'Hole depth in mm for generated negative geometry.', "type": 'number', "default": 100})
+    v.append({"name": 'radius_name', "description": 'Named hole size key, for example `m3`, `m6`, or another radius name available in the project.', "type": 'string', "default": '"m6"'})
+    v.append({"name": 'middle', "description": 'Controls whether the centre hole is included for patterns that can have one, especially circular or full-grid layouts.', "type": 'bool', "default": True})
+    v.append({"name": 'size', "description": 'Grid spacing mode. Use `oobb` for normal OOBB spacing or `oobe` for half-step spacing.', "type": 'string', "default": '"oobb"'})
+    v.append({"name": 'both_holes', "description": 'When `True`, also adds matching OOBE half-grid holes in addition to the main OOBB holes.', "type": 'bool', "default": False})
+    v.append({"name": 'circle', "description": 'When `True`, filters an `all` grid so only holes inside a circular boundary are kept. Usually used together with `diameter`.', "type": 'bool', "default": False})
+    v.append({"name": 'diameter', "description": 'Circular pattern diameter in OOBB units. When non-zero it overrides `width` and `height`, for example `diameter=3`.', "type": 'number', "default": 0})
+    v.append({"name": 'diameter_clearance', "description": 'Edge clearance in mm for circular filtering. Increase this to keep holes farther away from the outer circle edge.', "type": 'number', "default": 7.5})
+    v.append({"name": 'diameter_center_clearance', "description": 'Minimum distance from the centre in mm before a hole is allowed. Use this to create a clear area in the middle of a circular layout.', "type": 'number', "default": 0})
+    v.append({"name": 'loc', "description": 'Grid location or list of locations used when `holes` includes `single`. Coordinates are 1-based `[x, y]` grid positions, so `loc=[1,1]` is one corner and `loc=[[1,1],[3,2]]` places two single holes. The aliases `location`, `locations`, and `positions` are also accepted.', "type": 'list', "default": '[0,0]'})
     d["variables"] = v
     return d
 

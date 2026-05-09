@@ -19,6 +19,14 @@ def _load_component(folder_name):
 d = {}
 
 
+def _get_parent_variables():
+    screw_description = copy.deepcopy(_load_component("oobb_screw").describe())
+    return [
+        variable for variable in screw_description.get("variables", [])
+        if variable.get("name") != "style"
+    ]
+
+
 def describe():
     global d
     d = {}
@@ -28,19 +36,7 @@ def describe():
     d["category"] = 'Fasteners'
     d["shape_aliases"] = ['screw_countersunk']
     d["returns"] = 'List of geometry component dicts.'
-    v = []
-    v.append({"name": 'pos', "description": '3-element [x,y,z] position.', "type": 'list', "default": '[0,0,0]'})
-    v.append({"name": 'type', "description": 'Geometry type: p/positive or n/negative.', "type": 'string', "default": 'p'})
-    v.append({"name": 'radius_name', "description": 'Named radius key, e.g. m3, m6.', "type": 'string', "default": '"m3"'})
-    v.append({"name": 'depth', "description": 'Shaft hole depth in mm.', "type": 'number', "default": 250})
-    v.append({"name": 'zz', "description": 'Z anchor: none, top, bottom.', "type": 'string', "default": '"none"'})
-    v.append({"name": 'hole', "description": 'Include a through shaft hole.', "type": 'bool', "default": True})
-    v.append({"name": 'mode', "description": 'Render modes: laser, 3dpr, true.', "type": 'list', "default": '["laser","3dpr","true"]'})
-    v.append({"name": 'rot', "description": 'Rotation [rx,ry,rz] in degrees.', "type": 'list', "default": '[0,0,0]'})
-    v.append({"name": 'rot_x', "description": 'X rotation in degrees.', "type": 'number', "default": 0})
-    v.append({"name": 'rot_y', "description": 'Y rotation in degrees.', "type": 'number', "default": 0})
-    v.append({"name": 'rot_z', "description": 'Z rotation in degrees.', "type": 'number', "default": 0})
-    d["variables"] = v
+    d["variables"] = _get_parent_variables()
     return d
 
 
@@ -68,16 +64,49 @@ def test():
     test_dir = os.path.join(folder, "test")
     os.makedirs(test_dir, exist_ok=True)
 
-    samples = [{'filename': 'test_1',
-      'preview_rot': [70, 0, 20],
-      'kwargs': {'pos': [0, 0, 0],
-                 'type': 'positive',
-                 'radius_name': 'm3',
-                 'depth': 16,
-                 'zz': 'none',
-                 'hole': True,
-                 'mode': 'true',
-                 'rot': [0, 0, 0]}}]
+    samples = [
+        {'filename': 'test_1',
+         'preview_rot': [70, 0, 20],
+         'kwargs': {'pos': [0, 0, 0],
+                    'type': 'positive',
+                    'radius_name': 'm3',
+                    'depth': 16,
+                    'zz': 'none',
+                    'hole': True,
+                    'clearance': '',
+                    'nut_include': False,
+                    'overhang': False,
+                    'slot': 0,
+                    'mode': 'true',
+                    'rot': [0, 0, 0]}},
+        {'filename': 'test_2',
+         'preview_rot': [70, 0, 20],
+         'kwargs': {'pos': [0, 0, 0],
+                    'type': 'positive',
+                    'radius_name': 'm3',
+                    'depth': 18,
+                    'zz': 'bottom',
+                    'hole': True,
+                    'clearance': 'top',
+                    'nut_include': True,
+                    'overhang': True,
+                    'slot': 0,
+                    'mode': 'true',
+                    'rot': [0, 0, 0]}},
+        {'filename': 'test_3',
+         'preview_rot': [70, 0, 20],
+         'kwargs': {'pos': [0, 0, 0],
+                    'type': 'positive',
+                    'radius_name': 'm3',
+                    'depth': 14,
+                    'zz': 'top',
+                    'hole': False,
+                    'clearance': '',
+                    'nut_include': False,
+                    'overhang': False,
+                    'slot': 12,
+                    'mode': 'true',
+                    'rot': [0, 0, 0]}}]
 
     generated_files = []
 

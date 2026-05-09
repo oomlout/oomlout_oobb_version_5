@@ -11,6 +11,7 @@
 | [cylinder](cylinder/) | Basic cylinder primitive exposed through the component system. | OPSC Geometry Primitives |
 | [d_shaft](d_shaft/) | Legacy opsc D-shaft shape migrated into the component system. | OPSC Mechanical Shapes |
 | [gear](gear/) | Legacy opsc involute gear shape migrated into the component system. | OPSC Mechanical Shapes |
+| [github_belfryscad_bosl2_screw](github_belfryscad_bosl2_screw/) | Raw OpenSCAD wrapper around BOSL2 `screw()` from `screws.scad`, using the local `git/BOSL2` clone and the repo raw_scad insertion path. | External Library Wrappers |
 | [gridfinity_base_tile](gridfinity_base_tile/) | Returns the raw OpenSCAD source for a Gridfinity base tile. | Gridfinity |
 | [hole](hole/) | Legacy opsc cylindrical hole shape migrated into the component system. | OPSC Composite Shapes |
 | [import_stl](import_stl/) | Imported STL primitive exposed through the component system. | OPSC Geometry Primitives |
@@ -20,18 +21,20 @@
 | [oobb_cube_center](oobb_cube_center/) | Center-aligned cube that shifts pos by -size/2 on x/y before passing to OpenSCAD. | OOBB Geometry Primitives |
 | [oobb_cube_hexagon_cutout](oobb_cube_hexagon_cutout/) | A cube with a tiling hexagonal cutout pattern. A solid border is preserved around all edges and between neighbouring cutouts. The hex grid rotation can be adjusted with rotation_cutout. | OOBB Geometry Primitives |
 | [oobb_cube_new](oobb_cube_new/) | Cube with full rotation-object support and mode filtering. | OOBB Geometry Primitives |
-| [oobb_cylinder](oobb_cylinder/) | Cylinder geometry across all render modes, supporting named or explicit radius and z-centering. | OOBB Geometry Primitives |
+| [oobb_cylinder](oobb_cylinder/) | Cylinder geometry across all render modes, supporting named, explicit, or dual-end radii and z-centering. | OOBB Geometry Primitives |
 | [oobb_cylinder_hollow](oobb_cylinder_hollow/) | Hollow cylinder (positive outer minus negative inner) wrapped in a rotation object. | OOBB Geometry Primitives |
 | [oobb_hole](oobb_hole/) | Cylindrical screw hole for all render modes, resolved from a named or explicit radius. | OOBB Geometry Primitives |
 | [oobb_hole_new](oobb_hole_new/) | Cylindrical hole with rotation-object support, mode filtering, and named/explicit radius. | OOBB Geometry Primitives |
-| [oobb_holes](oobb_holes/) | Places OOBB-grid-aligned screw holes across a rectangular or circular area using named hole patterns. | OOBB Geometry Helpers |
+| [oobb_holes](oobb_holes/) | Places OOBB-grid-aligned screw holes across a rectangular or circular area using named hole patterns. Use `holes` to choose one or more layouts such as `["all"]`, `["perimeter"]`, or `["single"]` with `loc=[x,y]`. | OOBB Geometry Helpers |
 | [oobb_nut](oobb_nut/) | Hexagonal nut pocket with optional through-hole, overhang, and clearance, across all render modes. | Fasteners |
+| [oobb_overhang](oobb_overhang/) | Two-layer 3D-print overhang bridge geometry sized to a named radius footprint. | OOBB Geometry Primitives |
 | [oobb_plate](oobb_plate/) | OOBB grid-sized plate (cylinder for 1Ã—1, rounded rectangle otherwise) with optional hole pattern. | OOBB Geometry Primitives |
 | [oobb_rot](oobb_rot/) | Helper that extracts and returns a [rx,ry,rz] rotation list from kwargs. | OOBB Geometry Helpers |
 | [oobb_rounded_rectangle_hollow](oobb_rounded_rectangle_hollow/) | Hollow rounded rectangle (positive outer minus negative inner wall) wrapped in a rotation object. | OOBB Geometry Primitives |
 | [oobb_rounded_rectangle_rounded](oobb_rounded_rectangle_rounded/) | Rounded rectangle with rounded top and bottom edges (sphere-swept corners) wrapped in a rotation object. | OOBB Geometry Primitives |
 | [oobb_screw](oobb_screw/) | Screw cutout (socket_cap, countersunk, or self_tapping) with optional through-hole, nut pocket, overhang, and clearance. | Fasteners |
 | [oobb_screw_countersunk](oobb_screw_countersunk/) | Countersunk screw cutout; wrapper over oobb_screw with style='countersunk' pre-set. | Fasteners |
+| [oobb_screw_exact](oobb_screw_exact/) | Part builder that accepts the preferred OOBB screw naming format and maps it to the GitHub BelfrySCAD BOSL2 screw wrapper. | Fasteners |
 | [oobb_screw_self_tapping](oobb_screw_self_tapping/) | Self-tapping screw cutout; wrapper over oobb_screw with style='self_tapping' pre-set. | Fasteners |
 | [oobb_screw_socket_cap](oobb_screw_socket_cap/) | Socket-cap screw cutout; wrapper over oobb_screw with style='socket_cap' pre-set. | Fasteners |
 | [oobb_slice](oobb_slice/) | Large cube slice used to clip/intersect geometry. | OOBB Geometry Primitives |

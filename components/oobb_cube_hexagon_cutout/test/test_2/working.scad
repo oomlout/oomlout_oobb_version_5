@@ -1,6 +1,6 @@
 $fn = 50;
 
-use <oobb_cube_hexagon_cutout_raw_51d85d3406e2f11c.scad>;
+use <../scad_reference/oobb_cube_hexagon_cutout_raw.scad>;
 
 difference() {
 	union() {
