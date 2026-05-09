@@ -20,7 +20,9 @@ def describe():
     d["category"] = "OPSC Composite Shapes"
     d["shape_aliases"] = ["rounded_rectangle"]
     d["returns"] = "List of geometry component dicts."
-    d["variables"] = []
+    v = []
+    v.append({"name": "omit_corner", "description": "Corner or list of corners to leave out of the hull: none, bottom_left, bottom_right, top_left, or top_right.", "type": "string", "default": '"none"'})
+    d["variables"] = v
     return d
 
 
@@ -48,6 +50,13 @@ def render(params):
     from solid2 import hull
 
     m = params.get("m", "")
+    omit_corner = params.get("omit_corner", "")
+    omitted_corners = []
+    if omit_corner !="":
+        if isinstance(omit_corner, str):
+            omitted_corners = [omit_corner]
+        elif isinstance(omit_corner, list):
+            omitted_corners = omit_corner
     p2 = copy.deepcopy(params)
     p2["m"] = ""
     p2["h"] = p2["size"][2]
@@ -70,15 +79,21 @@ def render(params):
     bl["pos"][1] = -(p2["size"][1] - p2["r"] * 2) / 2
     br["pos"][0] = (p2["size"][0] - p2["r"] * 2) / 2
     br["pos"][1] = -(p2["size"][1] - p2["r"] * 2) / 2
-    for corner in [tl, tr, bl, br]:
+    corners = {
+        "top_left": tl,
+        "top_right": tr,
+        "bottom_left": bl,
+        "bottom_right": br,
+    }
+    for corner in corners.values():
         del corner["size"]
 
-    solid_obj = hull()(
-        opsc.get_opsc_item(tl),
-        opsc.get_opsc_item(tr),
-        opsc.get_opsc_item(bl),
-        opsc.get_opsc_item(br),
-    )
+    selected_corners = [
+        corner for name, corner in corners.items()
+        if name not in omitted_corners
+    ]
+
+    solid_obj = hull()(*[opsc.get_opsc_item(corner) for corner in selected_corners])
     return apply_modifier(solid_obj, m)
 
 
@@ -92,11 +107,17 @@ def test():
     os.makedirs(test_dir, exist_ok=True)
 
     samples = [{'filename': 'test_1',
-      'preview_rot': [55, 0, 25],
-      'kwargs': {'type': 'positive', 'size': [24, 14, 4], 'r': 3, 'pos': [0, 0, 0]}},
-     {'filename': 'test_2',
-      'preview_rot': [55, 0, 25],
-      'kwargs': {'type': 'positive', 'size': [36, 18, 5], 'r': 4, 'pos': [0, 0, 0]}}]
+        'preview_rot': [55, 0, 25],
+        'kwargs': {'type': 'positive', 'size': [24, 14, 4], 'r': 3, 'pos': [0, 0, 0]}},
+        {'filename': 'test_2',
+        'preview_rot': [55, 0, 25],
+        'kwargs': {'type': 'positive', 'size': [36, 18, 5], 'r': 4, 'pos': [0, 0, 0]}},
+        {'filename': 'test_3',
+        'preview_rot': [55, 0, 25],
+        'kwargs': {'type': 'positive', 'size': [30, 20, 5], 'r': 4, 'omit_corner': 'top_right', 'pos': [0, 0, 0]}},
+        {'filename': 'test_4',
+        'preview_rot': [55, 0, 25],
+        'kwargs': {'type': 'positive', 'size': [30, 20, 5], 'r': 4, 'omit_corner': ['top_right', 'bottom_left'], 'pos': [0, 0, 0]}}]
 
     generated_files = []
 

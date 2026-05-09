@@ -100,6 +100,9 @@ def action(**kwargs):
         p3["width_mm"] = width_mm
         p3["height_mm"] = height_mm
         p3["size"] = [ width_mm, height_mm, depth_mm]
+        omit_corner = p3.get("omit_corner", "")
+        if omit_corner != "":
+            p3["omit_corner"] = omit_corner
         return_value.append(opsc.opsc_easy(**p3))
 
 
