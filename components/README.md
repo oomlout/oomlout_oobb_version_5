@@ -13,6 +13,7 @@
 | [gear](gear/) | Legacy opsc involute gear shape migrated into the component system. | OPSC Mechanical Shapes |
 | [github_belfryscad_bosl2_screw](github_belfryscad_bosl2_screw/) | Raw OpenSCAD wrapper around BOSL2 `screw()` from `screws.scad`, using the local `git/BOSL2` clone and the repo raw_scad insertion path. | External Library Wrappers |
 | [gridfinity_base_tile](gridfinity_base_tile/) | Returns the raw OpenSCAD source for a Gridfinity base tile. | Gridfinity |
+| [gridfinity_tray_raw](gridfinity_tray_raw/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using gridfinity_width, gridfinity_depth, and gridfinity_height as the public size inputs. | Gridfinity |
 | [hole](hole/) | Legacy opsc cylindrical hole shape migrated into the component system. | OPSC Composite Shapes |
 | [import_stl](import_stl/) | Imported STL primitive exposed through the component system. | OPSC Geometry Primitives |
 | [oobb_circle](oobb_circle/) | Renders a cylinder (solid or cutout) sized to an OOBB grid position. | OOBB Geometry Primitives |

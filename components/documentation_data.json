@@ -1427,6 +1427,601 @@
       "test_samples_path": "gridfinity_base_tile/TEST_SAMPLES.md"
     },
     {
+      "command": "gridfinity_tray_raw",
+      "name_long": "Gridfinity: Tray Raw",
+      "name_short_options": [],
+      "description": "Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using gridfinity_width, gridfinity_depth, and gridfinity_height as the public size inputs.",
+      "summary": "Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using gridfinity_width, gridfinity_depth, and gridfinity_height as the public size inputs.",
+      "variables": [
+        {
+          "name": "gridfinity_width",
+          "description": "Width in Gridfinity units.",
+          "type": "number",
+          "default": 2
+        },
+        {
+          "name": "gridfinity_depth",
+          "description": "Depth in Gridfinity units.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "gridfinity_height",
+          "description": "Height in Gridfinity units.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "filled_in",
+          "description": "Fill the cup into a solid block or fill the lip.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "wall_thickness",
+          "description": "Outer wall thickness in mm. Zero uses upstream auto sizing.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "headroom",
+          "description": "Undersize the top by this amount for easier stacking.",
+          "type": "number",
+          "default": 0.8
+        },
+        {
+          "name": "lip_style",
+          "description": "Cup lip style.",
+          "type": "string",
+          "default": "\"normal\""
+        },
+        {
+          "name": "vertical_chambers",
+          "description": "Number of vertical chambers.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "horizontal_chambers",
+          "description": "Number of horizontal chambers.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "enable_magnets",
+          "description": "Enable base magnet holes.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "enable_screws",
+          "description": "Enable base screw holes.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "magnet_size",
+          "description": "Magnet diameter and height [d,h] in mm.",
+          "type": "list",
+          "default": "[6.5,2.4]"
+        },
+        {
+          "name": "screw_size",
+          "description": "Screw diameter and height [d,h] in mm.",
+          "type": "list",
+          "default": "[3,6]"
+        },
+        {
+          "name": "floor_thickness",
+          "description": "Minimum thickness above cutouts in the base.",
+          "type": "number",
+          "default": 0.7
+        },
+        {
+          "name": "efficient_floor",
+          "description": "Efficient floor mode.",
+          "type": "string",
+          "default": "\"off\""
+        },
+        {
+          "name": "sub_pitch",
+          "description": "Bottom pad subdivision pitch.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "flat_base",
+          "description": "Internal base style.",
+          "type": "string",
+          "default": "\"off\""
+        },
+        {
+          "name": "label_style",
+          "description": "Label style.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "label_position",
+          "description": "Label position.",
+          "type": "string",
+          "default": "\"left\""
+        },
+        {
+          "name": "sliding_lid_enabled",
+          "description": "Enable the sliding lid geometry.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "fingerslide",
+          "description": "Finger slide style.",
+          "type": "string",
+          "default": "\"none\""
+        },
+        {
+          "name": "tapered_corner",
+          "description": "Tapered corner style.",
+          "type": "string",
+          "default": "\"none\""
+        },
+        {
+          "name": "wallpattern_enabled",
+          "description": "Enable wall cutout patterns.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "floorpattern_enabled",
+          "description": "Enable floor patterns.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "wallcutout_vertical",
+          "description": "Vertical wall cutout mode.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "wallcutout_horizontal",
+          "description": "Horizontal wall cutout mode.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "extension_x_enabled",
+          "description": "Extendable tab mode on X.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "extension_y_enabled",
+          "description": "Extendable tab mode on Y.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "text_1",
+          "description": "Add the bin size to the bottom text.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "text_2",
+          "description": "Enable custom bottom text.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "text_2_text",
+          "description": "Custom bottom text value.",
+          "type": "string",
+          "default": "\"Gridfinity Extended\""
+        },
+        {
+          "name": "pitch",
+          "description": "Gridfinity pitch [x,y,z] in mm.",
+          "type": "list",
+          "default": "[42,42,7]"
+        },
+        {
+          "name": "clearance",
+          "description": "Clearance [x,y,z] in mm.",
+          "type": "list",
+          "default": "[0.5,0.5,0]"
+        },
+        {
+          "name": "set_colour",
+          "description": "Color handling mode for the upstream renderer.",
+          "type": "string",
+          "default": "\"enable\""
+        },
+        {
+          "name": "render_position",
+          "description": "Upstream render position mode.",
+          "type": "string",
+          "default": "\"center\""
+        },
+        {
+          "name": "fa",
+          "description": "OpenSCAD fragment angle.",
+          "type": "number",
+          "default": 6
+        },
+        {
+          "name": "fs",
+          "description": "OpenSCAD fragment size.",
+          "type": "number",
+          "default": 0.4
+        },
+        {
+          "name": "fn",
+          "description": "OpenSCAD fragment count override.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "random_seed",
+          "description": "Random seed for procedural features.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "force_render",
+          "description": "Force render on costly upstream components.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        }
+      ],
+      "variable_names": [
+        "gridfinity_width",
+        "gridfinity_depth",
+        "gridfinity_height",
+        "filled_in",
+        "wall_thickness",
+        "headroom",
+        "lip_style",
+        "vertical_chambers",
+        "horizontal_chambers",
+        "enable_magnets",
+        "enable_screws",
+        "magnet_size",
+        "screw_size",
+        "floor_thickness",
+        "efficient_floor",
+        "sub_pitch",
+        "flat_base",
+        "label_style",
+        "label_position",
+        "sliding_lid_enabled",
+        "fingerslide",
+        "tapered_corner",
+        "wallpattern_enabled",
+        "floorpattern_enabled",
+        "wallcutout_vertical",
+        "wallcutout_horizontal",
+        "extension_x_enabled",
+        "extension_y_enabled",
+        "text_1",
+        "text_2",
+        "text_2_text",
+        "pitch",
+        "clearance",
+        "set_colour",
+        "render_position",
+        "fa",
+        "fs",
+        "fn",
+        "random_seed",
+        "force_render",
+        "pos",
+        "rot",
+        "type"
+      ],
+      "category": "Gridfinity",
+      "returns": "Raw SCAD geometry component dict.",
+      "aliases": [],
+      "detail_page": "gridfinity_tray_raw/documentation_detail.html",
+      "detail_markdown": "",
+      "detail_html": "",
+      "sample_images": [
+        {
+          "sample_id": "scad_reference",
+          "filename": "scad_reference",
+          "title": "scad_reference",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_depth": 1,
+            "gridfinity_height": 3,
+            "filled_in": "\"disabled\"",
+            "wall_thickness": 0,
+            "headroom": 0.8,
+            "lip_style": "\"normal\"",
+            "vertical_chambers": 1,
+            "horizontal_chambers": 1,
+            "enable_magnets": false,
+            "enable_screws": false,
+            "magnet_size": "[6.5,2.4]",
+            "screw_size": "[3,6]",
+            "floor_thickness": 0.7,
+            "efficient_floor": "\"off\"",
+            "sub_pitch": 1,
+            "flat_base": "\"off\"",
+            "label_style": "\"disabled\"",
+            "label_position": "\"left\"",
+            "sliding_lid_enabled": false,
+            "fingerslide": "\"none\"",
+            "tapered_corner": "\"none\"",
+            "wallpattern_enabled": false,
+            "floorpattern_enabled": false,
+            "wallcutout_vertical": "\"disabled\"",
+            "wallcutout_horizontal": "\"disabled\"",
+            "extension_x_enabled": "\"disabled\"",
+            "extension_y_enabled": "\"disabled\"",
+            "text_1": false,
+            "text_2": false,
+            "text_2_text": "\"Gridfinity Extended\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "gridfinity_tray_raw/test/scad_reference/image.png",
+          "detail_image_path": "test/scad_reference/image.png",
+          "full_image_path": "gridfinity_tray_raw/test/scad_reference/image.png",
+          "detail_full_image_path": "test/scad_reference/image.png",
+          "detail_iso_400_path": "test/scad_reference/image.png",
+          "detail_iso_120_path": "test/scad_reference/image.png",
+          "detail_top_400_path": "test/scad_reference/image.png",
+          "detail_top_120_path": "test/scad_reference/image.png",
+          "detail_side_400_path": "test/scad_reference/image.png",
+          "detail_side_120_path": "test/scad_reference/image.png",
+          "scad_exists": false,
+          "scad_path": "gridfinity_tray_raw/test/scad_reference/working.scad",
+          "detail_scad_path": "test/scad_reference/working.scad"
+        },
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_depth": 1,
+            "gridfinity_height": 3,
+            "filled_in": "\"disabled\"",
+            "wall_thickness": 0,
+            "headroom": 0.8,
+            "lip_style": "\"normal\"",
+            "vertical_chambers": 1,
+            "horizontal_chambers": 1,
+            "enable_magnets": false,
+            "enable_screws": false,
+            "magnet_size": "[6.5,2.4]",
+            "screw_size": "[3,6]",
+            "floor_thickness": 0.7,
+            "efficient_floor": "\"off\"",
+            "sub_pitch": 1,
+            "flat_base": "\"off\"",
+            "label_style": "\"disabled\"",
+            "label_position": "\"left\"",
+            "sliding_lid_enabled": false,
+            "fingerslide": "\"none\"",
+            "tapered_corner": "\"none\"",
+            "wallpattern_enabled": false,
+            "floorpattern_enabled": false,
+            "wallcutout_vertical": "\"disabled\"",
+            "wallcutout_horizontal": "\"disabled\"",
+            "extension_x_enabled": "\"disabled\"",
+            "extension_y_enabled": "\"disabled\"",
+            "text_1": false,
+            "text_2": false,
+            "text_2_text": "\"Gridfinity Extended\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "gridfinity_tray_raw/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "gridfinity_tray_raw/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "gridfinity_tray_raw/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_depth": 1,
+            "gridfinity_height": 3,
+            "filled_in": "\"disabled\"",
+            "wall_thickness": 0,
+            "headroom": 0.8,
+            "lip_style": "\"normal\"",
+            "vertical_chambers": 1,
+            "horizontal_chambers": 1,
+            "enable_magnets": false,
+            "enable_screws": false,
+            "magnet_size": "[6.5,2.4]",
+            "screw_size": "[3,6]",
+            "floor_thickness": 0.7,
+            "efficient_floor": "\"off\"",
+            "sub_pitch": 1,
+            "flat_base": "\"off\"",
+            "label_style": "\"disabled\"",
+            "label_position": "\"left\"",
+            "sliding_lid_enabled": false,
+            "fingerslide": "\"none\"",
+            "tapered_corner": "\"none\"",
+            "wallpattern_enabled": false,
+            "floorpattern_enabled": false,
+            "wallcutout_vertical": "\"disabled\"",
+            "wallcutout_horizontal": "\"disabled\"",
+            "extension_x_enabled": "\"disabled\"",
+            "extension_y_enabled": "\"disabled\"",
+            "text_1": false,
+            "text_2": false,
+            "text_2_text": "\"Gridfinity Extended\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "gridfinity_tray_raw/test/test_2/image.png",
+          "detail_image_path": "test/test_2/image.png",
+          "full_image_path": "gridfinity_tray_raw/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image.png",
+          "detail_iso_120_path": "test/test_2/image.png",
+          "detail_top_400_path": "test/test_2/image.png",
+          "detail_top_120_path": "test/test_2/image.png",
+          "detail_side_400_path": "test/test_2/image.png",
+          "detail_side_120_path": "test/test_2/image.png",
+          "scad_exists": true,
+          "scad_path": "gridfinity_tray_raw/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "gridfinity_width": 2,
+        "gridfinity_depth": 1,
+        "gridfinity_height": 3,
+        "filled_in": "\"disabled\"",
+        "wall_thickness": 0,
+        "headroom": 0.8,
+        "lip_style": "\"normal\"",
+        "vertical_chambers": 1,
+        "horizontal_chambers": 1,
+        "enable_magnets": false,
+        "enable_screws": false,
+        "magnet_size": "[6.5,2.4]",
+        "screw_size": "[3,6]",
+        "floor_thickness": 0.7,
+        "efficient_floor": "\"off\"",
+        "sub_pitch": 1,
+        "flat_base": "\"off\"",
+        "label_style": "\"disabled\"",
+        "label_position": "\"left\"",
+        "sliding_lid_enabled": false,
+        "fingerslide": "\"none\"",
+        "tapered_corner": "\"none\"",
+        "wallpattern_enabled": false,
+        "floorpattern_enabled": false,
+        "wallcutout_vertical": "\"disabled\"",
+        "wallcutout_horizontal": "\"disabled\"",
+        "extension_x_enabled": "\"disabled\"",
+        "extension_y_enabled": "\"disabled\"",
+        "text_1": false,
+        "text_2": false,
+        "text_2_text": "\"Gridfinity Extended\"",
+        "pitch": "[42,42,7]",
+        "clearance": "[0.5,0.5,0]",
+        "set_colour": "\"enable\"",
+        "render_position": "\"center\"",
+        "fa": 6,
+        "fs": 0.4,
+        "fn": 0,
+        "random_seed": 0,
+        "force_render": true,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "\"positive\""
+      },
+      "readme_path": "gridfinity_tray_raw/README.md",
+      "test_samples_path": ""
+    },
+    {
       "command": "hole",
       "name_long": "OPSC Composite Shapes: Hole",
       "name_short_options": [],
@@ -33670,7 +34265,7 @@
       "has_mode_values": true
     }
   ],
-  "generated_date": "2026-05-09",
-  "total_objects": 61,
+  "generated_date": "2026-05-13",
+  "total_objects": 62,
   "total_part_sets": 0
 }
