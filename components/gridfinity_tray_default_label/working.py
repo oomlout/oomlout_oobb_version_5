@@ -69,7 +69,7 @@ MODULE_DEFAULTS = {
     "label_style": "normal",
     "label_position": "left",
     "label_dividers": "disabled",
-    "label_size": [1.095, 29.5, 10, 0.6],
+    "label_size": [1., 29.5, 15, 0.6],
     "label_relief": [0, 0, 0, 0.6],
     "label_walls": [0, 1, 0, 0],
     "sliding_lid_enabled": False,

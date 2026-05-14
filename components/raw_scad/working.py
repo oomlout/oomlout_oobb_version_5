@@ -91,6 +91,10 @@ def _resolve_include_path(target, base_dir):
 
     target_parts = [part for part in re.split(r"[\\/]+", target) if part]
     if target_parts and target_parts[0] == "git":
+        project_git_candidate = os.path.join(_PROJECT_ROOT, *target_parts)
+        if os.path.isfile(project_git_candidate):
+            return project_git_candidate
+
         git_candidate = os.path.join(
             _PROJECT_ROOT,
             "components",
