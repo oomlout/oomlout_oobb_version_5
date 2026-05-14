@@ -13,7 +13,10 @@
 | [gear](gear/) | Legacy opsc involute gear shape migrated into the component system. | OPSC Mechanical Shapes |
 | [github_belfryscad_bosl2_screw](github_belfryscad_bosl2_screw/) | Raw OpenSCAD wrapper around BOSL2 `screw()` from `screws.scad`, using the local `git/BOSL2` clone and the repo raw_scad insertion path. | External Library Wrappers |
 | [gridfinity_base_tile](gridfinity_base_tile/) | Returns the raw OpenSCAD source for a Gridfinity base tile. | Gridfinity |
-| [gridfinity_tray_raw](gridfinity_tray_raw/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using gridfinity_width, gridfinity_depth, and gridfinity_height as the public size inputs. | Gridfinity |
+| [gridfinity_tray_default_label](gridfinity_tray_default_label/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
+| [gridfinity_tray_raw](gridfinity_tray_raw/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
+| [gridfinity_tray_raw - Copy](gridfinity_tray_raw - Copy/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
+| [gridfinity_tray_raw_offset](gridfinity_tray_raw_offset/) | Returns a local wrapper around gridfinity_tray_raw from the tray_raw component directory, using the same repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [hole](hole/) | Legacy opsc cylindrical hole shape migrated into the component system. | OPSC Composite Shapes |
 | [import_stl](import_stl/) | Imported STL primitive exposed through the component system. | OPSC Geometry Primitives |
 | [oobb_circle](oobb_circle/) | Renders a cylinder (solid or cutout) sized to an OOBB grid position. | OOBB Geometry Primitives |

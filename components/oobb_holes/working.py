@@ -459,7 +459,8 @@ def action(**kwargs):
 
     if both_holes:
         p2 = copy.deepcopy(kwargs)
-        p2["shape"] = "oobe_hole"
+        p2["size"] = "oobe"
+        p2["both_holes"] = False
         p2["radius_name"] = "m3"
         p2["width"] = width * 2 - 1
         p2["height"] = height * 2 - 1
@@ -469,7 +470,7 @@ def action(**kwargs):
             if diameter != 0:
                 p2["diameter"] = diameter_full * 2 - 1
         p2["holes"] = holes
-        objects.extend(_get_oobe_holes(**p2))
+        objects.extend(action(**p2))
 
     return objects
 
