@@ -12,10 +12,12 @@
 | [d_shaft](d_shaft/) | Legacy opsc D-shaft shape migrated into the component system. | OPSC Mechanical Shapes |
 | [gear](gear/) | Legacy opsc involute gear shape migrated into the component system. | OPSC Mechanical Shapes |
 | [github_belfryscad_bosl2_screw](github_belfryscad_bosl2_screw/) | Raw OpenSCAD wrapper around BOSL2 `screw()` from `screws.scad`, using the local `git/BOSL2` clone and the repo raw_scad insertion path. | External Library Wrappers |
+| [gridfinity_base_raw](gridfinity_base_raw/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended baseplate generator, using repo-style width and height inputs while keeping a broad first-pass upstream option surface. | Gridfinity |
 | [gridfinity_base_tile](gridfinity_base_tile/) | Returns the raw OpenSCAD source for a Gridfinity base tile. | Gridfinity |
+| [gridfinity_gridflock_raw](gridfinity_gridflock_raw/) | Returns a raw OpenSCAD wrapper around the vendored GridFlock segmented baseplate generator, using repo-style public size inputs where gridfinity_width is X and gridfinity_depth is Y. | Gridfinity |
 | [gridfinity_tray_default_label](gridfinity_tray_default_label/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
+| [gridfinity_tray_fractional_test](gridfinity_tray_fractional_test/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [gridfinity_tray_raw](gridfinity_tray_raw/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
-| [gridfinity_tray_raw - Copy](gridfinity_tray_raw - Copy/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [gridfinity_tray_raw_offset](gridfinity_tray_raw_offset/) | Returns a local wrapper around gridfinity_tray_raw from the tray_raw component directory, using the same repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [hole](hole/) | Legacy opsc cylindrical hole shape migrated into the component system. | OPSC Composite Shapes |
 | [import_stl](import_stl/) | Imported STL primitive exposed through the component system. | OPSC Geometry Primitives |

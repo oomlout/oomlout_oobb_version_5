@@ -1203,6 +1203,606 @@
       "test_samples_path": ""
     },
     {
+      "command": "gridfinity_base_raw",
+      "name_long": "Gridfinity: Base Raw",
+      "name_short_options": [],
+      "description": "Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended baseplate generator, using repo-style width and height inputs while keeping a broad first-pass upstream option surface.",
+      "summary": "Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended baseplate generator, using repo-style width and height inputs while keeping a broad first-pass upstream option surface.",
+      "variables": [
+        {
+          "name": "gridfinity_width",
+          "description": "Width in Gridfinity units along X, or [grid,mm].",
+          "type": "number|list",
+          "default": 2
+        },
+        {
+          "name": "gridfinity_height",
+          "description": "Height in Gridfinity units along Y, or [grid,mm].",
+          "type": "number|list",
+          "default": 1
+        },
+        {
+          "name": "outer_width",
+          "description": "Outer width in Gridfinity units or [grid,mm].",
+          "type": "number|list",
+          "default": "[0,0]"
+        },
+        {
+          "name": "outer_depth",
+          "description": "Outer depth in Gridfinity units or [grid,mm].",
+          "type": "number|list",
+          "default": "[0,0]"
+        },
+        {
+          "name": "outer_height",
+          "description": "Outer frame height in millimeters.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "oversize_method",
+          "description": "Oversize method: fill, crop, or outer.",
+          "type": "string",
+          "default": "\"fill\""
+        },
+        {
+          "name": "position_fill_grid_x",
+          "description": "X alignment for filling partial grid space.",
+          "type": "string",
+          "default": "\"near\""
+        },
+        {
+          "name": "position_fill_grid_y",
+          "description": "Y alignment for filling partial grid space.",
+          "type": "string",
+          "default": "\"near\""
+        },
+        {
+          "name": "position_grid_in_outer_x",
+          "description": "X alignment of the grid inside the outer frame.",
+          "type": "string",
+          "default": "\"center\""
+        },
+        {
+          "name": "position_grid_in_outer_y",
+          "description": "Y alignment of the grid inside the outer frame.",
+          "type": "string",
+          "default": "\"center\""
+        },
+        {
+          "name": "plate_corner_radius",
+          "description": "Outer plate corner radius in millimeters.",
+          "type": "number",
+          "default": 3.75
+        },
+        {
+          "name": "secondary_corner_radius",
+          "description": "Secondary inner corner radius in millimeters.",
+          "type": "number",
+          "default": 3.75
+        },
+        {
+          "name": "enable_magnets",
+          "description": "Enable baseplate magnet pockets.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "magnet_size",
+          "description": "Magnet diameter and height [d,h] in millimeters.",
+          "type": "list",
+          "default": "[6.5,2.4]"
+        },
+        {
+          "name": "magnet_release_method",
+          "description": "Magnet release method: none, slot, or hole.",
+          "type": "string",
+          "default": "\"none\""
+        },
+        {
+          "name": "corner_screw_enabled",
+          "description": "Enable corner screw holes.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "center_screw_enabled",
+          "description": "Enable the center hold-down screw hole.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "weighted_enable",
+          "description": "Enable weight cavities in the frame.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "reduced_wall_height",
+          "description": "Reduced wall height in millimeters. -1 keeps upstream behavior.",
+          "type": "number",
+          "default": -1
+        },
+        {
+          "name": "reduce_wall_taper",
+          "description": "Reduce wall taper when walls are shortened.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "plate_options",
+          "description": "Baseplate style option, typically default or cnclaser.",
+          "type": "string",
+          "default": "\"default\""
+        },
+        {
+          "name": "custom_grid_enabled",
+          "description": "Enable custom grid cell layout.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "grid_positions",
+          "description": "Custom grid positions matrix passed to the upstream baseplate module.",
+          "type": "list",
+          "default": "[[1]]"
+        },
+        {
+          "name": "remove_bottom_taper",
+          "description": "Remove the default Gridfinity bottom taper.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "connector_only",
+          "description": "Generate connector-only geometry for the frame system.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "connector_position",
+          "description": "Frame connector position: disabled, center_wall, intersection, or both.",
+          "type": "string",
+          "default": "\"center_wall\""
+        },
+        {
+          "name": "connector_clip_enabled",
+          "description": "Enable clip-style frame connectors.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "connector_butterfly_enabled",
+          "description": "Enable butterfly frame connectors.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "connector_filament_enabled",
+          "description": "Enable filament frame connectors.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "connector_snaps_style",
+          "description": "Connector snap style: disabled, larger, smaller, or wall.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "pitch",
+          "description": "Gridfinity pitch [x,y,z] in millimeters.",
+          "type": "list",
+          "default": "[42,42,7]"
+        },
+        {
+          "name": "clearance",
+          "description": "Environment clearance [x,y,z] in millimeters.",
+          "type": "list",
+          "default": "[0.5,0.5,0]"
+        },
+        {
+          "name": "set_colour",
+          "description": "Color handling mode for the upstream renderer.",
+          "type": "string",
+          "default": "\"enable\""
+        },
+        {
+          "name": "render_position",
+          "description": "Render position mode, usually center.",
+          "type": "string",
+          "default": "\"center\""
+        },
+        {
+          "name": "cut",
+          "description": "Debug cut [x,y,z].",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "fa",
+          "description": "OpenSCAD fragment angle.",
+          "type": "number",
+          "default": 6
+        },
+        {
+          "name": "fs",
+          "description": "OpenSCAD fragment size.",
+          "type": "number",
+          "default": 0.4
+        },
+        {
+          "name": "fn",
+          "description": "OpenSCAD fragment count override.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "random_seed",
+          "description": "Random seed for the upstream environment.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "force_render",
+          "description": "Force render on costly upstream components.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        }
+      ],
+      "variable_names": [
+        "gridfinity_width",
+        "gridfinity_height",
+        "outer_width",
+        "outer_depth",
+        "outer_height",
+        "oversize_method",
+        "position_fill_grid_x",
+        "position_fill_grid_y",
+        "position_grid_in_outer_x",
+        "position_grid_in_outer_y",
+        "plate_corner_radius",
+        "secondary_corner_radius",
+        "enable_magnets",
+        "magnet_size",
+        "magnet_release_method",
+        "corner_screw_enabled",
+        "center_screw_enabled",
+        "weighted_enable",
+        "reduced_wall_height",
+        "reduce_wall_taper",
+        "plate_options",
+        "custom_grid_enabled",
+        "grid_positions",
+        "remove_bottom_taper",
+        "connector_only",
+        "connector_position",
+        "connector_clip_enabled",
+        "connector_butterfly_enabled",
+        "connector_filament_enabled",
+        "connector_snaps_style",
+        "pitch",
+        "clearance",
+        "set_colour",
+        "render_position",
+        "cut",
+        "fa",
+        "fs",
+        "fn",
+        "random_seed",
+        "force_render",
+        "pos",
+        "rot",
+        "type"
+      ],
+      "category": "Gridfinity",
+      "returns": "Raw SCAD geometry component dict.",
+      "aliases": [],
+      "detail_page": "gridfinity_base_raw/documentation_detail.html",
+      "detail_markdown": "# gridfinity_base_raw\n\n**Gridfinity: Base Raw**\n\nReturns a raw OpenSCAD wrapper around the vendored Gridfinity Extended baseplate generator, using repo-style width and height inputs while keeping a broad first-pass upstream option surface.\n\n## Returns\n\nRaw SCAD geometry component dict.\n\n## Notes\n\n- Backed by a self-contained vendored copy of `gridfinity_extended_openscad` inside this component folder.\n- `gridfinity_width` and `gridfinity_height` accept either plain Gridfinity-unit numbers or upstream-style `[grid, mm]` tuples.\n- Legacy `gridfinity_depth` and `depth` aliases are still accepted for compatibility.\n- The wrapper bridges public width and height inputs into both `set_environment(...)` and the upstream `gridfinity_baseplate(...)` cell-count parameters.\n\n## Key Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| gridfinity_width | Width in Gridfinity units along X, or `[grid,mm]`. | number\\|list | 2 |\n| gridfinity_height | Height in Gridfinity units along Y, or `[grid,mm]`. | number\\|list | 1 |\n| outer_width | Outer width in Gridfinity units or `[grid,mm]`. | number\\|list | [0,0] |\n| outer_depth | Outer depth in Gridfinity units or `[grid,mm]`. | number\\|list | [0,0] |\n| oversize_method | Oversize method: `fill`, `crop`, or `outer`. | string | \"fill\" |\n| enable_magnets | Enable baseplate magnet pockets. | bool | False |\n| magnet_size | Magnet diameter and height `[d,h]` in millimeters. | list | [6.5,2.4] |\n| corner_screw_enabled | Enable corner screw holes. | bool | False |\n| center_screw_enabled | Enable the center hold-down screw hole. | bool | False |\n| weighted_enable | Enable weight cavities in the frame. | bool | False |\n| plate_options | Baseplate style option, typically `default` or `cnclaser`. | string | \"default\" |\n| custom_grid_enabled | Enable custom grid cell layout. | bool | False |\n| connector_position | Frame connector position: `disabled`, `center_wall`, `intersection`, or `both`. | string | \"center_wall\" |\n| connector_clip_enabled | Enable clip-style frame connectors. | bool | False |\n| connector_butterfly_enabled | Enable butterfly frame connectors. | bool | False |\n| connector_filament_enabled | Enable filament frame connectors. | bool | False |\n| connector_snaps_style | Connector snap style: `disabled`, `larger`, `smaller`, or `wall`. | string | \"disabled\" |\n| pitch | Gridfinity pitch `[x,y,z]` in millimeters. | list | [42,42,7] |\n| clearance | Environment clearance `[x,y,z]` in millimeters. | list | [0.5,0.5,0] |\n| pos | 3-element `[x,y,z]` position. | list | [0,0,0] |\n| rot | Rotation `[rx,ry,rz]` in degrees. | list | [0,0,0] |\n| type | Geometry type: positive or negative. | string | \"positive\" |",
+      "detail_html": "<h1>gridfinity_base_raw</h1>\n<p><strong>Gridfinity: Base Raw</strong></p>\n<p>Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended baseplate generator, using repo-style width and height inputs while keeping a broad first-pass upstream option surface.</p>\n<h2>Returns</h2>\n<p>Raw SCAD geometry component dict.</p>\n<h2>Notes</h2>\n<ul><li>Backed by a self-contained vendored copy of <code>gridfinity_extended_openscad</code> inside this component folder.</li><li><code>gridfinity_width</code> and <code>gridfinity_height</code> accept either plain Gridfinity-unit numbers or upstream-style <code>[grid, mm]</code> tuples.</li><li>Legacy <code>gridfinity_depth</code> and <code>depth</code> aliases are still accepted for compatibility.</li><li>The wrapper bridges public width and height inputs into both <code>set_environment(...)</code> and the upstream <code>gridfinity_baseplate(...)</code> cell-count parameters.</li></ul>\n<h2>Key Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>gridfinity_width</td><td>Width in Gridfinity units along X, or <code>[grid,mm]</code>.</td><td>number\\</td><td>list</td><td>2</td></tr><tr><td>gridfinity_height</td><td>Height in Gridfinity units along Y, or <code>[grid,mm]</code>.</td><td>number\\</td><td>list</td><td>1</td></tr><tr><td>outer_width</td><td>Outer width in Gridfinity units or <code>[grid,mm]</code>.</td><td>number\\</td><td>list</td><td>[0,0]</td></tr><tr><td>outer_depth</td><td>Outer depth in Gridfinity units or <code>[grid,mm]</code>.</td><td>number\\</td><td>list</td><td>[0,0]</td></tr><tr><td>oversize_method</td><td>Oversize method: <code>fill</code>, <code>crop</code>, or <code>outer</code>.</td><td>string</td><td>\"fill\"</td></tr><tr><td>enable_magnets</td><td>Enable baseplate magnet pockets.</td><td>bool</td><td>False</td></tr><tr><td>magnet_size</td><td>Magnet diameter and height <code>[d,h]</code> in millimeters.</td><td>list</td><td>[6.5,2.4]</td></tr><tr><td>corner_screw_enabled</td><td>Enable corner screw holes.</td><td>bool</td><td>False</td></tr><tr><td>center_screw_enabled</td><td>Enable the center hold-down screw hole.</td><td>bool</td><td>False</td></tr><tr><td>weighted_enable</td><td>Enable weight cavities in the frame.</td><td>bool</td><td>False</td></tr><tr><td>plate_options</td><td>Baseplate style option, typically <code>default</code> or <code>cnclaser</code>.</td><td>string</td><td>\"default\"</td></tr><tr><td>custom_grid_enabled</td><td>Enable custom grid cell layout.</td><td>bool</td><td>False</td></tr><tr><td>connector_position</td><td>Frame connector position: <code>disabled</code>, <code>center_wall</code>, <code>intersection</code>, or <code>both</code>.</td><td>string</td><td>\"center_wall\"</td></tr><tr><td>connector_clip_enabled</td><td>Enable clip-style frame connectors.</td><td>bool</td><td>False</td></tr><tr><td>connector_butterfly_enabled</td><td>Enable butterfly frame connectors.</td><td>bool</td><td>False</td></tr><tr><td>connector_filament_enabled</td><td>Enable filament frame connectors.</td><td>bool</td><td>False</td></tr><tr><td>connector_snaps_style</td><td>Connector snap style: <code>disabled</code>, <code>larger</code>, <code>smaller</code>, or <code>wall</code>.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>pitch</td><td>Gridfinity pitch <code>[x,y,z]</code> in millimeters.</td><td>list</td><td>[42,42,7]</td></tr><tr><td>clearance</td><td>Environment clearance <code>[x,y,z]</code> in millimeters.</td><td>list</td><td>[0.5,0.5,0]</td></tr><tr><td>pos</td><td>3-element <code>[x,y,z]</code> position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation <code>[rx,ry,rz]</code> in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>type</td><td>Geometry type: positive or negative.</td><td>string</td><td>\"positive\"</td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "Default 2x1 Gridfinity Extended baseplate.",
+          "intent": "Default 2x1 Gridfinity Extended baseplate.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "gridfinity_width": 2,
+            "gridfinity_height": 1,
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "gridfinity_width": 2,
+            "gridfinity_height": 1,
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive"
+          },
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_height": 1,
+            "outer_width": "[0,0]",
+            "outer_depth": "[0,0]",
+            "outer_height": 0,
+            "oversize_method": "\"fill\"",
+            "position_fill_grid_x": "\"near\"",
+            "position_fill_grid_y": "\"near\"",
+            "position_grid_in_outer_x": "\"center\"",
+            "position_grid_in_outer_y": "\"center\"",
+            "plate_corner_radius": 3.75,
+            "secondary_corner_radius": 3.75,
+            "enable_magnets": false,
+            "magnet_size": "[6.5,2.4]",
+            "magnet_release_method": "\"none\"",
+            "corner_screw_enabled": false,
+            "center_screw_enabled": false,
+            "weighted_enable": false,
+            "reduced_wall_height": -1,
+            "reduce_wall_taper": false,
+            "plate_options": "\"default\"",
+            "custom_grid_enabled": false,
+            "grid_positions": "[[1]]",
+            "remove_bottom_taper": false,
+            "connector_only": false,
+            "connector_position": "\"center_wall\"",
+            "connector_clip_enabled": false,
+            "connector_butterfly_enabled": false,
+            "connector_filament_enabled": false,
+            "connector_snaps_style": "\"disabled\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "cut": "[0,0,0]",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "Call `action()` and render the raw-SCAD payload directly.",
+          "exists": false,
+          "image_path": "gridfinity_base_raw/test/test_1/image.png",
+          "detail_image_path": "test/test_1/image.png",
+          "full_image_path": "gridfinity_base_raw/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image.png",
+          "detail_iso_120_path": "test/test_1/image.png",
+          "detail_top_400_path": "test/test_1/image.png",
+          "detail_top_120_path": "test/test_1/image.png",
+          "detail_side_400_path": "test/test_1/image.png",
+          "detail_side_120_path": "test/test_1/image.png",
+          "scad_exists": false,
+          "scad_path": "gridfinity_base_raw/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "Fractional crop baseplate with magnets, corner screws, and clip connectors enabled.",
+          "intent": "Fractional crop baseplate with magnets, corner screws, and clip connectors enabled.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "width": [
+              3.5,
+              0
+            ],
+            "height": [
+              2.2,
+              0
+            ],
+            "oversize_method": "crop",
+            "enable_magnets": true,
+            "corner_screw_enabled": true,
+            "connector_clip_enabled": true,
+            "connector_position": "both",
+            "remove_bottom_taper": true,
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "width": [
+              3.5,
+              0
+            ],
+            "height": [
+              2.2,
+              0
+            ],
+            "oversize_method": "crop",
+            "enable_magnets": true,
+            "corner_screw_enabled": true,
+            "connector_clip_enabled": true,
+            "connector_position": "both",
+            "remove_bottom_taper": true,
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive"
+          },
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_height": 1,
+            "outer_width": "[0,0]",
+            "outer_depth": "[0,0]",
+            "outer_height": 0,
+            "oversize_method": "\"fill\"",
+            "position_fill_grid_x": "\"near\"",
+            "position_fill_grid_y": "\"near\"",
+            "position_grid_in_outer_x": "\"center\"",
+            "position_grid_in_outer_y": "\"center\"",
+            "plate_corner_radius": 3.75,
+            "secondary_corner_radius": 3.75,
+            "enable_magnets": false,
+            "magnet_size": "[6.5,2.4]",
+            "magnet_release_method": "\"none\"",
+            "corner_screw_enabled": false,
+            "center_screw_enabled": false,
+            "weighted_enable": false,
+            "reduced_wall_height": -1,
+            "reduce_wall_taper": false,
+            "plate_options": "\"default\"",
+            "custom_grid_enabled": false,
+            "grid_positions": "[[1]]",
+            "remove_bottom_taper": false,
+            "connector_only": false,
+            "connector_position": "\"center_wall\"",
+            "connector_clip_enabled": false,
+            "connector_butterfly_enabled": false,
+            "connector_filament_enabled": false,
+            "connector_snaps_style": "\"disabled\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "cut": "[0,0,0]",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "Call `action()` and render the raw-SCAD payload directly.",
+          "exists": false,
+          "image_path": "gridfinity_base_raw/test/test_2/image.png",
+          "detail_image_path": "test/test_2/image.png",
+          "full_image_path": "gridfinity_base_raw/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image.png",
+          "detail_iso_120_path": "test/test_2/image.png",
+          "detail_top_400_path": "test/test_2/image.png",
+          "detail_top_120_path": "test/test_2/image.png",
+          "detail_side_400_path": "test/test_2/image.png",
+          "detail_side_120_path": "test/test_2/image.png",
+          "scad_exists": false,
+          "scad_path": "gridfinity_base_raw/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "This component returns raw SCAD through a local wrapper around vendored Gridfinity Extended baseplate modules, so the test implementation should render the generated result rather than primitive component dicts.",
+      "has_test_images": false,
+      "has_detail_page": true,
+      "default_values": {
+        "gridfinity_width": 2,
+        "gridfinity_height": 1,
+        "outer_width": "[0,0]",
+        "outer_depth": "[0,0]",
+        "outer_height": 0,
+        "oversize_method": "\"fill\"",
+        "position_fill_grid_x": "\"near\"",
+        "position_fill_grid_y": "\"near\"",
+        "position_grid_in_outer_x": "\"center\"",
+        "position_grid_in_outer_y": "\"center\"",
+        "plate_corner_radius": 3.75,
+        "secondary_corner_radius": 3.75,
+        "enable_magnets": false,
+        "magnet_size": "[6.5,2.4]",
+        "magnet_release_method": "\"none\"",
+        "corner_screw_enabled": false,
+        "center_screw_enabled": false,
+        "weighted_enable": false,
+        "reduced_wall_height": -1,
+        "reduce_wall_taper": false,
+        "plate_options": "\"default\"",
+        "custom_grid_enabled": false,
+        "grid_positions": "[[1]]",
+        "remove_bottom_taper": false,
+        "connector_only": false,
+        "connector_position": "\"center_wall\"",
+        "connector_clip_enabled": false,
+        "connector_butterfly_enabled": false,
+        "connector_filament_enabled": false,
+        "connector_snaps_style": "\"disabled\"",
+        "pitch": "[42,42,7]",
+        "clearance": "[0.5,0.5,0]",
+        "set_colour": "\"enable\"",
+        "render_position": "\"center\"",
+        "cut": "[0,0,0]",
+        "fa": 6,
+        "fs": 0.4,
+        "fn": 0,
+        "random_seed": 0,
+        "force_render": true,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "\"positive\""
+      },
+      "readme_path": "gridfinity_base_raw/README.md",
+      "test_samples_path": "gridfinity_base_raw/TEST_SAMPLES.md"
+    },
+    {
       "command": "gridfinity_base_tile",
       "name_long": "Gridfinity: Base Tile",
       "name_short_options": [],
@@ -1425,6 +2025,586 @@
       },
       "readme_path": "gridfinity_base_tile/README.md",
       "test_samples_path": "gridfinity_base_tile/TEST_SAMPLES.md"
+    },
+    {
+      "command": "gridfinity_gridflock_raw",
+      "name_long": "Gridfinity: GridFlock Raw",
+      "name_short_options": [],
+      "description": "Returns a raw OpenSCAD wrapper around the vendored GridFlock segmented baseplate generator, using repo-style public size inputs where gridfinity_width is X and gridfinity_depth is Y.",
+      "summary": "Returns a raw OpenSCAD wrapper around the vendored GridFlock segmented baseplate generator, using repo-style public size inputs where gridfinity_width is X and gridfinity_depth is Y.",
+      "variables": [
+        {
+          "name": "gridfinity_width",
+          "description": "Width in Gridfinity units along X.",
+          "type": "number",
+          "default": 2
+        },
+        {
+          "name": "gridfinity_depth",
+          "description": "Depth in Gridfinity units along Y.",
+          "type": "number",
+          "default": 2
+        },
+        {
+          "name": "plate_size",
+          "description": "Explicit plate size [x,y] in millimeters. Overrides derived unit sizing.",
+          "type": "list",
+          "default": "[84,84]"
+        },
+        {
+          "name": "bed_size",
+          "description": "Printer bed size [x,y] in millimeters.",
+          "type": "list",
+          "default": "[250,220]"
+        },
+        {
+          "name": "baseplate_dimensions",
+          "description": "Base Gridfinity cell dimensions [x,y] in millimeters.",
+          "type": "list",
+          "default": "[42,42]"
+        },
+        {
+          "name": "magnets",
+          "description": "Enable Gridfinity magnet pockets.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "magnet_style",
+          "description": "Magnet style enum from upstream GridFlock.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "magnet_frame_style",
+          "description": "Magnet frame style enum from upstream GridFlock.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "click",
+          "description": "Enable click-latch features.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "click_style",
+          "description": "Click-latch style enum from upstream GridFlock.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "connector_intersection_puzzle",
+          "description": "Enable intersection puzzle connectors between segments.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "intersection_puzzle_fit",
+          "description": "Intersection connector fit from 0 (loose) to 1 (tight).",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "connector_edge_puzzle",
+          "description": "Enable edge puzzle connectors between segments.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "edge_puzzle_count",
+          "description": "Number of edge puzzle connectors per cell edge.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "filler_x",
+          "description": "Filler mode in X: 0 none, 1 integer fraction, 2 dynamic.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "filler_y",
+          "description": "Filler mode in Y: 0 none, 1 integer fraction, 2 dynamic.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "filler_fraction",
+          "description": "Integer filler fractions [x,y].",
+          "type": "list",
+          "default": "[2,2]"
+        },
+        {
+          "name": "alignment",
+          "description": "Padding alignment [x,y] from 0 to 1.",
+          "type": "list",
+          "default": "[0.5,0.5]"
+        },
+        {
+          "name": "numbering",
+          "description": "Emboss segment numbers on the underside.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "bottom_chamfer",
+          "description": "Bottom chamfer [north,east,south,west] in millimeters.",
+          "type": "list",
+          "default": "[0,0,0,0]"
+        },
+        {
+          "name": "top_chamfer",
+          "description": "Top chamfer [north,east,south,west] in millimeters.",
+          "type": "list",
+          "default": "[0,0,0,0]"
+        },
+        {
+          "name": "plate_wall_thickness",
+          "description": "Plate wall thickness [north,east,south,west] in millimeters.",
+          "type": "list",
+          "default": "[0,0,0,0]"
+        },
+        {
+          "name": "plate_wall_height",
+          "description": "Plate wall heights [above,below] in millimeters.",
+          "type": "list",
+          "default": "[0,0]"
+        },
+        {
+          "name": "vertical_screw_plate_corners",
+          "description": "Enable vertical screw holes at plate corners.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "vertical_screw_segment_corners",
+          "description": "Enable vertical screw holes at segment corners.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "vertical_screw_other",
+          "description": "Enable vertical screw holes at other intersections.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "thumbscrews",
+          "description": "Enable Gridfinity Refined thumbscrew cutouts.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "x_segment_algorithm",
+          "description": "Segmentation algorithm in X: 0 ideal, 1 incremental.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "y_row_count_first",
+          "description": "Override first Y segment row counts [odd,even].",
+          "type": "list",
+          "default": "[0,0]"
+        },
+        {
+          "name": "x_column_count_first",
+          "description": "Override first X segment column count for incremental mode.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "stacked_print",
+          "description": "Enable stacked-print segment output.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "stacked_print_duplicates",
+          "description": "Duplicate each segment this many times in stacked-print mode.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "solid_base",
+          "description": "Solid base thickness in millimeters.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "plate_corner_radius",
+          "description": "Corner radius of the generated plate in millimeters.",
+          "type": "number",
+          "default": 4
+        },
+        {
+          "name": "edge_adjust",
+          "description": "Padding adjustment [north,east,south,west] in millimeters.",
+          "type": "list",
+          "default": "[0,0,0,0]"
+        },
+        {
+          "name": "cell_override",
+          "description": "Per-cell override string using c, s, and e codes.",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "top_slice",
+          "description": "Cut this much from the top of the baseplate in millimeters.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        }
+      ],
+      "variable_names": [
+        "gridfinity_width",
+        "gridfinity_depth",
+        "plate_size",
+        "bed_size",
+        "baseplate_dimensions",
+        "magnets",
+        "magnet_style",
+        "magnet_frame_style",
+        "click",
+        "click_style",
+        "connector_intersection_puzzle",
+        "intersection_puzzle_fit",
+        "connector_edge_puzzle",
+        "edge_puzzle_count",
+        "filler_x",
+        "filler_y",
+        "filler_fraction",
+        "alignment",
+        "numbering",
+        "bottom_chamfer",
+        "top_chamfer",
+        "plate_wall_thickness",
+        "plate_wall_height",
+        "vertical_screw_plate_corners",
+        "vertical_screw_segment_corners",
+        "vertical_screw_other",
+        "thumbscrews",
+        "x_segment_algorithm",
+        "y_row_count_first",
+        "x_column_count_first",
+        "stacked_print",
+        "stacked_print_duplicates",
+        "solid_base",
+        "plate_corner_radius",
+        "edge_adjust",
+        "cell_override",
+        "top_slice",
+        "pos",
+        "rot",
+        "type"
+      ],
+      "category": "Gridfinity",
+      "returns": "Raw SCAD geometry component dict.",
+      "aliases": [],
+      "detail_page": "gridfinity_gridflock_raw/documentation_detail.html",
+      "detail_markdown": "# gridfinity_gridflock_raw\n\n**Gridfinity: GridFlock Raw**\n\nReturns a raw OpenSCAD wrapper around the vendored GridFlock segmented baseplate generator, using repo-style public size inputs where `gridfinity_width` is X and `gridfinity_depth` is Y.\n\n## Returns\n\nRaw SCAD geometry component dict.\n\n## Notes\n\n- Backed by the vendored GridFlock source and its vendored `gridfinity-rebuilt-openscad` dependency.\n- `plate_size` is derived from the Gridfinity-unit inputs unless you pass an explicit millimeter size.\n- The wrapper forces the upstream `test_pattern` off and calls GridFlock's `main()` entrypoint directly.\n\n## Key Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| gridfinity_width | Width in Gridfinity units along X. | number | 2 |\n| gridfinity_depth | Depth in Gridfinity units along Y. | number | 2 |\n| plate_size | Explicit plate size [x,y] in millimeters. | list | [84,84] |\n| bed_size | Printer bed size [x,y] in millimeters. | list | [250,220] |\n| baseplate_dimensions | Base Gridfinity cell dimensions [x,y] in millimeters. | list | [42,42] |\n| magnets | Enable Gridfinity magnet pockets. | bool | False |\n| connector_intersection_puzzle | Enable intersection puzzle connectors between segments. | bool | True |\n| connector_edge_puzzle | Enable edge puzzle connectors between segments. | bool | False |\n| plate_wall_thickness | Plate wall thickness [north,east,south,west] in millimeters. | list | [0,0,0,0] |\n| plate_wall_height | Plate wall heights [above,below] in millimeters. | list | [0,0] |\n| solid_base | Solid base thickness in millimeters. | number | 0 |\n| edge_adjust | Padding adjustment [north,east,south,west] in millimeters. | list | [0,0,0,0] |\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| type | Geometry type: positive or negative. | string | \"positive\" |",
+      "detail_html": "<h1>gridfinity_gridflock_raw</h1>\n<p><strong>Gridfinity: GridFlock Raw</strong></p>\n<p>Returns a raw OpenSCAD wrapper around the vendored GridFlock segmented baseplate generator, using repo-style public size inputs where <code>gridfinity_width</code> is X and <code>gridfinity_depth</code> is Y.</p>\n<h2>Returns</h2>\n<p>Raw SCAD geometry component dict.</p>\n<h2>Notes</h2>\n<ul><li>Backed by the vendored GridFlock source and its vendored <code>gridfinity-rebuilt-openscad</code> dependency.</li><li><code>plate_size</code> is derived from the Gridfinity-unit inputs unless you pass an explicit millimeter size.</li><li>The wrapper forces the upstream <code>test_pattern</code> off and calls GridFlock's <code>main()</code> entrypoint directly.</li></ul>\n<h2>Key Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>gridfinity_width</td><td>Width in Gridfinity units along X.</td><td>number</td><td>2</td></tr><tr><td>gridfinity_depth</td><td>Depth in Gridfinity units along Y.</td><td>number</td><td>2</td></tr><tr><td>plate_size</td><td>Explicit plate size [x,y] in millimeters.</td><td>list</td><td>[84,84]</td></tr><tr><td>bed_size</td><td>Printer bed size [x,y] in millimeters.</td><td>list</td><td>[250,220]</td></tr><tr><td>baseplate_dimensions</td><td>Base Gridfinity cell dimensions [x,y] in millimeters.</td><td>list</td><td>[42,42]</td></tr><tr><td>magnets</td><td>Enable Gridfinity magnet pockets.</td><td>bool</td><td>False</td></tr><tr><td>connector_intersection_puzzle</td><td>Enable intersection puzzle connectors between segments.</td><td>bool</td><td>True</td></tr><tr><td>connector_edge_puzzle</td><td>Enable edge puzzle connectors between segments.</td><td>bool</td><td>False</td></tr><tr><td>plate_wall_thickness</td><td>Plate wall thickness [north,east,south,west] in millimeters.</td><td>list</td><td>[0,0,0,0]</td></tr><tr><td>plate_wall_height</td><td>Plate wall heights [above,below] in millimeters.</td><td>list</td><td>[0,0]</td></tr><tr><td>solid_base</td><td>Solid base thickness in millimeters.</td><td>number</td><td>0</td></tr><tr><td>edge_adjust</td><td>Padding adjustment [north,east,south,west] in millimeters.</td><td>list</td><td>[0,0,0,0]</td></tr><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>type</td><td>Geometry type: positive or negative.</td><td>string</td><td>\"positive\"</td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "Default 2x2 GridFlock baseplate using derived plate size.",
+          "intent": "Default 2x2 GridFlock baseplate using derived plate size.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "gridfinity_width": 2,
+            "gridfinity_depth": 2,
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "gridfinity_width": 2,
+            "gridfinity_depth": 2,
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive"
+          },
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_depth": 2,
+            "plate_size": "[84,84]",
+            "bed_size": "[250,220]",
+            "baseplate_dimensions": "[42,42]",
+            "magnets": false,
+            "magnet_style": 1,
+            "magnet_frame_style": 1,
+            "click": false,
+            "click_style": 1,
+            "connector_intersection_puzzle": true,
+            "intersection_puzzle_fit": 1,
+            "connector_edge_puzzle": false,
+            "edge_puzzle_count": 1,
+            "filler_x": 1,
+            "filler_y": 1,
+            "filler_fraction": "[2,2]",
+            "alignment": "[0.5,0.5]",
+            "numbering": true,
+            "bottom_chamfer": "[0,0,0,0]",
+            "top_chamfer": "[0,0,0,0]",
+            "plate_wall_thickness": "[0,0,0,0]",
+            "plate_wall_height": "[0,0]",
+            "vertical_screw_plate_corners": false,
+            "vertical_screw_segment_corners": false,
+            "vertical_screw_other": false,
+            "thumbscrews": false,
+            "x_segment_algorithm": 0,
+            "y_row_count_first": "[0,0]",
+            "x_column_count_first": 0,
+            "stacked_print": false,
+            "stacked_print_duplicates": 1,
+            "solid_base": 0,
+            "plate_corner_radius": 4,
+            "edge_adjust": "[0,0,0,0]",
+            "cell_override": "\"\"",
+            "top_slice": 0,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "Call `action()` and render the raw-SCAD payload directly.",
+          "exists": true,
+          "image_path": "gridfinity_gridflock_raw/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "gridfinity_gridflock_raw/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "gridfinity_gridflock_raw/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "Segmented plate with magnets, edge connectors, and a top plate wall.",
+          "intent": "Segmented plate with magnets, edge connectors, and a top plate wall.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "width": 3,
+            "depth": 2,
+            "bed_size": [
+              100,
+              100
+            ],
+            "magnets": true,
+            "connector_intersection_puzzle": false,
+            "connector_edge_puzzle": true,
+            "plate_wall_thickness": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "plate_wall_height": [
+              4,
+              0
+            ],
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "width": 3,
+            "depth": 2,
+            "bed_size": [
+              100,
+              100
+            ],
+            "magnets": true,
+            "connector_intersection_puzzle": false,
+            "connector_edge_puzzle": true,
+            "plate_wall_thickness": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "plate_wall_height": [
+              4,
+              0
+            ],
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive"
+          },
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_depth": 2,
+            "plate_size": "[84,84]",
+            "bed_size": "[250,220]",
+            "baseplate_dimensions": "[42,42]",
+            "magnets": false,
+            "magnet_style": 1,
+            "magnet_frame_style": 1,
+            "click": false,
+            "click_style": 1,
+            "connector_intersection_puzzle": true,
+            "intersection_puzzle_fit": 1,
+            "connector_edge_puzzle": false,
+            "edge_puzzle_count": 1,
+            "filler_x": 1,
+            "filler_y": 1,
+            "filler_fraction": "[2,2]",
+            "alignment": "[0.5,0.5]",
+            "numbering": true,
+            "bottom_chamfer": "[0,0,0,0]",
+            "top_chamfer": "[0,0,0,0]",
+            "plate_wall_thickness": "[0,0,0,0]",
+            "plate_wall_height": "[0,0]",
+            "vertical_screw_plate_corners": false,
+            "vertical_screw_segment_corners": false,
+            "vertical_screw_other": false,
+            "thumbscrews": false,
+            "x_segment_algorithm": 0,
+            "y_row_count_first": "[0,0]",
+            "x_column_count_first": 0,
+            "stacked_print": false,
+            "stacked_print_duplicates": 1,
+            "solid_base": 0,
+            "plate_corner_radius": 4,
+            "edge_adjust": "[0,0,0,0]",
+            "cell_override": "\"\"",
+            "top_slice": 0,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "Call `action()` and render the raw-SCAD payload directly.",
+          "exists": true,
+          "image_path": "gridfinity_gridflock_raw/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "gridfinity_gridflock_raw/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "gridfinity_gridflock_raw/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "This component returns raw SCAD source through a wrapper around vendored GridFlock modules, so the test implementation should render the generated result rather than a list of primitive component dicts.",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "gridfinity_width": 2,
+        "gridfinity_depth": 2,
+        "plate_size": "[84,84]",
+        "bed_size": "[250,220]",
+        "baseplate_dimensions": "[42,42]",
+        "magnets": false,
+        "magnet_style": 1,
+        "magnet_frame_style": 1,
+        "click": false,
+        "click_style": 1,
+        "connector_intersection_puzzle": true,
+        "intersection_puzzle_fit": 1,
+        "connector_edge_puzzle": false,
+        "edge_puzzle_count": 1,
+        "filler_x": 1,
+        "filler_y": 1,
+        "filler_fraction": "[2,2]",
+        "alignment": "[0.5,0.5]",
+        "numbering": true,
+        "bottom_chamfer": "[0,0,0,0]",
+        "top_chamfer": "[0,0,0,0]",
+        "plate_wall_thickness": "[0,0,0,0]",
+        "plate_wall_height": "[0,0]",
+        "vertical_screw_plate_corners": false,
+        "vertical_screw_segment_corners": false,
+        "vertical_screw_other": false,
+        "thumbscrews": false,
+        "x_segment_algorithm": 0,
+        "y_row_count_first": "[0,0]",
+        "x_column_count_first": 0,
+        "stacked_print": false,
+        "stacked_print_duplicates": 1,
+        "solid_base": 0,
+        "plate_corner_radius": 4,
+        "edge_adjust": "[0,0,0,0]",
+        "cell_override": "\"\"",
+        "top_slice": 0,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "\"positive\""
+      },
+      "readme_path": "gridfinity_gridflock_raw/README.md",
+      "test_samples_path": "gridfinity_gridflock_raw/TEST_SAMPLES.md"
     },
     {
       "command": "gridfinity_tray_default_label",
@@ -2097,6 +3277,676 @@
       "test_samples_path": ""
     },
     {
+      "command": "gridfinity_tray_fractional_test",
+      "name_long": "Gridfinity: Tray Raw",
+      "name_short_options": [],
+      "description": "Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z.",
+      "summary": "Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z.",
+      "variables": [
+        {
+          "name": "gridfinity_width",
+          "description": "Width in Gridfinity units along X.",
+          "type": "number",
+          "default": 2
+        },
+        {
+          "name": "gridfinity_height",
+          "description": "Height in Gridfinity units along Y.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "gridfinity_depth",
+          "description": "Depth in Gridfinity units along Z.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "filled_in",
+          "description": "Fill the cup into a solid block or fill the lip.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "wall_thickness",
+          "description": "Outer wall thickness in mm. Zero uses upstream auto sizing.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "headroom",
+          "description": "Undersize the top by this amount for easier stacking.",
+          "type": "number",
+          "default": 0.8
+        },
+        {
+          "name": "lip_style",
+          "description": "Cup lip style.",
+          "type": "string",
+          "default": "\"normal\""
+        },
+        {
+          "name": "vertical_chambers",
+          "description": "Number of vertical chambers.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "horizontal_chambers",
+          "description": "Number of horizontal chambers.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "enable_magnets",
+          "description": "Enable base magnet holes.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "enable_screws",
+          "description": "Enable base screw holes.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "magnet_size",
+          "description": "Magnet diameter and height [d,h] in mm.",
+          "type": "list",
+          "default": "[6.5,2.4]"
+        },
+        {
+          "name": "screw_size",
+          "description": "Screw diameter and height [d,h] in mm.",
+          "type": "list",
+          "default": "[3,6]"
+        },
+        {
+          "name": "floor_thickness",
+          "description": "Minimum thickness above cutouts in the base.",
+          "type": "number",
+          "default": 0.7
+        },
+        {
+          "name": "efficient_floor",
+          "description": "Efficient floor mode.",
+          "type": "string",
+          "default": "\"off\""
+        },
+        {
+          "name": "sub_pitch",
+          "description": "Bottom pad subdivision pitch.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "flat_base",
+          "description": "Internal base style.",
+          "type": "string",
+          "default": "\"off\""
+        },
+        {
+          "name": "label_style",
+          "description": "Label style.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "label_position",
+          "description": "Label position.",
+          "type": "string",
+          "default": "\"left\""
+        },
+        {
+          "name": "sliding_lid_enabled",
+          "description": "Enable the sliding lid geometry.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "fingerslide",
+          "description": "Finger slide style.",
+          "type": "string",
+          "default": "\"none\""
+        },
+        {
+          "name": "tapered_corner",
+          "description": "Tapered corner style.",
+          "type": "string",
+          "default": "\"none\""
+        },
+        {
+          "name": "wallpattern_enabled",
+          "description": "Enable wall cutout patterns.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "floorpattern_enabled",
+          "description": "Enable floor patterns.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "wallcutout_vertical",
+          "description": "Vertical wall cutout mode.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "wallcutout_horizontal",
+          "description": "Horizontal wall cutout mode.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "extension_x_enabled",
+          "description": "Extendable tab mode on X.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "extension_y_enabled",
+          "description": "Extendable tab mode on Y.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "text_1",
+          "description": "Add the bin size to the bottom text.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "text_2",
+          "description": "Enable custom bottom text.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "text_2_text",
+          "description": "Custom bottom text value.",
+          "type": "string",
+          "default": "\"Gridfinity Extended\""
+        },
+        {
+          "name": "pitch",
+          "description": "Gridfinity pitch [x,y,z] in mm.",
+          "type": "list",
+          "default": "[42,42,7]"
+        },
+        {
+          "name": "clearance",
+          "description": "Clearance [x,y,z] in mm.",
+          "type": "list",
+          "default": "[0.5,0.5,0]"
+        },
+        {
+          "name": "set_colour",
+          "description": "Color handling mode for the upstream renderer.",
+          "type": "string",
+          "default": "\"enable\""
+        },
+        {
+          "name": "render_position",
+          "description": "Upstream render position mode.",
+          "type": "string",
+          "default": "\"center\""
+        },
+        {
+          "name": "fa",
+          "description": "OpenSCAD fragment angle.",
+          "type": "number",
+          "default": 6
+        },
+        {
+          "name": "fs",
+          "description": "OpenSCAD fragment size.",
+          "type": "number",
+          "default": 0.4
+        },
+        {
+          "name": "fn",
+          "description": "OpenSCAD fragment count override.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "random_seed",
+          "description": "Random seed for procedural features.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "force_render",
+          "description": "Force render on costly upstream components.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        }
+      ],
+      "variable_names": [
+        "gridfinity_width",
+        "gridfinity_height",
+        "gridfinity_depth",
+        "filled_in",
+        "wall_thickness",
+        "headroom",
+        "lip_style",
+        "vertical_chambers",
+        "horizontal_chambers",
+        "enable_magnets",
+        "enable_screws",
+        "magnet_size",
+        "screw_size",
+        "floor_thickness",
+        "efficient_floor",
+        "sub_pitch",
+        "flat_base",
+        "label_style",
+        "label_position",
+        "sliding_lid_enabled",
+        "fingerslide",
+        "tapered_corner",
+        "wallpattern_enabled",
+        "floorpattern_enabled",
+        "wallcutout_vertical",
+        "wallcutout_horizontal",
+        "extension_x_enabled",
+        "extension_y_enabled",
+        "text_1",
+        "text_2",
+        "text_2_text",
+        "pitch",
+        "clearance",
+        "set_colour",
+        "render_position",
+        "fa",
+        "fs",
+        "fn",
+        "random_seed",
+        "force_render",
+        "pos",
+        "rot",
+        "type"
+      ],
+      "category": "Gridfinity",
+      "returns": "Raw SCAD geometry component dict.",
+      "aliases": [],
+      "detail_page": "gridfinity_tray_fractional_test/documentation_detail.html",
+      "detail_markdown": "# gridfinity_tray_raw\n\n**Gridfinity: Tray Raw**\n\nReturns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using gridfinity_width, gridfinity_depth, and gridfinity_height as the public size inputs.\n\n## Returns\n\nRaw SCAD geometry component dict.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| gridfinity_width | Width in Gridfinity units. | number | 2 |\n| gridfinity_depth | Depth in Gridfinity units. | number | 1 |\n| gridfinity_height | Height in Gridfinity units. | number | 3 |\n| filled_in | Fill the cup into a solid block or fill the lip. | string | \"disabled\" |\n| wall_thickness | Outer wall thickness in mm. Zero uses upstream auto sizing. | number | 0 |\n| headroom | Undersize the top by this amount for easier stacking. | number | 0.8 |\n| lip_style | Cup lip style. | string | \"normal\" |\n| vertical_chambers | Number of vertical chambers. | number | 1 |\n| horizontal_chambers | Number of horizontal chambers. | number | 1 |\n| enable_magnets | Enable base magnet holes. | bool | False |\n| enable_screws | Enable base screw holes. | bool | False |\n| magnet_size | Magnet diameter and height [d,h] in mm. | list | [6.5,2.4] |\n| screw_size | Screw diameter and height [d,h] in mm. | list | [3,6] |\n| floor_thickness | Minimum thickness above cutouts in the base. | number | 0.7 |\n| efficient_floor | Efficient floor mode. | string | \"off\" |\n| sub_pitch | Bottom pad subdivision pitch. | number | 1 |\n| flat_base | Internal base style. | string | \"off\" |\n| label_style | Label style. | string | \"disabled\" |\n| label_position | Label position. | string | \"left\" |\n| sliding_lid_enabled | Enable the sliding lid geometry. | bool | False |\n| fingerslide | Finger slide style. | string | \"none\" |\n| tapered_corner | Tapered corner style. | string | \"none\" |\n| wallpattern_enabled | Enable wall cutout patterns. | bool | False |\n| floorpattern_enabled | Enable floor patterns. | bool | False |\n| wallcutout_vertical | Vertical wall cutout mode. | string | \"disabled\" |\n| wallcutout_horizontal | Horizontal wall cutout mode. | string | \"disabled\" |\n| extension_x_enabled | Extendable tab mode on X. | string | \"disabled\" |\n| extension_y_enabled | Extendable tab mode on Y. | string | \"disabled\" |\n| text_1 | Add the bin size to the bottom text. | bool | False |\n| text_2 | Enable custom bottom text. | bool | False |\n| text_2_text | Custom bottom text value. | string | \"Gridfinity Extended\" |\n| pitch | Gridfinity pitch [x,y,z] in mm. | list | [42,42,7] |\n| clearance | Clearance [x,y,z] in mm. | list | [0.5,0.5,0] |\n| set_colour | Color handling mode for the upstream renderer. | string | \"enable\" |\n| render_position | Upstream render position mode. | string | \"center\" |\n| fa | OpenSCAD fragment angle. | number | 6 |\n| fs | OpenSCAD fragment size. | number | 0.4 |\n| fn | OpenSCAD fragment count override. | number | 0 |\n| random_seed | Random seed for procedural features. | number | 0 |\n| force_render | Force render on costly upstream components. | bool | True |\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| type | Geometry type: positive or negative. | string | \"positive\" |",
+      "detail_html": "<h1>gridfinity_tray_raw</h1>\n<p><strong>Gridfinity: Tray Raw</strong></p>\n<p>Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using gridfinity_width, gridfinity_depth, and gridfinity_height as the public size inputs.</p>\n<h2>Returns</h2>\n<p>Raw SCAD geometry component dict.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>gridfinity_width</td><td>Width in Gridfinity units.</td><td>number</td><td>2</td></tr><tr><td>gridfinity_depth</td><td>Depth in Gridfinity units.</td><td>number</td><td>1</td></tr><tr><td>gridfinity_height</td><td>Height in Gridfinity units.</td><td>number</td><td>3</td></tr><tr><td>filled_in</td><td>Fill the cup into a solid block or fill the lip.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>wall_thickness</td><td>Outer wall thickness in mm. Zero uses upstream auto sizing.</td><td>number</td><td>0</td></tr><tr><td>headroom</td><td>Undersize the top by this amount for easier stacking.</td><td>number</td><td>0.8</td></tr><tr><td>lip_style</td><td>Cup lip style.</td><td>string</td><td>\"normal\"</td></tr><tr><td>vertical_chambers</td><td>Number of vertical chambers.</td><td>number</td><td>1</td></tr><tr><td>horizontal_chambers</td><td>Number of horizontal chambers.</td><td>number</td><td>1</td></tr><tr><td>enable_magnets</td><td>Enable base magnet holes.</td><td>bool</td><td>False</td></tr><tr><td>enable_screws</td><td>Enable base screw holes.</td><td>bool</td><td>False</td></tr><tr><td>magnet_size</td><td>Magnet diameter and height [d,h] in mm.</td><td>list</td><td>[6.5,2.4]</td></tr><tr><td>screw_size</td><td>Screw diameter and height [d,h] in mm.</td><td>list</td><td>[3,6]</td></tr><tr><td>floor_thickness</td><td>Minimum thickness above cutouts in the base.</td><td>number</td><td>0.7</td></tr><tr><td>efficient_floor</td><td>Efficient floor mode.</td><td>string</td><td>\"off\"</td></tr><tr><td>sub_pitch</td><td>Bottom pad subdivision pitch.</td><td>number</td><td>1</td></tr><tr><td>flat_base</td><td>Internal base style.</td><td>string</td><td>\"off\"</td></tr><tr><td>label_style</td><td>Label style.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>label_position</td><td>Label position.</td><td>string</td><td>\"left\"</td></tr><tr><td>sliding_lid_enabled</td><td>Enable the sliding lid geometry.</td><td>bool</td><td>False</td></tr><tr><td>fingerslide</td><td>Finger slide style.</td><td>string</td><td>\"none\"</td></tr><tr><td>tapered_corner</td><td>Tapered corner style.</td><td>string</td><td>\"none\"</td></tr><tr><td>wallpattern_enabled</td><td>Enable wall cutout patterns.</td><td>bool</td><td>False</td></tr><tr><td>floorpattern_enabled</td><td>Enable floor patterns.</td><td>bool</td><td>False</td></tr><tr><td>wallcutout_vertical</td><td>Vertical wall cutout mode.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>wallcutout_horizontal</td><td>Horizontal wall cutout mode.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>extension_x_enabled</td><td>Extendable tab mode on X.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>extension_y_enabled</td><td>Extendable tab mode on Y.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>text_1</td><td>Add the bin size to the bottom text.</td><td>bool</td><td>False</td></tr><tr><td>text_2</td><td>Enable custom bottom text.</td><td>bool</td><td>False</td></tr><tr><td>text_2_text</td><td>Custom bottom text value.</td><td>string</td><td>\"Gridfinity Extended\"</td></tr><tr><td>pitch</td><td>Gridfinity pitch [x,y,z] in mm.</td><td>list</td><td>[42,42,7]</td></tr><tr><td>clearance</td><td>Clearance [x,y,z] in mm.</td><td>list</td><td>[0.5,0.5,0]</td></tr><tr><td>set_colour</td><td>Color handling mode for the upstream renderer.</td><td>string</td><td>\"enable\"</td></tr><tr><td>render_position</td><td>Upstream render position mode.</td><td>string</td><td>\"center\"</td></tr><tr><td>fa</td><td>OpenSCAD fragment angle.</td><td>number</td><td>6</td></tr><tr><td>fs</td><td>OpenSCAD fragment size.</td><td>number</td><td>0.4</td></tr><tr><td>fn</td><td>OpenSCAD fragment count override.</td><td>number</td><td>0</td></tr><tr><td>random_seed</td><td>Random seed for procedural features.</td><td>number</td><td>0</td></tr><tr><td>force_render</td><td>Force render on costly upstream components.</td><td>bool</td><td>True</td></tr><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>type</td><td>Geometry type: positive or negative.</td><td>string</td><td>\"positive\"</td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "_validation_explicit",
+          "filename": "_validation_explicit",
+          "title": "_validation_explicit",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_height": 1,
+            "gridfinity_depth": 3,
+            "filled_in": "\"disabled\"",
+            "wall_thickness": 0,
+            "headroom": 0.8,
+            "lip_style": "\"normal\"",
+            "vertical_chambers": 1,
+            "horizontal_chambers": 1,
+            "enable_magnets": false,
+            "enable_screws": false,
+            "magnet_size": "[6.5,2.4]",
+            "screw_size": "[3,6]",
+            "floor_thickness": 0.7,
+            "efficient_floor": "\"off\"",
+            "sub_pitch": 1,
+            "flat_base": "\"off\"",
+            "label_style": "\"disabled\"",
+            "label_position": "\"left\"",
+            "sliding_lid_enabled": false,
+            "fingerslide": "\"none\"",
+            "tapered_corner": "\"none\"",
+            "wallpattern_enabled": false,
+            "floorpattern_enabled": false,
+            "wallcutout_vertical": "\"disabled\"",
+            "wallcutout_horizontal": "\"disabled\"",
+            "extension_x_enabled": "\"disabled\"",
+            "extension_y_enabled": "\"disabled\"",
+            "text_1": false,
+            "text_2": false,
+            "text_2_text": "\"Gridfinity Extended\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "gridfinity_tray_fractional_test/test/_validation_explicit/image.png",
+          "detail_image_path": "test/_validation_explicit/image.png",
+          "full_image_path": "gridfinity_tray_fractional_test/test/_validation_explicit/image.png",
+          "detail_full_image_path": "test/_validation_explicit/image.png",
+          "detail_iso_400_path": "test/_validation_explicit/image.png",
+          "detail_iso_120_path": "test/_validation_explicit/image.png",
+          "detail_top_400_path": "test/_validation_explicit/image.png",
+          "detail_top_120_path": "test/_validation_explicit/image.png",
+          "detail_side_400_path": "test/_validation_explicit/image.png",
+          "detail_side_120_path": "test/_validation_explicit/image.png",
+          "scad_exists": true,
+          "scad_path": "gridfinity_tray_fractional_test/test/_validation_explicit/working.scad",
+          "detail_scad_path": "test/_validation_explicit/working.scad"
+        },
+        {
+          "sample_id": "scad_reference",
+          "filename": "scad_reference",
+          "title": "scad_reference",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_height": 1,
+            "gridfinity_depth": 3,
+            "filled_in": "\"disabled\"",
+            "wall_thickness": 0,
+            "headroom": 0.8,
+            "lip_style": "\"normal\"",
+            "vertical_chambers": 1,
+            "horizontal_chambers": 1,
+            "enable_magnets": false,
+            "enable_screws": false,
+            "magnet_size": "[6.5,2.4]",
+            "screw_size": "[3,6]",
+            "floor_thickness": 0.7,
+            "efficient_floor": "\"off\"",
+            "sub_pitch": 1,
+            "flat_base": "\"off\"",
+            "label_style": "\"disabled\"",
+            "label_position": "\"left\"",
+            "sliding_lid_enabled": false,
+            "fingerslide": "\"none\"",
+            "tapered_corner": "\"none\"",
+            "wallpattern_enabled": false,
+            "floorpattern_enabled": false,
+            "wallcutout_vertical": "\"disabled\"",
+            "wallcutout_horizontal": "\"disabled\"",
+            "extension_x_enabled": "\"disabled\"",
+            "extension_y_enabled": "\"disabled\"",
+            "text_1": false,
+            "text_2": false,
+            "text_2_text": "\"Gridfinity Extended\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "gridfinity_tray_fractional_test/test/scad_reference/image.png",
+          "detail_image_path": "test/scad_reference/image.png",
+          "full_image_path": "gridfinity_tray_fractional_test/test/scad_reference/image.png",
+          "detail_full_image_path": "test/scad_reference/image.png",
+          "detail_iso_400_path": "test/scad_reference/image.png",
+          "detail_iso_120_path": "test/scad_reference/image.png",
+          "detail_top_400_path": "test/scad_reference/image.png",
+          "detail_top_120_path": "test/scad_reference/image.png",
+          "detail_side_400_path": "test/scad_reference/image.png",
+          "detail_side_120_path": "test/scad_reference/image.png",
+          "scad_exists": false,
+          "scad_path": "gridfinity_tray_fractional_test/test/scad_reference/working.scad",
+          "detail_scad_path": "test/scad_reference/working.scad"
+        },
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_height": 1,
+            "gridfinity_depth": 3,
+            "filled_in": "\"disabled\"",
+            "wall_thickness": 0,
+            "headroom": 0.8,
+            "lip_style": "\"normal\"",
+            "vertical_chambers": 1,
+            "horizontal_chambers": 1,
+            "enable_magnets": false,
+            "enable_screws": false,
+            "magnet_size": "[6.5,2.4]",
+            "screw_size": "[3,6]",
+            "floor_thickness": 0.7,
+            "efficient_floor": "\"off\"",
+            "sub_pitch": 1,
+            "flat_base": "\"off\"",
+            "label_style": "\"disabled\"",
+            "label_position": "\"left\"",
+            "sliding_lid_enabled": false,
+            "fingerslide": "\"none\"",
+            "tapered_corner": "\"none\"",
+            "wallpattern_enabled": false,
+            "floorpattern_enabled": false,
+            "wallcutout_vertical": "\"disabled\"",
+            "wallcutout_horizontal": "\"disabled\"",
+            "extension_x_enabled": "\"disabled\"",
+            "extension_y_enabled": "\"disabled\"",
+            "text_1": false,
+            "text_2": false,
+            "text_2_text": "\"Gridfinity Extended\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "gridfinity_tray_fractional_test/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "gridfinity_tray_fractional_test/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "gridfinity_tray_fractional_test/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "gridfinity_width": 2,
+            "gridfinity_height": 1,
+            "gridfinity_depth": 3,
+            "filled_in": "\"disabled\"",
+            "wall_thickness": 0,
+            "headroom": 0.8,
+            "lip_style": "\"normal\"",
+            "vertical_chambers": 1,
+            "horizontal_chambers": 1,
+            "enable_magnets": false,
+            "enable_screws": false,
+            "magnet_size": "[6.5,2.4]",
+            "screw_size": "[3,6]",
+            "floor_thickness": 0.7,
+            "efficient_floor": "\"off\"",
+            "sub_pitch": 1,
+            "flat_base": "\"off\"",
+            "label_style": "\"disabled\"",
+            "label_position": "\"left\"",
+            "sliding_lid_enabled": false,
+            "fingerslide": "\"none\"",
+            "tapered_corner": "\"none\"",
+            "wallpattern_enabled": false,
+            "floorpattern_enabled": false,
+            "wallcutout_vertical": "\"disabled\"",
+            "wallcutout_horizontal": "\"disabled\"",
+            "extension_x_enabled": "\"disabled\"",
+            "extension_y_enabled": "\"disabled\"",
+            "text_1": false,
+            "text_2": false,
+            "text_2_text": "\"Gridfinity Extended\"",
+            "pitch": "[42,42,7]",
+            "clearance": "[0.5,0.5,0]",
+            "set_colour": "\"enable\"",
+            "render_position": "\"center\"",
+            "fa": 6,
+            "fs": 0.4,
+            "fn": 0,
+            "random_seed": 0,
+            "force_render": true,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "gridfinity_tray_fractional_test/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "gridfinity_tray_fractional_test/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "gridfinity_tray_fractional_test/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "gridfinity_width": 2,
+        "gridfinity_height": 1,
+        "gridfinity_depth": 3,
+        "filled_in": "\"disabled\"",
+        "wall_thickness": 0,
+        "headroom": 0.8,
+        "lip_style": "\"normal\"",
+        "vertical_chambers": 1,
+        "horizontal_chambers": 1,
+        "enable_magnets": false,
+        "enable_screws": false,
+        "magnet_size": "[6.5,2.4]",
+        "screw_size": "[3,6]",
+        "floor_thickness": 0.7,
+        "efficient_floor": "\"off\"",
+        "sub_pitch": 1,
+        "flat_base": "\"off\"",
+        "label_style": "\"disabled\"",
+        "label_position": "\"left\"",
+        "sliding_lid_enabled": false,
+        "fingerslide": "\"none\"",
+        "tapered_corner": "\"none\"",
+        "wallpattern_enabled": false,
+        "floorpattern_enabled": false,
+        "wallcutout_vertical": "\"disabled\"",
+        "wallcutout_horizontal": "\"disabled\"",
+        "extension_x_enabled": "\"disabled\"",
+        "extension_y_enabled": "\"disabled\"",
+        "text_1": false,
+        "text_2": false,
+        "text_2_text": "\"Gridfinity Extended\"",
+        "pitch": "[42,42,7]",
+        "clearance": "[0.5,0.5,0]",
+        "set_colour": "\"enable\"",
+        "render_position": "\"center\"",
+        "fa": 6,
+        "fs": 0.4,
+        "fn": 0,
+        "random_seed": 0,
+        "force_render": true,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "\"positive\""
+      },
+      "readme_path": "gridfinity_tray_fractional_test/README.md",
+      "test_samples_path": ""
+    },
+    {
       "command": "gridfinity_tray_raw",
       "name_long": "Gridfinity: Tray Raw",
       "name_short_options": [],
@@ -2764,676 +4614,6 @@
         "type": "\"positive\""
       },
       "readme_path": "gridfinity_tray_raw/README.md",
-      "test_samples_path": ""
-    },
-    {
-      "command": "gridfinity_tray_raw - Copy",
-      "name_long": "Gridfinity: Tray Raw",
-      "name_short_options": [],
-      "description": "Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z.",
-      "summary": "Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z.",
-      "variables": [
-        {
-          "name": "gridfinity_width",
-          "description": "Width in Gridfinity units along X.",
-          "type": "number",
-          "default": 2
-        },
-        {
-          "name": "gridfinity_height",
-          "description": "Height in Gridfinity units along Y.",
-          "type": "number",
-          "default": 1
-        },
-        {
-          "name": "gridfinity_depth",
-          "description": "Depth in Gridfinity units along Z.",
-          "type": "number",
-          "default": 3
-        },
-        {
-          "name": "filled_in",
-          "description": "Fill the cup into a solid block or fill the lip.",
-          "type": "string",
-          "default": "\"disabled\""
-        },
-        {
-          "name": "wall_thickness",
-          "description": "Outer wall thickness in mm. Zero uses upstream auto sizing.",
-          "type": "number",
-          "default": 0
-        },
-        {
-          "name": "headroom",
-          "description": "Undersize the top by this amount for easier stacking.",
-          "type": "number",
-          "default": 0.8
-        },
-        {
-          "name": "lip_style",
-          "description": "Cup lip style.",
-          "type": "string",
-          "default": "\"normal\""
-        },
-        {
-          "name": "vertical_chambers",
-          "description": "Number of vertical chambers.",
-          "type": "number",
-          "default": 1
-        },
-        {
-          "name": "horizontal_chambers",
-          "description": "Number of horizontal chambers.",
-          "type": "number",
-          "default": 1
-        },
-        {
-          "name": "enable_magnets",
-          "description": "Enable base magnet holes.",
-          "type": "bool",
-          "default": false
-        },
-        {
-          "name": "enable_screws",
-          "description": "Enable base screw holes.",
-          "type": "bool",
-          "default": false
-        },
-        {
-          "name": "magnet_size",
-          "description": "Magnet diameter and height [d,h] in mm.",
-          "type": "list",
-          "default": "[6.5,2.4]"
-        },
-        {
-          "name": "screw_size",
-          "description": "Screw diameter and height [d,h] in mm.",
-          "type": "list",
-          "default": "[3,6]"
-        },
-        {
-          "name": "floor_thickness",
-          "description": "Minimum thickness above cutouts in the base.",
-          "type": "number",
-          "default": 0.7
-        },
-        {
-          "name": "efficient_floor",
-          "description": "Efficient floor mode.",
-          "type": "string",
-          "default": "\"off\""
-        },
-        {
-          "name": "sub_pitch",
-          "description": "Bottom pad subdivision pitch.",
-          "type": "number",
-          "default": 1
-        },
-        {
-          "name": "flat_base",
-          "description": "Internal base style.",
-          "type": "string",
-          "default": "\"off\""
-        },
-        {
-          "name": "label_style",
-          "description": "Label style.",
-          "type": "string",
-          "default": "\"disabled\""
-        },
-        {
-          "name": "label_position",
-          "description": "Label position.",
-          "type": "string",
-          "default": "\"left\""
-        },
-        {
-          "name": "sliding_lid_enabled",
-          "description": "Enable the sliding lid geometry.",
-          "type": "bool",
-          "default": false
-        },
-        {
-          "name": "fingerslide",
-          "description": "Finger slide style.",
-          "type": "string",
-          "default": "\"none\""
-        },
-        {
-          "name": "tapered_corner",
-          "description": "Tapered corner style.",
-          "type": "string",
-          "default": "\"none\""
-        },
-        {
-          "name": "wallpattern_enabled",
-          "description": "Enable wall cutout patterns.",
-          "type": "bool",
-          "default": false
-        },
-        {
-          "name": "floorpattern_enabled",
-          "description": "Enable floor patterns.",
-          "type": "bool",
-          "default": false
-        },
-        {
-          "name": "wallcutout_vertical",
-          "description": "Vertical wall cutout mode.",
-          "type": "string",
-          "default": "\"disabled\""
-        },
-        {
-          "name": "wallcutout_horizontal",
-          "description": "Horizontal wall cutout mode.",
-          "type": "string",
-          "default": "\"disabled\""
-        },
-        {
-          "name": "extension_x_enabled",
-          "description": "Extendable tab mode on X.",
-          "type": "string",
-          "default": "\"disabled\""
-        },
-        {
-          "name": "extension_y_enabled",
-          "description": "Extendable tab mode on Y.",
-          "type": "string",
-          "default": "\"disabled\""
-        },
-        {
-          "name": "text_1",
-          "description": "Add the bin size to the bottom text.",
-          "type": "bool",
-          "default": false
-        },
-        {
-          "name": "text_2",
-          "description": "Enable custom bottom text.",
-          "type": "bool",
-          "default": false
-        },
-        {
-          "name": "text_2_text",
-          "description": "Custom bottom text value.",
-          "type": "string",
-          "default": "\"Gridfinity Extended\""
-        },
-        {
-          "name": "pitch",
-          "description": "Gridfinity pitch [x,y,z] in mm.",
-          "type": "list",
-          "default": "[42,42,7]"
-        },
-        {
-          "name": "clearance",
-          "description": "Clearance [x,y,z] in mm.",
-          "type": "list",
-          "default": "[0.5,0.5,0]"
-        },
-        {
-          "name": "set_colour",
-          "description": "Color handling mode for the upstream renderer.",
-          "type": "string",
-          "default": "\"enable\""
-        },
-        {
-          "name": "render_position",
-          "description": "Upstream render position mode.",
-          "type": "string",
-          "default": "\"center\""
-        },
-        {
-          "name": "fa",
-          "description": "OpenSCAD fragment angle.",
-          "type": "number",
-          "default": 6
-        },
-        {
-          "name": "fs",
-          "description": "OpenSCAD fragment size.",
-          "type": "number",
-          "default": 0.4
-        },
-        {
-          "name": "fn",
-          "description": "OpenSCAD fragment count override.",
-          "type": "number",
-          "default": 0
-        },
-        {
-          "name": "random_seed",
-          "description": "Random seed for procedural features.",
-          "type": "number",
-          "default": 0
-        },
-        {
-          "name": "force_render",
-          "description": "Force render on costly upstream components.",
-          "type": "bool",
-          "default": true
-        },
-        {
-          "name": "pos",
-          "description": "3-element [x,y,z] position.",
-          "type": "list",
-          "default": "[0,0,0]"
-        },
-        {
-          "name": "rot",
-          "description": "Rotation [rx,ry,rz] in degrees.",
-          "type": "list",
-          "default": "[0,0,0]"
-        },
-        {
-          "name": "type",
-          "description": "Geometry type: positive or negative.",
-          "type": "string",
-          "default": "\"positive\""
-        }
-      ],
-      "variable_names": [
-        "gridfinity_width",
-        "gridfinity_height",
-        "gridfinity_depth",
-        "filled_in",
-        "wall_thickness",
-        "headroom",
-        "lip_style",
-        "vertical_chambers",
-        "horizontal_chambers",
-        "enable_magnets",
-        "enable_screws",
-        "magnet_size",
-        "screw_size",
-        "floor_thickness",
-        "efficient_floor",
-        "sub_pitch",
-        "flat_base",
-        "label_style",
-        "label_position",
-        "sliding_lid_enabled",
-        "fingerslide",
-        "tapered_corner",
-        "wallpattern_enabled",
-        "floorpattern_enabled",
-        "wallcutout_vertical",
-        "wallcutout_horizontal",
-        "extension_x_enabled",
-        "extension_y_enabled",
-        "text_1",
-        "text_2",
-        "text_2_text",
-        "pitch",
-        "clearance",
-        "set_colour",
-        "render_position",
-        "fa",
-        "fs",
-        "fn",
-        "random_seed",
-        "force_render",
-        "pos",
-        "rot",
-        "type"
-      ],
-      "category": "Gridfinity",
-      "returns": "Raw SCAD geometry component dict.",
-      "aliases": [],
-      "detail_page": "gridfinity_tray_raw - Copy/documentation_detail.html",
-      "detail_markdown": "# gridfinity_tray_raw\n\n**Gridfinity: Tray Raw**\n\nReturns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using gridfinity_width, gridfinity_depth, and gridfinity_height as the public size inputs.\n\n## Returns\n\nRaw SCAD geometry component dict.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| gridfinity_width | Width in Gridfinity units. | number | 2 |\n| gridfinity_depth | Depth in Gridfinity units. | number | 1 |\n| gridfinity_height | Height in Gridfinity units. | number | 3 |\n| filled_in | Fill the cup into a solid block or fill the lip. | string | \"disabled\" |\n| wall_thickness | Outer wall thickness in mm. Zero uses upstream auto sizing. | number | 0 |\n| headroom | Undersize the top by this amount for easier stacking. | number | 0.8 |\n| lip_style | Cup lip style. | string | \"normal\" |\n| vertical_chambers | Number of vertical chambers. | number | 1 |\n| horizontal_chambers | Number of horizontal chambers. | number | 1 |\n| enable_magnets | Enable base magnet holes. | bool | False |\n| enable_screws | Enable base screw holes. | bool | False |\n| magnet_size | Magnet diameter and height [d,h] in mm. | list | [6.5,2.4] |\n| screw_size | Screw diameter and height [d,h] in mm. | list | [3,6] |\n| floor_thickness | Minimum thickness above cutouts in the base. | number | 0.7 |\n| efficient_floor | Efficient floor mode. | string | \"off\" |\n| sub_pitch | Bottom pad subdivision pitch. | number | 1 |\n| flat_base | Internal base style. | string | \"off\" |\n| label_style | Label style. | string | \"disabled\" |\n| label_position | Label position. | string | \"left\" |\n| sliding_lid_enabled | Enable the sliding lid geometry. | bool | False |\n| fingerslide | Finger slide style. | string | \"none\" |\n| tapered_corner | Tapered corner style. | string | \"none\" |\n| wallpattern_enabled | Enable wall cutout patterns. | bool | False |\n| floorpattern_enabled | Enable floor patterns. | bool | False |\n| wallcutout_vertical | Vertical wall cutout mode. | string | \"disabled\" |\n| wallcutout_horizontal | Horizontal wall cutout mode. | string | \"disabled\" |\n| extension_x_enabled | Extendable tab mode on X. | string | \"disabled\" |\n| extension_y_enabled | Extendable tab mode on Y. | string | \"disabled\" |\n| text_1 | Add the bin size to the bottom text. | bool | False |\n| text_2 | Enable custom bottom text. | bool | False |\n| text_2_text | Custom bottom text value. | string | \"Gridfinity Extended\" |\n| pitch | Gridfinity pitch [x,y,z] in mm. | list | [42,42,7] |\n| clearance | Clearance [x,y,z] in mm. | list | [0.5,0.5,0] |\n| set_colour | Color handling mode for the upstream renderer. | string | \"enable\" |\n| render_position | Upstream render position mode. | string | \"center\" |\n| fa | OpenSCAD fragment angle. | number | 6 |\n| fs | OpenSCAD fragment size. | number | 0.4 |\n| fn | OpenSCAD fragment count override. | number | 0 |\n| random_seed | Random seed for procedural features. | number | 0 |\n| force_render | Force render on costly upstream components. | bool | True |\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| type | Geometry type: positive or negative. | string | \"positive\" |",
-      "detail_html": "<h1>gridfinity_tray_raw</h1>\n<p><strong>Gridfinity: Tray Raw</strong></p>\n<p>Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using gridfinity_width, gridfinity_depth, and gridfinity_height as the public size inputs.</p>\n<h2>Returns</h2>\n<p>Raw SCAD geometry component dict.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>gridfinity_width</td><td>Width in Gridfinity units.</td><td>number</td><td>2</td></tr><tr><td>gridfinity_depth</td><td>Depth in Gridfinity units.</td><td>number</td><td>1</td></tr><tr><td>gridfinity_height</td><td>Height in Gridfinity units.</td><td>number</td><td>3</td></tr><tr><td>filled_in</td><td>Fill the cup into a solid block or fill the lip.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>wall_thickness</td><td>Outer wall thickness in mm. Zero uses upstream auto sizing.</td><td>number</td><td>0</td></tr><tr><td>headroom</td><td>Undersize the top by this amount for easier stacking.</td><td>number</td><td>0.8</td></tr><tr><td>lip_style</td><td>Cup lip style.</td><td>string</td><td>\"normal\"</td></tr><tr><td>vertical_chambers</td><td>Number of vertical chambers.</td><td>number</td><td>1</td></tr><tr><td>horizontal_chambers</td><td>Number of horizontal chambers.</td><td>number</td><td>1</td></tr><tr><td>enable_magnets</td><td>Enable base magnet holes.</td><td>bool</td><td>False</td></tr><tr><td>enable_screws</td><td>Enable base screw holes.</td><td>bool</td><td>False</td></tr><tr><td>magnet_size</td><td>Magnet diameter and height [d,h] in mm.</td><td>list</td><td>[6.5,2.4]</td></tr><tr><td>screw_size</td><td>Screw diameter and height [d,h] in mm.</td><td>list</td><td>[3,6]</td></tr><tr><td>floor_thickness</td><td>Minimum thickness above cutouts in the base.</td><td>number</td><td>0.7</td></tr><tr><td>efficient_floor</td><td>Efficient floor mode.</td><td>string</td><td>\"off\"</td></tr><tr><td>sub_pitch</td><td>Bottom pad subdivision pitch.</td><td>number</td><td>1</td></tr><tr><td>flat_base</td><td>Internal base style.</td><td>string</td><td>\"off\"</td></tr><tr><td>label_style</td><td>Label style.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>label_position</td><td>Label position.</td><td>string</td><td>\"left\"</td></tr><tr><td>sliding_lid_enabled</td><td>Enable the sliding lid geometry.</td><td>bool</td><td>False</td></tr><tr><td>fingerslide</td><td>Finger slide style.</td><td>string</td><td>\"none\"</td></tr><tr><td>tapered_corner</td><td>Tapered corner style.</td><td>string</td><td>\"none\"</td></tr><tr><td>wallpattern_enabled</td><td>Enable wall cutout patterns.</td><td>bool</td><td>False</td></tr><tr><td>floorpattern_enabled</td><td>Enable floor patterns.</td><td>bool</td><td>False</td></tr><tr><td>wallcutout_vertical</td><td>Vertical wall cutout mode.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>wallcutout_horizontal</td><td>Horizontal wall cutout mode.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>extension_x_enabled</td><td>Extendable tab mode on X.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>extension_y_enabled</td><td>Extendable tab mode on Y.</td><td>string</td><td>\"disabled\"</td></tr><tr><td>text_1</td><td>Add the bin size to the bottom text.</td><td>bool</td><td>False</td></tr><tr><td>text_2</td><td>Enable custom bottom text.</td><td>bool</td><td>False</td></tr><tr><td>text_2_text</td><td>Custom bottom text value.</td><td>string</td><td>\"Gridfinity Extended\"</td></tr><tr><td>pitch</td><td>Gridfinity pitch [x,y,z] in mm.</td><td>list</td><td>[42,42,7]</td></tr><tr><td>clearance</td><td>Clearance [x,y,z] in mm.</td><td>list</td><td>[0.5,0.5,0]</td></tr><tr><td>set_colour</td><td>Color handling mode for the upstream renderer.</td><td>string</td><td>\"enable\"</td></tr><tr><td>render_position</td><td>Upstream render position mode.</td><td>string</td><td>\"center\"</td></tr><tr><td>fa</td><td>OpenSCAD fragment angle.</td><td>number</td><td>6</td></tr><tr><td>fs</td><td>OpenSCAD fragment size.</td><td>number</td><td>0.4</td></tr><tr><td>fn</td><td>OpenSCAD fragment count override.</td><td>number</td><td>0</td></tr><tr><td>random_seed</td><td>Random seed for procedural features.</td><td>number</td><td>0</td></tr><tr><td>force_render</td><td>Force render on costly upstream components.</td><td>bool</td><td>True</td></tr><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>type</td><td>Geometry type: positive or negative.</td><td>string</td><td>\"positive\"</td></tr></tbody></table></div>",
-      "sample_images": [
-        {
-          "sample_id": "_validation_explicit",
-          "filename": "_validation_explicit",
-          "title": "_validation_explicit",
-          "intent": "",
-          "preview_rot": [
-            0,
-            0,
-            0
-          ],
-          "kwargs": null,
-          "helper_kwargs": null,
-          "companion_geometry_kwargs": null,
-          "set_values": null,
-          "default_values": {
-            "gridfinity_width": 2,
-            "gridfinity_height": 1,
-            "gridfinity_depth": 3,
-            "filled_in": "\"disabled\"",
-            "wall_thickness": 0,
-            "headroom": 0.8,
-            "lip_style": "\"normal\"",
-            "vertical_chambers": 1,
-            "horizontal_chambers": 1,
-            "enable_magnets": false,
-            "enable_screws": false,
-            "magnet_size": "[6.5,2.4]",
-            "screw_size": "[3,6]",
-            "floor_thickness": 0.7,
-            "efficient_floor": "\"off\"",
-            "sub_pitch": 1,
-            "flat_base": "\"off\"",
-            "label_style": "\"disabled\"",
-            "label_position": "\"left\"",
-            "sliding_lid_enabled": false,
-            "fingerslide": "\"none\"",
-            "tapered_corner": "\"none\"",
-            "wallpattern_enabled": false,
-            "floorpattern_enabled": false,
-            "wallcutout_vertical": "\"disabled\"",
-            "wallcutout_horizontal": "\"disabled\"",
-            "extension_x_enabled": "\"disabled\"",
-            "extension_y_enabled": "\"disabled\"",
-            "text_1": false,
-            "text_2": false,
-            "text_2_text": "\"Gridfinity Extended\"",
-            "pitch": "[42,42,7]",
-            "clearance": "[0.5,0.5,0]",
-            "set_colour": "\"enable\"",
-            "render_position": "\"center\"",
-            "fa": 6,
-            "fs": 0.4,
-            "fn": 0,
-            "random_seed": 0,
-            "force_render": true,
-            "pos": "[0,0,0]",
-            "rot": "[0,0,0]",
-            "type": "\"positive\""
-          },
-          "implementation_rule": "",
-          "exists": false,
-          "image_path": "gridfinity_tray_raw - Copy/test/_validation_explicit/image.png",
-          "detail_image_path": "test/_validation_explicit/image.png",
-          "full_image_path": "gridfinity_tray_raw - Copy/test/_validation_explicit/image.png",
-          "detail_full_image_path": "test/_validation_explicit/image.png",
-          "detail_iso_400_path": "test/_validation_explicit/image.png",
-          "detail_iso_120_path": "test/_validation_explicit/image.png",
-          "detail_top_400_path": "test/_validation_explicit/image.png",
-          "detail_top_120_path": "test/_validation_explicit/image.png",
-          "detail_side_400_path": "test/_validation_explicit/image.png",
-          "detail_side_120_path": "test/_validation_explicit/image.png",
-          "scad_exists": true,
-          "scad_path": "gridfinity_tray_raw - Copy/test/_validation_explicit/working.scad",
-          "detail_scad_path": "test/_validation_explicit/working.scad"
-        },
-        {
-          "sample_id": "scad_reference",
-          "filename": "scad_reference",
-          "title": "scad_reference",
-          "intent": "",
-          "preview_rot": [
-            0,
-            0,
-            0
-          ],
-          "kwargs": null,
-          "helper_kwargs": null,
-          "companion_geometry_kwargs": null,
-          "set_values": null,
-          "default_values": {
-            "gridfinity_width": 2,
-            "gridfinity_height": 1,
-            "gridfinity_depth": 3,
-            "filled_in": "\"disabled\"",
-            "wall_thickness": 0,
-            "headroom": 0.8,
-            "lip_style": "\"normal\"",
-            "vertical_chambers": 1,
-            "horizontal_chambers": 1,
-            "enable_magnets": false,
-            "enable_screws": false,
-            "magnet_size": "[6.5,2.4]",
-            "screw_size": "[3,6]",
-            "floor_thickness": 0.7,
-            "efficient_floor": "\"off\"",
-            "sub_pitch": 1,
-            "flat_base": "\"off\"",
-            "label_style": "\"disabled\"",
-            "label_position": "\"left\"",
-            "sliding_lid_enabled": false,
-            "fingerslide": "\"none\"",
-            "tapered_corner": "\"none\"",
-            "wallpattern_enabled": false,
-            "floorpattern_enabled": false,
-            "wallcutout_vertical": "\"disabled\"",
-            "wallcutout_horizontal": "\"disabled\"",
-            "extension_x_enabled": "\"disabled\"",
-            "extension_y_enabled": "\"disabled\"",
-            "text_1": false,
-            "text_2": false,
-            "text_2_text": "\"Gridfinity Extended\"",
-            "pitch": "[42,42,7]",
-            "clearance": "[0.5,0.5,0]",
-            "set_colour": "\"enable\"",
-            "render_position": "\"center\"",
-            "fa": 6,
-            "fs": 0.4,
-            "fn": 0,
-            "random_seed": 0,
-            "force_render": true,
-            "pos": "[0,0,0]",
-            "rot": "[0,0,0]",
-            "type": "\"positive\""
-          },
-          "implementation_rule": "",
-          "exists": false,
-          "image_path": "gridfinity_tray_raw - Copy/test/scad_reference/image.png",
-          "detail_image_path": "test/scad_reference/image.png",
-          "full_image_path": "gridfinity_tray_raw - Copy/test/scad_reference/image.png",
-          "detail_full_image_path": "test/scad_reference/image.png",
-          "detail_iso_400_path": "test/scad_reference/image.png",
-          "detail_iso_120_path": "test/scad_reference/image.png",
-          "detail_top_400_path": "test/scad_reference/image.png",
-          "detail_top_120_path": "test/scad_reference/image.png",
-          "detail_side_400_path": "test/scad_reference/image.png",
-          "detail_side_120_path": "test/scad_reference/image.png",
-          "scad_exists": false,
-          "scad_path": "gridfinity_tray_raw - Copy/test/scad_reference/working.scad",
-          "detail_scad_path": "test/scad_reference/working.scad"
-        },
-        {
-          "sample_id": "test_1",
-          "filename": "test_1",
-          "title": "test_1",
-          "intent": "",
-          "preview_rot": [
-            0,
-            0,
-            0
-          ],
-          "kwargs": null,
-          "helper_kwargs": null,
-          "companion_geometry_kwargs": null,
-          "set_values": null,
-          "default_values": {
-            "gridfinity_width": 2,
-            "gridfinity_height": 1,
-            "gridfinity_depth": 3,
-            "filled_in": "\"disabled\"",
-            "wall_thickness": 0,
-            "headroom": 0.8,
-            "lip_style": "\"normal\"",
-            "vertical_chambers": 1,
-            "horizontal_chambers": 1,
-            "enable_magnets": false,
-            "enable_screws": false,
-            "magnet_size": "[6.5,2.4]",
-            "screw_size": "[3,6]",
-            "floor_thickness": 0.7,
-            "efficient_floor": "\"off\"",
-            "sub_pitch": 1,
-            "flat_base": "\"off\"",
-            "label_style": "\"disabled\"",
-            "label_position": "\"left\"",
-            "sliding_lid_enabled": false,
-            "fingerslide": "\"none\"",
-            "tapered_corner": "\"none\"",
-            "wallpattern_enabled": false,
-            "floorpattern_enabled": false,
-            "wallcutout_vertical": "\"disabled\"",
-            "wallcutout_horizontal": "\"disabled\"",
-            "extension_x_enabled": "\"disabled\"",
-            "extension_y_enabled": "\"disabled\"",
-            "text_1": false,
-            "text_2": false,
-            "text_2_text": "\"Gridfinity Extended\"",
-            "pitch": "[42,42,7]",
-            "clearance": "[0.5,0.5,0]",
-            "set_colour": "\"enable\"",
-            "render_position": "\"center\"",
-            "fa": 6,
-            "fs": 0.4,
-            "fn": 0,
-            "random_seed": 0,
-            "force_render": true,
-            "pos": "[0,0,0]",
-            "rot": "[0,0,0]",
-            "type": "\"positive\""
-          },
-          "implementation_rule": "",
-          "exists": true,
-          "image_path": "gridfinity_tray_raw - Copy/test/test_1/image_400.png",
-          "detail_image_path": "test/test_1/image_400.png",
-          "full_image_path": "gridfinity_tray_raw - Copy/test/test_1/image.png",
-          "detail_full_image_path": "test/test_1/image.png",
-          "detail_iso_400_path": "test/test_1/image_400.png",
-          "detail_iso_120_path": "test/test_1/image_120.png",
-          "detail_top_400_path": "test/test_1/image_top_400.png",
-          "detail_top_120_path": "test/test_1/image_top_120.png",
-          "detail_side_400_path": "test/test_1/image_side_400.png",
-          "detail_side_120_path": "test/test_1/image_side_120.png",
-          "scad_exists": true,
-          "scad_path": "gridfinity_tray_raw - Copy/test/test_1/working.scad",
-          "detail_scad_path": "test/test_1/working.scad"
-        },
-        {
-          "sample_id": "test_2",
-          "filename": "test_2",
-          "title": "test_2",
-          "intent": "",
-          "preview_rot": [
-            0,
-            0,
-            0
-          ],
-          "kwargs": null,
-          "helper_kwargs": null,
-          "companion_geometry_kwargs": null,
-          "set_values": null,
-          "default_values": {
-            "gridfinity_width": 2,
-            "gridfinity_height": 1,
-            "gridfinity_depth": 3,
-            "filled_in": "\"disabled\"",
-            "wall_thickness": 0,
-            "headroom": 0.8,
-            "lip_style": "\"normal\"",
-            "vertical_chambers": 1,
-            "horizontal_chambers": 1,
-            "enable_magnets": false,
-            "enable_screws": false,
-            "magnet_size": "[6.5,2.4]",
-            "screw_size": "[3,6]",
-            "floor_thickness": 0.7,
-            "efficient_floor": "\"off\"",
-            "sub_pitch": 1,
-            "flat_base": "\"off\"",
-            "label_style": "\"disabled\"",
-            "label_position": "\"left\"",
-            "sliding_lid_enabled": false,
-            "fingerslide": "\"none\"",
-            "tapered_corner": "\"none\"",
-            "wallpattern_enabled": false,
-            "floorpattern_enabled": false,
-            "wallcutout_vertical": "\"disabled\"",
-            "wallcutout_horizontal": "\"disabled\"",
-            "extension_x_enabled": "\"disabled\"",
-            "extension_y_enabled": "\"disabled\"",
-            "text_1": false,
-            "text_2": false,
-            "text_2_text": "\"Gridfinity Extended\"",
-            "pitch": "[42,42,7]",
-            "clearance": "[0.5,0.5,0]",
-            "set_colour": "\"enable\"",
-            "render_position": "\"center\"",
-            "fa": 6,
-            "fs": 0.4,
-            "fn": 0,
-            "random_seed": 0,
-            "force_render": true,
-            "pos": "[0,0,0]",
-            "rot": "[0,0,0]",
-            "type": "\"positive\""
-          },
-          "implementation_rule": "",
-          "exists": true,
-          "image_path": "gridfinity_tray_raw - Copy/test/test_2/image_400.png",
-          "detail_image_path": "test/test_2/image_400.png",
-          "full_image_path": "gridfinity_tray_raw - Copy/test/test_2/image.png",
-          "detail_full_image_path": "test/test_2/image.png",
-          "detail_iso_400_path": "test/test_2/image_400.png",
-          "detail_iso_120_path": "test/test_2/image_120.png",
-          "detail_top_400_path": "test/test_2/image_top_400.png",
-          "detail_top_120_path": "test/test_2/image_top_120.png",
-          "detail_side_400_path": "test/test_2/image_side_400.png",
-          "detail_side_120_path": "test/test_2/image_side_120.png",
-          "scad_exists": true,
-          "scad_path": "gridfinity_tray_raw - Copy/test/test_2/working.scad",
-          "detail_scad_path": "test/test_2/working.scad"
-        }
-      ],
-      "sample_notes": "",
-      "has_test_images": true,
-      "has_detail_page": true,
-      "default_values": {
-        "gridfinity_width": 2,
-        "gridfinity_height": 1,
-        "gridfinity_depth": 3,
-        "filled_in": "\"disabled\"",
-        "wall_thickness": 0,
-        "headroom": 0.8,
-        "lip_style": "\"normal\"",
-        "vertical_chambers": 1,
-        "horizontal_chambers": 1,
-        "enable_magnets": false,
-        "enable_screws": false,
-        "magnet_size": "[6.5,2.4]",
-        "screw_size": "[3,6]",
-        "floor_thickness": 0.7,
-        "efficient_floor": "\"off\"",
-        "sub_pitch": 1,
-        "flat_base": "\"off\"",
-        "label_style": "\"disabled\"",
-        "label_position": "\"left\"",
-        "sliding_lid_enabled": false,
-        "fingerslide": "\"none\"",
-        "tapered_corner": "\"none\"",
-        "wallpattern_enabled": false,
-        "floorpattern_enabled": false,
-        "wallcutout_vertical": "\"disabled\"",
-        "wallcutout_horizontal": "\"disabled\"",
-        "extension_x_enabled": "\"disabled\"",
-        "extension_y_enabled": "\"disabled\"",
-        "text_1": false,
-        "text_2": false,
-        "text_2_text": "\"Gridfinity Extended\"",
-        "pitch": "[42,42,7]",
-        "clearance": "[0.5,0.5,0]",
-        "set_colour": "\"enable\"",
-        "render_position": "\"center\"",
-        "fa": 6,
-        "fs": 0.4,
-        "fn": 0,
-        "random_seed": 0,
-        "force_render": true,
-        "pos": "[0,0,0]",
-        "rot": "[0,0,0]",
-        "type": "\"positive\""
-      },
-      "readme_path": "gridfinity_tray_raw - Copy/README.md",
       "test_samples_path": ""
     },
     {
@@ -36605,7 +37785,7 @@
       "has_mode_values": true
     }
   ],
-  "generated_date": "2026-05-14",
-  "total_objects": 65,
+  "generated_date": "2026-05-17",
+  "total_objects": 67,
   "total_part_sets": 0
 }
