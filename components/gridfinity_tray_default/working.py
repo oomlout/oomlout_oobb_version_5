@@ -66,7 +66,7 @@ MODULE_DEFAULTS = {
     "flat_base_rounded_easyPrint": -1,
     "align_grid_x": "near",
     "align_grid_y": "near",
-    "label_style": "none",
+    "label_style": "disabled",
     "label_position": "left",
     "label_dividers": "disabled",
     "label_size": [1., 29.5, 15, 0.6],
