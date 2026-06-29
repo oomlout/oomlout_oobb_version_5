@@ -36,6 +36,8 @@ def describe():
     v.append({"name": 'diameter_clearance', "description": 'Edge clearance in mm for circular filtering. Increase this to keep holes farther away from the outer circle edge.', "type": 'number', "default": 7.5})
     v.append({"name": 'diameter_center_clearance', "description": 'Minimum distance from the centre in mm before a hole is allowed. Use this to create a clear area in the middle of a circular layout.', "type": 'number', "default": 0})
     v.append({"name": 'loc', "description": 'Grid location or list of locations used when `holes` includes `single`. Coordinates are 1-based `[x, y]` grid positions, so `loc=[1,1]` is one corner and `loc=[[1,1],[3,2]]` places two single holes. The aliases `location`, `locations`, and `positions` are also accepted.', "type": 'list', "default": '[0,0]'})
+    v.append({"name": 'donut', "description": 'When `True`, use the circle approach — holes fill a ring. Requires `diameter` for the outer size.', "type": 'bool', "default": False})
+    v.append({"name": 'diameter_center', "description": 'Diameter of the hole-free zone in the centre, in OOBB units (each unit = 15 mm). Converted to `diameter_center_clearance`. Only used when `donut=True`.', "type": 'number', "default": 0})
     d["variables"] = v
     return d
 
@@ -111,7 +113,7 @@ def _get_oobe_holes(**kwargs):
                         for h in range(0, math.floor(height)):
                             hx = pos_start[0] + w * spacing
                             hy = pos_start[1] + h * spacing
-                            r = width * spacing / 2 - diameter_clearance
+                            r = width * spacing / 2 - diameter_clearance - 3/2
                             dist = math.sqrt(hx ** 2 + hy ** 2)
                             if dist <= r:
                                 if middle or dist > 15:
@@ -149,6 +151,8 @@ def action(**kwargs):
     size = kwargs.get("size", "oobb")
     both_holes = kwargs.get("both_holes", False)
     circle = kwargs.get("circle", False)
+    donut = kwargs.get("donut", False)
+    diameter_center = kwargs.get("diameter_center", 0)
     diameter_full = int(kwargs.get("diameter", 0))
     diameter = diameter_full
     diameter_clearance = kwargs.get("diameter_clearance", 7.5)
@@ -178,7 +182,40 @@ def action(**kwargs):
         spacing = oobb.gv("osp") / 2
 
     if "all" in holes:
-        if not circle:
+        if donut:
+            if diameter != 0:
+                width = diameter
+                height = diameter
+            inner_r = diameter_center/2# * spacing / 2
+            radius_extra = 3/2 if radius_name == "m3" else 6/2
+            outer_r = width * spacing / 2 - diameter_clearance - radius_extra
+            acceptable_holes = []
+            pos_start = [
+                xx + -(width * spacing / 2) + spacing / 2,
+                yy + -(height * spacing / 2) + spacing / 2,
+                z,
+            ]
+            for w in range(0, math.floor(width)):
+                for h in range(0, math.floor(height)):
+                    hx = pos_start[0] + w * spacing
+                    hy = pos_start[1] + h * spacing
+                    dist = math.sqrt((hx - xx) ** 2 + (hy - yy) ** 2)
+                    if dist <= outer_r and dist >= inner_r:
+                        acceptable_holes.append([w, h])
+            for mode in modes:
+                for ah in acceptable_holes:
+                    hx = pos_start[0] + ah[0] * spacing
+                    hy = pos_start[1] + ah[1] * spacing
+                    objects.extend(
+                        oobb.oobb_easy(
+                            type="negative",
+                            shape="oobb_hole",
+                            pos=[hx, hy, z],
+                            radius_name=radius_name,
+                            m=m,
+                        )
+                    )
+        elif not circle:
             for mode in modes:
                 pos_start = [
                     xx + -(width * spacing / 2) + spacing / 2,
@@ -211,7 +248,10 @@ def action(**kwargs):
                 for h in range(0, math.floor(height)):
                     hx = pos_start[0] + w * spacing
                     hy = pos_start[1] + h * spacing
-                    r = width * spacing / 2 - diameter_clearance
+                    radius_extra = 6/2
+                    if radius_name == "m3":
+                        radius_extra = 3/2
+                    r = width * spacing / 2 - diameter_clearance - radius_extra
                     if math.sqrt(hx ** 2 + hy ** 2) <= r:
                         if w == math.floor(width / 2) and h == math.floor(height / 2) and not middle:
                             pass

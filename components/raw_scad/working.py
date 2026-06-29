@@ -212,7 +212,8 @@ def render(params):
         raise ValueError("raw_scad requires either 'source' or 'file'.")
     filename = _bundle_raw_scad_references(filename, cache_dir)
 
-    scad_object = import_scad(filename)
+    include_mode = params.get("include_mode", False)
+    scad_object = import_scad(filename, use_not_include=not include_mode)
     module_fn = getattr(scad_object, module_name, None)
     if module_fn is None:
         raise ValueError(f"raw_scad module '{module_name}' not found in {filename}")
@@ -221,7 +222,8 @@ def render(params):
     if cache_dir is not None:
         include_path = os.path.relpath(filename, cache_dir).replace("\\", "/")
         result.include_file_path = include_path
-        result.include_string = f"use <{include_path}>;\n"
+        directive = "include" if include_mode else "use"
+        result.include_string = f"{directive} <{include_path}>;\n"
     return result
 
 

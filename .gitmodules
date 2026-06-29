@@ -1,0 +1,3 @@
+[submodule "components/github_belfry_bosl2_gear/BOSL2"]
+	path = components/github_belfry_bosl2_gear/BOSL2
+	url = https://github.com/BelfrySCAD/BOSL2.git
