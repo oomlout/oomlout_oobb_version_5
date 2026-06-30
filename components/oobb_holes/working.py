@@ -181,6 +181,8 @@ def action(**kwargs):
     if size == "oobe":
         spacing = oobb.gv("osp") / 2
 
+    if donut:
+        holes.extend("all")
     if "all" in holes:
         if donut:
             if diameter != 0:

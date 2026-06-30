@@ -51,7 +51,7 @@ def render(params):
     pos = p2["pos"]
     depth = p2["depth"]
     depth_extra = p2.get("depth_extra", 100)
-    clearance_bearing_original = p2.get("clearance_bearing", 2)
+    clearance_bearing_original = p2.get("clearance_bearing", 3)
     clearance = p2.get("clearance", "")
 
     depth_bearing = depth
@@ -80,13 +80,13 @@ def render(params):
     extra_inner["r"] = inner_diameter + clearance_bearing / 2
     extra_outer["r"] = outer_diameter - clearance_bearing / 2
 
-    mi = opsc.get_opsc_item(main_inner)
+    mi = opsc.get_opsc_item(main_inner)                     #the actual bearing bit inside
     mo = opsc.get_opsc_item(main_outer)
     eo = opsc.get_opsc_item(extra_outer)
 
     if not exclude_clearance:
         ei = opsc.get_opsc_item(extra_inner)
-        if inner_diameter > 10:
+        if inner_diameter >= 10:
             shape = translate([0, 0, -depth / 2])(union()(difference()(mo, mi), difference()(eo, ei)))
         else:
             shape = translate([0, 0, -depth / 2])(union()(difference()(mo, mi), difference()(eo)))
@@ -96,6 +96,10 @@ def render(params):
         extra_inner["pos"] = [pos[0], pos[1], pos[2] - ex / 2 - depth_extra / 2]
         ei = opsc.get_opsc_item(extra_inner)
         shape = translate([0, 0, -depth / 2])(mo, ei)
+    
+    #return difference()(mo, mi)    # the actual bearing
+    #return eo
+    #return difference()(eo, ei)
     return shape
 
 
