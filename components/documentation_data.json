@@ -1010,6 +1010,282 @@
       "test_samples_path": "gear/TEST_SAMPLES.md"
     },
     {
+      "command": "github_belfry_bosl2_gear",
+      "name_long": "GitHub BelfrySCAD BOSL2: Spur Gear",
+      "name_short_options": [],
+      "description": "BOSL2 spur_gear() wrapper \u2014 metric involute spur gears with optional helical or herringbone teeth and a centre shaft bore.",
+      "summary": "BOSL2 spur_gear() wrapper \u2014 metric involute spur gears with optional helical or herringbone teeth and a centre shaft bore.",
+      "variables": [
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        },
+        {
+          "name": "teeth",
+          "description": "Number of gear teeth (integer >= 4).",
+          "type": "number",
+          "default": 16
+        },
+        {
+          "name": "mod",
+          "description": "Gear module (metric pitch). Pitch diameter = mod*teeth.",
+          "type": "number",
+          "default": 2
+        },
+        {
+          "name": "thickness",
+          "description": "Gear face thickness in mm (alias: depth).",
+          "type": "number",
+          "default": 8
+        },
+        {
+          "name": "depth",
+          "description": "Alias for thickness.",
+          "type": "number",
+          "default": 8
+        },
+        {
+          "name": "shaft_diam",
+          "description": "Centre shaft bore diameter in mm (0 = no bore).",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "pressure_angle",
+          "description": "Tooth pressure angle in degrees.",
+          "type": "number",
+          "default": 20
+        },
+        {
+          "name": "backlash",
+          "description": "Backlash in mm.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "helical",
+          "description": "Helical angle in degrees (0 = spur gear).",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "herringbone",
+          "description": "If true, produce a herringbone (double-helical) gear.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "gear_spin",
+          "description": "Rotate the gear teeth pattern by this many degrees.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "mode",
+          "description": "Render modes: \"laser\", \"3dpr\", \"true\".",
+          "type": "list",
+          "default": "[\"laser\",\"3dpr\",\"true\"]"
+        }
+      ],
+      "variable_names": [
+        "pos",
+        "rot",
+        "type",
+        "teeth",
+        "mod",
+        "thickness",
+        "depth",
+        "shaft_diam",
+        "pressure_angle",
+        "backlash",
+        "helical",
+        "herringbone",
+        "gear_spin",
+        "mode"
+      ],
+      "category": "External Library Wrappers",
+      "returns": "Raw SCAD geometry component dict.",
+      "aliases": [],
+      "detail_page": "github_belfry_bosl2_gear/documentation_detail.html",
+      "detail_markdown": "# github_belfry_bosl2_gear\n\n**GitHub BelfrySCAD BOSL2: Spur Gear**\n\nBOSL2 `spur_gear()` wrapper \u2014 metric involute spur gears with optional helical or herringbone teeth and a centre shaft bore.\n\nSource library: [BelfrySCAD/BOSL2 gears.scad](https://github.com/BelfrySCAD/BOSL2/wiki/gears.scad)\n\n## Library\n\nBOSL2 is included as a git submodule at `BOSL2/`. After cloning this repository, initialise it with:\n\n```bash\ngit submodule update --init components/github_belfry_bosl2_gear/BOSL2\n```\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| type | Geometry type: positive or negative. | string | \"positive\" |\n| teeth | Number of gear teeth (integer >= 4). | number | 16 |\n| mod | Gear module (metric pitch). Pitch diameter = mod*teeth. | number | 2 |\n| thickness | Gear face thickness in mm (alias: depth). | number | 8 |\n| shaft_diam | Centre shaft bore diameter in mm (0 = no bore). | number | 0 |\n| pressure_angle | Tooth pressure angle in degrees. | number | 20 |\n| backlash | Backlash in mm. | number | 0 |\n| helical | Helical angle in degrees (0 = spur gear). | number | 0 |\n| herringbone | If true, produce a herringbone (double-helical) gear. | bool | false |\n| gear_spin | Rotate the gear teeth pattern by this many degrees. | number | 0 |\n| mode | Render modes: \"laser\", \"3dpr\", \"true\". | list | [\"laser\",\"3dpr\",\"true\"] |\n\n## Category\n\nExternal Library Wrappers\n\n## Gear Sizing Reference\n\nPitch diameter (mm) = `mod \u00d7 teeth`\n\n| mod | teeth | pitch diameter |\n|-----|-------|----------------|\n| 1   | 16    | 16 mm          |\n| 2   | 16    | 32 mm          |\n| 2   | 24    | 48 mm          |\n| 3   | 20    | 60 mm          |\n\nTwo gears mesh when they share the same `mod` and `pressure_angle`.\nCentre-to-centre distance = `mod \u00d7 (teeth_a + teeth_b) / 2`.\n\n## Sample Notes\n\nRequires the BOSL2 submodule to be initialised.",
+      "detail_html": "<h1>github_belfry_bosl2_gear</h1>\n<p><strong>GitHub BelfrySCAD BOSL2: Spur Gear</strong></p>\n<p>BOSL2 <code>spur_gear()</code> wrapper \u2014 metric involute spur gears with optional helical or herringbone teeth and a centre shaft bore.</p>\n<p>Source library: [BelfrySCAD/BOSL2 gears.scad](https://github.com/BelfrySCAD/BOSL2/wiki/gears.scad)</p>\n<h2>Library</h2>\n<p>BOSL2 is included as a git submodule at <code>BOSL2/</code>. After cloning this repository, initialise it with:</p>\n<pre><code>git submodule update --init components/github_belfry_bosl2_gear/BOSL2</code></pre>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>type</td><td>Geometry type: positive or negative.</td><td>string</td><td>\"positive\"</td></tr><tr><td>teeth</td><td>Number of gear teeth (integer &gt;= 4).</td><td>number</td><td>16</td></tr><tr><td>mod</td><td>Gear module (metric pitch). Pitch diameter = mod*teeth.</td><td>number</td><td>2</td></tr><tr><td>thickness</td><td>Gear face thickness in mm (alias: depth).</td><td>number</td><td>8</td></tr><tr><td>shaft_diam</td><td>Centre shaft bore diameter in mm (0 = no bore).</td><td>number</td><td>0</td></tr><tr><td>pressure_angle</td><td>Tooth pressure angle in degrees.</td><td>number</td><td>20</td></tr><tr><td>backlash</td><td>Backlash in mm.</td><td>number</td><td>0</td></tr><tr><td>helical</td><td>Helical angle in degrees (0 = spur gear).</td><td>number</td><td>0</td></tr><tr><td>herringbone</td><td>If true, produce a herringbone (double-helical) gear.</td><td>bool</td><td>false</td></tr><tr><td>gear_spin</td><td>Rotate the gear teeth pattern by this many degrees.</td><td>number</td><td>0</td></tr><tr><td>mode</td><td>Render modes: \"laser\", \"3dpr\", \"true\".</td><td>list</td><td>[\"laser\",\"3dpr\",\"true\"]</td></tr></tbody></table></div>\n<h2>Category</h2>\n<p>External Library Wrappers</p>\n<h2>Gear Sizing Reference</h2>\n<p>Pitch diameter (mm) = <code>mod \u00d7 teeth</code></p>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>mod</th><th>teeth</th><th>pitch diameter</th></tr></thead><tbody><tr><td>1</td><td>16</td><td>16 mm</td></tr><tr><td>2</td><td>16</td><td>32 mm</td></tr><tr><td>2</td><td>24</td><td>48 mm</td></tr><tr><td>3</td><td>20</td><td>60 mm</td></tr></tbody></table></div>\n<p>Two gears mesh when they share the same <code>mod</code> and <code>pressure_angle</code>. Centre-to-centre distance = <code>mod \u00d7 (teeth_a + teeth_b) / 2</code>.</p>\n<h2>Sample Notes</h2>\n<p>Requires the BOSL2 submodule to be initialised.</p>",
+      "sample_images": [
+        {
+          "sample_id": "scad_reference",
+          "filename": "scad_reference",
+          "title": "scad_reference",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "teeth": 16,
+            "mod": 2,
+            "thickness": 8,
+            "depth": 8,
+            "shaft_diam": 0,
+            "pressure_angle": 20,
+            "backlash": 0,
+            "helical": 0,
+            "herringbone": false,
+            "gear_spin": 0,
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "github_belfry_bosl2_gear/test/scad_reference/image.png",
+          "detail_image_path": "test/scad_reference/image.png",
+          "full_image_path": "github_belfry_bosl2_gear/test/scad_reference/image.png",
+          "detail_full_image_path": "test/scad_reference/image.png",
+          "detail_iso_400_path": "test/scad_reference/image.png",
+          "detail_iso_120_path": "test/scad_reference/image.png",
+          "detail_top_400_path": "test/scad_reference/image.png",
+          "detail_top_120_path": "test/scad_reference/image.png",
+          "detail_side_400_path": "test/scad_reference/image.png",
+          "detail_side_120_path": "test/scad_reference/image.png",
+          "scad_exists": false,
+          "scad_path": "github_belfry_bosl2_gear/test/scad_reference/working.scad",
+          "detail_scad_path": "test/scad_reference/working.scad"
+        },
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "teeth": 16,
+            "mod": 2,
+            "thickness": 8,
+            "depth": 8,
+            "shaft_diam": 0,
+            "pressure_angle": 20,
+            "backlash": 0,
+            "helical": 0,
+            "herringbone": false,
+            "gear_spin": 0,
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "github_belfry_bosl2_gear/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "github_belfry_bosl2_gear/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "github_belfry_bosl2_gear/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "teeth": 16,
+            "mod": 2,
+            "thickness": 8,
+            "depth": 8,
+            "shaft_diam": 0,
+            "pressure_angle": 20,
+            "backlash": 0,
+            "helical": 0,
+            "herringbone": false,
+            "gear_spin": 0,
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "github_belfry_bosl2_gear/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "github_belfry_bosl2_gear/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "github_belfry_bosl2_gear/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "\"positive\"",
+        "teeth": 16,
+        "mod": 2,
+        "thickness": 8,
+        "depth": 8,
+        "shaft_diam": 0,
+        "pressure_angle": 20,
+        "backlash": 0,
+        "helical": 0,
+        "herringbone": false,
+        "gear_spin": 0,
+        "mode": "[\"laser\",\"3dpr\",\"true\"]"
+      },
+      "readme_path": "github_belfry_bosl2_gear/README.md",
+      "test_samples_path": ""
+    },
+    {
       "command": "github_belfryscad_bosl2_screw",
       "name_long": "GitHub BelfrySCAD BOSL2: Screw",
       "name_short_options": [],
@@ -1608,18 +1884,18 @@
             "type": "\"positive\""
           },
           "implementation_rule": "Call `action()` and render the raw-SCAD payload directly.",
-          "exists": false,
-          "image_path": "gridfinity_base_raw/test/test_1/image.png",
-          "detail_image_path": "test/test_1/image.png",
+          "exists": true,
+          "image_path": "gridfinity_base_raw/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
           "full_image_path": "gridfinity_base_raw/test/test_1/image.png",
           "detail_full_image_path": "test/test_1/image.png",
-          "detail_iso_400_path": "test/test_1/image.png",
-          "detail_iso_120_path": "test/test_1/image.png",
-          "detail_top_400_path": "test/test_1/image.png",
-          "detail_top_120_path": "test/test_1/image.png",
-          "detail_side_400_path": "test/test_1/image.png",
-          "detail_side_120_path": "test/test_1/image.png",
-          "scad_exists": false,
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
           "scad_path": "gridfinity_base_raw/test/test_1/working.scad",
           "detail_scad_path": "test/test_1/working.scad"
         },
@@ -1735,24 +2011,24 @@
             "type": "\"positive\""
           },
           "implementation_rule": "Call `action()` and render the raw-SCAD payload directly.",
-          "exists": false,
-          "image_path": "gridfinity_base_raw/test/test_2/image.png",
-          "detail_image_path": "test/test_2/image.png",
+          "exists": true,
+          "image_path": "gridfinity_base_raw/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
           "full_image_path": "gridfinity_base_raw/test/test_2/image.png",
           "detail_full_image_path": "test/test_2/image.png",
-          "detail_iso_400_path": "test/test_2/image.png",
-          "detail_iso_120_path": "test/test_2/image.png",
-          "detail_top_400_path": "test/test_2/image.png",
-          "detail_top_120_path": "test/test_2/image.png",
-          "detail_side_400_path": "test/test_2/image.png",
-          "detail_side_120_path": "test/test_2/image.png",
-          "scad_exists": false,
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
           "scad_path": "gridfinity_base_raw/test/test_2/working.scad",
           "detail_scad_path": "test/test_2/working.scad"
         }
       ],
       "sample_notes": "This component returns raw SCAD through a local wrapper around vendored Gridfinity Extended baseplate modules, so the test implementation should render the generated result rather than primitive component dicts.",
-      "has_test_images": false,
+      "has_test_images": true,
       "has_detail_page": true,
       "default_values": {
         "gridfinity_width": 2,
@@ -6405,6 +6681,183 @@
       "test_samples_path": "import_stl/TEST_SAMPLES.md"
     },
     {
+      "command": "oobb_bearing",
+      "name_long": "OOBB Mechanical Shapes: Bearing Lookup",
+      "name_short_options": [],
+      "description": "Lookup a bearing size from the CSV data in data/bearing and emit a matching opsc bearing object.",
+      "summary": "Lookup a bearing size from the CSV data in data/bearing and emit a matching opsc bearing object.",
+      "variables": [
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        },
+        {
+          "name": "bearing_size",
+          "description": "Bearing size key from the CSV files, for example 606, 6701, MR104, or 60_22.",
+          "type": "string",
+          "default": "\"606\""
+        },
+        {
+          "name": "clearance",
+          "description": "Clearance passed through to the legacy opsc bearing object as clearance_bearing.",
+          "type": "number",
+          "default": 0
+        }
+      ],
+      "variable_names": [
+        "pos",
+        "rot",
+        "type",
+        "bearing_size",
+        "clearance"
+      ],
+      "category": "OPSC Mechanical Shapes",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "oobb_bearing/documentation_detail.html",
+      "detail_markdown": "# oobb_bearing\n\nLookup-bearing wrapper for the CSV data under `data/bearing`.\n\nUse `bearing_size` to select a row from the bearing tables, then the component emits a matching `opsc` bearing object with `id`, `od`, and `depth` filled from that row.\n\n`clearance` defaults to `0` and is forwarded to the legacy bearing object as `clearance_bearing`.",
+      "detail_html": "<h1>oobb_bearing</h1>\n<p>Lookup-bearing wrapper for the CSV data under <code>data/bearing</code>.</p>\n<p>Use <code>bearing_size</code> to select a row from the bearing tables, then the component emits a matching <code>opsc</code> bearing object with <code>id</code>, <code>od</code>, and <code>depth</code> filled from that row.</p>\n<p><code>clearance</code> defaults to <code>0</code> and is forwarded to the legacy bearing object as <code>clearance_bearing</code>.</p>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "bearing_size": "\"606\"",
+            "clearance": 0
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_bearing/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "oobb_bearing/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_bearing/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "bearing_size": "\"606\"",
+            "clearance": 0
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_bearing/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "oobb_bearing/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_bearing/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        },
+        {
+          "sample_id": "test_3",
+          "filename": "test_3",
+          "title": "test_3",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "bearing_size": "\"606\"",
+            "clearance": 0
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_bearing/test/test_3/image_400.png",
+          "detail_image_path": "test/test_3/image_400.png",
+          "full_image_path": "oobb_bearing/test/test_3/image.png",
+          "detail_full_image_path": "test/test_3/image.png",
+          "detail_iso_400_path": "test/test_3/image_400.png",
+          "detail_iso_120_path": "test/test_3/image_120.png",
+          "detail_top_400_path": "test/test_3/image_top_400.png",
+          "detail_top_120_path": "test/test_3/image_top_120.png",
+          "detail_side_400_path": "test/test_3/image_side_400.png",
+          "detail_side_120_path": "test/test_3/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_bearing/test/test_3/working.scad",
+          "detail_scad_path": "test/test_3/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "\"positive\"",
+        "bearing_size": "\"606\"",
+        "clearance": 0
+      },
+      "readme_path": "oobb_bearing/README.md",
+      "test_samples_path": "oobb_bearing/TEST_SAMPLES.md"
+    },
+    {
       "command": "oobb_circle",
       "name_long": "OOBB Geometry Primitives: Circle",
       "name_short_options": [],
@@ -8107,6 +8560,227 @@
       "test_samples_path": "oobb_cylinder_hollow/TEST_SAMPLES.md"
     },
     {
+      "command": "oobb_gear_spur",
+      "name_long": "OOBB Motion: Spur Gear",
+      "name_short_options": [],
+      "description": "Metric involute spur gear via BOSL2. Pressure angle fixed at 20\u00b0. Optional chamfer bevel on top and bottom faces.",
+      "summary": "Metric involute spur gear via BOSL2.",
+      "variables": [
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        },
+        {
+          "name": "teeth",
+          "description": "Number of gear teeth (integer >= 4).",
+          "type": "number",
+          "default": 16
+        },
+        {
+          "name": "mod",
+          "description": "Gear module (metric pitch). Pitch diameter = mod*teeth.",
+          "type": "number",
+          "default": 2
+        },
+        {
+          "name": "depth",
+          "description": "Gear face thickness in mm.",
+          "type": "number",
+          "default": 8
+        },
+        {
+          "name": "shaft_diam",
+          "description": "Centre shaft bore diameter in mm (0 = no bore).",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "backlash",
+          "description": "Backlash in mm.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "gear_bevel",
+          "description": "Chamfer depth (mm) on top and bottom outer edges. 0 = flat faces.",
+          "type": "number",
+          "default": 0
+        }
+      ],
+      "variable_names": [
+        "pos",
+        "rot",
+        "type",
+        "teeth",
+        "mod",
+        "depth",
+        "shaft_diam",
+        "backlash",
+        "gear_bevel"
+      ],
+      "category": "OOBB Motion",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "oobb_gear_spur/documentation_detail.html",
+      "detail_markdown": "# oobb_gear_spur\n\n**OOBB Motion: Spur Gear**\n\nMetric involute spur gear via BOSL2. Pressure angle fixed at 20\u00b0.\n\nDelegates to `github_belfry_bosl2_gear`. Helical angle, herringbone, and gear_spin are fixed at their spur-gear defaults.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| type | Geometry type: positive or negative. | string | \"positive\" |\n| teeth | Number of gear teeth (integer >= 4). | number | 16 |\n| mod | Gear module (metric pitch). Pitch diameter = mod*teeth. | number | 2 |\n| depth | Gear face thickness in mm. | number | 8 |\n| shaft_diam | Centre shaft bore diameter in mm (0 = no bore). | number | 0 |\n| backlash | Backlash in mm. | number | 0 |\n| gear_bevel | Chamfer depth (mm) on top and bottom outer edges. 0 = flat faces. | number | 0 |\n\n## Category\n\nOOBB Motion\n\n## Gear Sizing Reference\n\nPitch diameter (mm) = `mod \u00d7 teeth`  \nCentre-to-centre distance = `mod \u00d7 (teeth_a + teeth_b) / 2`\n\nTwo gears mesh when they share the same `mod`.\n\n## Dependencies\n\nRequires BOSL2 submodule initialised in `github_belfry_bosl2_gear`:\n```bash\ngit submodule update --init components/github_belfry_bosl2_gear/BOSL2\n```",
+      "detail_html": "<h1>oobb_gear_spur</h1>\n<p><strong>OOBB Motion: Spur Gear</strong></p>\n<p>Metric involute spur gear via BOSL2. Pressure angle fixed at 20\u00b0.</p>\n<p>Delegates to <code>github_belfry_bosl2_gear</code>. Helical angle, herringbone, and gear_spin are fixed at their spur-gear defaults.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>type</td><td>Geometry type: positive or negative.</td><td>string</td><td>\"positive\"</td></tr><tr><td>teeth</td><td>Number of gear teeth (integer &gt;= 4).</td><td>number</td><td>16</td></tr><tr><td>mod</td><td>Gear module (metric pitch). Pitch diameter = mod*teeth.</td><td>number</td><td>2</td></tr><tr><td>depth</td><td>Gear face thickness in mm.</td><td>number</td><td>8</td></tr><tr><td>shaft_diam</td><td>Centre shaft bore diameter in mm (0 = no bore).</td><td>number</td><td>0</td></tr><tr><td>backlash</td><td>Backlash in mm.</td><td>number</td><td>0</td></tr><tr><td>gear_bevel</td><td>Chamfer depth (mm) on top and bottom outer edges. 0 = flat faces.</td><td>number</td><td>0</td></tr></tbody></table></div>\n<h2>Category</h2>\n<p>OOBB Motion</p>\n<h2>Gear Sizing Reference</h2>\n<p>Pitch diameter (mm) = <code>mod \u00d7 teeth</code> Centre-to-centre distance = <code>mod \u00d7 (teeth_a + teeth_b) / 2</code></p>\n<p>Two gears mesh when they share the same <code>mod</code>.</p>\n<h2>Dependencies</h2>\n<p>Requires BOSL2 submodule initialised in <code>github_belfry_bosl2_gear</code>:</p>\n<pre><code>git submodule update --init components/github_belfry_bosl2_gear/BOSL2</code></pre>",
+      "sample_images": [
+        {
+          "sample_id": "scad_reference",
+          "filename": "scad_reference",
+          "title": "scad_reference",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "teeth": 16,
+            "mod": 2,
+            "depth": 8,
+            "shaft_diam": 0,
+            "backlash": 0,
+            "gear_bevel": 0
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "oobb_gear_spur/test/scad_reference/image.png",
+          "detail_image_path": "test/scad_reference/image.png",
+          "full_image_path": "oobb_gear_spur/test/scad_reference/image.png",
+          "detail_full_image_path": "test/scad_reference/image.png",
+          "detail_iso_400_path": "test/scad_reference/image.png",
+          "detail_iso_120_path": "test/scad_reference/image.png",
+          "detail_top_400_path": "test/scad_reference/image.png",
+          "detail_top_120_path": "test/scad_reference/image.png",
+          "detail_side_400_path": "test/scad_reference/image.png",
+          "detail_side_120_path": "test/scad_reference/image.png",
+          "scad_exists": false,
+          "scad_path": "oobb_gear_spur/test/scad_reference/working.scad",
+          "detail_scad_path": "test/scad_reference/working.scad"
+        },
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "teeth": 16,
+            "mod": 2,
+            "depth": 8,
+            "shaft_diam": 0,
+            "backlash": 0,
+            "gear_bevel": 0
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_gear_spur/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "oobb_gear_spur/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_gear_spur/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "\"positive\"",
+            "teeth": 16,
+            "mod": 2,
+            "depth": 8,
+            "shaft_diam": 0,
+            "backlash": 0,
+            "gear_bevel": 0
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_gear_spur/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "oobb_gear_spur/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_gear_spur/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "\"positive\"",
+        "teeth": 16,
+        "mod": 2,
+        "depth": 8,
+        "shaft_diam": 0,
+        "backlash": 0,
+        "gear_bevel": 0
+      },
+      "readme_path": "oobb_gear_spur/README.md",
+      "test_samples_path": ""
+    },
+    {
       "command": "oobb_hole",
       "name_long": "OOBB Geometry Primitives: Hole (legacy)",
       "name_short_options": [],
@@ -8660,6 +9334,18 @@
           "description": "Grid location or list of locations used when `holes` includes `single`. Coordinates are 1-based `[x, y]` grid positions, so `loc=[1,1]` is one corner and `loc=[[1,1],[3,2]]` places two single holes. The aliases `location`, `locations`, and `positions` are also accepted.",
           "type": "list",
           "default": "[0,0]"
+        },
+        {
+          "name": "donut",
+          "description": "When `True`, use the circle approach \u2014 holes fill a ring. Requires `diameter` for the outer size.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "diameter_center",
+          "description": "Diameter of the hole-free zone in the centre, in OOBB units (each unit = 15 mm). Converted to `diameter_center_clearance`. Only used when `donut=True`.",
+          "type": "number",
+          "default": 0
         }
       ],
       "variable_names": [
@@ -8676,7 +9362,9 @@
         "diameter",
         "diameter_clearance",
         "diameter_center_clearance",
-        "loc"
+        "loc",
+        "donut",
+        "diameter_center"
       ],
       "category": "OOBB Geometry Helpers",
       "returns": "List of geometry component dicts.",
@@ -8741,7 +9429,9 @@
             "diameter": 0,
             "diameter_clearance": 7.5,
             "diameter_center_clearance": 0,
-            "loc": "[0,0]"
+            "loc": "[0,0]",
+            "donut": false,
+            "diameter_center": 0
           },
           "implementation_rule": "keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.",
           "exists": true,
@@ -8813,7 +9503,9 @@
             "diameter": 0,
             "diameter_clearance": 7.5,
             "diameter_center_clearance": 0,
-            "loc": "[0,0]"
+            "loc": "[0,0]",
+            "donut": false,
+            "diameter_center": 0
           },
           "implementation_rule": "keep the sample values exactly as written. If `kwargs` already contains `rot`, do not replace it; use `preview_rot` only as the outer rotation wrapper for the final rendered scene.",
           "exists": true,
@@ -8849,7 +9541,9 @@
         "diameter": 0,
         "diameter_clearance": 7.5,
         "diameter_center_clearance": 0,
-        "loc": "[0,0]"
+        "loc": "[0,0]",
+        "donut": false,
+        "diameter_center": 0
       },
       "readme_path": "oobb_holes/README.md",
       "test_samples_path": "oobb_holes/TEST_SAMPLES.md"
@@ -12032,6 +12726,624 @@
       "test_samples_path": "oobb_sphere/TEST_SAMPLES.md"
     },
     {
+      "command": "oobb_sphere_cylinder",
+      "name_long": "OOBB Geometry Primitives: Sphere Cylinder",
+      "name_short_options": [],
+      "description": "OOBB cylinder wrapper that can emit either a normal cylinder or the rounded sphere_cylinder shape.",
+      "summary": "OOBB cylinder wrapper that can emit either a normal cylinder or the rounded sphere_cylinder shape.",
+      "variables": [
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "depth",
+          "description": "Cylinder height in mm.",
+          "type": "number",
+          "default": 250
+        },
+        {
+          "name": "radius_name",
+          "description": "Named radius for mode-aware lookup.",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "radius",
+          "description": "Explicit radius in mm.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Rounded edge radius in mm for sphere_cylinder style.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "style",
+          "description": "Output style: sphere_cylinder or cylinder.",
+          "type": "string",
+          "default": "\"sphere_cylinder\""
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: center, bottom, top.",
+          "type": "string",
+          "default": "\"center\""
+        },
+        {
+          "name": "mode",
+          "description": "Render modes: laser, 3dpr, true.",
+          "type": "list",
+          "default": "[\"laser\",\"3dpr\",\"true\"]"
+        }
+      ],
+      "variable_names": [
+        "pos",
+        "depth",
+        "radius_name",
+        "radius",
+        "radius_rounded",
+        "style",
+        "zz",
+        "mode"
+      ],
+      "category": "OOBB Geometry Primitives",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "oobb_sphere_cylinder/documentation_detail.html",
+      "detail_markdown": "# oobb_sphere_cylinder\n\n**OOBB Geometry Primitives: Sphere Cylinder**\n\nOOBB cylinder wrapper that can emit either a normal `cylinder` or the rounded `sphere_cylinder` shape.\n\n## Returns\n\nList of geometry component dicts.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| depth | Cylinder height in mm. | number | 250 |\n| radius_name | Named radius for mode-aware lookup. | string | \"\" |\n| radius | Explicit radius in mm. | number | 0 |\n| radius_rounded | Rounded edge radius in mm for sphere_cylinder style. | number | 1 |\n| style | Output style: sphere_cylinder or cylinder. | string | \"sphere_cylinder\" |\n| zz | Z anchor point: center, bottom, top. | string | \"center\" |\n| mode | Render modes: laser, 3dpr, true. | list | [\"laser\",\"3dpr\",\"true\"] |\n\n## Sample Notes\n\nshow rounded, plain cylinder, and radius_name usage.",
+      "detail_html": "<h1>oobb_sphere_cylinder</h1>\n<p><strong>OOBB Geometry Primitives: Sphere Cylinder</strong></p>\n<p>OOBB cylinder wrapper that can emit either a normal <code>cylinder</code> or the rounded <code>sphere_cylinder</code> shape.</p>\n<h2>Returns</h2>\n<p>List of geometry component dicts.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>depth</td><td>Cylinder height in mm.</td><td>number</td><td>250</td></tr><tr><td>radius_name</td><td>Named radius for mode-aware lookup.</td><td>string</td><td>\"\"</td></tr><tr><td>radius</td><td>Explicit radius in mm.</td><td>number</td><td>0</td></tr><tr><td>radius_rounded</td><td>Rounded edge radius in mm for sphere_cylinder style.</td><td>number</td><td>1</td></tr><tr><td>style</td><td>Output style: sphere_cylinder or cylinder.</td><td>string</td><td>\"sphere_cylinder\"</td></tr><tr><td>zz</td><td>Z anchor point: center, bottom, top.</td><td>string</td><td>\"center\"</td></tr><tr><td>mode</td><td>Render modes: laser, 3dpr, true.</td><td>list</td><td>[\"laser\",\"3dpr\",\"true\"]</td></tr></tbody></table></div>\n<h2>Sample Notes</h2>\n<p>show rounded, plain cylinder, and radius_name usage.</p>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1.png",
+          "title": "rounded OOBB sphere cylinder.",
+          "intent": "rounded OOBB sphere cylinder.",
+          "preview_rot": [
+            45,
+            0,
+            25
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "depth": 18,
+            "radius": 7,
+            "radius_rounded": 2,
+            "zz": "center",
+            "mode": "true"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "depth": 18,
+            "radius": 7,
+            "radius_rounded": 2,
+            "zz": "center",
+            "mode": "true"
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "depth": 250,
+            "radius_name": "\"\"",
+            "radius": 0,
+            "radius_rounded": 1,
+            "style": "\"sphere_cylinder\"",
+            "zz": "\"center\"",
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "keep the sample values exactly as written.",
+          "exists": true,
+          "image_path": "oobb_sphere_cylinder/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "oobb_sphere_cylinder/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_sphere_cylinder/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2.png",
+          "title": "same inputs switched back to normal cylinder output.",
+          "intent": "same inputs switched back to normal cylinder output.",
+          "preview_rot": [
+            45,
+            0,
+            25
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "depth": 18,
+            "radius": 7,
+            "radius_rounded": 2,
+            "style": "cylinder",
+            "zz": "center",
+            "mode": "true"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "depth": 18,
+            "radius": 7,
+            "radius_rounded": 2,
+            "style": "cylinder",
+            "zz": "center",
+            "mode": "true"
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "depth": 250,
+            "radius_name": "\"\"",
+            "radius": 0,
+            "radius_rounded": 1,
+            "style": "\"sphere_cylinder\"",
+            "zz": "\"center\"",
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "keep the sample values exactly as written.",
+          "exists": true,
+          "image_path": "oobb_sphere_cylinder/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "oobb_sphere_cylinder/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_sphere_cylinder/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        },
+        {
+          "sample_id": "test_3",
+          "filename": "test_3.png",
+          "title": "mode-aware named radius with bottom anchoring.",
+          "intent": "mode-aware named radius with bottom anchoring.",
+          "preview_rot": [
+            45,
+            0,
+            25
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "depth": 12,
+            "radius_name": "hole_radius_m6",
+            "radius_rounded": 1,
+            "zz": "bottom",
+            "mode": "true"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "depth": 12,
+            "radius_name": "hole_radius_m6",
+            "radius_rounded": 1,
+            "zz": "bottom",
+            "mode": "true"
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "depth": 250,
+            "radius_name": "\"\"",
+            "radius": 0,
+            "radius_rounded": 1,
+            "style": "\"sphere_cylinder\"",
+            "zz": "\"center\"",
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "keep the sample values exactly as written.",
+          "exists": true,
+          "image_path": "oobb_sphere_cylinder/test/test_3/image_400.png",
+          "detail_image_path": "test/test_3/image_400.png",
+          "full_image_path": "oobb_sphere_cylinder/test/test_3/image.png",
+          "detail_full_image_path": "test/test_3/image.png",
+          "detail_iso_400_path": "test/test_3/image_400.png",
+          "detail_iso_120_path": "test/test_3/image_120.png",
+          "detail_top_400_path": "test/test_3/image_top_400.png",
+          "detail_top_120_path": "test/test_3/image_top_120.png",
+          "detail_side_400_path": "test/test_3/image_side_400.png",
+          "detail_side_120_path": "test/test_3/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_sphere_cylinder/test/test_3/working.scad",
+          "detail_scad_path": "test/test_3/working.scad"
+        }
+      ],
+      "sample_notes": "this component exists as a drop-in OOBB-level version of `sphere_cylinder`, with `style=\"cylinder\"` available when a plain cylinder is needed.",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "pos": "[0,0,0]",
+        "depth": 250,
+        "radius_name": "\"\"",
+        "radius": 0,
+        "radius_rounded": 1,
+        "style": "\"sphere_cylinder\"",
+        "zz": "\"center\"",
+        "mode": "[\"laser\",\"3dpr\",\"true\"]"
+      },
+      "readme_path": "oobb_sphere_cylinder/README.md",
+      "test_samples_path": "oobb_sphere_cylinder/TEST_SAMPLES.md"
+    },
+    {
+      "command": "oobb_surface",
+      "name_long": "OOBB Geometry Primitives: Surface",
+      "name_short_options": [],
+      "description": "Creates an OpenSCAD heightmap surface from an image, normalizing the source to 1000 pixels wide and scaling width, height, and relief depth in millimeters.",
+      "summary": "Creates an OpenSCAD heightmap surface from an image, normalizing the source to 1000 pixels wide and scaling width, height, and relief depth in millimeters.",
+      "variables": [
+        {
+          "name": "file",
+          "description": "Image file to turn into an OpenSCAD surface. image is accepted as an alias.",
+          "type": "string",
+          "default": "\"icon.png\""
+        },
+        {
+          "name": "image",
+          "description": "Alias for file.",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "name": "width",
+          "description": "Surface width in mm. If height is omitted, the image aspect ratio sets height.",
+          "type": "number",
+          "default": ""
+        },
+        {
+          "name": "height",
+          "description": "Surface height in mm. If width is omitted, the image aspect ratio sets width.",
+          "type": "number",
+          "default": ""
+        },
+        {
+          "name": "depth",
+          "description": "Relief depth in mm, mapped from OpenSCAD surface's 0..100 height range.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, top, center/middle.",
+          "type": "string",
+          "default": "\"bottom\""
+        },
+        {
+          "name": "slice_bottom",
+          "description": "Subtract a cube from the bottom of the heightmap to slice away the low background.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "center",
+          "description": "Center the OpenSCAD surface around the origin in X/Y.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "invert",
+          "description": "OpenSCAD surface invert flag. True makes darker pixels higher.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "convexity",
+          "description": "OpenSCAD surface convexity.",
+          "type": "number",
+          "default": 10
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        },
+        {
+          "name": "m",
+          "description": "OpenSCAD modifier prefix, e.g. #, %, *.",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "variable_names": [
+        "file",
+        "image",
+        "width",
+        "height",
+        "depth",
+        "pos",
+        "rot",
+        "zz",
+        "slice_bottom",
+        "center",
+        "invert",
+        "convexity",
+        "type",
+        "m"
+      ],
+      "category": "OOBB Geometry Primitives",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "oobb_surface/documentation_detail.html",
+      "detail_markdown": "# oobb_surface\n\n**OOBB Geometry Primitives: Surface**\n\nCreates an OpenSCAD heightmap surface from an image, normalizing the source to 1000 pixels wide and scaling width, height, and relief depth in millimeters.\n\nThe source PNG is resized into the same directory as the generated SCAD module, and the SCAD references that local PNG by filename only.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| file | Image file to turn into an OpenSCAD surface. image is accepted as an alias. | string | \"icon.png\" |\n| image | Alias for file. | string |  |\n| width | Surface width in mm. If height is omitted, the image aspect ratio sets height. | number |  |\n| height | Surface height in mm. If width is omitted, the image aspect ratio sets width. | number |  |\n| depth | Relief depth in mm, mapped from OpenSCAD surface's 0..100 height range. | number | 1 |\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| zz | Z anchor point: bottom, top, center/middle. | string | \"bottom\" |\n| slice_bottom | Subtract a cube to slice away the background; invert=false slices the bottom, invert=true slices the top. | bool | True |\n| center | Center the OpenSCAD surface around the origin in X/Y. | bool | True |\n| invert | OpenSCAD surface invert flag. True makes darker pixels higher. | bool | True |\n| convexity | OpenSCAD surface convexity. | number | 10 |\n| type | Geometry type: positive or negative. | string | \"positive\" |\n| m | OpenSCAD modifier prefix, e.g. #, %, *. | string | \"\" |\n\n## Category\n\nOOBB Geometry Primitives",
+      "detail_html": "<h1>oobb_surface</h1>\n<p><strong>OOBB Geometry Primitives: Surface</strong></p>\n<p>Creates an OpenSCAD heightmap surface from an image, normalizing the source to 1000 pixels wide and scaling width, height, and relief depth in millimeters.</p>\n<p>The source PNG is resized into the same directory as the generated SCAD module, and the SCAD references that local PNG by filename only.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>file</td><td>Image file to turn into an OpenSCAD surface. image is accepted as an alias.</td><td>string</td><td>\"icon.png\"</td></tr><tr><td>image</td><td>Alias for file.</td><td>string</td><td></td></tr><tr><td>width</td><td>Surface width in mm. If height is omitted, the image aspect ratio sets height.</td><td>number</td><td></td></tr><tr><td>height</td><td>Surface height in mm. If width is omitted, the image aspect ratio sets width.</td><td>number</td><td></td></tr><tr><td>depth</td><td>Relief depth in mm, mapped from OpenSCAD surface's 0..100 height range.</td><td>number</td><td>1</td></tr><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>zz</td><td>Z anchor point: bottom, top, center/middle.</td><td>string</td><td>\"bottom\"</td></tr><tr><td>slice_bottom</td><td>Subtract a cube to slice away the background; invert=false slices the bottom, invert=true slices the top.</td><td>bool</td><td>True</td></tr><tr><td>center</td><td>Center the OpenSCAD surface around the origin in X/Y.</td><td>bool</td><td>True</td></tr><tr><td>invert</td><td>OpenSCAD surface invert flag. True makes darker pixels higher.</td><td>bool</td><td>True</td></tr><tr><td>convexity</td><td>OpenSCAD surface convexity.</td><td>number</td><td>10</td></tr><tr><td>type</td><td>Geometry type: positive or negative.</td><td>string</td><td>\"positive\"</td></tr><tr><td>m</td><td>OpenSCAD modifier prefix, e.g. #, %, *.</td><td>string</td><td>\"\"</td></tr></tbody></table></div>\n<h2>Category</h2>\n<p>OOBB Geometry Primitives</p>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1.png",
+          "title": "square icon surface scaled from width only, preserving the image aspect ratio.",
+          "intent": "square icon surface scaled from width only, preserving the image aspect ratio.",
+          "preview_rot": [
+            65,
+            0,
+            25
+          ],
+          "kwargs": {
+            "type": "positive",
+            "file": "icon.png",
+            "width": 60,
+            "depth": 1,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "file": "icon.png",
+            "width": 60,
+            "depth": 1,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "file": "\"icon.png\"",
+            "image": "undocumented",
+            "width": "undocumented",
+            "height": "undocumented",
+            "depth": 1,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\"",
+            "slice_bottom": true,
+            "center": true,
+            "invert": true,
+            "convexity": 10,
+            "type": "\"positive\"",
+            "m": "\"\""
+          },
+          "implementation_rule": "resize the source image to 1000 pixels wide before calculating millimeter scale, then use the default `slice_bottom=True` to subtract a slicing cube. With `invert=True`, slice from the top.",
+          "exists": true,
+          "image_path": "oobb_surface/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "oobb_surface/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_surface/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2.png",
+          "title": "icon surface scaled from height only, preserving the image aspect ratio and centered on Z.",
+          "intent": "icon surface scaled from height only, preserving the image aspect ratio and centered on Z.",
+          "preview_rot": [
+            65,
+            0,
+            25
+          ],
+          "kwargs": {
+            "type": "positive",
+            "file": "icon.png",
+            "height": 35,
+            "depth": 1.5,
+            "zz": "center",
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "file": "icon.png",
+            "height": 35,
+            "depth": 1.5,
+            "zz": "center",
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "file": "\"icon.png\"",
+            "image": "undocumented",
+            "width": "undocumented",
+            "height": "undocumented",
+            "depth": 1,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\"",
+            "slice_bottom": true,
+            "center": true,
+            "invert": true,
+            "convexity": 10,
+            "type": "\"positive\"",
+            "m": "\"\""
+          },
+          "implementation_rule": "derive width from the normalized image aspect ratio.",
+          "exists": true,
+          "image_path": "oobb_surface/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "oobb_surface/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_surface/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        },
+        {
+          "sample_id": "test_3",
+          "filename": "test_3.png",
+          "title": "forced non-proportional scaling when both width and height are provided.",
+          "intent": "forced non-proportional scaling when both width and height are provided.",
+          "preview_rot": [
+            65,
+            0,
+            25
+          ],
+          "kwargs": {
+            "type": "positive",
+            "file": "icon.png",
+            "width": 70,
+            "height": 35,
+            "depth": 1,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "file": "icon.png",
+            "width": 70,
+            "height": 35,
+            "depth": 1,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "file": "\"icon.png\"",
+            "image": "undocumented",
+            "width": "undocumented",
+            "height": "undocumented",
+            "depth": 1,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\"",
+            "slice_bottom": true,
+            "center": true,
+            "invert": true,
+            "convexity": 10,
+            "type": "\"positive\"",
+            "m": "\"\""
+          },
+          "implementation_rule": "use explicit width and height exactly, even when that changes the source aspect ratio.",
+          "exists": true,
+          "image_path": "oobb_surface/test/test_3/image_400.png",
+          "detail_image_path": "test/test_3/image_400.png",
+          "full_image_path": "oobb_surface/test/test_3/image.png",
+          "detail_full_image_path": "test/test_3/image.png",
+          "detail_iso_400_path": "test/test_3/image_400.png",
+          "detail_iso_120_path": "test/test_3/image_120.png",
+          "detail_top_400_path": "test/test_3/image_top_400.png",
+          "detail_top_120_path": "test/test_3/image_top_120.png",
+          "detail_side_400_path": "test/test_3/image_side_400.png",
+          "detail_side_120_path": "test/test_3/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_surface/test/test_3/working.scad",
+          "detail_scad_path": "test/test_3/working.scad"
+        }
+      ],
+      "sample_notes": "`oobb_surface` includes `icon.png` as a local documentation sample image and writes a normalized 1000-pixel-wide PNG beside each generated SCAD file. The generated SCAD references that copied PNG by filename only.",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "file": "\"icon.png\"",
+        "image": "undocumented",
+        "width": "undocumented",
+        "height": "undocumented",
+        "depth": 1,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\"",
+        "slice_bottom": true,
+        "center": true,
+        "invert": true,
+        "convexity": 10,
+        "type": "\"positive\"",
+        "m": "\"\""
+      },
+      "readme_path": "oobb_surface/README.md",
+      "test_samples_path": "oobb_surface/TEST_SAMPLES.md"
+    },
+    {
       "command": "oobb_text",
       "name_long": "OOBB Geometry Primitives: Text",
       "name_short_options": [],
@@ -12810,6 +14122,226 @@
       },
       "readme_path": "oobb_tube_new/README.md",
       "test_samples_path": "oobb_tube_new/TEST_SAMPLES.md"
+    },
+    {
+      "command": "oobe_holes",
+      "name_long": "OOBB Geometry Helpers: OOBE Hole Array (M3, 7.5 mm)",
+      "name_short_options": [],
+      "description": "M3 screw holes on the OOBE 7.5 mm half-grid. Identical patterns to oobb_holes but spacing is fixed at 7.5 mm and hole size is fixed at M3. No both_holes option \u2014 there is no smaller grid.",
+      "summary": "M3 screw holes on the OOBE 7.",
+      "variables": [
+        {
+          "name": "holes",
+          "description": "Hole pattern or list of patterns. Same values as oobb_holes: `all`, `perimeter`, `perimeter_miss_middle`, `u`, `top`, `bottom`, `left`, `right`, `corners`, `single`, `missing_middle`, `just_middle`, `circle`.",
+          "type": "list",
+          "default": "[\"all\"]"
+        },
+        {
+          "name": "width",
+          "description": "Width of the hole grid in OOBE units (each unit = 7.5 mm).",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "height",
+          "description": "Height of the hole grid in OOBE units (each unit = 7.5 mm).",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "pos",
+          "description": "Base position [x, y, z] in mm.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "depth",
+          "description": "Hole depth in mm.",
+          "type": "number",
+          "default": 100
+        },
+        {
+          "name": "middle",
+          "description": "Include the centre hole for patterns that have one.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "circle",
+          "description": "Filter an `all` grid to only holes inside a circular boundary.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "diameter",
+          "description": "Circular pattern diameter in OOBE units.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "diameter_clearance",
+          "description": "Edge clearance in mm for circular filtering.",
+          "type": "number",
+          "default": 7.5
+        },
+        {
+          "name": "diameter_center_clearance",
+          "description": "Min distance from centre in mm before a hole is allowed.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "loc",
+          "description": "Grid location(s) for the `single` pattern. 1-based [x,y], e.g. `loc=[1,1]` or `loc=[[1,1],[3,2]]`.",
+          "type": "list",
+          "default": "[0,0]"
+        },
+        {
+          "name": "donut",
+          "description": "When True, use the circle approach \u2014 holes fill a ring. Requires `diameter` to set the outer size.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "diameter_center",
+          "description": "Diameter of the hole-free zone in the centre, in OOBE units (each unit = 7.5 mm). Only used when `donut=True`.",
+          "type": "number",
+          "default": 0
+        }
+      ],
+      "variable_names": [
+        "holes",
+        "width",
+        "height",
+        "pos",
+        "depth",
+        "middle",
+        "circle",
+        "diameter",
+        "diameter_clearance",
+        "diameter_center_clearance",
+        "loc",
+        "donut",
+        "diameter_center"
+      ],
+      "category": "OOBB Geometry Helpers",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "oobe_holes/documentation_detail.html",
+      "detail_markdown": "# oobe_holes\n\n**OOBB Geometry Helpers: OOBE Hole Array (M3, 7.5 mm)**\n\nM3 screw holes on the OOBE 7.5 mm half-grid. Identical patterns to `oobb_holes` but spacing is fixed at 7.5 mm and hole size is fixed at M3. No `both_holes` option \u2014 there is no smaller grid.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| holes | Hole pattern(s): `all`, `perimeter`, `perimeter_miss_middle`, `u`, `top`, `bottom`, `left`, `right`, `corners`, `single`, `missing_middle`, `just_middle`, `circle`. | list | [\"all\"] |\n| width | Width of the hole grid in OOBE units (each unit = 7.5 mm). | number | 0 |\n| height | Height of the hole grid in OOBE units (each unit = 7.5 mm). | number | 0 |\n| pos | Base position [x, y, z] in mm. | list | [0,0,0] |\n| depth | Hole depth in mm. | number | 100 |\n| middle | Include the centre hole for patterns that have one. | bool | true |\n| circle | Filter an `all` grid to only holes inside a circular boundary. | bool | false |\n| diameter | Circular pattern diameter in OOBE units. | number | 0 |\n| diameter_clearance | Edge clearance in mm for circular filtering. | number | 7.5 |\n| diameter_center_clearance | Min distance from centre in mm before a hole is allowed. | number | 0 |\n| loc | Grid location(s) for the `single` pattern. 1-based [x,y], e.g. `loc=[1,1]`. | list | [0,0] |\n| donut | When true, use the circle approach \u2014 holes fill a ring. Requires `diameter` for the outer size. | bool | false |\n| diameter_center | Diameter of the hole-free zone in the centre, in OOBE units (each unit = 7.5 mm). Only used when `donut=true`. | number | 0 |\n\n## Category\n\nOOBB Geometry Helpers\n\n## Notes\n\n- Spacing fixed at 7.5 mm (OOBE half-grid).\n- Hole size fixed at M3.\n- Delegates to `oobb_holes` with `size=\"oobe\"` and `radius_name=\"m3\"`.",
+      "detail_html": "<h1>oobe_holes</h1>\n<p><strong>OOBB Geometry Helpers: OOBE Hole Array (M3, 7.5 mm)</strong></p>\n<p>M3 screw holes on the OOBE 7.5 mm half-grid. Identical patterns to <code>oobb_holes</code> but spacing is fixed at 7.5 mm and hole size is fixed at M3. No <code>both_holes</code> option \u2014 there is no smaller grid.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>holes</td><td>Hole pattern(s): <code>all</code>, <code>perimeter</code>, <code>perimeter_miss_middle</code>, <code>u</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>, <code>corners</code>, <code>single</code>, <code>missing_middle</code>, <code>just_middle</code>, <code>circle</code>.</td><td>list</td><td>[\"all\"]</td></tr><tr><td>width</td><td>Width of the hole grid in OOBE units (each unit = 7.5 mm).</td><td>number</td><td>0</td></tr><tr><td>height</td><td>Height of the hole grid in OOBE units (each unit = 7.5 mm).</td><td>number</td><td>0</td></tr><tr><td>pos</td><td>Base position [x, y, z] in mm.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>depth</td><td>Hole depth in mm.</td><td>number</td><td>100</td></tr><tr><td>middle</td><td>Include the centre hole for patterns that have one.</td><td>bool</td><td>true</td></tr><tr><td>circle</td><td>Filter an <code>all</code> grid to only holes inside a circular boundary.</td><td>bool</td><td>false</td></tr><tr><td>diameter</td><td>Circular pattern diameter in OOBE units.</td><td>number</td><td>0</td></tr><tr><td>diameter_clearance</td><td>Edge clearance in mm for circular filtering.</td><td>number</td><td>7.5</td></tr><tr><td>diameter_center_clearance</td><td>Min distance from centre in mm before a hole is allowed.</td><td>number</td><td>0</td></tr><tr><td>loc</td><td>Grid location(s) for the <code>single</code> pattern. 1-based [x,y], e.g. <code>loc=[1,1]</code>.</td><td>list</td><td>[0,0]</td></tr><tr><td>donut</td><td>When true, use the circle approach \u2014 holes fill a ring. Requires <code>diameter</code> for the outer size.</td><td>bool</td><td>false</td></tr><tr><td>diameter_center</td><td>Diameter of the hole-free zone in the centre, in OOBE units (each unit = 7.5 mm). Only used when <code>donut=true</code>.</td><td>number</td><td>0</td></tr></tbody></table></div>\n<h2>Category</h2>\n<p>OOBB Geometry Helpers</p>\n<h2>Notes</h2>\n<ul><li>Spacing fixed at 7.5 mm (OOBE half-grid).</li><li>Hole size fixed at M3.</li><li>Delegates to <code>oobb_holes</code> with <code>size=\"oobe\"</code> and <code>radius_name=\"m3\"</code>.</li></ul>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "holes": "[\"all\"]",
+            "width": 0,
+            "height": 0,
+            "pos": "[0,0,0]",
+            "depth": 100,
+            "middle": true,
+            "circle": false,
+            "diameter": 0,
+            "diameter_clearance": 7.5,
+            "diameter_center_clearance": 0,
+            "loc": "[0,0]",
+            "donut": false,
+            "diameter_center": 0
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobe_holes/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "oobe_holes/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobe_holes/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "holes": "[\"all\"]",
+            "width": 0,
+            "height": 0,
+            "pos": "[0,0,0]",
+            "depth": 100,
+            "middle": true,
+            "circle": false,
+            "diameter": 0,
+            "diameter_clearance": 7.5,
+            "diameter_center_clearance": 0,
+            "loc": "[0,0]",
+            "donut": false,
+            "diameter_center": 0
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobe_holes/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "oobe_holes/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobe_holes/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "holes": "[\"all\"]",
+        "width": 0,
+        "height": 0,
+        "pos": "[0,0,0]",
+        "depth": 100,
+        "middle": true,
+        "circle": false,
+        "diameter": 0,
+        "diameter_clearance": 7.5,
+        "diameter_center_clearance": 0,
+        "loc": "[0,0]",
+        "donut": false,
+        "diameter_center": 0
+      },
+      "readme_path": "oobe_holes/README.md",
+      "test_samples_path": ""
     },
     {
       "command": "oring",
@@ -14059,18 +15591,18 @@
             "omit_corner": "\"none\""
           },
           "implementation_rule": "keep the sample values exactly as written. This sample exists specifically to demonstrate the single-string `omit_corner` form.",
-          "exists": false,
-          "image_path": "rounded_rectangle/test/test_3/image.png",
-          "detail_image_path": "test/test_3/image.png",
+          "exists": true,
+          "image_path": "rounded_rectangle/test/test_3/image_400.png",
+          "detail_image_path": "test/test_3/image_400.png",
           "full_image_path": "rounded_rectangle/test/test_3/image.png",
           "detail_full_image_path": "test/test_3/image.png",
-          "detail_iso_400_path": "test/test_3/image.png",
-          "detail_iso_120_path": "test/test_3/image.png",
-          "detail_top_400_path": "test/test_3/image.png",
-          "detail_top_120_path": "test/test_3/image.png",
-          "detail_side_400_path": "test/test_3/image.png",
-          "detail_side_120_path": "test/test_3/image.png",
-          "scad_exists": false,
+          "detail_iso_400_path": "test/test_3/image_400.png",
+          "detail_iso_120_path": "test/test_3/image_120.png",
+          "detail_top_400_path": "test/test_3/image_top_400.png",
+          "detail_top_120_path": "test/test_3/image_top_120.png",
+          "detail_side_400_path": "test/test_3/image_side_400.png",
+          "detail_side_120_path": "test/test_3/image_side_120.png",
+          "scad_exists": true,
           "scad_path": "rounded_rectangle/test/test_3/working.scad",
           "detail_scad_path": "test/test_3/working.scad"
         },
@@ -14126,18 +15658,18 @@
             "omit_corner": "\"none\""
           },
           "implementation_rule": "keep the sample values exactly as written. This sample exists specifically to demonstrate the list form of `omit_corner`.",
-          "exists": false,
-          "image_path": "rounded_rectangle/test/test_4/image.png",
-          "detail_image_path": "test/test_4/image.png",
+          "exists": true,
+          "image_path": "rounded_rectangle/test/test_4/image_400.png",
+          "detail_image_path": "test/test_4/image_400.png",
           "full_image_path": "rounded_rectangle/test/test_4/image.png",
           "detail_full_image_path": "test/test_4/image.png",
-          "detail_iso_400_path": "test/test_4/image.png",
-          "detail_iso_120_path": "test/test_4/image.png",
-          "detail_top_400_path": "test/test_4/image.png",
-          "detail_top_120_path": "test/test_4/image.png",
-          "detail_side_400_path": "test/test_4/image.png",
-          "detail_side_120_path": "test/test_4/image.png",
-          "scad_exists": false,
+          "detail_iso_400_path": "test/test_4/image_400.png",
+          "detail_iso_120_path": "test/test_4/image_120.png",
+          "detail_top_400_path": "test/test_4/image_top_400.png",
+          "detail_top_120_path": "test/test_4/image_top_120.png",
+          "detail_side_400_path": "test/test_4/image_side_400.png",
+          "detail_side_120_path": "test/test_4/image_side_120.png",
+          "scad_exists": true,
           "scad_path": "rounded_rectangle/test/test_4/working.scad",
           "detail_scad_path": "test/test_4/working.scad"
         }
@@ -14617,6 +16149,234 @@
       "default_values": {},
       "readme_path": "sphere/README.md",
       "test_samples_path": "sphere/TEST_SAMPLES.md"
+    },
+    {
+      "command": "sphere_cylinder",
+      "name_long": "OPSC Composite Shapes: Sphere Cylinder",
+      "name_short_options": [],
+      "description": "Cylinder with rounded top and bottom outside edges, intended as a drop-in rounded replacement for cylinder.",
+      "summary": "Cylinder with rounded top and bottom outside edges, intended as a drop-in rounded replacement for cylinder.",
+      "variables": [
+        {
+          "name": "r",
+          "description": "Outer cylinder radius in mm.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "h",
+          "description": "Cylinder height in mm.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Rounded edge radius in mm.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "center",
+          "description": "Match OpenSCAD cylinder center behaviour.",
+          "type": "boolean",
+          "default": false
+        }
+      ],
+      "variable_names": [
+        "r",
+        "h",
+        "radius_rounded",
+        "center"
+      ],
+      "category": "OPSC Composite Shapes",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "sphere_cylinder/documentation_detail.html",
+      "detail_markdown": "# sphere_cylinder\n\n**OPSC Composite Shapes: Sphere Cylinder**\n\nCylinder with rounded top and bottom outside edges, intended as a drop-in rounded replacement for `cylinder`.\n\n## Returns\n\nList of geometry component dicts.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| r | Outer cylinder radius in mm. | number | 1 |\n| h | Cylinder height in mm. | number | 1 |\n| radius_rounded | Rounded edge radius in mm. | number | 1 |\n| center | Match OpenSCAD cylinder center behaviour. | boolean | False |\n\n## Sample Notes\n\nshow normal `r`/`h`, friendly `diameter`/`depth`, and centered cylinder usage.",
+      "detail_html": "<h1>sphere_cylinder</h1>\n<p><strong>OPSC Composite Shapes: Sphere Cylinder</strong></p>\n<p>Cylinder with rounded top and bottom outside edges, intended as a drop-in rounded replacement for <code>cylinder</code>.</p>\n<h2>Returns</h2>\n<p>List of geometry component dicts.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>r</td><td>Outer cylinder radius in mm.</td><td>number</td><td>1</td></tr><tr><td>h</td><td>Cylinder height in mm.</td><td>number</td><td>1</td></tr><tr><td>radius_rounded</td><td>Rounded edge radius in mm.</td><td>number</td><td>1</td></tr><tr><td>center</td><td>Match OpenSCAD cylinder center behaviour.</td><td>boolean</td><td>False</td></tr></tbody></table></div>\n<h2>Sample Notes</h2>\n<p>show normal <code>r</code>/<code>h</code>, friendly <code>diameter</code>/<code>depth</code>, and centered cylinder usage.</p>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1.png",
+          "title": "rounded cylinder using the normal `r` and `h` cylinder keys.",
+          "intent": "rounded cylinder using the normal `r` and `h` cylinder keys.",
+          "preview_rot": [
+            45,
+            0,
+            25
+          ],
+          "kwargs": {
+            "type": "positive",
+            "r": 8,
+            "h": 20,
+            "radius_rounded": 2,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "r": 8,
+            "h": 20,
+            "radius_rounded": 2,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "r": 1,
+            "h": 1,
+            "radius_rounded": 1,
+            "center": false
+          },
+          "implementation_rule": "keep the sample values exactly as written.",
+          "exists": true,
+          "image_path": "sphere_cylinder/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "sphere_cylinder/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "sphere_cylinder/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2.png",
+          "title": "rounded cylinder using `diameter` and `depth` aliases.",
+          "intent": "rounded cylinder using `diameter` and `depth` aliases.",
+          "preview_rot": [
+            45,
+            0,
+            25
+          ],
+          "kwargs": {
+            "type": "positive",
+            "diameter": 18,
+            "depth": 12,
+            "radius_rounded": 3,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "diameter": 18,
+            "depth": 12,
+            "radius_rounded": 3,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "r": 1,
+            "h": 1,
+            "radius_rounded": 1,
+            "center": false
+          },
+          "implementation_rule": "keep the sample values exactly as written.",
+          "exists": true,
+          "image_path": "sphere_cylinder/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "sphere_cylinder/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "sphere_cylinder/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        },
+        {
+          "sample_id": "test_3",
+          "filename": "test_3.png",
+          "title": "centered rounded cylinder matching OpenSCAD cylinder `center=True` behaviour.",
+          "intent": "centered rounded cylinder matching OpenSCAD cylinder `center=True` behaviour.",
+          "preview_rot": [
+            45,
+            0,
+            25
+          ],
+          "kwargs": {
+            "type": "positive",
+            "r": 8,
+            "h": 20,
+            "radius_rounded": 2,
+            "center": true,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "r": 8,
+            "h": 20,
+            "radius_rounded": 2,
+            "center": true,
+            "pos": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "r": 1,
+            "h": 1,
+            "radius_rounded": 1,
+            "center": false
+          },
+          "implementation_rule": "keep the sample values exactly as written.",
+          "exists": true,
+          "image_path": "sphere_cylinder/test/test_3/image_400.png",
+          "detail_image_path": "test/test_3/image_400.png",
+          "full_image_path": "sphere_cylinder/test/test_3/image.png",
+          "detail_full_image_path": "test/test_3/image.png",
+          "detail_iso_400_path": "test/test_3/image_400.png",
+          "detail_iso_120_path": "test/test_3/image_120.png",
+          "detail_top_400_path": "test/test_3/image_top_400.png",
+          "detail_top_120_path": "test/test_3/image_top_120.png",
+          "detail_side_400_path": "test/test_3/image_side_400.png",
+          "detail_side_120_path": "test/test_3/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "sphere_cylinder/test/test_3/working.scad",
+          "detail_scad_path": "test/test_3/working.scad"
+        }
+      ],
+      "sample_notes": "show the rounded top and bottom outside edges clearly.",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "r": 1,
+        "h": 1,
+        "radius_rounded": 1,
+        "center": false
+      },
+      "readme_path": "sphere_cylinder/README.md",
+      "test_samples_path": "sphere_cylinder/TEST_SAMPLES.md"
     },
     {
       "command": "sphere_rectangle",
@@ -15544,6 +17304,166 @@
       "default_values": {},
       "readme_path": "vpulley/README.md",
       "test_samples_path": "vpulley/TEST_SAMPLES.md"
+    },
+    {
+      "command": "withuering_wall_logo",
+      "name_long": "Withuering Wall Logo",
+      "name_short_options": [],
+      "description": "Circular wall logo disk using the W squared SVG. The logo is subtracted from the top face; when depth_engraving is omitted, the logo cuts fully through.",
+      "summary": "Circular wall logo disk using the W squared SVG.",
+      "variables": [
+        {
+          "name": "radius",
+          "description": "Outer circle radius in mm.",
+          "type": "number",
+          "default": 20
+        },
+        {
+          "name": "depth",
+          "description": "Disk depth in mm.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm. Defaults to depth for a full hollow cut.",
+          "type": "number",
+          "default": "(same as depth)"
+        },
+        {
+          "name": "logo_size_radius_percent",
+          "description": "Logo size as a multiple of the outer radius.",
+          "type": "number",
+          "default": 1.4
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "radius",
+        "depth",
+        "depth_engraving",
+        "logo_size_radius_percent",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "withuering_wall_logo/documentation_detail.html",
+      "detail_markdown": "# withuering_wall_logo\n\n**Withuering Wall Logo**\n\nCircular wall logo disk using the W squared SVG. The logo is centered on the disk, scaled by `logo_size_radius_percent`, and subtracted from the top face; when `depth_engraving` is omitted, the logo cuts fully through.\n\nThe OpenSCAD import uses the local `image_scad.svg`, which is pre-centered in a 1 mm square so generated SCAD can reference a copied SVG with simple scaling.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| radius | Outer circle radius in mm. | number | 20 |\n| depth | Disk depth in mm. | number | 3 |\n| depth_engraving | Logo cut depth in mm. Defaults to depth for a full hollow cut. | number | (same as depth) |\n| logo_size_radius_percent | Logo size as a multiple of the outer radius. | number | 0.65 |\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| zz | Z anchor point: bottom, center/middle, top. | string | \"bottom\" |",
+      "detail_html": "<h1>withuering_wall_logo</h1>\n<p><strong>Withuering Wall Logo</strong></p>\n<p>Circular wall logo disk using the W squared SVG. The logo is centered on the disk, scaled by <code>logo_size_radius_percent</code>, and subtracted from the top face; when <code>depth_engraving</code> is omitted, the logo cuts fully through.</p>\n<p>The OpenSCAD import uses the local <code>image_scad.svg</code>, which is pre-centered in a 1 mm square so generated SCAD can reference a copied SVG with simple scaling.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>radius</td><td>Outer circle radius in mm.</td><td>number</td><td>20</td></tr><tr><td>depth</td><td>Disk depth in mm.</td><td>number</td><td>3</td></tr><tr><td>depth_engraving</td><td>Logo cut depth in mm. Defaults to depth for a full hollow cut.</td><td>number</td><td>(same as depth)</td></tr><tr><td>logo_size_radius_percent</td><td>Logo size as a multiple of the outer radius.</td><td>number</td><td>0.65</td></tr><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>zz</td><td>Z anchor point: bottom, center/middle, top.</td><td>string</td><td>\"bottom\"</td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "radius": 20,
+            "depth": 3,
+            "depth_engraving": "(same as depth)",
+            "logo_size_radius_percent": 1.4,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "withuering_wall_logo/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "withuering_wall_logo/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "withuering_wall_logo/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "radius": 20,
+            "depth": 3,
+            "depth_engraving": "(same as depth)",
+            "logo_size_radius_percent": 1.4,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "withuering_wall_logo/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "withuering_wall_logo/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "withuering_wall_logo/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "radius": 20,
+        "depth": 3,
+        "depth_engraving": "(same as depth)",
+        "logo_size_radius_percent": 1.4,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "withuering_wall_logo/README.md",
+      "test_samples_path": ""
     }
   ],
   "part_sets": [],
@@ -38455,7 +40375,7 @@
       "has_mode_values": true
     }
   ],
-  "generated_date": "2026-06-24",
-  "total_objects": 68,
+  "generated_date": "2026-07-15",
+  "total_objects": 76,
   "total_part_sets": 0
 }

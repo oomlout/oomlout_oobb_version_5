@@ -1,6 +1,6 @@
 # Test Run Reports
 
-- Total tests with reports: **32**
+- Total tests with reports: **31**
 
 | Test Folder | Status | Artifact Files | Report |
 | --- | --- | ---: | --- |
@@ -33,6 +33,5 @@
 | `tests_test_file_generation_OobbBaseFileGenerationTests_test_dump_pickle_creates_pickle_files` | **PASS** | 0 | [`test_report.md`](tests_test_file_generation_OobbBaseFileGenerationTests_test_dump_pickle_creates_pickle_files/test_report.md) |
 | `tests_test_file_generation_ScadGenerationMatrixTests_test_capability_core_geometry` | **PASS** | 119 | [`test_report.md`](tests_test_file_generation_ScadGenerationMatrixTests_test_capability_core_geometry/test_report.md) |
 | `tests_test_file_generation_ScadGenerationMatrixTests_test_capability_fasteners_connectors` | **PASS** | 68 | [`test_report.md`](tests_test_file_generation_ScadGenerationMatrixTests_test_capability_fasteners_connectors/test_report.md) |
-| `tests_test_file_generation_ScadGenerationMatrixTests_test_capability_holders_storage` | **PASS** | 85 | [`test_report.md`](tests_test_file_generation_ScadGenerationMatrixTests_test_capability_holders_storage/test_report.md) |
 | `tests_test_file_generation_ScadGenerationMatrixTests_test_capability_motion_drive` | **PASS** | 102 | [`test_report.md`](tests_test_file_generation_ScadGenerationMatrixTests_test_capability_motion_drive/test_report.md) |
 | `tests_test_file_generation_SnapshotTests_test_markdown_generation_snapshot` | **PASS** | 0 | [`test_report.md`](tests_test_file_generation_SnapshotTests_test_markdown_generation_snapshot/test_report.md) |

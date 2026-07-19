@@ -1,4 +1,6 @@
-$fn = 50;difference() {
+$fn = 50;
+
+difference() {
 	union() {
 		rotate_extrude(angle = 360) {
 			translate(v = [12, 0, 0]) {

@@ -1,4 +1,5 @@
 @echo off
+python components\generate_all_component_tests.py --objects-root "components" --skip-existing-images
 python components\documentation.py ^
     --json "components\documentation_data.json" ^
     --html-template "templates\oobb_documentation_template.html" ^

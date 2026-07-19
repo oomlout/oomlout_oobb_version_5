@@ -1,6 +1,6 @@
 $fn = 50;
 
-use <gridfinity_base_tile_raw_b06c903fe30da707.scad>;
+use <../scad_reference/gridfinity_base_tile_raw.scad>;
 
 difference() {
 	union() {

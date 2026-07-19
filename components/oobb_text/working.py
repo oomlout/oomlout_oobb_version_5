@@ -29,6 +29,8 @@ def describe():
     v.append({"name": "font", "description": "OpenSCAD font name.", "type": "string", "default": '"Candara:Light"'})
     v.append({"name": "halign", "description": "Horizontal alignment: left, center, or right.", "type": "string", "default": '"center"'})
     v.append({"name": "valign", "description": "Vertical alignment: top, center, baseline, or bottom.", "type": "string", "default": '"center"'})
+    v.append({"name": "minkowski_radius", "description": "Radius in mm of a circular 2D Minkowski expansion applied before extrusion. Zero keeps the legacy plain-text path.", "type": "number", "default": 0})
+    v.append({"name": "minkowski", "description": "Legacy-friendly alias for minkowski_radius.", "type": "number", "default": 0})
     v.append({"name": "type", "description": "Geometry type/modifier context, usually positive or negative.", "type": "string", "default": '"positive"'})
     v.append({"name": "m", "description": "OpenSCAD modifier prefix, e.g. #, %, *.", "type": "string", "default": '""'})
     d["variables"] = v
@@ -76,8 +78,49 @@ def action(**kwargs):
     params.setdefault("font", "Candara:Light")
     params.setdefault("valign", "center")
     params.setdefault("halign", "center")
+
+    # Keep the zero/default case byte-for-byte compatible with the historic
+    # plain text component.  In particular, do not wrap it in a Minkowski
+    # operation with a zero-radius circle: OpenSCAD treats that as additional
+    # geometry and it makes ordinary text needlessly expensive to render.
+    minkowski_radius = params.get(
+        "minkowski_radius", params.get("minkowski", 0)
+    )
+    try:
+        minkowski_radius = float(minkowski_radius)
+    except (TypeError, ValueError):
+        minkowski_radius = 0
+    minkowski_radius = max(0, minkowski_radius)
+    params.pop("minkowski", None)
+    if minkowski_radius > 0:
+        params["minkowski_radius"] = minkowski_radius
+        # Return the component shape directly so opsc dispatches to render().
+        # A direct dict is intentional: opsc_easy filters unknown parameters.
+        params["shape"] = "oobb_text"
+        return [params]
+
+    params.pop("minkowski_radius", None)
     params["shape"] = "text"
     return [opsc.opsc_easy(**params)]
+
+
+def render(params):
+    """Render text expanded by the requested circular Minkowski radius."""
+    from solid2 import circle, linear_extrude, minkowski, text
+
+    radius = max(0, float(params.get("minkowski_radius", 0)))
+    height = params.get("height", params.get("h", params.get("depth", 0.3)))
+    text_keys = {
+        "text", "size", "font", "halign", "valign", "spacing",
+        "direction", "language", "script",
+    }
+    text_params = {key: value for key, value in params.items() if key in text_keys}
+    text_2d = text(**text_params)
+    if radius > 0:
+        text_2d = minkowski()(text_2d, circle(r=radius))
+    if height != 0:
+        return linear_extrude(height)(text_2d)
+    return text_2d
 
 
 def test():
@@ -144,4 +187,3 @@ def test():
         generated_files.append(png_path)
 
     return generated_files
-

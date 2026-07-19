@@ -1,10 +1,10 @@
 $fn = 50;
 
-use <../scad_reference/gridfinity_gridflock_raw_generated.scad>;
+use <../scad_reference/components/gridfinity_gridflock_raw/gridflock.scad>;
 
 difference() {
 	union() {
-		gridfinity_gridflock_raw_generated();
+		gridflock(alignment = [0.5, 0.5], baseplate_dimensions = [42, 42], bed_size = [250, 220], bottom_chamfer = [0, 0, 0, 0], cell_override = "", click = false, click1_distance = 1, click1_height = 3, click1_inner_length = 0, click1_outer_length = 30, click1_steepness = 1, click1_strength = 1.6, click1_wall_strength = 1, click_style = 1, clickgroove_depth = 0.9, clickgroove_gap_length = 25, clickgroove_strength = 1.4, clickgroove_tab_length = 10, clickgroove_wall_strength = 1, connector_edge_puzzle = false, connector_intersection_puzzle = true, edge_adjust = [0, 0, 0, 0], edge_puzzle_count = 1, edge_puzzle_dim = [10, 2.5], edge_puzzle_dim_c = [3, 1.2], edge_puzzle_gap = 0.15, edge_puzzle_height_female = 2.25, edge_puzzle_height_male_delta = 0.25, edge_puzzle_magnet_border = true, edge_puzzle_magnet_border_width = 2.5, filler_fraction = [2, 2], filler_minimum_size = [15, 15], filler_x = 1, filler_y = 1, gridfinity_depth = 2, gridfinity_width = 2, intersection_puzzle_fit = 1, magnet_border = 2, magnet_bottom = 0.75, magnet_diameter = 5.9, magnet_frame_style = 1, magnet_height = 2.25, magnet_release_width = 3, magnet_style = 1, magnet_top = 0.5, magnets = false, number_depth = 0.5, number_font = "sans-serif", number_size = 3, number_squeeze_size = 2, numbering = true, plate_corner_radius = 4, plate_size = [84, 84], plate_wall_height = [0, 0], plate_wall_thickness = [0, 0, 0, 0], solid_base = 0, stacked_print = false, stacked_print_duplicates = 1, stacked_print_flip = 1, stacked_print_flip_first = 0, stacked_print_layer_height = 0.2, stacked_print_min_gap = 0.5, stacked_print_slice = 0.3, thumbscrew_diameter = 15.8, thumbscrews = false, top_chamfer = [0, 0, 0, 0], top_slice = 0, vertical_screw_counterbore_top = [0, 0], vertical_screw_countersink_top = [0, 0], vertical_screw_diameter = 3.2, vertical_screw_other = false, vertical_screw_plate_corner_inset = [1, 1], vertical_screw_plate_corners = false, vertical_screw_plate_edges = false, vertical_screw_segment_corner_inset = [1, 1], vertical_screw_segment_corners = false, vertical_screw_segment_edges = false, x_column_count_first = 0, x_segment_algorithm = 0, y_row_count_first = [0, 0]);
 	}
 	union();
 }

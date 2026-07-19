@@ -502,7 +502,7 @@ def get_opsc_item(params, output_dir=None):
     if renderer is not None:
         p2 = copy.deepcopy(params)
         p2["pos"] = [0,0,0]
-        if output_dir is not None and p2.get("shape") == "raw_scad":
+        if output_dir is not None and p2.get("shape") in {"raw_scad", "oobb_surface", "surface", "withuering_wall_logo"}:
             p2["cache_dir"] = output_dir
         m = params.get('m', '')
         return_value = get_opsc_transform(params, renderer(p2))
@@ -513,7 +513,7 @@ def get_opsc_item(params, output_dir=None):
     if params['shape'] in other_shapes:
         p2 = copy.deepcopy(params)
         p2["pos"] = [0,0,0]
-        if output_dir is not None and p2.get("shape") == "raw_scad":
+        if output_dir is not None and p2.get("shape") in {"raw_scad", "oobb_surface", "surface"}:
             p2["cache_dir"] = output_dir
         m = params.get('m', '')
         return_value = get_opsc_transform(params, globals()[params['shape']](p2))
@@ -583,7 +583,7 @@ def opsc_easy(type, shape, **kwargs):
         'shape': shape
     }
     params_allowed = []
-    params_base = ['color','center','comment','size', 'r', 'radius', 'r1', 'r2', 'd', 'h', 'rw', 'rh', 'dw', 'dh', 'pos', 'x', 'y', 'z', 'rot', 'rotX', 'rotY', 'rotZ', "w", "inclusion", 'sides', 'height', 'width', "m", "id", "od", "depth", "bearing_size", "exclude_clearance", "clearance", "points","text","valign","halign","font","inset","wall_thickness","extra","wall_thickness", "loc", "locs", "location", "locations", "objects","rot_shift","extra_clearance","file","source","module","module_kwargs","omit_corner","diameter_center","donut"]
+    params_base = ['color','center','comment','size', 'r', 'radius', 'radius_rounded', 'r_rounded', 'r1', 'r2', 'radius_1', 'radius_2', 'd', 'diameter', 'h', 'rw', 'rh', 'dw', 'dh', 'pos', 'x', 'y', 'z', 'rot', 'rotX', 'rotY', 'rotZ', "w", "inclusion", 'sides', 'height', 'width', "m", "id", "od", "depth", "bearing_size", "exclude_clearance", "clearance", "points","text","valign","halign","font","inset","wall_thickness","extra","wall_thickness", "loc", "locs", "location", "locations", "objects","rot_shift","extra_clearance","file","source","module","module_kwargs","omit_corner","diameter_center","donut"]
     params_allowed.extend(params_base)
     params_gear = ['number_of_teeth', 'circular_pitch', 'diametral_pitch', 'pressure_angle', 'clearance', 'gear_thickness', 'rim_thickness', 'rim_width', 'hub_thickness', 'hub_diameter', 'bore_diameter', 'circles', 'backlash', 'twist', 'involute_facets', 'flat', "lobe_number", "radius_offset", "radius_pin", "offset", "clearance_bearing"]
     params_allowed.extend(params_gear)

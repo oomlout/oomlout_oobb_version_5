@@ -40,6 +40,22 @@ class OobbTextComponentTests(unittest.TestCase):
             self.assertTrue(result)
             self.assertEqual(result[0][0]["shape"], "text")
 
+    def test_zero_minkowski_uses_plain_text_path(self):
+        from components.oobb_text.working import action
+
+        with mock.patch.dict("sys.modules", {"opsc": _fake_opsc()}):
+            result = action(text="OOBB", minkowski_radius=0, pos=[0, 0, 0])
+        self.assertEqual(result[0]["shape"], "text")
+        self.assertNotIn("minkowski_radius", result[0])
+
+    def test_positive_minkowski_uses_expanded_renderer_path(self):
+        from components.oobb_text.working import action
+
+        with mock.patch.dict("sys.modules", {"opsc": _fake_opsc()}):
+            result = action(text="OOBB", minkowski_radius=1.25, pos=[0, 0, 0])
+        self.assertEqual(result[0]["shape"], "oobb_text")
+        self.assertEqual(result[0]["minkowski_radius"], 1.25)
+
     def test_metadata_is_documentation_ready(self):
         from components.oobb_text.working import define
 

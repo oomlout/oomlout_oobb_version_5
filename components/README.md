@@ -11,6 +11,7 @@
 | [cylinder](cylinder/) | Basic cylinder primitive exposed through the component system. | OPSC Geometry Primitives |
 | [d_shaft](d_shaft/) | Legacy opsc D-shaft shape migrated into the component system. | OPSC Mechanical Shapes |
 | [gear](gear/) | Legacy opsc involute gear shape migrated into the component system. | OPSC Mechanical Shapes |
+| [github_belfry_bosl2_gear](github_belfry_bosl2_gear/) | BOSL2 spur_gear() wrapper — metric involute spur gears with optional helical or herringbone teeth and a centre shaft bore. | External Library Wrappers |
 | [github_belfryscad_bosl2_screw](github_belfryscad_bosl2_screw/) | Raw OpenSCAD wrapper around BOSL2 `screw()` from `screws.scad`, using the local `git/BOSL2` clone and the repo raw_scad insertion path. | External Library Wrappers |
 | [gridfinity_base_raw](gridfinity_base_raw/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended baseplate generator, using repo-style width and height inputs while keeping a broad first-pass upstream option surface. | Gridfinity |
 | [gridfinity_base_tile](gridfinity_base_tile/) | Returns the raw OpenSCAD source for a Gridfinity base tile. | Gridfinity |
@@ -22,6 +23,7 @@
 | [gridfinity_tray_raw_offset](gridfinity_tray_raw_offset/) | Returns a local wrapper around gridfinity_tray_raw from the tray_raw component directory, using the same repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [hole](hole/) | Legacy opsc cylindrical hole shape migrated into the component system. | OPSC Composite Shapes |
 | [import_stl](import_stl/) | Imported STL primitive exposed through the component system. | OPSC Geometry Primitives |
+| [oobb_bearing](oobb_bearing/) | Lookup a bearing size from the CSV data in data/bearing and emit a matching opsc bearing object. | OPSC Mechanical Shapes |
 | [oobb_circle](oobb_circle/) | Renders a cylinder (solid or cutout) sized to an OOBB grid position. | OOBB Geometry Primitives |
 | [oobb_coupler_flanged](oobb_coupler_flanged/) | Flanged coupler with shaft holes and flange M3/M8 cutouts, wrapped in a rotation object. | OOBB Mechanical |
 | [oobb_cube](oobb_cube/) | Cube geometry primitive; delegates to oobb_cube_center. | OOBB Geometry Primitives |
@@ -30,6 +32,7 @@
 | [oobb_cube_new](oobb_cube_new/) | Cube with full rotation-object support and mode filtering. | OOBB Geometry Primitives |
 | [oobb_cylinder](oobb_cylinder/) | Cylinder geometry across all render modes, supporting named, explicit, or dual-end radii and z-centering. | OOBB Geometry Primitives |
 | [oobb_cylinder_hollow](oobb_cylinder_hollow/) | Hollow cylinder (positive outer minus negative inner) wrapped in a rotation object. | OOBB Geometry Primitives |
+| [oobb_gear_spur](oobb_gear_spur/) | Metric involute spur gear via BOSL2. Pressure angle fixed at 20°. Optional chamfer bevel on top and bottom faces. | OOBB Motion |
 | [oobb_hole](oobb_hole/) | Cylindrical screw hole for all render modes, resolved from a named or explicit radius. | OOBB Geometry Primitives |
 | [oobb_hole_new](oobb_hole_new/) | Cylindrical hole with rotation-object support, mode filtering, and named/explicit radius. | OOBB Geometry Primitives |
 | [oobb_holes](oobb_holes/) | Places OOBB-grid-aligned screw holes across a rectangular or circular area using named hole patterns. Use `holes` to choose one or more layouts such as `["all"]`, `["perimeter"]`, or `["single"]` with `loc=[x,y]`. | OOBB Geometry Helpers |
@@ -47,9 +50,12 @@
 | [oobb_slice](oobb_slice/) | Large cube slice used to clip/intersect geometry. | OOBB Geometry Primitives |
 | [oobb_slot](oobb_slot/) | Slot (two-ended rounded cutout) with rotation-object support, mode filtering, and named/explicit radius. | OOBB Geometry Primitives |
 | [oobb_sphere](oobb_sphere/) | Sphere (optionally ellipsoidal via radius_1/radius_2 scale) with z-anchor support. | OOBB Geometry Primitives |
+| [oobb_sphere_cylinder](oobb_sphere_cylinder/) | OOBB cylinder wrapper that can emit either a normal cylinder or the rounded sphere_cylinder shape. | OOBB Geometry Primitives |
+| [oobb_surface](oobb_surface/) | Creates an OpenSCAD heightmap surface from an image, normalizing the source to 1000 pixels wide and scaling width, height, and relief depth in millimeters. | OOBB Geometry Primitives |
 | [oobb_text](oobb_text/) | Legacy OOBB text helper that creates centered extruded text with OOBB defaults. | OOBB Geometry Primitives |
 | [oobb_tube](oobb_tube/) | Tube cutout (hollow cylinder) across all render modes, with named/explicit radius and rotation support. | OOBB Geometry Primitives |
 | [oobb_tube_new](oobb_tube_new/) | Tube cutout with updated rendering pipeline; identical interface to oobb_tube. | OOBB Geometry Primitives |
+| [oobe_holes](oobe_holes/) | M3 screw holes on the OOBE 7.5 mm half-grid. Identical patterns to oobb_holes but spacing is fixed at 7.5 mm and hole size is fixed at M3. No both_holes option — there is no smaller grid. | OOBB Geometry Helpers |
 | [oring](oring/) | Legacy opsc o-ring profile shape migrated into the component system. | OPSC Mechanical Shapes |
 | [polyg](polyg/) | Legacy opsc polygon-prism shape migrated into the component system. | OPSC Composite Shapes |
 | [polyg_tube](polyg_tube/) | Legacy opsc polygon tube shape migrated into the component system. | OPSC Composite Shapes |
@@ -63,6 +69,7 @@
 | [slot](slot/) | Legacy opsc slot shape migrated into the component system. | OPSC Composite Shapes |
 | [slot_small](slot_small/) | Legacy opsc short slot helper migrated into the component system. | OPSC Composite Shapes |
 | [sphere](sphere/) | Basic sphere primitive exposed through the component system. | OPSC Geometry Primitives |
+| [sphere_cylinder](sphere_cylinder/) | Cylinder with rounded top and bottom outside edges, intended as a drop-in rounded replacement for cylinder. | OPSC Composite Shapes |
 | [sphere_rectangle](sphere_rectangle/) | Legacy opsc sphere-swept rectangle shape migrated into the component system. | OPSC Composite Shapes |
 | [text](text/) | Extruded or planar text primitive exposed through the component system. | OPSC Geometry Primitives |
 | [text_hollow](text_hollow/) | Legacy opsc hollow-text shape migrated into the component system. | OPSC Composite Shapes |
@@ -70,3 +77,4 @@
 | [tube](tube/) | Legacy opsc tube shape migrated into the component system. | OPSC Composite Shapes |
 | [tube_new](tube_new/) | Legacy opsc tapered tube shape migrated into the component system. | OPSC Composite Shapes |
 | [vpulley](vpulley/) | Legacy opsc V-pulley profile shape migrated into the component system. | OPSC Mechanical Shapes |
+| [withuering_wall_logo](withuering_wall_logo/) | Circular wall logo disk using the W squared SVG. The logo is subtracted from the top face; when depth_engraving is omitted, the logo cuts fully through. | OOBB Custom Components |

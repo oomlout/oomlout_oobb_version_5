@@ -10,7 +10,7 @@ difference() {
 				}
 				difference() {
 					translate(v = [0, 0, -50]) {
-						cylinder(h = 100, r = 15.5);
+						cylinder(h = 100, r = 15.75);
 					}
 				}
 			}
