@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1mm" height="1mm"
+     viewBox="0 0 1254 1254"
+     role="img" aria-label="BVU geometric logo for OpenSCAD import">
+  <title>BVU geometric logo for OpenSCAD import</title>
+  <g fill="#000000" fill-rule="evenodd">
+    <path d="M 489 482 L 346 567 L 346 661 L 422 617 L 422 666 L 346 717 L 346 784 L 421 831 L 420 903 L 346 903 L 346 1024 L 490 1024 L 489 776 L 428 737 L 489 695 Z"/>
+    <path d="M 599 417 L 528 459 L 528 866 L 601 1023 L 653 1024 L 727 865 L 727 459 L 654 417 L 654 849 L 627 902 L 601 850 Z"/>
+    <path d="M 235 414 L 235 1024 L 312 1024 L 312 458 L 627 273 L 941 457 L 937 947 L 839 945 L 840 524 L 767 482 L 765 1024 L 1019 1024 L 1019 412 L 625 186 Z"/>
+  </g>
+</svg>
