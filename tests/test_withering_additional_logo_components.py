@@ -5,9 +5,13 @@ import unittest
 from components.withering_built_logo import working as built
 from components.withering_mtli_logo import working as mtli
 from components.withering_root_logo import working as root
+from components.withering_rise_logo import working as rise
+from components.withering_10north_logo import working as ten_north
 
 
 CASES = (
+    (ten_north, "withering_10north_logo"),
+    (rise, "withering_rise_logo"),
     (mtli, "withering_mtli_logo"),
     (built, "withering_built_logo"),
     (root, "withering_root_logo"),

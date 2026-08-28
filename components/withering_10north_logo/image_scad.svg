@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1mm" height="1mm" viewBox="0 0 751 751"
+     role="img" aria-labelledby="title desc">
+  <title id="title">10 North logo</title>
+  <desc id="desc">Square logo with a large 10, a doorway and steps inside the numeral 1, and NORTH below.</desc>
+
+  <path fill="#000" fill-rule="evenodd"
+        d="M4 6H742V743H4Z
+           M21 23H725V726H21Z"/>
+
+  <path fill="#000" fill-rule="evenodd"
+        d="M52 158
+           L169 77
+           H318
+           V536
+           H127
+           V220
+           L52 273
+           Z
+           M180 296H268V464H180Z
+           M170 464H278V487H170Z
+           M159 487H290V511H159Z
+           M147 511H302V536H147Z
+           M178 472H270V487H178Z
+           M166 495H282V511H166Z
+           M155 519H294V536H155Z"/>
+
+  <circle cx="250" cy="391.5" r="9.5" fill="#000"/>
+
+  <path fill="#000" fill-rule="evenodd"
+        d="M515.5 72
+           C621 72 691 132 691 309.5
+           C691 485 621 547 515.5 547
+           C410 547 340 485 340 309.5
+           C340 132 410 72 515.5 72
+           Z
+           M515.5 182
+           C548 182 566 211 566 307.5
+           C566 404 548 433 515.5 433
+           C483 433 464 404 464 307.5
+           C464 211 483 182 515.5 182
+           Z"/>
+
+  <path fill="#000"
+        d="M54 672V568H92
+           L135 626V568H173V672H136
+           L92 614V672Z"/>
+
+  <path fill="#000" fill-rule="evenodd"
+        d="M254 566
+           C294 566 318 587 318 620.5
+           C318 654 294 675 254 675
+           C214 675 190 654 190 620.5
+           C190 587 214 566 254 566
+           Z
+           M254 597
+           C269 597 278 606 278 620.5
+           C278 635 269 643 254 643
+           C239 643 230 635 230 620.5
+           C230 606 239 597 254 597
+           Z"/>
+
+  <path fill="#000" fill-rule="evenodd"
+        d="M336 672V568H397
+           C429 568 448 582 448 607
+           C448 623 440 634 425 640
+           L452 672H407
+           L387 645H375V672Z
+           M375 597V620H397
+           C404 620 409 616 409 608.5
+           C409 601 404 597 397 597Z"/>
+
+  <path fill="#000"
+        d="M455 568H561V600H528V672H489V600H455Z"/>
+
+  <path fill="#000"
+        d="M578 568H617V607H651V568H690V672H651V633H617V672H578Z"/>
+</svg>

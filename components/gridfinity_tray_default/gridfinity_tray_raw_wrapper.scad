@@ -3,6 +3,22 @@ use <ostat/gridfinity_extended_openscad/modules/module_gridfinity_cup.scad>
 
 function _gridfinity_dimension(value) = is_num(value) ? [value, 0] : value;
 
+function _gridfinity_units(value, pitch_value) =
+    is_num(value) ? value :
+    assert(is_list(value) && len(value) == 2, "Gridfinity dimensions must be numbers or [grid,mm].")
+    value[0] + value[1] / pitch_value;
+
+function _gridfinity_has_half_unit(value, pitch_value, epsilon = 0.0001) =
+    let(units = _gridfinity_units(value, pitch_value))
+    abs(units * 2 - round(units * 2)) < epsilon
+        && abs(units - round(units)) >= epsilon;
+
+function _gridfinity_effective_sub_pitch(width, depth, requested_sub_pitch, pitch) =
+    _gridfinity_has_half_unit(width, pitch[0])
+        || _gridfinity_has_half_unit(depth, pitch[1])
+        ? 2
+        : requested_sub_pitch;
+
 module gridfinity_tray_raw(
     gridfinity_width = 2,
     gridfinity_depth = 1,
@@ -149,6 +165,12 @@ module gridfinity_tray_raw(
     width = _gridfinity_dimension(gridfinity_width);
     depth = _gridfinity_dimension(gridfinity_height);
     height = _gridfinity_dimension(gridfinity_depth);
+    effective_sub_pitch = _gridfinity_effective_sub_pitch(
+        gridfinity_width,
+        gridfinity_height,
+        sub_pitch,
+        pitch
+    );
 
     $fa = fa;
     $fs = fs;
@@ -202,7 +224,7 @@ module gridfinity_tray_raw(
             floorThickness = floor_thickness,
             cavityFloorRadius = cavity_floor_radius,
             efficientFloor = efficient_floor,
-            subPitch = sub_pitch,
+            subPitch = effective_sub_pitch,
             flatBase = flat_base,
             spacer = spacer,
             minimumPrintablePadSize = minimum_printable_pad_size,
