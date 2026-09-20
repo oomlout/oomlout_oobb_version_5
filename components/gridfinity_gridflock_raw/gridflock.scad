@@ -851,22 +851,30 @@ module segment_corner(posy=_NORTH, posx=_WEST, connector=[false, false, false, f
 module segment_rectangle(size, connector=[false, false, false, false], include_wall=false) {
     // wall thickness to cut off, by side
     wall_t = function (side) include_wall || connector[side] ? 0 : plate_wall_thickness[side];
-    // corner radius by side
-    compute_radius = function (side) max(0.01, plate_corner_radius - wall_t(side));
-    bounds_offset = function (side) compute_radius(side) + wall_t(side);
-    bounds_min = [
-        -size.x/2 + bounds_offset(_WEST),
-        -size.y/2 + bounds_offset(_SOUTH)
+    // A large plate radius belongs only at a true outer corner.  Adjacent
+    // segment connectors must retain square corners; otherwise a radius larger
+    // than the segment's short side reverses its bounds and creates a chamfer.
+    corner_radii = function (posy, posx) connector[posx] || connector[posy] ? [0.01, 0.01] : [
+        max(0.01, plate_corner_radius - wall_t(posx)),
+        max(0.01, plate_corner_radius - wall_t(posy))
     ];
-    bounds_max = [
-        size.x/2 - bounds_offset(_EAST),
-        size.y/2 - bounds_offset(_NORTH)
-    ];
+    module draw_corner(posy, posx, radii) {
+        translate([
+            posx == _WEST ? -size.x/2 + radii.x : size.x/2 - radii.x,
+            posy == _SOUTH ? -size.y/2 + radii.y : size.y/2 - radii.y
+        ]) {
+            if (connector[posx] || connector[posy]) {
+                square(size = radii * 2, center=true);
+            } else {
+                scale(radii) circle(r = 1);
+            }
+        }
+    }
     hull() {
-        translate([bounds_min.x, bounds_min.y]) segment_corner(_SOUTH, _WEST, connector, compute_radius);
-        translate([bounds_max.x, bounds_min.y]) segment_corner(_SOUTH, _EAST, connector, compute_radius);
-        translate([bounds_max.x, bounds_max.y]) segment_corner(_NORTH, _EAST, connector, compute_radius);
-        translate([bounds_min.x, bounds_max.y]) segment_corner(_NORTH, _WEST, connector, compute_radius);
+        draw_corner(_SOUTH, _WEST, corner_radii(_SOUTH, _WEST));
+        draw_corner(_SOUTH, _EAST, corner_radii(_SOUTH, _EAST));
+        draw_corner(_NORTH, _EAST, corner_radii(_NORTH, _EAST));
+        draw_corner(_NORTH, _WEST, corner_radii(_NORTH, _WEST));
     };
 }
 
