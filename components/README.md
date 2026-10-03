@@ -55,6 +55,7 @@
 | [oobb_text](oobb_text/) | Legacy OOBB text helper that creates centered extruded text with OOBB defaults. | OOBB Geometry Primitives |
 | [oobb_tube](oobb_tube/) | Tube cutout (hollow cylinder) across all render modes, with named/explicit radius and rotation support. | OOBB Geometry Primitives |
 | [oobb_tube_new](oobb_tube_new/) | Tube cutout with updated rendering pipeline; identical interface to oobb_tube. | OOBB Geometry Primitives |
+| [oobb_wire](oobb_wire/) | Wire-holder clearances for basic, power, motor, motor_stepper and i2c, with an optional plate. | OOBB Electronic Components |
 | [oobe_holes](oobe_holes/) | M3 screw holes on the OOBE 7.5 mm half-grid. Identical patterns to oobb_holes but spacing is fixed at 7.5 mm and hole size is fixed at M3. No both_holes option — there is no smaller grid. | OOBB Geometry Helpers |
 | [oring](oring/) | Legacy opsc o-ring profile shape migrated into the component system. | OPSC Mechanical Shapes |
 | [polyg](polyg/) | Legacy opsc polygon-prism shape migrated into the component system. | OPSC Composite Shapes |
