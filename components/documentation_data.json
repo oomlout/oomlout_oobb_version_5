@@ -4893,6 +4893,375 @@
       "test_samples_path": ""
     },
     {
+      "command": "gridfinity_tray_quarter_increment",
+      "name_long": "Gridfinity: Tray Quarter Increment",
+      "name_short_options": [],
+      "description": "Tray with whole, half and quarter bottom feet; quarter steps on one axis only.",
+      "summary": "Tray with whole, half and quarter bottom feet; quarter steps on one axis only.",
+      "variables": [
+        {
+          "name": "gridfinity_width",
+          "description": "Width in Gridfinity units along X.",
+          "type": "number",
+          "default": 2
+        },
+        {
+          "name": "gridfinity_height",
+          "description": "Height in Gridfinity units along Y.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "gridfinity_depth",
+          "description": "Depth in Gridfinity units along Z.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "filled_in",
+          "description": "Fill the cup into a solid block or fill the lip.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "wall_thickness",
+          "description": "Outer wall thickness in mm. Zero uses upstream auto sizing.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "headroom",
+          "description": "Undersize the top by this amount for easier stacking.",
+          "type": "number",
+          "default": 0.8
+        },
+        {
+          "name": "lip_style",
+          "description": "Cup lip style.",
+          "type": "string",
+          "default": "\"normal\""
+        },
+        {
+          "name": "vertical_chambers",
+          "description": "Number of vertical chambers.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "horizontal_chambers",
+          "description": "Number of horizontal chambers.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "enable_magnets",
+          "description": "Enable base magnet holes.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "enable_screws",
+          "description": "Enable base screw holes.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "magnet_size",
+          "description": "Magnet diameter and height [d,h] in mm.",
+          "type": "list",
+          "default": "[6.5,2.4]"
+        },
+        {
+          "name": "screw_size",
+          "description": "Screw diameter and height [d,h] in mm.",
+          "type": "list",
+          "default": "[3,6]"
+        },
+        {
+          "name": "floor_thickness",
+          "description": "Minimum thickness above cutouts in the base.",
+          "type": "number",
+          "default": 0.7
+        },
+        {
+          "name": "efficient_floor",
+          "description": "Efficient floor mode.",
+          "type": "string",
+          "default": "\"on\""
+        },
+        {
+          "name": "sub_pitch",
+          "description": "Bottom pad subdivision pitch.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "flat_base",
+          "description": "Internal base style.",
+          "type": "string",
+          "default": "\"off\""
+        },
+        {
+          "name": "label_style",
+          "description": "Label style.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "label_position",
+          "description": "Label position.",
+          "type": "string",
+          "default": "\"left\""
+        },
+        {
+          "name": "sliding_lid_enabled",
+          "description": "Enable the sliding lid geometry.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "fingerslide",
+          "description": "Finger slide style.",
+          "type": "string",
+          "default": "\"none\""
+        },
+        {
+          "name": "tapered_corner",
+          "description": "Tapered corner style.",
+          "type": "string",
+          "default": "\"none\""
+        },
+        {
+          "name": "wallpattern_enabled",
+          "description": "Enable wall cutout patterns.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "floorpattern_enabled",
+          "description": "Enable floor patterns.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "wallcutout_vertical",
+          "description": "Vertical wall cutout mode.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "wallcutout_horizontal",
+          "description": "Horizontal wall cutout mode.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "extension_x_enabled",
+          "description": "Extendable tab mode on X.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "extension_y_enabled",
+          "description": "Extendable tab mode on Y.",
+          "type": "string",
+          "default": "\"disabled\""
+        },
+        {
+          "name": "text_1",
+          "description": "Add the bin size to the bottom text.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "text_2",
+          "description": "Enable custom bottom text.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "text_2_text",
+          "description": "Custom bottom text value.",
+          "type": "string",
+          "default": "\"Gridfinity Extended\""
+        },
+        {
+          "name": "pitch",
+          "description": "Gridfinity pitch [x,y,z] in mm.",
+          "type": "list",
+          "default": "[42,42,7]"
+        },
+        {
+          "name": "clearance",
+          "description": "Clearance [x,y,z] in mm.",
+          "type": "list",
+          "default": "[0.5,0.5,0]"
+        },
+        {
+          "name": "set_colour",
+          "description": "Color handling mode for the upstream renderer.",
+          "type": "string",
+          "default": "\"enable\""
+        },
+        {
+          "name": "render_position",
+          "description": "Upstream render position mode.",
+          "type": "string",
+          "default": "\"center\""
+        },
+        {
+          "name": "fa",
+          "description": "OpenSCAD fragment angle.",
+          "type": "number",
+          "default": 6
+        },
+        {
+          "name": "fs",
+          "description": "OpenSCAD fragment size.",
+          "type": "number",
+          "default": 0.4
+        },
+        {
+          "name": "fn",
+          "description": "OpenSCAD fragment count override.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "random_seed",
+          "description": "Random seed for procedural features.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "force_render",
+          "description": "Force render on costly upstream components.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: positive or negative.",
+          "type": "string",
+          "default": "\"positive\""
+        }
+      ],
+      "variable_names": [
+        "gridfinity_width",
+        "gridfinity_height",
+        "gridfinity_depth",
+        "filled_in",
+        "wall_thickness",
+        "headroom",
+        "lip_style",
+        "vertical_chambers",
+        "horizontal_chambers",
+        "enable_magnets",
+        "enable_screws",
+        "magnet_size",
+        "screw_size",
+        "floor_thickness",
+        "efficient_floor",
+        "sub_pitch",
+        "flat_base",
+        "label_style",
+        "label_position",
+        "sliding_lid_enabled",
+        "fingerslide",
+        "tapered_corner",
+        "wallpattern_enabled",
+        "floorpattern_enabled",
+        "wallcutout_vertical",
+        "wallcutout_horizontal",
+        "extension_x_enabled",
+        "extension_y_enabled",
+        "text_1",
+        "text_2",
+        "text_2_text",
+        "pitch",
+        "clearance",
+        "set_colour",
+        "render_position",
+        "fa",
+        "fs",
+        "fn",
+        "random_seed",
+        "force_render",
+        "pos",
+        "rot",
+        "type"
+      ],
+      "category": "Gridfinity",
+      "returns": "Raw SCAD geometry component dict.",
+      "aliases": [],
+      "detail_page": "gridfinity_tray_quarter_increment/documentation_detail.html",
+      "detail_markdown": "# Gridfinity tray with quarter increments\n\nOOBB shape: `gridfinity_tray_quarter_increment`.\n\nUses the existing Gridfinity Extended tray and pad profiles, with a separate\nbottom mask that splits fractional feet. The original `gridfinity_tray_raw`\ncomponent and its vendored sources are unchanged.\n\nWidth is X, height is Y, and depth is Z, all in Gridfinity units (42/42/7 mm).\nBoth `gridfinity_width`/`gridfinity_height`/`gridfinity_depth` and the shorter\n`width`/`height`/`depth` aliases work. Position and rotation work as usual.\n\n| Tray footprint | Bottom feet |\n| --- | --- |\n| 0.75 \u00d7 1 | 0.5 \u00d7 1 + 0.25 \u00d7 1 |\n| 1 \u00d7 0.75 | 1 \u00d7 0.5 + 1 \u00d7 0.25 |\n| 0.75 \u00d7 0.5 | 0.5 \u00d7 0.5 + 0.25 \u00d7 0.5 |\n| 0.5 \u00d7 0.25 | 0.5 \u00d7 0.25 |\n| 1.25 \u00d7 1 | 1 \u00d7 1 + 0.25 \u00d7 1 |\n| 1.75 \u00d7 1 | 1 \u00d7 1 + 0.5 \u00d7 1 + 0.25 \u00d7 1 |\n\nOnly one axis may end in .25 or .75. The other must be a multiple of 0.5.\nDimensions must be positive multiples of 0.25; unsupported dimensions raise an\nerror. Whole-unit feet come first, then any half-unit and quarter-unit remainder.\nThe `near` alignment places the remainder at the far end; `far` mirrors it.\nCenter alignment is unsupported. `sub_pitch` and `flat_base` are retained in the\ncommon parameter signature but the component controls them to preserve this\nfoot layout and the standard floor height.\n\nThe interior now follows the bottom feet by default, like the default tray's\nefficient floor. Each whole/half/quarter foot has its own recess, with material\nleft across the seams to keep the tray closed. The nominal 0.7 mm floor has an\nadditional 0.01 mm boolean clearance. Use `efficient_floor=\"off\"` to retain a\nflat interior floor.\n\n```python\noobb.append_full(\n    thing,\n    shape=\"gridfinity_tray_quarter_increment\",\n    gridfinity_width=0.75,\n    gridfinity_height=1,\n    gridfinity_depth=18 / 7,\n    wall_thickness=1.25,\n    lip_style=\"none\",\n)\n```\n\nValidation: `python -m pytest -q tests/test_gridfinity_tray_quarter_increment.py`.\nThe geometry tests require OpenSCAD with the Manifold backend, trimesh and numpy.\nThey check individual foot dimensions, one connected watertight mesh, closed\nfoot bottoms, and the depth of the recesses, with both efficient and flat floors.\nPhysical fit still requires a print check.",
+      "detail_html": "<h1>Gridfinity tray with quarter increments</h1>\n<p>OOBB shape: <code>gridfinity_tray_quarter_increment</code>.</p>\n<p>Uses the existing Gridfinity Extended tray and pad profiles, with a separate bottom mask that splits fractional feet. The original <code>gridfinity_tray_raw</code> component and its vendored sources are unchanged.</p>\n<p>Width is X, height is Y, and depth is Z, all in Gridfinity units (42/42/7 mm). Both <code>gridfinity_width</code>/<code>gridfinity_height</code>/<code>gridfinity_depth</code> and the shorter <code>width</code>/<code>height</code>/<code>depth</code> aliases work. Position and rotation work as usual.</p>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Tray footprint</th><th>Bottom feet</th></tr></thead><tbody><tr><td>0.75 \u00d7 1</td><td>0.5 \u00d7 1 + 0.25 \u00d7 1</td></tr><tr><td>1 \u00d7 0.75</td><td>1 \u00d7 0.5 + 1 \u00d7 0.25</td></tr><tr><td>0.75 \u00d7 0.5</td><td>0.5 \u00d7 0.5 + 0.25 \u00d7 0.5</td></tr><tr><td>0.5 \u00d7 0.25</td><td>0.5 \u00d7 0.25</td></tr><tr><td>1.25 \u00d7 1</td><td>1 \u00d7 1 + 0.25 \u00d7 1</td></tr><tr><td>1.75 \u00d7 1</td><td>1 \u00d7 1 + 0.5 \u00d7 1 + 0.25 \u00d7 1</td></tr></tbody></table></div>\n<p>Only one axis may end in .25 or .75. The other must be a multiple of 0.5. Dimensions must be positive multiples of 0.25; unsupported dimensions raise an error. Whole-unit feet come first, then any half-unit and quarter-unit remainder. The <code>near</code> alignment places the remainder at the far end; <code>far</code> mirrors it. Center alignment is unsupported. <code>sub_pitch</code> and <code>flat_base</code> are retained in the common parameter signature but the component controls them to preserve this foot layout and the standard floor height.</p>\n<p>The interior now follows the bottom feet by default, like the default tray's efficient floor. Each whole/half/quarter foot has its own recess, with material left across the seams to keep the tray closed. The nominal 0.7 mm floor has an additional 0.01 mm boolean clearance. Use <code>efficient_floor=\"off\"</code> to retain a flat interior floor.</p>\n<pre><code>oobb.append_full(\n    thing,\n    shape=&quot;gridfinity_tray_quarter_increment&quot;,\n    gridfinity_width=0.75,\n    gridfinity_height=1,\n    gridfinity_depth=18 / 7,\n    wall_thickness=1.25,\n    lip_style=&quot;none&quot;,\n)</code></pre>\n<p>Validation: <code>python -m pytest -q tests/test_gridfinity_tray_quarter_increment.py</code>. The geometry tests require OpenSCAD with the Manifold backend, trimesh and numpy. They check individual foot dimensions, one connected watertight mesh, closed foot bottoms, and the depth of the recesses, with both efficient and flat floors. Physical fit still requires a print check.</p>",
+      "sample_images": [],
+      "sample_notes": "",
+      "has_test_images": false,
+      "has_detail_page": true,
+      "default_values": {
+        "gridfinity_width": 2,
+        "gridfinity_height": 1,
+        "gridfinity_depth": 3,
+        "filled_in": "\"disabled\"",
+        "wall_thickness": 0,
+        "headroom": 0.8,
+        "lip_style": "\"normal\"",
+        "vertical_chambers": 1,
+        "horizontal_chambers": 1,
+        "enable_magnets": false,
+        "enable_screws": false,
+        "magnet_size": "[6.5,2.4]",
+        "screw_size": "[3,6]",
+        "floor_thickness": 0.7,
+        "efficient_floor": "\"on\"",
+        "sub_pitch": 1,
+        "flat_base": "\"off\"",
+        "label_style": "\"disabled\"",
+        "label_position": "\"left\"",
+        "sliding_lid_enabled": false,
+        "fingerslide": "\"none\"",
+        "tapered_corner": "\"none\"",
+        "wallpattern_enabled": false,
+        "floorpattern_enabled": false,
+        "wallcutout_vertical": "\"disabled\"",
+        "wallcutout_horizontal": "\"disabled\"",
+        "extension_x_enabled": "\"disabled\"",
+        "extension_y_enabled": "\"disabled\"",
+        "text_1": false,
+        "text_2": false,
+        "text_2_text": "\"Gridfinity Extended\"",
+        "pitch": "[42,42,7]",
+        "clearance": "[0.5,0.5,0]",
+        "set_colour": "\"enable\"",
+        "render_position": "\"center\"",
+        "fa": 6,
+        "fs": 0.4,
+        "fn": 0,
+        "random_seed": 0,
+        "force_render": true,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "\"positive\""
+      },
+      "readme_path": "gridfinity_tray_quarter_increment/README.md",
+      "test_samples_path": ""
+    },
+    {
       "command": "gridfinity_tray_raw",
       "name_long": "Gridfinity: Tray Raw",
       "name_short_options": [],
@@ -8320,6 +8689,320 @@
       "test_samples_path": "oobb_cylinder/TEST_SAMPLES.md"
     },
     {
+      "command": "oobb_cylinder_d_shaft",
+      "name_long": "OOBB Geometry Primitives: D-Shaft Cylinder",
+      "name_short_options": [],
+      "description": "Cylinder with a flat cut from the +Y side. cut_d is the material removed in mm; the remaining flat-to-back size is 2 * radius - cut_d.",
+      "summary": "Cylinder with a flat cut from the +Y side.",
+      "variables": [
+        {
+          "name": "radius",
+          "description": "Cylinder radius in mm; r is an alias. Supply a radius, diameter, or radius_name.",
+          "type": "number",
+          "default": "(required unless diameter or radius_name is supplied)"
+        },
+        {
+          "name": "diameter",
+          "description": "Cylinder diameter in mm; d is an alias. Explicit radius takes precedence.",
+          "type": "number",
+          "default": "(optional)"
+        },
+        {
+          "name": "radius_name",
+          "description": "Mode-aware OOBB radius lookup, used when no explicit radius or diameter is supplied.",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "name": "cut_d",
+          "description": "Depth removed from the +Y curved edge in mm. Flat is at y = radius - cut_d before rotation. Must satisfy 0 <= cut_d < 2 * radius; 0 leaves a full cylinder.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "depth",
+          "description": "Cylinder length along local Z in mm (aliases: depth_mm, h). May be an OOBB dimension name.",
+          "type": "number or string",
+          "default": 250
+        },
+        {
+          "name": "pos",
+          "description": "Anchor position [x,y,z] in mm.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Local Z anchor: center, bottom, or top, applied before rotation.",
+          "type": "string",
+          "default": "center"
+        },
+        {
+          "name": "type",
+          "description": "p/positive for a solid shaft; n/negative for a D-shaped hole.",
+          "type": "string",
+          "default": "p"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees about pos. Alternatively use rot_x, rot_y, rot_z.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "mode",
+          "description": "Render mode string or list: laser, 3dpr, true.",
+          "type": "list or string",
+          "default": "[\"laser\",\"3dpr\",\"true\"]"
+        }
+      ],
+      "variable_names": [
+        "radius",
+        "diameter",
+        "radius_name",
+        "cut_d",
+        "depth",
+        "pos",
+        "zz",
+        "type",
+        "rot",
+        "mode"
+      ],
+      "category": "OOBB Geometry Primitives",
+      "returns": "List of mode-specific rotation objects containing a cylinder minus a flat cut.",
+      "aliases": [],
+      "detail_page": "oobb_cylinder_d_shaft/documentation_detail.html",
+      "detail_markdown": "# oobb_cylinder_d_shaft\n\n**OOBB Geometry Primitives: D-Shaft Cylinder**\n\nCylinder with a flat cut from the +Y side. cut_d is the material removed in mm; the remaining flat-to-back size is 2 * radius - cut_d.\n\n## Returns\n\nList of mode-specific rotation objects containing a cylinder minus a flat cut.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| radius | Cylinder radius in mm; r is an alias. Supply a radius, diameter, or radius_name. | number | (required unless diameter or radius_name is supplied) |\n| diameter | Cylinder diameter in mm; d is an alias. Explicit radius takes precedence. | number | (optional) |\n| radius_name | Mode-aware OOBB radius lookup, used when no explicit radius or diameter is supplied. | string |  |\n| cut_d | Depth removed from the +Y curved edge in mm. Flat is at y = radius - cut_d before rotation. Must satisfy 0 <= cut_d < 2 * radius; 0 leaves a full cylinder. | number | 1 |\n| depth | Cylinder length along local Z in mm (aliases: depth_mm, h). May be an OOBB dimension name. | number or string | 250 |\n| pos | Anchor position [x,y,z] in mm. | list | [0,0,0] |\n| zz | Local Z anchor: center, bottom, or top, applied before rotation. | string | center |\n| type | p/positive for a solid shaft; n/negative for a D-shaped hole. | string | p |\n| rot | Rotation [rx,ry,rz] in degrees about pos. Alternatively use rot_x, rot_y, rot_z. | list | [0,0,0] |\n| mode | Render mode string or list: laser, 3dpr, true. | list or string | [\"laser\",\"3dpr\",\"true\"] |\n\n## Sample Notes\n\ncut_d is a distance removed in millimetres, not a fraction or the remaining width. The flat faces +Y before rotation; zz defaults to center. Regenerate previews with `python -c \"from components.oobb_cylinder_d_shaft.working import test; test()\"`.\n\n## Usage\n\n```python\nimport oobb\n\nshaft = oobb.oobb_easy(\n    shape=\"oobb_cylinder_d_shaft\",\n    type=\"p\",\n    radius=5,\n    depth=12,\n    cut_d=2,\n    pos=[0, 0, 0],\n    zz=\"center\",\n)\n```\n\nThis starts with a 10 mm diameter cylinder and removes 2 mm from its +Y edge.\nThe flat lies at local y=3 mm, leaving 8 mm from the flat to the opposite edge.\nThe cylinder spans z=-6 to z=6 mm. `cut_d` stays in millimetres when the radius changes.\n\nFor a D-shaped hole, use `type=\"n\"` and combine the returned geometry with a\npositive body. The cylinder and its flat are grouped before subtraction, so the\nflat cutter does not cut into surrounding parts. Use `rot=[0,0,90]` to turn the\nflat toward -X, or `rot=[90,0,0]` to put the shaft axis along -Y.\n\nNamed radii resolve separately in each render mode. For example:\n\n```python\nshaft = oobb.oobb_easy(\n    shape=\"oobb_cylinder_d_shaft\",\n    radius_name=\"hole_radius_m6\",\n    depth=12,\n    cut_d=0.5,\n    zz=\"bottom\",\n    mode=\"3dpr\",\n)\n```\n\n## Rendered examples\n\nAll four examples have radius=5 mm, depth=12 mm, zz=\"center\", and mode=\"true\".\nThe HTML documentation includes their isometric, top, and side previews and SCAD files.\n\n| Example | cut_d (mm removed) | Flat Y (mm) | Remaining flat-to-back size (mm) |\n|---------|--------------------|-------------|---------------------------------|\n| test_1: full cylinder | 0 | 5 (no flat) | 10 |\n| test_2: shallow flat | 1 | 4 | 9 |\n| test_3: deeper flat | 2 | 3 | 8 |\n| test_4: half cylinder | 5 | 0 | 5 |\n\n## Limits\n\nUse a positive constant radius and depth. `cut_d=0` produces an uncut cylinder;\n`cut_d=radius` produces a half cylinder. Cuts deeper than the radius are allowed,\nbut `cut_d` must remain less than the full diameter in every requested mode.\nNegative cuts, non-finite dimensions, and tapered cylinders are rejected.\n\n## Regenerate\n\n```powershell\npython -c \"from components.oobb_cylinder_d_shaft.working import test; test()\"\npython components/documentation.py --objects-root components --markdown\npython components/documentation.py --objects-root components --json components/documentation_data.json --html-template templates/oobb_documentation_template.html --html-output components/documentation.html\n```",
+      "detail_html": "<h1>oobb_cylinder_d_shaft</h1>\n<p><strong>OOBB Geometry Primitives: D-Shaft Cylinder</strong></p>\n<p>Cylinder with a flat cut from the +Y side. cut_d is the material removed in mm; the remaining flat-to-back size is 2 * radius - cut_d.</p>\n<h2>Returns</h2>\n<p>List of mode-specific rotation objects containing a cylinder minus a flat cut.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>radius</td><td>Cylinder radius in mm; r is an alias. Supply a radius, diameter, or radius_name.</td><td>number</td><td>(required unless diameter or radius_name is supplied)</td></tr><tr><td>diameter</td><td>Cylinder diameter in mm; d is an alias. Explicit radius takes precedence.</td><td>number</td><td>(optional)</td></tr><tr><td>radius_name</td><td>Mode-aware OOBB radius lookup, used when no explicit radius or diameter is supplied.</td><td>string</td><td></td></tr><tr><td>cut_d</td><td>Depth removed from the +Y curved edge in mm. Flat is at y = radius - cut_d before rotation. Must satisfy 0 &lt;= cut_d &lt; 2 * radius; 0 leaves a full cylinder.</td><td>number</td><td>1</td></tr><tr><td>depth</td><td>Cylinder length along local Z in mm (aliases: depth_mm, h). May be an OOBB dimension name.</td><td>number or string</td><td>250</td></tr><tr><td>pos</td><td>Anchor position [x,y,z] in mm.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>zz</td><td>Local Z anchor: center, bottom, or top, applied before rotation.</td><td>string</td><td>center</td></tr><tr><td>type</td><td>p/positive for a solid shaft; n/negative for a D-shaped hole.</td><td>string</td><td>p</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees about pos. Alternatively use rot_x, rot_y, rot_z.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>mode</td><td>Render mode string or list: laser, 3dpr, true.</td><td>list or string</td><td>[\"laser\",\"3dpr\",\"true\"]</td></tr></tbody></table></div>\n<h2>Sample Notes</h2>\n<p>cut_d is a distance removed in millimetres, not a fraction or the remaining width. The flat faces +Y before rotation; zz defaults to center. Regenerate previews with <code>python -c \"from components.oobb_cylinder_d_shaft.working import test; test()\"</code>.</p>\n<h2>Usage</h2>\n<pre><code>import oobb\n\nshaft = oobb.oobb_easy(\n    shape=&quot;oobb_cylinder_d_shaft&quot;,\n    type=&quot;p&quot;,\n    radius=5,\n    depth=12,\n    cut_d=2,\n    pos=[0, 0, 0],\n    zz=&quot;center&quot;,\n)</code></pre>\n<p>This starts with a 10 mm diameter cylinder and removes 2 mm from its +Y edge. The flat lies at local y=3 mm, leaving 8 mm from the flat to the opposite edge. The cylinder spans z=-6 to z=6 mm. <code>cut_d</code> stays in millimetres when the radius changes.</p>\n<p>For a D-shaped hole, use <code>type=\"n\"</code> and combine the returned geometry with a positive body. The cylinder and its flat are grouped before subtraction, so the flat cutter does not cut into surrounding parts. Use <code>rot=[0,0,90]</code> to turn the flat toward -X, or <code>rot=[90,0,0]</code> to put the shaft axis along -Y.</p>\n<p>Named radii resolve separately in each render mode. For example:</p>\n<pre><code>shaft = oobb.oobb_easy(\n    shape=&quot;oobb_cylinder_d_shaft&quot;,\n    radius_name=&quot;hole_radius_m6&quot;,\n    depth=12,\n    cut_d=0.5,\n    zz=&quot;bottom&quot;,\n    mode=&quot;3dpr&quot;,\n)</code></pre>\n<h2>Rendered examples</h2>\n<p>All four examples have radius=5 mm, depth=12 mm, zz=\"center\", and mode=\"true\". The HTML documentation includes their isometric, top, and side previews and SCAD files.</p>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Example</th><th>cut_d (mm removed)</th><th>Flat Y (mm)</th><th>Remaining flat-to-back size (mm)</th></tr></thead><tbody><tr><td>test_1: full cylinder</td><td>0</td><td>5 (no flat)</td><td>10</td></tr><tr><td>test_2: shallow flat</td><td>1</td><td>4</td><td>9</td></tr><tr><td>test_3: deeper flat</td><td>2</td><td>3</td><td>8</td></tr><tr><td>test_4: half cylinder</td><td>5</td><td>0</td><td>5</td></tr></tbody></table></div>\n<h2>Limits</h2>\n<p>Use a positive constant radius and depth. <code>cut_d=0</code> produces an uncut cylinder; <code>cut_d=radius</code> produces a half cylinder. Cuts deeper than the radius are allowed, but <code>cut_d</code> must remain less than the full diameter in every requested mode. Negative cuts, non-finite dimensions, and tapered cylinders are rejected.</p>\n<h2>Regenerate</h2>\n<pre><code>python -c &quot;from components.oobb_cylinder_d_shaft.working import test; test()&quot;\npython components/documentation.py --objects-root components --markdown\npython components/documentation.py --objects-root components --json components/documentation_data.json --html-template templates/oobb_documentation_template.html --html-output components/documentation.html</code></pre>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1.png",
+          "title": "Uncut reference cylinder: cut_d=0 mm, remaining size 10 mm.",
+          "intent": "Uncut reference cylinder: cut_d=0 mm, remaining size 10 mm.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "radius": 5,
+            "depth": 12,
+            "cut_d": 0,
+            "mode": "true"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "radius": 5,
+            "depth": 12,
+            "cut_d": 0,
+            "mode": "true"
+          },
+          "default_values": {
+            "radius": "(required unless diameter or radius_name is supplied)",
+            "diameter": "(optional)",
+            "radius_name": "undocumented",
+            "cut_d": 1,
+            "depth": 250,
+            "pos": "[0,0,0]",
+            "zz": "center",
+            "type": "p",
+            "rot": "[0,0,0]",
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_cylinder_d_shaft/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "oobb_cylinder_d_shaft/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_cylinder_d_shaft/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2.png",
+          "title": "Shallow D-flat: cut_d=1 mm, remaining flat-to-back size 9 mm.",
+          "intent": "Shallow D-flat: cut_d=1 mm, remaining flat-to-back size 9 mm.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "radius": 5,
+            "depth": 12,
+            "cut_d": 1,
+            "mode": "true"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "radius": 5,
+            "depth": 12,
+            "cut_d": 1,
+            "mode": "true"
+          },
+          "default_values": {
+            "radius": "(required unless diameter or radius_name is supplied)",
+            "diameter": "(optional)",
+            "radius_name": "undocumented",
+            "cut_d": 1,
+            "depth": 250,
+            "pos": "[0,0,0]",
+            "zz": "center",
+            "type": "p",
+            "rot": "[0,0,0]",
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_cylinder_d_shaft/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "oobb_cylinder_d_shaft/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_cylinder_d_shaft/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        },
+        {
+          "sample_id": "test_3",
+          "filename": "test_3.png",
+          "title": "Deeper D-flat: cut_d=2 mm, remaining flat-to-back size 8 mm.",
+          "intent": "Deeper D-flat: cut_d=2 mm, remaining flat-to-back size 8 mm.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "radius": 5,
+            "depth": 12,
+            "cut_d": 2,
+            "mode": "true"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "radius": 5,
+            "depth": 12,
+            "cut_d": 2,
+            "mode": "true"
+          },
+          "default_values": {
+            "radius": "(required unless diameter or radius_name is supplied)",
+            "diameter": "(optional)",
+            "radius_name": "undocumented",
+            "cut_d": 1,
+            "depth": 250,
+            "pos": "[0,0,0]",
+            "zz": "center",
+            "type": "p",
+            "rot": "[0,0,0]",
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_cylinder_d_shaft/test/test_3/image_400.png",
+          "detail_image_path": "test/test_3/image_400.png",
+          "full_image_path": "oobb_cylinder_d_shaft/test/test_3/image.png",
+          "detail_full_image_path": "test/test_3/image.png",
+          "detail_iso_400_path": "test/test_3/image_400.png",
+          "detail_iso_120_path": "test/test_3/image_120.png",
+          "detail_top_400_path": "test/test_3/image_top_400.png",
+          "detail_top_120_path": "test/test_3/image_top_120.png",
+          "detail_side_400_path": "test/test_3/image_side_400.png",
+          "detail_side_120_path": "test/test_3/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_cylinder_d_shaft/test/test_3/working.scad",
+          "detail_scad_path": "test/test_3/working.scad"
+        },
+        {
+          "sample_id": "test_4",
+          "filename": "test_4.png",
+          "title": "Half cylinder: cut_d=5 mm reaches the centreline, remaining size 5 mm.",
+          "intent": "Half cylinder: cut_d=5 mm reaches the centreline, remaining size 5 mm.",
+          "preview_rot": [
+            55,
+            0,
+            25
+          ],
+          "kwargs": {
+            "radius": 5,
+            "depth": 12,
+            "cut_d": 5,
+            "mode": "true"
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "radius": 5,
+            "depth": 12,
+            "cut_d": 5,
+            "mode": "true"
+          },
+          "default_values": {
+            "radius": "(required unless diameter or radius_name is supplied)",
+            "diameter": "(optional)",
+            "radius_name": "undocumented",
+            "cut_d": 1,
+            "depth": 250,
+            "pos": "[0,0,0]",
+            "zz": "center",
+            "type": "p",
+            "rot": "[0,0,0]",
+            "mode": "[\"laser\",\"3dpr\",\"true\"]"
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_cylinder_d_shaft/test/test_4/image_400.png",
+          "detail_image_path": "test/test_4/image_400.png",
+          "full_image_path": "oobb_cylinder_d_shaft/test/test_4/image.png",
+          "detail_full_image_path": "test/test_4/image.png",
+          "detail_iso_400_path": "test/test_4/image_400.png",
+          "detail_iso_120_path": "test/test_4/image_120.png",
+          "detail_top_400_path": "test/test_4/image_top_400.png",
+          "detail_top_120_path": "test/test_4/image_top_120.png",
+          "detail_side_400_path": "test/test_4/image_side_400.png",
+          "detail_side_120_path": "test/test_4/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_cylinder_d_shaft/test/test_4/working.scad",
+          "detail_scad_path": "test/test_4/working.scad"
+        }
+      ],
+      "sample_notes": "cut_d is a distance removed in millimetres, not a fraction or the remaining width. The flat faces +Y before rotation; zz defaults to center. Regenerate previews with `python -c \"from components.oobb_cylinder_d_shaft.working import test; test()\"`.",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "radius": "(required unless diameter or radius_name is supplied)",
+        "diameter": "(optional)",
+        "radius_name": "undocumented",
+        "cut_d": 1,
+        "depth": 250,
+        "pos": "[0,0,0]",
+        "zz": "center",
+        "type": "p",
+        "rot": "[0,0,0]",
+        "mode": "[\"laser\",\"3dpr\",\"true\"]"
+      },
+      "readme_path": "oobb_cylinder_d_shaft/README.md",
+      "test_samples_path": "oobb_cylinder_d_shaft/TEST_SAMPLES.md"
+    },
+    {
       "command": "oobb_cylinder_hollow",
       "name_long": "OOBB Geometry Primitives: Hollow Cylinder",
       "name_short_options": [],
@@ -8558,6 +9241,195 @@
       },
       "readme_path": "oobb_cylinder_hollow/README.md",
       "test_samples_path": "oobb_cylinder_hollow/TEST_SAMPLES.md"
+    },
+    {
+      "command": "oobb_funnel_rounded_rectangle",
+      "name_long": "OOBB Geometry Primitives: Rounded Rectangle Funnel",
+      "name_short_options": [],
+      "description": "Open rounded rectangular funnel with a straight inset spout and a tapered, constant-width wall.",
+      "summary": "Open rounded rectangular funnel with a straight inset spout and a tapered, constant-width wall.",
+      "variables": [
+        {
+          "name": "pos",
+          "description": "Spout-bottom position [x,y,z] in mm.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: p/positive or n/negative.",
+          "type": "string",
+          "default": "p"
+        },
+        {
+          "name": "size",
+          "description": "Spout outer [width,height,total_depth] in mm.",
+          "type": "list",
+          "default": "[36,36,14]"
+        },
+        {
+          "name": "mouth_size",
+          "description": "Mouth outer [width,height] in mm.",
+          "type": "list",
+          "default": "[63,63]"
+        },
+        {
+          "name": "spout_depth",
+          "description": "Straight insertion depth in mm.",
+          "type": "number",
+          "default": 8
+        },
+        {
+          "name": "radius",
+          "description": "Spout outer corner radius in mm.",
+          "type": "number",
+          "default": 4
+        },
+        {
+          "name": "mouth_radius",
+          "description": "Mouth outer corner radius in mm.",
+          "type": "number",
+          "default": 8
+        },
+        {
+          "name": "wall_thickness",
+          "description": "Horizontal wall thickness in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        }
+      ],
+      "variable_names": [
+        "pos",
+        "type",
+        "size",
+        "mouth_size",
+        "spout_depth",
+        "radius",
+        "mouth_radius",
+        "wall_thickness",
+        "rot"
+      ],
+      "category": "OOBB Geometry Primitives",
+      "returns": "List containing a rotation object with positive and negative OOBB geometry.",
+      "aliases": [],
+      "detail_page": "oobb_funnel_rounded_rectangle/documentation_detail.html",
+      "detail_markdown": "# oobb_funnel_rounded_rectangle\n\nOpen, rounded rectangular funnel made from OOBB `rounded_rectangle` sections and hulls. The straight spout starts at `z=0`, and the mouth ends at `z=size[2]`. Its inner and outer profiles use the same taper and corner centres, leaving a settable horizontal wall thickness (default 1.5 mm).\n\n| Parameter | Default | Meaning |\n| --- | --- | --- |\n| `size` | `[36, 36, 14]` | Spout outside width, height, and total funnel depth in mm |\n| `mouth_size` | `[63, 63]` | Mouth outside width and height in mm |\n| `spout_depth` | `8` | Straight section that inserts into a pot in mm |\n| `radius` | `4` | Spout outside corner radius in mm |\n| `mouth_radius` | `8` | Mouth outside corner radius in mm |\n| `wall_thickness` | `1.5` | Horizontal wall thickness in mm |\n| `pos`, `rot`, `type` | `[0,0,0]`, `[0,0,0]`, `p` | OOBB placement and polarity |\n\nFor printing, place the wide mouth on the build plate. With the default 36 mm spout, 63 mm mouth, 8 mm insertion depth and 14 mm total depth, the taper rises 6 mm while narrowing 13.5 mm per side, a slope of about 24 degrees above the bed. This shallow wall is likely to need support on a typical FDM printer. A support-free 45-degree taper with the same mouth and spout would need at least 21.5 mm total depth.",
+      "detail_html": "<h1>oobb_funnel_rounded_rectangle</h1>\n<p>Open, rounded rectangular funnel made from OOBB <code>rounded_rectangle</code> sections and hulls. The straight spout starts at <code>z=0</code>, and the mouth ends at <code>z=size[2]</code>. Its inner and outer profiles use the same taper and corner centres, leaving a settable horizontal wall thickness (default 1.5 mm).</p>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Parameter</th><th>Default</th><th>Meaning</th></tr></thead><tbody><tr><td><code>size</code></td><td><code>[36, 36, 14]</code></td><td>Spout outside width, height, and total funnel depth in mm</td></tr><tr><td><code>mouth_size</code></td><td><code>[63, 63]</code></td><td>Mouth outside width and height in mm</td></tr><tr><td><code>spout_depth</code></td><td><code>8</code></td><td>Straight section that inserts into a pot in mm</td></tr><tr><td><code>radius</code></td><td><code>4</code></td><td>Spout outside corner radius in mm</td></tr><tr><td><code>mouth_radius</code></td><td><code>8</code></td><td>Mouth outside corner radius in mm</td></tr><tr><td><code>wall_thickness</code></td><td><code>1.5</code></td><td>Horizontal wall thickness in mm</td></tr><tr><td><code>pos</code>, <code>rot</code>, <code>type</code></td><td><code>[0,0,0]</code>, <code>[0,0,0]</code>, <code>p</code></td><td>OOBB placement and polarity</td></tr></tbody></table></div>\n<p>For printing, place the wide mouth on the build plate. With the default 36 mm spout, 63 mm mouth, 8 mm insertion depth and 14 mm total depth, the taper rises 6 mm while narrowing 13.5 mm per side, a slope of about 24 degrees above the bed. This shallow wall is likely to need support on a typical FDM printer. A support-free 45-degree taper with the same mouth and spout would need at least 21.5 mm total depth.</p>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1.png",
+          "title": "1x1 Gridfinity pot funnel shown with the wide mouth on the build plate.",
+          "intent": "1x1 Gridfinity pot funnel shown with the wide mouth on the build plate.",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": {
+            "type": "positive",
+            "size": [
+              36,
+              36,
+              14
+            ],
+            "mouth_size": [
+              63,
+              63
+            ],
+            "spout_depth": 8,
+            "radius": 4,
+            "mouth_radius": 8,
+            "wall_thickness": 1.5,
+            "pos": [
+              0,
+              0,
+              14
+            ],
+            "rot": [
+              180,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "type": "positive",
+            "size": [
+              36,
+              36,
+              14
+            ],
+            "mouth_size": [
+              63,
+              63
+            ],
+            "spout_depth": 8,
+            "radius": 4,
+            "mouth_radius": 8,
+            "wall_thickness": 1.5,
+            "pos": [
+              0,
+              0,
+              14
+            ],
+            "rot": [
+              180,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "type": "p",
+            "size": "[36,36,14]",
+            "mouth_size": "[63,63]",
+            "spout_depth": 8,
+            "radius": 4,
+            "mouth_radius": 8,
+            "wall_thickness": 1.5,
+            "rot": "[0,0,0]"
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_funnel_rounded_rectangle/test/test_1/image.png",
+          "detail_image_path": "test/test_1/image.png",
+          "full_image_path": "oobb_funnel_rounded_rectangle/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image.png",
+          "detail_iso_120_path": "test/test_1/image.png",
+          "detail_top_400_path": "test/test_1/image.png",
+          "detail_top_120_path": "test/test_1/image.png",
+          "detail_side_400_path": "test/test_1/image.png",
+          "detail_side_120_path": "test/test_1/image.png",
+          "scad_exists": true,
+          "scad_path": "oobb_funnel_rounded_rectangle/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "pos": "[0,0,0]",
+        "type": "p",
+        "size": "[36,36,14]",
+        "mouth_size": "[63,63]",
+        "spout_depth": 8,
+        "radius": 4,
+        "mouth_radius": 8,
+        "wall_thickness": 1.5,
+        "rot": "[0,0,0]"
+      },
+      "readme_path": "oobb_funnel_rounded_rectangle/README.md",
+      "test_samples_path": "oobb_funnel_rounded_rectangle/TEST_SAMPLES.md"
     },
     {
       "command": "oobb_gear_spur",
@@ -10862,6 +11734,795 @@
       },
       "readme_path": "oobb_rounded_rectangle_rounded/README.md",
       "test_samples_path": "oobb_rounded_rectangle_rounded/TEST_SAMPLES.md"
+    },
+    {
+      "command": "oobb_rounded_rectangle_rounded_draft_angle",
+      "name_long": "OOBB Geometry Primitives: Rounded Rectangle with Draft Angle",
+      "name_short_options": [],
+      "description": "Rounded rectangle with rounded top and bottom edges and side walls that taper inward toward the bottom for injection-moulding design.",
+      "summary": "Rounded rectangle with rounded top and bottom edges and side walls that taper inward toward the bottom for injection-moulding design.",
+      "variables": [
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: p/positive or n/negative.",
+          "type": "string",
+          "default": "p"
+        },
+        {
+          "name": "size",
+          "description": "Overall [x,y,z] dimensions of the undrafted reference shape, in mm.",
+          "type": "list",
+          "default": "[20,10,5]"
+        },
+        {
+          "name": "radius",
+          "description": "Corner radius of the base shape.",
+          "type": "number",
+          "default": 5
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Rounding radius for top/bottom edges.",
+          "type": "number",
+          "default": 2.5
+        },
+        {
+          "name": "draft_angle",
+          "description": "Side-wall draft angle in degrees. Positive values taper the bottom inward relative to the top.",
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "extra",
+          "description": "Extra variant/modifier string.",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot_x",
+          "description": "X rotation in degrees.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "rot_y",
+          "description": "Y rotation in degrees.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "rot_z",
+          "description": "Z rotation in degrees.",
+          "type": "number",
+          "default": 0
+        }
+      ],
+      "variable_names": [
+        "pos",
+        "type",
+        "size",
+        "radius",
+        "radius_rounded",
+        "draft_angle",
+        "extra",
+        "rot",
+        "rot_x",
+        "rot_y",
+        "rot_z"
+      ],
+      "category": "OOBB Geometry Primitives",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "oobb_rounded_rectangle_rounded_draft_angle/documentation_detail.html",
+      "detail_markdown": "# oobb_rounded_rectangle_rounded_draft_angle\n\n**OOBB Geometry Primitives: Rounded Rectangle with Draft Angle**\n\nRounded rectangle with rounded top and bottom edges. `size` gives the undrafted reference envelope at the top. A positive `draft_angle` tapers the side walls inward toward the bottom, matching a part modeled upside down relative to the mould. The nominal full-depth width and height reduction is `2 \u00d7 depth \u00d7 tan(draft_angle)`; rounded edges affect the exact face dimensions.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| type | Geometry type: p/positive or n/negative. | string | p |\n| size | Overall [x,y,z] dimensions of the undrafted reference shape at the top, in mm. | list | [20,10,5] |\n| radius | Corner radius of the base shape. | number | 5 |\n| radius_rounded | Rounding radius for top/bottom edges. | number | 2.5 |\n| draft_angle | Side-wall draft angle in degrees. Positive values taper the bottom inward relative to the top. | number | 1 |\n| extra | Extra variant/modifier string. | string | \"\" |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| rot_x | X rotation in degrees. | number | 0 |\n| rot_y | Y rotation in degrees. | number | 0 |\n| rot_z | Z rotation in degrees. | number | 0 |\n\n## Draft size change\n\nThe table shows nominal full-depth width and height reduction for an ideal drafted wall. Each bottom side moves inward by half the tabulated amount. Values are calculated as `2 \u00d7 depth \u00d7 tan(angle)` and rounded to 0.001 mm. The component keeps the rounded top and bottom edges, so its exact face dimensions also depend on `radius_rounded`.\n\n| Depth (mm) | 0\u00b0 | 0.5\u00b0 | 1\u00b0 | 2\u00b0 | 3\u00b0 | 5\u00b0 |\n|------------|----:|-----:|----:|----:|----:|----:|\n| 3 | 0.000 | 0.052 | 0.105 | 0.210 | 0.314 | 0.525 |\n| 5 | 0.000 | 0.087 | 0.175 | 0.349 | 0.524 | 0.875 |\n| 10 | 0.000 | 0.175 | 0.349 | 0.698 | 1.048 | 1.750 |\n| 20 | 0.000 | 0.349 | 0.698 | 1.397 | 2.096 | 3.499 |\n| 25 | 0.000 | 0.436 | 0.873 | 1.746 | 2.621 | 4.374 |\n\n## Previews\n\n| Draft angle | Preview |\n|-------------|---------|\n| 0\u00b0 | ![Undrafted rounded rectangle](images/draft_0_degrees.png) |\n| 1\u00b0 | ![Rounded rectangle with 1 degree draft tapering inward toward the bottom](images/draft_1_degree.png) |\n| 5\u00b0 | ![Rounded rectangle with 5 degree draft tapering inward toward the bottom](images/draft_5_degrees.png) |",
+      "detail_html": "<h1>oobb_rounded_rectangle_rounded_draft_angle</h1>\n<p><strong>OOBB Geometry Primitives: Rounded Rectangle with Draft Angle</strong></p>\n<p>Rounded rectangle with rounded top and bottom edges. <code>size</code> gives the undrafted reference envelope at the top. A positive <code>draft_angle</code> tapers the side walls inward toward the bottom, matching a part modeled upside down relative to the mould. The nominal full-depth width and height reduction is <code>2 \u00d7 depth \u00d7 tan(draft_angle)</code>; rounded edges affect the exact face dimensions.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>type</td><td>Geometry type: p/positive or n/negative.</td><td>string</td><td>p</td></tr><tr><td>size</td><td>Overall [x,y,z] dimensions of the undrafted reference shape at the top, in mm.</td><td>list</td><td>[20,10,5]</td></tr><tr><td>radius</td><td>Corner radius of the base shape.</td><td>number</td><td>5</td></tr><tr><td>radius_rounded</td><td>Rounding radius for top/bottom edges.</td><td>number</td><td>2.5</td></tr><tr><td>draft_angle</td><td>Side-wall draft angle in degrees. Positive values taper the bottom inward relative to the top.</td><td>number</td><td>1</td></tr><tr><td>extra</td><td>Extra variant/modifier string.</td><td>string</td><td>\"\"</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot_x</td><td>X rotation in degrees.</td><td>number</td><td>0</td></tr><tr><td>rot_y</td><td>Y rotation in degrees.</td><td>number</td><td>0</td></tr><tr><td>rot_z</td><td>Z rotation in degrees.</td><td>number</td><td>0</td></tr></tbody></table></div>\n<h2>Draft size change</h2>\n<p>The table shows nominal full-depth width and height reduction for an ideal drafted wall. Each bottom side moves inward by half the tabulated amount. Values are calculated as <code>2 \u00d7 depth \u00d7 tan(angle)</code> and rounded to 0.001 mm. The component keeps the rounded top and bottom edges, so its exact face dimensions also depend on <code>radius_rounded</code>.</p>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Depth (mm)</th><th>0\u00b0</th><th>0.5\u00b0</th><th>1\u00b0</th><th>2\u00b0</th><th>3\u00b0</th><th>5\u00b0</th></tr></thead><tbody><tr><td>3</td><td>0.000</td><td>0.052</td><td>0.105</td><td>0.210</td><td>0.314</td><td>0.525</td></tr><tr><td>5</td><td>0.000</td><td>0.087</td><td>0.175</td><td>0.349</td><td>0.524</td><td>0.875</td></tr><tr><td>10</td><td>0.000</td><td>0.175</td><td>0.349</td><td>0.698</td><td>1.048</td><td>1.750</td></tr><tr><td>20</td><td>0.000</td><td>0.349</td><td>0.698</td><td>1.397</td><td>2.096</td><td>3.499</td></tr><tr><td>25</td><td>0.000</td><td>0.436</td><td>0.873</td><td>1.746</td><td>2.621</td><td>4.374</td></tr></tbody></table></div>\n<h2>Previews</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Draft angle</th><th>Preview</th></tr></thead><tbody><tr><td>0\u00b0</td><td><img src=\"images/draft_0_degrees.png\" alt=\"Undrafted rounded rectangle\" style=\"max-width:260px;height:auto\"></td></tr><tr><td>1\u00b0</td><td><img src=\"images/draft_1_degree.png\" alt=\"Rounded rectangle with 1 degree draft tapering inward toward the bottom\" style=\"max-width:260px;height:auto\"></td></tr><tr><td>5\u00b0</td><td><img src=\"images/draft_5_degrees.png\" alt=\"Rounded rectangle with 5 degree draft tapering inward toward the bottom\" style=\"max-width:260px;height:auto\"></td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "draft_0_degrees",
+          "filename": "draft_0_degrees.png",
+          "title": "undrafted reference geometry.",
+          "intent": "undrafted reference geometry.",
+          "preview_rot": [
+            60,
+            0,
+            25
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              20
+            ],
+            "radius": 5,
+            "radius_rounded": 2,
+            "draft_angle": 0
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              20
+            ],
+            "radius": 5,
+            "radius_rounded": 2,
+            "draft_angle": 0
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "type": "p",
+            "size": "[20,10,5]",
+            "radius": 5,
+            "radius_rounded": 2.5,
+            "draft_angle": 1,
+            "extra": "\"\"",
+            "rot": "[0,0,0]",
+            "rot_x": 0,
+            "rot_y": 0,
+            "rot_z": 0
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_0_degrees/image.png",
+          "detail_image_path": "test/draft_0_degrees/image.png",
+          "full_image_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_0_degrees/image.png",
+          "detail_full_image_path": "test/draft_0_degrees/image.png",
+          "detail_iso_400_path": "test/draft_0_degrees/image.png",
+          "detail_iso_120_path": "test/draft_0_degrees/image.png",
+          "detail_top_400_path": "test/draft_0_degrees/image.png",
+          "detail_top_120_path": "test/draft_0_degrees/image.png",
+          "detail_side_400_path": "test/draft_0_degrees/image.png",
+          "detail_side_120_path": "test/draft_0_degrees/image.png",
+          "scad_exists": false,
+          "scad_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_0_degrees/working.scad",
+          "detail_scad_path": "test/draft_0_degrees/working.scad"
+        },
+        {
+          "sample_id": "draft_1_degree",
+          "filename": "draft_1_degree.png",
+          "title": "default 1 degree draft, tapering inward toward the bottom.",
+          "intent": "default 1 degree draft, tapering inward toward the bottom.",
+          "preview_rot": [
+            60,
+            0,
+            25
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              20
+            ],
+            "radius": 5,
+            "radius_rounded": 2,
+            "draft_angle": 1
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              20
+            ],
+            "radius": 5,
+            "radius_rounded": 2,
+            "draft_angle": 1
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "type": "p",
+            "size": "[20,10,5]",
+            "radius": 5,
+            "radius_rounded": 2.5,
+            "draft_angle": 1,
+            "extra": "\"\"",
+            "rot": "[0,0,0]",
+            "rot_x": 0,
+            "rot_y": 0,
+            "rot_z": 0
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_1_degree/image.png",
+          "detail_image_path": "test/draft_1_degree/image.png",
+          "full_image_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_1_degree/image.png",
+          "detail_full_image_path": "test/draft_1_degree/image.png",
+          "detail_iso_400_path": "test/draft_1_degree/image.png",
+          "detail_iso_120_path": "test/draft_1_degree/image.png",
+          "detail_top_400_path": "test/draft_1_degree/image.png",
+          "detail_top_120_path": "test/draft_1_degree/image.png",
+          "detail_side_400_path": "test/draft_1_degree/image.png",
+          "detail_side_120_path": "test/draft_1_degree/image.png",
+          "scad_exists": false,
+          "scad_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_1_degree/working.scad",
+          "detail_scad_path": "test/draft_1_degree/working.scad"
+        },
+        {
+          "sample_id": "draft_5_degrees",
+          "filename": "draft_5_degrees.png",
+          "title": "exaggerated draft tapering inward toward the bottom to make the taper easy to see.",
+          "intent": "exaggerated draft tapering inward toward the bottom to make the taper easy to see.",
+          "preview_rot": [
+            60,
+            0,
+            25
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              20
+            ],
+            "radius": 5,
+            "radius_rounded": 2,
+            "draft_angle": 5
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              20
+            ],
+            "radius": 5,
+            "radius_rounded": 2,
+            "draft_angle": 5
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "type": "p",
+            "size": "[20,10,5]",
+            "radius": 5,
+            "radius_rounded": 2.5,
+            "draft_angle": 1,
+            "extra": "\"\"",
+            "rot": "[0,0,0]",
+            "rot_x": 0,
+            "rot_y": 0,
+            "rot_z": 0
+          },
+          "implementation_rule": "",
+          "exists": false,
+          "image_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_5_degrees/image.png",
+          "detail_image_path": "test/draft_5_degrees/image.png",
+          "full_image_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_5_degrees/image.png",
+          "detail_full_image_path": "test/draft_5_degrees/image.png",
+          "detail_iso_400_path": "test/draft_5_degrees/image.png",
+          "detail_iso_120_path": "test/draft_5_degrees/image.png",
+          "detail_top_400_path": "test/draft_5_degrees/image.png",
+          "detail_top_120_path": "test/draft_5_degrees/image.png",
+          "detail_side_400_path": "test/draft_5_degrees/image.png",
+          "detail_side_120_path": "test/draft_5_degrees/image.png",
+          "scad_exists": false,
+          "scad_path": "oobb_rounded_rectangle_rounded_draft_angle/test/draft_5_degrees/working.scad",
+          "detail_scad_path": "test/draft_5_degrees/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": false,
+      "has_detail_page": true,
+      "default_values": {
+        "pos": "[0,0,0]",
+        "type": "p",
+        "size": "[20,10,5]",
+        "radius": 5,
+        "radius_rounded": 2.5,
+        "draft_angle": 1,
+        "extra": "\"\"",
+        "rot": "[0,0,0]",
+        "rot_x": 0,
+        "rot_y": 0,
+        "rot_z": 0
+      },
+      "readme_path": "oobb_rounded_rectangle_rounded_draft_angle/README.md",
+      "test_samples_path": "oobb_rounded_rectangle_rounded_draft_angle/TEST_SAMPLES.md"
+    },
+    {
+      "command": "oobb_rounded_rectangle_rounded_hollow",
+      "name_long": "OOBB Geometry Primitives: Hollow Rounded Rectangle with Rounded Edges",
+      "name_short_options": [],
+      "description": "Hollow rounded rectangle with rounded outer top and bottom edges. Optional depth_top and depth_bottom values add solid end caps; zero keeps that end open. The default edge radius is half the wall thickness so the edge is covered by the bead.",
+      "summary": "Hollow rounded rectangle with rounded outer top and bottom edges.",
+      "variables": [
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Geometry type: p/positive or n/negative.",
+          "type": "string",
+          "default": "p"
+        },
+        {
+          "name": "size",
+          "description": "Outer [x,y,z] dimensions in mm.",
+          "type": "list",
+          "default": "[30,20,8]"
+        },
+        {
+          "name": "radius",
+          "description": "Plan-view corner radius of the outer shape.",
+          "type": "number",
+          "default": 5
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Outer top and bottom edge rounding radius in mm; defaults to half wall_thickness.",
+          "type": "number",
+          "default": 0.6
+        },
+        {
+          "name": "wall_thickness",
+          "description": "Side wall thickness in mm; also offsets the inner corner and edge radii.",
+          "type": "number",
+          "default": 1.2
+        },
+        {
+          "name": "depth_top",
+          "description": "Solid top cap thickness in mm; zero leaves the top open.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "depth_bottom",
+          "description": "Solid bottom cap thickness in mm; zero leaves the bottom open.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot_x",
+          "description": "X rotation in degrees.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "rot_y",
+          "description": "Y rotation in degrees.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "rot_z",
+          "description": "Z rotation in degrees.",
+          "type": "number",
+          "default": 0
+        }
+      ],
+      "variable_names": [
+        "pos",
+        "type",
+        "size",
+        "radius",
+        "radius_rounded",
+        "wall_thickness",
+        "depth_top",
+        "depth_bottom",
+        "rot",
+        "rot_x",
+        "rot_y",
+        "rot_z"
+      ],
+      "category": "OOBB Geometry Primitives",
+      "returns": "List containing positive outer and negative inner rounded-rectangle geometry.",
+      "aliases": [],
+      "detail_page": "oobb_rounded_rectangle_rounded_hollow/documentation_detail.html",
+      "detail_markdown": "# oobb_rounded_rectangle_rounded_hollow\n\n**OOBB Geometry Primitives: Hollow Rounded Rectangle with Rounded Edges**\n\nHollow rounded rectangle with rounded outer top and bottom edges. Optional depth_top and depth_bottom values add solid end caps; zero keeps that end open. The default edge radius is half the wall thickness so the edge is covered by the bead.\n\n## Returns\n\nList containing positive outer and negative inner rounded-rectangle geometry.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| type | Geometry type: p/positive or n/negative. | string | p |\n| size | Outer [x,y,z] dimensions in mm. | list | [30,20,8] |\n| radius | Plan-view corner radius of the outer shape. | number | 5 |\n| radius_rounded | Outer top and bottom edge rounding radius in mm; defaults to half wall_thickness. | number | 0.6 |\n| wall_thickness | Side wall thickness in mm; also offsets the inner corner and edge radii. | number | 1.2 |\n| depth_top | Solid top cap thickness in mm; zero leaves the top open. | number | 0 |\n| depth_bottom | Solid bottom cap thickness in mm; zero leaves the bottom open. | number | 0 |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| rot_x | X rotation in degrees. | number | 0 |\n| rot_y | Y rotation in degrees. | number | 0 |\n| rot_z | Z rotation in degrees. | number | 0 |\n\n## Sample Notes\n\nzero cap depths leave a through-tube; positive depths add solid end caps. The outer roundover defaults to half the wall thickness, leaving the inner top edge square beneath the bead.",
+      "detail_html": "<h1>oobb_rounded_rectangle_rounded_hollow</h1>\n<p><strong>OOBB Geometry Primitives: Hollow Rounded Rectangle with Rounded Edges</strong></p>\n<p>Hollow rounded rectangle with rounded outer top and bottom edges. Optional depth_top and depth_bottom values add solid end caps; zero keeps that end open. The default edge radius is half the wall thickness so the edge is covered by the bead.</p>\n<h2>Returns</h2>\n<p>List containing positive outer and negative inner rounded-rectangle geometry.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>type</td><td>Geometry type: p/positive or n/negative.</td><td>string</td><td>p</td></tr><tr><td>size</td><td>Outer [x,y,z] dimensions in mm.</td><td>list</td><td>[30,20,8]</td></tr><tr><td>radius</td><td>Plan-view corner radius of the outer shape.</td><td>number</td><td>5</td></tr><tr><td>radius_rounded</td><td>Outer top and bottom edge rounding radius in mm; defaults to half wall_thickness.</td><td>number</td><td>0.6</td></tr><tr><td>wall_thickness</td><td>Side wall thickness in mm; also offsets the inner corner and edge radii.</td><td>number</td><td>1.2</td></tr><tr><td>depth_top</td><td>Solid top cap thickness in mm; zero leaves the top open.</td><td>number</td><td>0</td></tr><tr><td>depth_bottom</td><td>Solid bottom cap thickness in mm; zero leaves the bottom open.</td><td>number</td><td>0</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot_x</td><td>X rotation in degrees.</td><td>number</td><td>0</td></tr><tr><td>rot_y</td><td>Y rotation in degrees.</td><td>number</td><td>0</td></tr><tr><td>rot_z</td><td>Z rotation in degrees.</td><td>number</td><td>0</td></tr></tbody></table></div>\n<h2>Sample Notes</h2>\n<p>zero cap depths leave a through-tube; positive depths add solid end caps. The outer roundover defaults to half the wall thickness, leaving the inner top edge square beneath the bead.</p>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "hollow rounded rectangle with a standard wall.",
+          "intent": "hollow rounded rectangle with a standard wall.",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              8
+            ],
+            "radius": 5,
+            "wall_thickness": 1.2,
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              8
+            ],
+            "radius": 5,
+            "wall_thickness": 1.2,
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "type": "p",
+            "size": "[30,20,8]",
+            "radius": 5,
+            "radius_rounded": 0.6,
+            "wall_thickness": 1.2,
+            "depth_top": 0,
+            "depth_bottom": 0,
+            "rot": "[0,0,0]",
+            "rot_x": 0,
+            "rot_y": 0,
+            "rot_z": 0
+          },
+          "implementation_rule": "the default edge radius is half the wall thickness (0.6 mm); the inner top edge stays square so the outer bead covers it.",
+          "exists": true,
+          "image_path": "oobb_rounded_rectangle_rounded_hollow/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "oobb_rounded_rectangle_rounded_hollow/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_rounded_rectangle_rounded_hollow/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "thin-wall hollow rounded rectangle.",
+          "intent": "thin-wall hollow rounded rectangle.",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              36,
+              24,
+              10
+            ],
+            "radius": 6,
+            "wall_thickness": 0.8,
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              36,
+              24,
+              10
+            ],
+            "radius": 6,
+            "wall_thickness": 0.8,
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "type": "p",
+            "size": "[30,20,8]",
+            "radius": 5,
+            "radius_rounded": 0.6,
+            "wall_thickness": 1.2,
+            "depth_top": 0,
+            "depth_bottom": 0,
+            "rot": "[0,0,0]",
+            "rot_x": 0,
+            "rot_y": 0,
+            "rot_z": 0
+          },
+          "implementation_rule": "the default edge radius is half the wall thickness (0.4 mm); the inner top edge stays square so the outer bead covers it.",
+          "exists": true,
+          "image_path": "oobb_rounded_rectangle_rounded_hollow/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "oobb_rounded_rectangle_rounded_hollow/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_rounded_rectangle_rounded_hollow/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        },
+        {
+          "sample_id": "test_3",
+          "filename": "test_3",
+          "title": "tube with a 1.5 mm solid top cap.",
+          "intent": "tube with a 1.5 mm solid top cap.",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              8
+            ],
+            "radius": 5,
+            "wall_thickness": 1.2,
+            "depth_top": 1.5,
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              8
+            ],
+            "radius": 5,
+            "wall_thickness": 1.2,
+            "depth_top": 1.5,
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "type": "p",
+            "size": "[30,20,8]",
+            "radius": 5,
+            "radius_rounded": 0.6,
+            "wall_thickness": 1.2,
+            "depth_top": 0,
+            "depth_bottom": 0,
+            "rot": "[0,0,0]",
+            "rot_x": 0,
+            "rot_y": 0,
+            "rot_z": 0
+          },
+          "implementation_rule": "the cavity ends below the top face, leaving a solid cap equal to depth_top.",
+          "exists": true,
+          "image_path": "oobb_rounded_rectangle_rounded_hollow/test/test_3/image_400.png",
+          "detail_image_path": "test/test_3/image_400.png",
+          "full_image_path": "oobb_rounded_rectangle_rounded_hollow/test/test_3/image.png",
+          "detail_full_image_path": "test/test_3/image.png",
+          "detail_iso_400_path": "test/test_3/image_400.png",
+          "detail_iso_120_path": "test/test_3/image_120.png",
+          "detail_top_400_path": "test/test_3/image_top_400.png",
+          "detail_top_120_path": "test/test_3/image_top_120.png",
+          "detail_side_400_path": "test/test_3/image_side_400.png",
+          "detail_side_120_path": "test/test_3/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_rounded_rectangle_rounded_hollow/test/test_3/working.scad",
+          "detail_scad_path": "test/test_3/working.scad"
+        },
+        {
+          "sample_id": "test_4",
+          "filename": "test_4",
+          "title": "tube with solid top and bottom caps.",
+          "intent": "tube with solid top and bottom caps.",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              8
+            ],
+            "radius": 5,
+            "wall_thickness": 1.2,
+            "depth_top": 1.2,
+            "depth_bottom": 1.2,
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": {
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "type": "positive",
+            "size": [
+              30,
+              20,
+              8
+            ],
+            "radius": 5,
+            "wall_thickness": 1.2,
+            "depth_top": 1.2,
+            "depth_bottom": 1.2,
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          "default_values": {
+            "pos": "[0,0,0]",
+            "type": "p",
+            "size": "[30,20,8]",
+            "radius": 5,
+            "radius_rounded": 0.6,
+            "wall_thickness": 1.2,
+            "depth_top": 0,
+            "depth_bottom": 0,
+            "rot": "[0,0,0]",
+            "rot_x": 0,
+            "rot_y": 0,
+            "rot_z": 0
+          },
+          "implementation_rule": "the cavity is inset from both ends, leaving solid caps equal to depth_top and depth_bottom.",
+          "exists": true,
+          "image_path": "oobb_rounded_rectangle_rounded_hollow/test/test_4/image_400.png",
+          "detail_image_path": "test/test_4/image_400.png",
+          "full_image_path": "oobb_rounded_rectangle_rounded_hollow/test/test_4/image.png",
+          "detail_full_image_path": "test/test_4/image.png",
+          "detail_iso_400_path": "test/test_4/image_400.png",
+          "detail_iso_120_path": "test/test_4/image_120.png",
+          "detail_top_400_path": "test/test_4/image_top_400.png",
+          "detail_top_120_path": "test/test_4/image_top_120.png",
+          "detail_side_400_path": "test/test_4/image_side_400.png",
+          "detail_side_120_path": "test/test_4/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_rounded_rectangle_rounded_hollow/test/test_4/working.scad",
+          "detail_scad_path": "test/test_4/working.scad"
+        }
+      ],
+      "sample_notes": "zero cap depths leave a through-tube; positive depths add solid end caps. The outer roundover defaults to half the wall thickness, leaving the inner top edge square beneath the bead.",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "pos": "[0,0,0]",
+        "type": "p",
+        "size": "[30,20,8]",
+        "radius": 5,
+        "radius_rounded": 0.6,
+        "wall_thickness": 1.2,
+        "depth_top": 0,
+        "depth_bottom": 0,
+        "rot": "[0,0,0]",
+        "rot_x": 0,
+        "rot_y": 0,
+        "rot_z": 0
+      },
+      "readme_path": "oobb_rounded_rectangle_rounded_hollow/README.md",
+      "test_samples_path": "oobb_rounded_rectangle_rounded_hollow/TEST_SAMPLES.md"
     },
     {
       "command": "oobb_screw",
@@ -13411,6 +15072,18 @@
           "default": "\"center\""
         },
         {
+          "name": "minkowski_radius",
+          "description": "Radius in mm of a circular 2D Minkowski expansion applied before extrusion. Zero keeps the legacy plain-text path.",
+          "type": "number",
+          "default": 0
+        },
+        {
+          "name": "minkowski",
+          "description": "Legacy-friendly alias for minkowski_radius.",
+          "type": "number",
+          "default": 0
+        },
+        {
           "name": "type",
           "description": "Geometry type/modifier context, usually positive or negative.",
           "type": "string",
@@ -13434,6 +15107,8 @@
         "font",
         "halign",
         "valign",
+        "minkowski_radius",
+        "minkowski",
         "type",
         "m"
       ],
@@ -13489,6 +15164,8 @@
             "font": "\"Candara:Light\"",
             "halign": "\"center\"",
             "valign": "\"center\"",
+            "minkowski_radius": 0,
+            "minkowski": 0,
             "type": "\"positive\"",
             "m": "\"\""
           },
@@ -13553,6 +15230,8 @@
             "font": "\"Candara:Light\"",
             "halign": "\"center\"",
             "valign": "\"center\"",
+            "minkowski_radius": 0,
+            "minkowski": 0,
             "type": "\"positive\"",
             "m": "\"\""
           },
@@ -13587,6 +15266,8 @@
         "font": "\"Candara:Light\"",
         "halign": "\"center\"",
         "valign": "\"center\"",
+        "minkowski_radius": 0,
+        "minkowski": 0,
         "type": "\"positive\"",
         "m": "\"\""
       },
@@ -14124,6 +15805,361 @@
       "test_samples_path": "oobb_tube_new/TEST_SAMPLES.md"
     },
     {
+      "command": "oobb_wire",
+      "name_long": "OOBB Electronic: Wire Holder",
+      "name_short_options": [],
+      "description": "Wire-holder clearances for five 2.54 mm connector styles, with an optional plain plate.",
+      "summary": "Wire-holder clearances for five 2.",
+      "variables": [
+        {
+          "name": "wire_type",
+          "description": "Connector: basic, power, motor, motor_stepper, or i2c.",
+          "type": "string",
+          "default": "\"basic\""
+        },
+        {
+          "name": "polarizing_pin",
+          "description": "Include the polarizing pin clearance notch on basic, power and i2c exits.",
+          "type": "bool",
+          "default": true
+        },
+        {
+          "name": "plate",
+          "description": "Include a plain OOBB plate with the wire void; mounting holes belong to the calling project.",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "width",
+          "description": "Optional plate width in OOBB units.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "height",
+          "description": "Height in OOBB units used to locate the front edge.",
+          "type": "number",
+          "default": 3
+        },
+        {
+          "name": "depth",
+          "description": "Host plate thickness in mm.",
+          "type": "number",
+          "default": 4
+        },
+        {
+          "name": "cutout_depth",
+          "description": "Depth of the housing run, header pocket and exit below the top surface, in mm.",
+          "type": "number",
+          "default": 2.8
+        },
+        {
+          "name": "front_y",
+          "description": "Override the front edge Y in local mm; defaults to the negative edge of height.",
+          "type": "number",
+          "default": ""
+        },
+        {
+          "name": "pos",
+          "description": "Origin at the centre of the host's bottom face, in mm.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotate the whole wire feature about its local origin before placement.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "type",
+          "description": "Boolean polarity: defaults to negative for cutouts, positive with plate=True.",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "name": "inclusion",
+          "description": "Render mode: all, 3dpr, laser, or true.",
+          "type": "string",
+          "default": "\"all\""
+        },
+        {
+          "name": "m",
+          "description": "OpenSCAD modifier, e.g. #, %, *.",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "variable_names": [
+        "wire_type",
+        "polarizing_pin",
+        "plate",
+        "width",
+        "height",
+        "depth",
+        "cutout_depth",
+        "front_y",
+        "pos",
+        "rot",
+        "type",
+        "inclusion",
+        "m"
+      ],
+      "category": "OOBB Electronic Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "oobb_wire/documentation_detail.html",
+      "detail_markdown": "# oobb_wire\n\nReusable wire-holder cutouts migrated from `oomlout_oobb_electronic_version_5`.\nSelect the connector with `wire_type` in `kwargs`: `basic` (default), `power`,\n`motor`, `motor_stepper`, or `i2c`. `type` remains the OOBB boolean polarity.\n\n```python\nimport oobb\n\n# The host plate belongs to your project.\noobb.append_full(thing, shape=\"oobb_plate\", type=\"positive\",\n                 width=3, height=3, depth=4, pos=[0, 0, 0])\noobb.append_full(thing, shape=\"oobb_wire\", type=\"negative\",\n                 wire_type=\"motor\", depth=4, height=3,\n                 polarizing_pin=True, pos=[0, 0, 0])\n```\n\nThe default 3x3 host footprint is 44x44 mm. The local origin is the centre of\nits bottom face; the exit faces negative Y, at Y=-22 mm. `pos` places that origin\nand `rot=[rx, ry, rz]` rotates the entire feature before placement. `front_y`\noverrides the local front edge in millimetres for a different host shape.\n\nThe narrow entry goes through the host, with 1 mm overshoot above and below.\nThe run behind the header pocket is at least 14 mm long for the Dupont housing.\nShort runs extend toward the entry without moving the header pocket or exit;\nconnector styles and larger hosts with longer runs retain their clearance.\nThe housing run, header pocket and front exit are 2.8 mm deep from the top surface, leaving a\n1.2 mm floor in a 4 mm plate. Hardware dimensions retain the original 2.54 mm\npitch and 0.54 mm header clearance; they do not scale with plate dimensions.\n\n`polarizing_pin=True` includes the original semicircular pin-clearance notch\nbeside the exit on `basic`, `power`, and `i2c`. Set it to `False` to remove that\nnotch. The offset keyed exit remains; motor styles have no such notch.\n\n| kwarg | Default | Meaning |\n| --- | --- | --- |\n| `wire_type` | `\"basic\"` | Connector style |\n| `polarizing_pin` | `True` | Include the polarizing pin clearance notch |\n| `plate` | `False` | Include a plain OOBB plate, without mounting holes |\n| `width`, `height` | `3`, `3` | OOBB units; height locates the front edge, width is for the optional plate |\n| `depth` | `4` | Host thickness in mm |\n| `cutout_depth` | `2.8` | Housing run / header pocket / exit depth below the top in mm |\n| `front_y` | derived from height | Front edge in local mm |\n| `pos`, `rot` | `[0, 0, 0]` | Whole-feature placement / rotation |\n| `type` | `\"negative\"` | Boolean polarity; defaults to `\"positive\"` with `plate=True` |\n| `inclusion`, `m` | `\"all\"`, `\"\"` | Standard render-mode filter / OpenSCAD modifier |\n\nFor an optional plain plate, use:\n\n```python\noobb.append_full(thing, shape=\"oobb_wire\", plate=True, wire_type=\"power\")\n```\n\nThis returns a grouped plate-minus-void, so it can be positioned, rotated, or\nsubtracted as one object. The electronic project's six M6 mounting holes and\nsix M3 pin holes stay in that project's `working_scad.get_wire`.\n\nRun `python -m unittest tests.test_oobb_wire_component -v` from the library root\nfor regression checks of the clearance dimensions and Dupont housing fit. Run this\ncomponent's `working.py` for previews of all five styles.",
+      "detail_html": "<h1>oobb_wire</h1>\n<p>Reusable wire-holder cutouts migrated from <code>oomlout_oobb_electronic_version_5</code>. Select the connector with <code>wire_type</code> in <code>kwargs</code>: <code>basic</code> (default), <code>power</code>, <code>motor</code>, <code>motor_stepper</code>, or <code>i2c</code>. <code>type</code> remains the OOBB boolean polarity.</p>\n<pre><code>import oobb\n\n# The host plate belongs to your project.\noobb.append_full(thing, shape=&quot;oobb_plate&quot;, type=&quot;positive&quot;,\n                 width=3, height=3, depth=4, pos=[0, 0, 0])\noobb.append_full(thing, shape=&quot;oobb_wire&quot;, type=&quot;negative&quot;,\n                 wire_type=&quot;motor&quot;, depth=4, height=3,\n                 polarizing_pin=True, pos=[0, 0, 0])</code></pre>\n<p>The default 3x3 host footprint is 44x44 mm. The local origin is the centre of its bottom face; the exit faces negative Y, at Y=-22 mm. <code>pos</code> places that origin and <code>rot=[rx, ry, rz]</code> rotates the entire feature before placement. <code>front_y</code> overrides the local front edge in millimetres for a different host shape.</p>\n<p>The narrow entry goes through the host, with 1 mm overshoot above and below. The run behind the header pocket is at least 14 mm long for the Dupont housing. Short runs extend toward the entry without moving the header pocket or exit; connector styles and larger hosts with longer runs retain their clearance. The housing run, header pocket and front exit are 2.8 mm deep from the top surface, leaving a 1.2 mm floor in a 4 mm plate. Hardware dimensions retain the original 2.54 mm pitch and 0.54 mm header clearance; they do not scale with plate dimensions.</p>\n<p><code>polarizing_pin=True</code> includes the original semicircular pin-clearance notch beside the exit on <code>basic</code>, <code>power</code>, and <code>i2c</code>. Set it to <code>False</code> to remove that notch. The offset keyed exit remains; motor styles have no such notch.</p>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>kwarg</th><th>Default</th><th>Meaning</th></tr></thead><tbody><tr><td><code>wire_type</code></td><td><code>\"basic\"</code></td><td>Connector style</td></tr><tr><td><code>polarizing_pin</code></td><td><code>True</code></td><td>Include the polarizing pin clearance notch</td></tr><tr><td><code>plate</code></td><td><code>False</code></td><td>Include a plain OOBB plate, without mounting holes</td></tr><tr><td><code>width</code>, <code>height</code></td><td><code>3</code>, <code>3</code></td><td>OOBB units; height locates the front edge, width is for the optional plate</td></tr><tr><td><code>depth</code></td><td><code>4</code></td><td>Host thickness in mm</td></tr><tr><td><code>cutout_depth</code></td><td><code>2.8</code></td><td>Housing run / header pocket / exit depth below the top in mm</td></tr><tr><td><code>front_y</code></td><td>derived from height</td><td>Front edge in local mm</td></tr><tr><td><code>pos</code>, <code>rot</code></td><td><code>[0, 0, 0]</code></td><td>Whole-feature placement / rotation</td></tr><tr><td><code>type</code></td><td><code>\"negative\"</code></td><td>Boolean polarity; defaults to <code>\"positive\"</code> with <code>plate=True</code></td></tr><tr><td><code>inclusion</code>, <code>m</code></td><td><code>\"all\"</code>, <code>\"\"</code></td><td>Standard render-mode filter / OpenSCAD modifier</td></tr></tbody></table></div>\n<p>For an optional plain plate, use:</p>\n<pre><code>oobb.append_full(thing, shape=&quot;oobb_wire&quot;, plate=True, wire_type=&quot;power&quot;)</code></pre>\n<p>This returns a grouped plate-minus-void, so it can be positioned, rotated, or subtracted as one object. The electronic project's six M6 mounting holes and six M3 pin holes stay in that project's <code>working_scad.get_wire</code>.</p>\n<p>Run <code>python -m unittest tests.test_oobb_wire_component -v</code> from the library root for regression checks of the clearance dimensions and Dupont housing fit. Run this component's <code>working.py</code> for previews of all five styles.</p>",
+      "sample_images": [
+        {
+          "sample_id": "basic",
+          "filename": "basic",
+          "title": "basic",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "wire_type": "\"basic\"",
+            "polarizing_pin": true,
+            "plate": false,
+            "width": 3,
+            "height": 3,
+            "depth": 4,
+            "cutout_depth": 2.8,
+            "front_y": "undocumented",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "undocumented",
+            "inclusion": "\"all\"",
+            "m": "\"\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_wire/test/basic/image_400.png",
+          "detail_image_path": "test/basic/image_400.png",
+          "full_image_path": "oobb_wire/test/basic/image.png",
+          "detail_full_image_path": "test/basic/image.png",
+          "detail_iso_400_path": "test/basic/image_400.png",
+          "detail_iso_120_path": "test/basic/image_120.png",
+          "detail_top_400_path": "test/basic/image_top_400.png",
+          "detail_top_120_path": "test/basic/image_top_120.png",
+          "detail_side_400_path": "test/basic/image_side_400.png",
+          "detail_side_120_path": "test/basic/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_wire/test/basic/working.scad",
+          "detail_scad_path": "test/basic/working.scad"
+        },
+        {
+          "sample_id": "i2c",
+          "filename": "i2c",
+          "title": "i2c",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "wire_type": "\"basic\"",
+            "polarizing_pin": true,
+            "plate": false,
+            "width": 3,
+            "height": 3,
+            "depth": 4,
+            "cutout_depth": 2.8,
+            "front_y": "undocumented",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "undocumented",
+            "inclusion": "\"all\"",
+            "m": "\"\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_wire/test/i2c/image_400.png",
+          "detail_image_path": "test/i2c/image_400.png",
+          "full_image_path": "oobb_wire/test/i2c/image.png",
+          "detail_full_image_path": "test/i2c/image.png",
+          "detail_iso_400_path": "test/i2c/image_400.png",
+          "detail_iso_120_path": "test/i2c/image_120.png",
+          "detail_top_400_path": "test/i2c/image_top_400.png",
+          "detail_top_120_path": "test/i2c/image_top_120.png",
+          "detail_side_400_path": "test/i2c/image_side_400.png",
+          "detail_side_120_path": "test/i2c/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_wire/test/i2c/working.scad",
+          "detail_scad_path": "test/i2c/working.scad"
+        },
+        {
+          "sample_id": "motor",
+          "filename": "motor",
+          "title": "motor",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "wire_type": "\"basic\"",
+            "polarizing_pin": true,
+            "plate": false,
+            "width": 3,
+            "height": 3,
+            "depth": 4,
+            "cutout_depth": 2.8,
+            "front_y": "undocumented",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "undocumented",
+            "inclusion": "\"all\"",
+            "m": "\"\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_wire/test/motor/image_400.png",
+          "detail_image_path": "test/motor/image_400.png",
+          "full_image_path": "oobb_wire/test/motor/image.png",
+          "detail_full_image_path": "test/motor/image.png",
+          "detail_iso_400_path": "test/motor/image_400.png",
+          "detail_iso_120_path": "test/motor/image_120.png",
+          "detail_top_400_path": "test/motor/image_top_400.png",
+          "detail_top_120_path": "test/motor/image_top_120.png",
+          "detail_side_400_path": "test/motor/image_side_400.png",
+          "detail_side_120_path": "test/motor/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_wire/test/motor/working.scad",
+          "detail_scad_path": "test/motor/working.scad"
+        },
+        {
+          "sample_id": "motor_stepper",
+          "filename": "motor_stepper",
+          "title": "motor_stepper",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "wire_type": "\"basic\"",
+            "polarizing_pin": true,
+            "plate": false,
+            "width": 3,
+            "height": 3,
+            "depth": 4,
+            "cutout_depth": 2.8,
+            "front_y": "undocumented",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "undocumented",
+            "inclusion": "\"all\"",
+            "m": "\"\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_wire/test/motor_stepper/image_400.png",
+          "detail_image_path": "test/motor_stepper/image_400.png",
+          "full_image_path": "oobb_wire/test/motor_stepper/image.png",
+          "detail_full_image_path": "test/motor_stepper/image.png",
+          "detail_iso_400_path": "test/motor_stepper/image_400.png",
+          "detail_iso_120_path": "test/motor_stepper/image_120.png",
+          "detail_top_400_path": "test/motor_stepper/image_top_400.png",
+          "detail_top_120_path": "test/motor_stepper/image_top_120.png",
+          "detail_side_400_path": "test/motor_stepper/image_side_400.png",
+          "detail_side_120_path": "test/motor_stepper/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_wire/test/motor_stepper/working.scad",
+          "detail_scad_path": "test/motor_stepper/working.scad"
+        },
+        {
+          "sample_id": "power",
+          "filename": "power",
+          "title": "power",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "wire_type": "\"basic\"",
+            "polarizing_pin": true,
+            "plate": false,
+            "width": 3,
+            "height": 3,
+            "depth": 4,
+            "cutout_depth": 2.8,
+            "front_y": "undocumented",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "type": "undocumented",
+            "inclusion": "\"all\"",
+            "m": "\"\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "oobb_wire/test/power/image_400.png",
+          "detail_image_path": "test/power/image_400.png",
+          "full_image_path": "oobb_wire/test/power/image.png",
+          "detail_full_image_path": "test/power/image.png",
+          "detail_iso_400_path": "test/power/image_400.png",
+          "detail_iso_120_path": "test/power/image_120.png",
+          "detail_top_400_path": "test/power/image_top_400.png",
+          "detail_top_120_path": "test/power/image_top_120.png",
+          "detail_side_400_path": "test/power/image_side_400.png",
+          "detail_side_120_path": "test/power/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "oobb_wire/test/power/working.scad",
+          "detail_scad_path": "test/power/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "wire_type": "\"basic\"",
+        "polarizing_pin": true,
+        "plate": false,
+        "width": 3,
+        "height": 3,
+        "depth": 4,
+        "cutout_depth": 2.8,
+        "front_y": "undocumented",
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "type": "undocumented",
+        "inclusion": "\"all\"",
+        "m": "\"\""
+      },
+      "readme_path": "oobb_wire/README.md",
+      "test_samples_path": ""
+    },
+    {
       "command": "oobe_holes",
       "name_long": "OOBB Geometry Helpers: OOBE Hole Array (M3, 7.5 mm)",
       "name_short_options": [],
@@ -14463,6 +16499,206 @@
       "default_values": {},
       "readme_path": "oring/README.md",
       "test_samples_path": "oring/TEST_SAMPLES.md"
+    },
+    {
+      "command": "patreon_logo",
+      "name_long": "Patreon Logo Badge",
+      "name_short_options": [],
+      "description": "Circular or rounded-square badge with the Patreon logo subtracted from the top face for engraving or colour inlay.",
+      "summary": "Circular or rounded-square badge with the Patreon logo subtracted from the top face for engraving or colour inlay.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "Outer diameter / square side length in mm.",
+          "type": "number",
+          "default": 50.0
+        },
+        {
+          "name": "depth",
+          "description": "Badge depth in mm.",
+          "type": "number",
+          "default": 3.0
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "body_shape",
+          "description": "Badge outline: 'rounded_square' or 'circle'.",
+          "type": "string",
+          "default": "\"rounded_square\""
+        },
+        {
+          "name": "corner_radius",
+          "description": "Plan-view corner radius in mm (rounded_square only).",
+          "type": "number",
+          "default": 4.0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Top and bottom perimeter edge radius in mm; zero keeps square edges.",
+          "type": "number",
+          "default": 0.0
+        },
+        {
+          "name": "logo_size_percent",
+          "description": "Logo width as a fraction of the badge size.",
+          "type": "number",
+          "default": 0.82
+        },
+        {
+          "name": "logo_shift",
+          "description": "2-element [x,y] shift of the logo engraving in mm.",
+          "type": "list",
+          "default": "[0,0]"
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "size",
+        "depth",
+        "depth_engraving",
+        "body_shape",
+        "corner_radius",
+        "radius_rounded",
+        "logo_size_percent",
+        "logo_shift",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "patreon_logo/documentation_detail.html",
+      "detail_markdown": "# patreon_logo\n\n**Patreon Logo Badge**\n\nCircular or rounded-square badge with the Patreon logo subtracted from the top face for engraving or colour inlay.\n\n## Returns\n\nList of geometry component dicts.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| size | Outer diameter / square side length in mm. | number | 50.0 |\n| depth | Badge depth in mm. | number | 3.0 |\n| depth_engraving | Logo cut depth in mm. | number | 1.5 |\n| body_shape | Badge outline: 'rounded_square' or 'circle'. | string | \"rounded_square\" |\n| corner_radius | Plan-view corner radius in mm (rounded_square only). | number | 4.0 |\n| radius_rounded | Top and bottom perimeter edge radius in mm; zero keeps square edges. | number | 0.0 |\n| logo_size_percent | Logo width as a fraction of the badge size. | number | 0.82 |\n| logo_shift | 2-element [x,y] shift of the logo engraving in mm. | list | [0,0] |\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| zz | Z anchor point: bottom, center/middle, top. | string | \"bottom\" |",
+      "detail_html": "<h1>patreon_logo</h1>\n<p><strong>Patreon Logo Badge</strong></p>\n<p>Circular or rounded-square badge with the Patreon logo subtracted from the top face for engraving or colour inlay.</p>\n<h2>Returns</h2>\n<p>List of geometry component dicts.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>size</td><td>Outer diameter / square side length in mm.</td><td>number</td><td>50.0</td></tr><tr><td>depth</td><td>Badge depth in mm.</td><td>number</td><td>3.0</td></tr><tr><td>depth_engraving</td><td>Logo cut depth in mm.</td><td>number</td><td>1.5</td></tr><tr><td>body_shape</td><td>Badge outline: 'rounded_square' or 'circle'.</td><td>string</td><td>\"rounded_square\"</td></tr><tr><td>corner_radius</td><td>Plan-view corner radius in mm (rounded_square only).</td><td>number</td><td>4.0</td></tr><tr><td>radius_rounded</td><td>Top and bottom perimeter edge radius in mm; zero keeps square edges.</td><td>number</td><td>0.0</td></tr><tr><td>logo_size_percent</td><td>Logo width as a fraction of the badge size.</td><td>number</td><td>0.82</td></tr><tr><td>logo_shift</td><td>2-element [x,y] shift of the logo engraving in mm.</td><td>list</td><td>[0,0]</td></tr><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>zz</td><td>Z anchor point: bottom, center/middle, top.</td><td>string</td><td>\"bottom\"</td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "size": 50.0,
+            "depth": 3.0,
+            "depth_engraving": 1.5,
+            "body_shape": "\"rounded_square\"",
+            "corner_radius": 4.0,
+            "radius_rounded": 0.0,
+            "logo_size_percent": 0.82,
+            "logo_shift": "[0,0]",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "patreon_logo/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "patreon_logo/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "patreon_logo/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "size": 50.0,
+            "depth": 3.0,
+            "depth_engraving": 1.5,
+            "body_shape": "\"rounded_square\"",
+            "corner_radius": 4.0,
+            "radius_rounded": 0.0,
+            "logo_size_percent": 0.82,
+            "logo_shift": "[0,0]",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "patreon_logo/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "patreon_logo/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "patreon_logo/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "size": 50.0,
+        "depth": 3.0,
+        "depth_engraving": 1.5,
+        "body_shape": "\"rounded_square\"",
+        "corner_radius": 4.0,
+        "radius_rounded": 0.0,
+        "logo_size_percent": 0.82,
+        "logo_shift": "[0,0]",
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "patreon_logo/README.md",
+      "test_samples_path": ""
     },
     {
       "command": "polyg",
@@ -15156,6 +17392,176 @@
       "default_values": {},
       "readme_path": "pulley_gt2/README.md",
       "test_samples_path": "pulley_gt2/TEST_SAMPLES.md"
+    },
+    {
+      "command": "qr_code",
+      "name_long": "QR Code",
+      "name_short_options": [],
+      "description": "QR code geometry generated from a data string. Dark modules are extruded to the requested depth; use as a positive for a raised code or as a negative to engrave it into a face.",
+      "summary": "QR code geometry generated from a data string.",
+      "variables": [
+        {
+          "name": "data",
+          "description": "Text or URL the QR code encodes.",
+          "type": "string",
+          "default": "\"https://www.patreon.com\""
+        },
+        {
+          "name": "size",
+          "description": "Overall square size in mm including the quiet-zone border.",
+          "type": "number",
+          "default": 30.0
+        },
+        {
+          "name": "depth",
+          "description": "Extrusion depth of the dark modules in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "border",
+          "description": "Quiet-zone width in modules kept clear around the code.",
+          "type": "number",
+          "default": 2
+        },
+        {
+          "name": "error_correction",
+          "description": "QR error correction level: l, m, q, or h.",
+          "type": "string",
+          "default": "\"m\""
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "data",
+        "size",
+        "depth",
+        "border",
+        "error_correction",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "qr_code/documentation_detail.html",
+      "detail_markdown": "# qr_code\n\n**QR Code**\n\nQR code geometry generated from a data string. Dark modules are extruded to the requested depth; use as a positive for a raised code or as a negative to engrave it into a face.\n\n## Returns\n\nList of geometry component dicts.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| data | Text or URL the QR code encodes. | string | \"https://www.patreon.com\" |\n| size | Overall square size in mm including the quiet-zone border. | number | 30.0 |\n| depth | Extrusion depth of the dark modules in mm. | number | 1.5 |\n| border | Quiet-zone width in modules kept clear around the code. | number | 2 |\n| error_correction | QR error correction level: l, m, q, or h. | string | \"m\" |\n| pos | 3-element [x,y,z] position. | list | [0,0,0] |\n| rot | Rotation [rx,ry,rz] in degrees. | list | [0,0,0] |\n| zz | Z anchor point: bottom, center/middle, top. | string | \"bottom\" |",
+      "detail_html": "<h1>qr_code</h1>\n<p><strong>QR Code</strong></p>\n<p>QR code geometry generated from a data string. Dark modules are extruded to the requested depth; use as a positive for a raised code or as a negative to engrave it into a face.</p>\n<h2>Returns</h2>\n<p>List of geometry component dicts.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>data</td><td>Text or URL the QR code encodes.</td><td>string</td><td>\"https://www.patreon.com\"</td></tr><tr><td>size</td><td>Overall square size in mm including the quiet-zone border.</td><td>number</td><td>30.0</td></tr><tr><td>depth</td><td>Extrusion depth of the dark modules in mm.</td><td>number</td><td>1.5</td></tr><tr><td>border</td><td>Quiet-zone width in modules kept clear around the code.</td><td>number</td><td>2</td></tr><tr><td>error_correction</td><td>QR error correction level: l, m, q, or h.</td><td>string</td><td>\"m\"</td></tr><tr><td>pos</td><td>3-element [x,y,z] position.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>rot</td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td>[0,0,0]</td></tr><tr><td>zz</td><td>Z anchor point: bottom, center/middle, top.</td><td>string</td><td>\"bottom\"</td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "data": "\"https://www.patreon.com\"",
+            "size": 30.0,
+            "depth": 1.5,
+            "border": 2,
+            "error_correction": "\"m\"",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "qr_code/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "qr_code/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "qr_code/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "data": "\"https://www.patreon.com\"",
+            "size": 30.0,
+            "depth": 1.5,
+            "border": 2,
+            "error_correction": "\"m\"",
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "qr_code/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "qr_code/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "qr_code/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "data": "\"https://www.patreon.com\"",
+        "size": 30.0,
+        "depth": 1.5,
+        "border": 2,
+        "error_correction": "\"m\"",
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "qr_code/README.md",
+      "test_samples_path": ""
     },
     {
       "command": "raw_scad",
@@ -17304,6 +19710,851 @@
       "default_values": {},
       "readme_path": "vpulley/README.md",
       "test_samples_path": "vpulley/TEST_SAMPLES.md"
+    },
+    {
+      "command": "withering_10north_logo",
+      "name_long": "Withering 10 North Logo",
+      "name_short_options": [],
+      "description": "Rounded-square 10 North badge with the SVG regions subtracted from the top face for engraving or colour inlay.",
+      "summary": "Rounded-square 10 North badge with the SVG regions subtracted from the top face for engraving or colour inlay.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "Outer square side length in mm.",
+          "type": "number",
+          "default": 50.0
+        },
+        {
+          "name": "depth",
+          "description": "Badge depth in mm.",
+          "type": "number",
+          "default": 3.0
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "corner_radius",
+          "description": "Plan-view corner radius in mm.",
+          "type": "number",
+          "default": 4.0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Top and bottom perimeter edge radius in mm; zero keeps square edges.",
+          "type": "number",
+          "default": 0.0
+        },
+        {
+          "name": "logo_size_percent",
+          "description": "Logo canvas width as a fraction of the badge side length.",
+          "type": "number",
+          "default": 0.82
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "size",
+        "depth",
+        "depth_engraving",
+        "corner_radius",
+        "radius_rounded",
+        "logo_size_percent",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "withering_10north_logo/documentation_detail.html",
+      "detail_markdown": "# withering_10north_logo\n\nRounded-square 10 North logo badge. The supplied SVG artwork is subtracted\nfrom the top face for engraving or colour inlay. The source logo's white\nbackground is omitted while its vector artwork is otherwise unchanged.\n\nThis component supports the same variables as `withering_bvu_logo`.",
+      "detail_html": "<h1>withering_10north_logo</h1>\n<p>Rounded-square 10 North logo badge. The supplied SVG artwork is subtracted from the top face for engraving or colour inlay. The source logo's white background is omitted while its vector artwork is otherwise unchanged.</p>\n<p>This component supports the same variables as <code>withering_bvu_logo</code>.</p>",
+      "sample_images": [],
+      "sample_notes": "",
+      "has_test_images": false,
+      "has_detail_page": true,
+      "default_values": {
+        "size": 50.0,
+        "depth": 3.0,
+        "depth_engraving": 1.5,
+        "corner_radius": 4.0,
+        "radius_rounded": 0.0,
+        "logo_size_percent": 0.82,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "withering_10north_logo/README.md",
+      "test_samples_path": ""
+    },
+    {
+      "command": "withering_built_logo",
+      "name_long": "Withering BUILT Building Expertise Logo",
+      "name_short_options": [],
+      "description": "Rounded-square BUILT building-expertise badge with the SVG regions subtracted from the top face for engraving or colour inlay.",
+      "summary": "Rounded-square BUILT building-expertise badge with the SVG regions subtracted from the top face for engraving or colour inlay.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "Outer square side length in mm.",
+          "type": "number",
+          "default": 50.0
+        },
+        {
+          "name": "depth",
+          "description": "Badge depth in mm.",
+          "type": "number",
+          "default": 3.0
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "corner_radius",
+          "description": "Plan-view corner radius in mm.",
+          "type": "number",
+          "default": 4.0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Top and bottom perimeter edge radius in mm; zero keeps square edges.",
+          "type": "number",
+          "default": 0.0
+        },
+        {
+          "name": "logo_size_percent",
+          "description": "Logo canvas width as a fraction of the badge side length.",
+          "type": "number",
+          "default": 0.82
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "size",
+        "depth",
+        "depth_engraving",
+        "corner_radius",
+        "radius_rounded",
+        "logo_size_percent",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "withering_built_logo/documentation_detail.html",
+      "detail_markdown": "# withering_built_logo\n\nRounded-square BUILT building-expertise logo badge. The supplied SVG paths are\nsubtracted from the top face for engraving or colour inlay. The OpenSCAD SVG is\nnormalized to a 1 mm square and omits the source file's white background.\n\nThis component supports the same variables as `withering_bvu_logo` and\n`withering_hbbd_logo`.",
+      "detail_html": "<h1>withering_built_logo</h1>\n<p>Rounded-square BUILT building-expertise logo badge. The supplied SVG paths are subtracted from the top face for engraving or colour inlay. The OpenSCAD SVG is normalized to a 1 mm square and omits the source file's white background.</p>\n<p>This component supports the same variables as <code>withering_bvu_logo</code> and <code>withering_hbbd_logo</code>.</p>",
+      "sample_images": [],
+      "sample_notes": "",
+      "has_test_images": false,
+      "has_detail_page": true,
+      "default_values": {
+        "size": 50.0,
+        "depth": 3.0,
+        "depth_engraving": 1.5,
+        "corner_radius": 4.0,
+        "radius_rounded": 0.0,
+        "logo_size_percent": 0.82,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "withering_built_logo/README.md",
+      "test_samples_path": ""
+    },
+    {
+      "command": "withering_bvu_logo",
+      "name_long": "Withering Building Volume as Utility Logo",
+      "name_short_options": [],
+      "description": "Rounded-square BVU geometric badge with the black SVG regions subtracted from the top face for engraving or colour inlay.",
+      "summary": "Rounded-square BVU geometric badge with the black SVG regions subtracted from the top face for engraving or colour inlay.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "Outer square side length in mm.",
+          "type": "number",
+          "default": 50.0
+        },
+        {
+          "name": "depth",
+          "description": "Badge depth in mm.",
+          "type": "number",
+          "default": 3.0
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "corner_radius",
+          "description": "Plan-view corner radius in mm.",
+          "type": "number",
+          "default": 4.0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Top and bottom perimeter edge radius in mm; zero keeps square edges.",
+          "type": "number",
+          "default": 0.0
+        },
+        {
+          "name": "logo_size_percent",
+          "description": "Logo canvas width as a fraction of the badge side length.",
+          "type": "number",
+          "default": 0.82
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "size",
+        "depth",
+        "depth_engraving",
+        "corner_radius",
+        "radius_rounded",
+        "logo_size_percent",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "withering_bvu_logo/documentation_detail.html",
+      "detail_markdown": "# withering_bvu_logo\n\n**Withering Building Volume as Utility Logo**\n\nRounded-square badge component using the Building Volume as Utility (BVU)\ngeometric SVG. The black logo regions are subtracted from the top face, making\nthe component suitable for a shallow recess or a contrasting-colour inlay.\n\nThe OpenSCAD import uses the local `image_scad.svg`, normalised to a 1 mm square\nand containing only the original vector paths; the source SVG's white background\nrectangle is intentionally omitted.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| size | Outer square side length in mm. | number | 50 |\n| depth | Badge depth in mm. | number | 3 |\n| depth_engraving | Logo cut depth in mm. | number | 1.5 |\n| corner_radius | Plan-view corner radius in mm. | number | 4 |\n| radius_rounded | Top and bottom perimeter edge radius in mm. | number | 0 |\n| logo_size_percent | Logo canvas width as a fraction of badge size. | number | 0.82 |\n| pos | 3-element `[x,y,z]` position. | list | `[0,0,0]` |\n| rot | Rotation `[rx,ry,rz]` in degrees. | list | `[0,0,0]` |\n| zz | Z anchor point: bottom, center/middle, top. | string | `\"bottom\"` |",
+      "detail_html": "<h1>withering_bvu_logo</h1>\n<p><strong>Withering Building Volume as Utility Logo</strong></p>\n<p>Rounded-square badge component using the Building Volume as Utility (BVU) geometric SVG. The black logo regions are subtracted from the top face, making the component suitable for a shallow recess or a contrasting-colour inlay.</p>\n<p>The OpenSCAD import uses the local <code>image_scad.svg</code>, normalised to a 1 mm square and containing only the original vector paths; the source SVG's white background rectangle is intentionally omitted.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>size</td><td>Outer square side length in mm.</td><td>number</td><td>50</td></tr><tr><td>depth</td><td>Badge depth in mm.</td><td>number</td><td>3</td></tr><tr><td>depth_engraving</td><td>Logo cut depth in mm.</td><td>number</td><td>1.5</td></tr><tr><td>corner_radius</td><td>Plan-view corner radius in mm.</td><td>number</td><td>4</td></tr><tr><td>radius_rounded</td><td>Top and bottom perimeter edge radius in mm.</td><td>number</td><td>0</td></tr><tr><td>logo_size_percent</td><td>Logo canvas width as a fraction of badge size.</td><td>number</td><td>0.82</td></tr><tr><td>pos</td><td>3-element <code>[x,y,z]</code> position.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td>rot</td><td>Rotation <code>[rx,ry,rz]</code> in degrees.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td>zz</td><td>Z anchor point: bottom, center/middle, top.</td><td>string</td><td><code>\"bottom\"</code></td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "size": 50.0,
+            "depth": 3.0,
+            "depth_engraving": 1.5,
+            "corner_radius": 4.0,
+            "radius_rounded": 0.0,
+            "logo_size_percent": 0.82,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "withering_bvu_logo/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "withering_bvu_logo/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "withering_bvu_logo/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "size": 50.0,
+            "depth": 3.0,
+            "depth_engraving": 1.5,
+            "corner_radius": 4.0,
+            "radius_rounded": 0.0,
+            "logo_size_percent": 0.82,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "withering_bvu_logo/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "withering_bvu_logo/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "withering_bvu_logo/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "size": 50.0,
+        "depth": 3.0,
+        "depth_engraving": 1.5,
+        "corner_radius": 4.0,
+        "radius_rounded": 0.0,
+        "logo_size_percent": 0.82,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "withering_bvu_logo/README.md",
+      "test_samples_path": ""
+    },
+    {
+      "command": "withering_hbbd_logo",
+      "name_long": "Withering HBBD Logo",
+      "name_short_options": [],
+      "description": "Rounded-square HBBD checkerboard badge with the black SVG regions subtracted from the top face for engraving or colour inlay.",
+      "summary": "Rounded-square HBBD checkerboard badge with the black SVG regions subtracted from the top face for engraving or colour inlay.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "Outer square side length in mm.",
+          "type": "number",
+          "default": 50.0
+        },
+        {
+          "name": "depth",
+          "description": "Badge depth in mm.",
+          "type": "number",
+          "default": 3.0
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "corner_radius",
+          "description": "Plan-view corner radius in mm.",
+          "type": "number",
+          "default": 4.0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Top and bottom perimeter edge radius in mm; zero keeps square edges.",
+          "type": "number",
+          "default": 0.0
+        },
+        {
+          "name": "logo_size_percent",
+          "description": "Logo width as a fraction of the badge side length.",
+          "type": "number",
+          "default": 0.82
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "size",
+        "depth",
+        "depth_engraving",
+        "corner_radius",
+        "radius_rounded",
+        "logo_size_percent",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "withering_hbbd_logo/documentation_detail.html",
+      "detail_markdown": "# withering_hbbd_logo\n\n**Withering HBBD Logo**\n\nRounded-square badge component using the HBBD checkerboard SVG. The black logo\nregions are subtracted from the top face, making the component suitable for a\nshallow recess or a contrasting-colour inlay.\n\nThe OpenSCAD import uses the local `image_scad.svg`, normalised to a 1 mm square\nand converted to paths so it does not depend on a locally installed font.\n\n## Variables\n\n| Name | Description | Type | Default |\n|------|-------------|------|---------|\n| size | Outer square side length in mm. | number | 50 |\n| depth | Badge depth in mm. | number | 3 |\n| depth_engraving | Logo cut depth in mm. | number | 1.5 |\n| corner_radius | Plan-view corner radius in mm. | number | 4 |\n| logo_size_percent | Logo width as a fraction of the badge size. | number | 0.82 |\n| pos | 3-element `[x,y,z]` position. | list | `[0,0,0]` |\n| rot | Rotation `[rx,ry,rz]` in degrees. | list | `[0,0,0]` |\n| zz | Z anchor point: bottom, center/middle, top. | string | `\"bottom\"` |",
+      "detail_html": "<h1>withering_hbbd_logo</h1>\n<p><strong>Withering HBBD Logo</strong></p>\n<p>Rounded-square badge component using the HBBD checkerboard SVG. The black logo regions are subtracted from the top face, making the component suitable for a shallow recess or a contrasting-colour inlay.</p>\n<p>The OpenSCAD import uses the local <code>image_scad.svg</code>, normalised to a 1 mm square and converted to paths so it does not depend on a locally installed font.</p>\n<h2>Variables</h2>\n<div class=\"markdown-table-wrap\"><table class=\"markdown-table\"><thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead><tbody><tr><td>size</td><td>Outer square side length in mm.</td><td>number</td><td>50</td></tr><tr><td>depth</td><td>Badge depth in mm.</td><td>number</td><td>3</td></tr><tr><td>depth_engraving</td><td>Logo cut depth in mm.</td><td>number</td><td>1.5</td></tr><tr><td>corner_radius</td><td>Plan-view corner radius in mm.</td><td>number</td><td>4</td></tr><tr><td>logo_size_percent</td><td>Logo width as a fraction of the badge size.</td><td>number</td><td>0.82</td></tr><tr><td>pos</td><td>3-element <code>[x,y,z]</code> position.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td>rot</td><td>Rotation <code>[rx,ry,rz]</code> in degrees.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td>zz</td><td>Z anchor point: bottom, center/middle, top.</td><td>string</td><td><code>\"bottom\"</code></td></tr></tbody></table></div>",
+      "sample_images": [
+        {
+          "sample_id": "test_1",
+          "filename": "test_1",
+          "title": "test_1",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "size": 50.0,
+            "depth": 3.0,
+            "depth_engraving": 1.5,
+            "corner_radius": 4.0,
+            "radius_rounded": 0.0,
+            "logo_size_percent": 0.82,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "withering_hbbd_logo/test/test_1/image_400.png",
+          "detail_image_path": "test/test_1/image_400.png",
+          "full_image_path": "withering_hbbd_logo/test/test_1/image.png",
+          "detail_full_image_path": "test/test_1/image.png",
+          "detail_iso_400_path": "test/test_1/image_400.png",
+          "detail_iso_120_path": "test/test_1/image_120.png",
+          "detail_top_400_path": "test/test_1/image_top_400.png",
+          "detail_top_120_path": "test/test_1/image_top_120.png",
+          "detail_side_400_path": "test/test_1/image_side_400.png",
+          "detail_side_120_path": "test/test_1/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "withering_hbbd_logo/test/test_1/working.scad",
+          "detail_scad_path": "test/test_1/working.scad"
+        },
+        {
+          "sample_id": "test_2",
+          "filename": "test_2",
+          "title": "test_2",
+          "intent": "",
+          "preview_rot": [
+            0,
+            0,
+            0
+          ],
+          "kwargs": null,
+          "helper_kwargs": null,
+          "companion_geometry_kwargs": null,
+          "set_values": null,
+          "default_values": {
+            "size": 50.0,
+            "depth": 3.0,
+            "depth_engraving": 1.5,
+            "corner_radius": 4.0,
+            "radius_rounded": 0.0,
+            "logo_size_percent": 0.82,
+            "pos": "[0,0,0]",
+            "rot": "[0,0,0]",
+            "zz": "\"bottom\""
+          },
+          "implementation_rule": "",
+          "exists": true,
+          "image_path": "withering_hbbd_logo/test/test_2/image_400.png",
+          "detail_image_path": "test/test_2/image_400.png",
+          "full_image_path": "withering_hbbd_logo/test/test_2/image.png",
+          "detail_full_image_path": "test/test_2/image.png",
+          "detail_iso_400_path": "test/test_2/image_400.png",
+          "detail_iso_120_path": "test/test_2/image_120.png",
+          "detail_top_400_path": "test/test_2/image_top_400.png",
+          "detail_top_120_path": "test/test_2/image_top_120.png",
+          "detail_side_400_path": "test/test_2/image_side_400.png",
+          "detail_side_120_path": "test/test_2/image_side_120.png",
+          "scad_exists": true,
+          "scad_path": "withering_hbbd_logo/test/test_2/working.scad",
+          "detail_scad_path": "test/test_2/working.scad"
+        }
+      ],
+      "sample_notes": "",
+      "has_test_images": true,
+      "has_detail_page": true,
+      "default_values": {
+        "size": 50.0,
+        "depth": 3.0,
+        "depth_engraving": 1.5,
+        "corner_radius": 4.0,
+        "radius_rounded": 0.0,
+        "logo_size_percent": 0.82,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "withering_hbbd_logo/README.md",
+      "test_samples_path": ""
+    },
+    {
+      "command": "withering_mtli_logo",
+      "name_long": "Withering MTLi Logistics Logo",
+      "name_short_options": [],
+      "description": "Rounded-square MTLi logistics badge with the SVG regions subtracted from the top face for engraving or colour inlay.",
+      "summary": "Rounded-square MTLi logistics badge with the SVG regions subtracted from the top face for engraving or colour inlay.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "Outer square side length in mm.",
+          "type": "number",
+          "default": 50.0
+        },
+        {
+          "name": "depth",
+          "description": "Badge depth in mm.",
+          "type": "number",
+          "default": 3.0
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "corner_radius",
+          "description": "Plan-view corner radius in mm.",
+          "type": "number",
+          "default": 4.0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Top and bottom perimeter edge radius in mm; zero keeps square edges.",
+          "type": "number",
+          "default": 0.0
+        },
+        {
+          "name": "logo_size_percent",
+          "description": "Logo canvas width as a fraction of the badge side length.",
+          "type": "number",
+          "default": 0.82
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "size",
+        "depth",
+        "depth_engraving",
+        "corner_radius",
+        "radius_rounded",
+        "logo_size_percent",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "withering_mtli_logo/documentation_detail.html",
+      "detail_markdown": "# withering_mtli_logo\n\nRounded-square MTLi logistics logo badge. The supplied SVG paths are subtracted\nfrom the top face for engraving or colour inlay. The OpenSCAD SVG is normalized\nto a 1 mm square and omits the source file's white background rectangle.\n\nThis component supports the same variables as `withering_bvu_logo` and\n`withering_hbbd_logo`.",
+      "detail_html": "<h1>withering_mtli_logo</h1>\n<p>Rounded-square MTLi logistics logo badge. The supplied SVG paths are subtracted from the top face for engraving or colour inlay. The OpenSCAD SVG is normalized to a 1 mm square and omits the source file's white background rectangle.</p>\n<p>This component supports the same variables as <code>withering_bvu_logo</code> and <code>withering_hbbd_logo</code>.</p>",
+      "sample_images": [],
+      "sample_notes": "",
+      "has_test_images": false,
+      "has_detail_page": true,
+      "default_values": {
+        "size": 50.0,
+        "depth": 3.0,
+        "depth_engraving": 1.5,
+        "corner_radius": 4.0,
+        "radius_rounded": 0.0,
+        "logo_size_percent": 0.82,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "withering_mtli_logo/README.md",
+      "test_samples_path": ""
+    },
+    {
+      "command": "withering_rise_logo",
+      "name_long": "Withering RISE Athlete Village Logo",
+      "name_short_options": [],
+      "description": "Rounded-square RISE athlete-village badge with the traced SVG regions subtracted from the top face for engraving or colour inlay.",
+      "summary": "Rounded-square RISE athlete-village badge with the traced SVG regions subtracted from the top face for engraving or colour inlay.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "Outer square side length in mm.",
+          "type": "number",
+          "default": 50.0
+        },
+        {
+          "name": "depth",
+          "description": "Badge depth in mm.",
+          "type": "number",
+          "default": 3.0
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "corner_radius",
+          "description": "Plan-view corner radius in mm.",
+          "type": "number",
+          "default": 4.0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Top and bottom perimeter edge radius in mm; zero keeps square edges.",
+          "type": "number",
+          "default": 0.0
+        },
+        {
+          "name": "logo_size_percent",
+          "description": "Logo canvas width as a fraction of the badge side length.",
+          "type": "number",
+          "default": 0.82
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "size",
+        "depth",
+        "depth_engraving",
+        "corner_radius",
+        "radius_rounded",
+        "logo_size_percent",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "withering_rise_logo/documentation_detail.html",
+      "detail_markdown": "# withering_rise_logo\n\nRounded-square RISE athlete-village logo badge. The source raster artwork is\ntraced into a monochrome, path-only SVG and subtracted from the top face for\nengraving or colour inlay.\n\nThis component supports the same variables as `withering_bvu_logo`.",
+      "detail_html": "<h1>withering_rise_logo</h1>\n<p>Rounded-square RISE athlete-village logo badge. The source raster artwork is traced into a monochrome, path-only SVG and subtracted from the top face for engraving or colour inlay.</p>\n<p>This component supports the same variables as <code>withering_bvu_logo</code>.</p>",
+      "sample_images": [],
+      "sample_notes": "",
+      "has_test_images": false,
+      "has_detail_page": true,
+      "default_values": {
+        "size": 50.0,
+        "depth": 3.0,
+        "depth_engraving": 1.5,
+        "corner_radius": 4.0,
+        "radius_rounded": 0.0,
+        "logo_size_percent": 0.82,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "withering_rise_logo/README.md",
+      "test_samples_path": ""
+    },
+    {
+      "command": "withering_root_logo",
+      "name_long": "Withering ROOT Elder Care Logo",
+      "name_short_options": [],
+      "description": "Rounded-square ROOT elder-care badge with the SVG regions subtracted from the top face for engraving or colour inlay.",
+      "summary": "Rounded-square ROOT elder-care badge with the SVG regions subtracted from the top face for engraving or colour inlay.",
+      "variables": [
+        {
+          "name": "size",
+          "description": "Outer square side length in mm.",
+          "type": "number",
+          "default": 50.0
+        },
+        {
+          "name": "depth",
+          "description": "Badge depth in mm.",
+          "type": "number",
+          "default": 3.0
+        },
+        {
+          "name": "depth_engraving",
+          "description": "Logo cut depth in mm.",
+          "type": "number",
+          "default": 1.5
+        },
+        {
+          "name": "corner_radius",
+          "description": "Plan-view corner radius in mm.",
+          "type": "number",
+          "default": 4.0
+        },
+        {
+          "name": "radius_rounded",
+          "description": "Top and bottom perimeter edge radius in mm; zero keeps square edges.",
+          "type": "number",
+          "default": 0.0
+        },
+        {
+          "name": "logo_size_percent",
+          "description": "Logo canvas width as a fraction of the badge side length.",
+          "type": "number",
+          "default": 0.82
+        },
+        {
+          "name": "pos",
+          "description": "3-element [x,y,z] position.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "rot",
+          "description": "Rotation [rx,ry,rz] in degrees.",
+          "type": "list",
+          "default": "[0,0,0]"
+        },
+        {
+          "name": "zz",
+          "description": "Z anchor point: bottom, center/middle, top.",
+          "type": "string",
+          "default": "\"bottom\""
+        }
+      ],
+      "variable_names": [
+        "size",
+        "depth",
+        "depth_engraving",
+        "corner_radius",
+        "radius_rounded",
+        "logo_size_percent",
+        "pos",
+        "rot",
+        "zz"
+      ],
+      "category": "OOBB Custom Components",
+      "returns": "List of geometry component dicts.",
+      "aliases": [],
+      "detail_page": "withering_root_logo/documentation_detail.html",
+      "detail_markdown": "# withering_root_logo\n\nRounded-square ROOT elder-care logo badge. The supplied SVG paths are\nsubtracted from the top face for engraving or colour inlay. The OpenSCAD SVG is\nnormalized to a 1 mm square and omits the source file's white background.\n\nThis component supports the same variables as `withering_bvu_logo` and\n`withering_hbbd_logo`.",
+      "detail_html": "<h1>withering_root_logo</h1>\n<p>Rounded-square ROOT elder-care logo badge. The supplied SVG paths are subtracted from the top face for engraving or colour inlay. The OpenSCAD SVG is normalized to a 1 mm square and omits the source file's white background.</p>\n<p>This component supports the same variables as <code>withering_bvu_logo</code> and <code>withering_hbbd_logo</code>.</p>",
+      "sample_images": [],
+      "sample_notes": "",
+      "has_test_images": false,
+      "has_detail_page": true,
+      "default_values": {
+        "size": 50.0,
+        "depth": 3.0,
+        "depth_engraving": 1.5,
+        "corner_radius": 4.0,
+        "radius_rounded": 0.0,
+        "logo_size_percent": 0.82,
+        "pos": "[0,0,0]",
+        "rot": "[0,0,0]",
+        "zz": "\"bottom\""
+      },
+      "readme_path": "withering_root_logo/README.md",
+      "test_samples_path": ""
     },
     {
       "command": "withuering_wall_logo",
@@ -40375,7 +43626,7 @@
       "has_mode_values": true
     }
   ],
-  "generated_date": "2026-07-15",
-  "total_objects": 76,
+  "generated_date": "2026-10-12",
+  "total_objects": 91,
   "total_part_sets": 0
 }

@@ -7,39 +7,40 @@ from components.oobb_wire import working as wire
 
 
 # Captured from the electronic project's original 3x3x4 mm plate builder.
-# Housing runs use header-pocket depth; basic/power have 14 mm length.
+# Expected dimensions include 0.2 mm extra XY clearance per side.
+# Basic/power through-slots share the rearward Y span.
 # Each box is (size, corner position); these are millimetres, not grid units.
-ORIGINAL_BOXES = {
-    "basic": [([5.62, 13.97, 6], [-1.54, -3.81, -1]), ([7.62, 14.0, 3.8], [-2.54, -12.74, 1.2]),
-              ([15.24, 3.08, 3.8], [-7.62, -15.82, 1.2]), ([10.16, 20, 3.8], [-5.08, -35.82, 1.2])],
-    "power": [([3.08, 6.35, 6], [-1.54, -3.81, -1]), ([5.08, 14.0, 3.8], [-2.54, -12.74, 1.2]),
-              ([12.7, 3.08, 3.8], [-7.62, -15.82, 1.2]), ([7.62, 20, 3.8], [-5.08, -35.82, 1.2])],
-    "motor": [([3.08, 6.35, 6], [-1.54, 3.81, -1]), ([5.08, 16.55, 3.8], [-2.54, -12.74, 1.2]),
-              ([10.16, 3.08, 3.8], [-5.08, -15.82, 1.2]), ([5.08, 20, 3.8], [-2.54, -35.82, 1.2])],
-    "motor_stepper": [([8.16, 6.35, 6], [-4.08, 3.81, -1]), ([10.16, 16.55, 3.8], [-5.08, -12.74, 1.2]),
-                      ([15.24, 3.08, 3.8], [-7.62, -15.82, 1.2]), ([10.16, 20, 3.8], [-5.08, -35.82, 1.2])],
-    "i2c": [([8.16, 6.35, 6], [-2.81, 3.81, -1]), ([10.16, 16.55, 3.8], [-3.81, -12.74, 1.2]),
-            ([17.78, 3.08, 3.8], [-8.89, -15.82, 1.2]), ([12.7, 20, 3.8], [-6.35, -35.82, 1.2])],
+EXPECTED_BOXES = {
+    "basic": [([5.62, 13.97, 6], [-1.54, -2.54, -1]), ([8.02, 14.4, 3.8], [-2.74, -12.94, 1.2]),
+              ([15.64, 3.48, 3.8], [-7.82, -16.02, 1.2]), ([10.16, 20, 3.8], [-5.08, -35.82, 1.2])],
+    "power": [([3.08, 13.97, 6], [-1.54, -2.54, -1]), ([5.48, 14.4, 3.8], [-2.74, -12.94, 1.2]),
+              ([13.1, 3.48, 3.8], [-7.82, -16.02, 1.2]), ([7.62, 20, 3.8], [-5.08, -35.82, 1.2])],
+    "motor": [([3.08, 6.35, 6], [-1.54, 3.81, -1]), ([5.48, 16.95, 3.8], [-2.74, -12.94, 1.2]),
+              ([10.56, 3.48, 3.8], [-5.28, -16.02, 1.2]), ([5.08, 20, 3.8], [-2.54, -35.82, 1.2])],
+    "motor_stepper": [([8.16, 6.35, 6], [-4.08, 3.81, -1]), ([10.56, 16.95, 3.8], [-5.28, -12.94, 1.2]),
+                      ([15.64, 3.48, 3.8], [-7.82, -16.02, 1.2]), ([10.16, 20, 3.8], [-5.08, -35.82, 1.2])],
+    "i2c": [([8.16, 6.35, 6], [-2.81, 3.81, -1]), ([10.56, 16.95, 3.8], [-4.01, -12.94, 1.2]),
+            ([18.18, 3.48, 3.8], [-9.09, -16.02, 1.2]), ([12.7, 20, 3.8], [-6.35, -35.82, 1.2])],
 }
 
 
 class OobbWireTests(unittest.TestCase):
     def test_dupont_housing_clearance_does_not_shrink_with_host(self):
-        for name in ORIGINAL_BOXES:
+        for name in EXPECTED_BOXES:
             for host in ({}, {"height": 2.5}, {"height": 4}, {"front_y": -21.75}):
                 with self.subTest(wire_type=name, host=host):
                     boxes = wire.action(wire_type=name, **host)[0]["objects"]
                     entry, run, pocket = boxes[:3]
                     self.assertGreaterEqual(run["size"][1], 14)
-                    # Keep the housing flush with the header pocket and
+                    # Keep the housing overlapping the header pocket and
                     # connected to the through-entry, even on larger hosts.
-                    self.assertAlmostEqual(run["pos"][1], pocket["pos"][1] + pocket["size"][1])
+                    self.assertAlmostEqual(pocket["pos"][1] + pocket["size"][1] - run["pos"][1], 0.4)
                     self.assertGreaterEqual(run["pos"][1] + run["size"][1] + 1e-9, entry["pos"][1])
                     if name in ("basic", "power") and host != {"height": 4}:
-                        self.assertEqual(run["size"][1], 14)
+                        self.assertAlmostEqual(run["size"][1], 14.4)
 
     def test_housing_run_matches_header_depth(self):
-        for name in ORIGINAL_BOXES:
+        for name in EXPECTED_BOXES:
             for depth, cutout_depth in ((4, 2.8), (8, 3)):
                 with self.subTest(wire_type=name, depth=depth):
                     entry, run, pocket, exit_box = wire.action(
@@ -51,8 +52,8 @@ class OobbWireTests(unittest.TestCase):
                     self.assertEqual(entry["pos"][2], -1)
                     self.assertEqual(entry["size"][2], depth + 2)
 
-    def test_original_clearances_for_every_connector(self):
-        for name, expected in ORIGINAL_BOXES.items():
+    def test_clearances_for_every_connector(self):
+        for name, expected in EXPECTED_BOXES.items():
             with self.subTest(wire_type=name):
                 result = wire.action(wire_type=name)[0]
                 self.assertEqual(result["typetype"], "negative")
@@ -63,7 +64,7 @@ class OobbWireTests(unittest.TestCase):
                         self.assertAlmostEqual(actual, original)
 
     def test_polarizing_pin_defaults_on_and_only_removes_notch(self):
-        for name in ORIGINAL_BOXES:
+        for name in EXPECTED_BOXES:
             with self.subTest(wire_type=name):
                 default = wire.action(wire_type=name)[0]["objects"]
                 enabled = wire.action(wire_type=name, polarizing_pin=True)[0]["objects"]
@@ -117,7 +118,7 @@ class OobbWireTests(unittest.TestCase):
         result = wire.action(depth=8, cutout_depth=3, front_y=-30)[0]["objects"]
         self.assertEqual(result[0]["size"][2], 10)
         self.assertEqual(result[2]["pos"][2], 5)
-        self.assertAlmostEqual(result[2]["pos"][1], -23.82)
+        self.assertAlmostEqual(result[2]["pos"][1], -24.02)
         self.assertEqual(result[-1]["pos"][1], -30)
 
     def test_invalid_configuration_fails_explicitly(self):

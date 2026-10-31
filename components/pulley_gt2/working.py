@@ -1,4 +1,5 @@
-﻿import copy
+import copy
+import math
 import os
 import sys
 
@@ -14,11 +15,16 @@ def describe():
     d = {}
     d["name"] = "pulley_gt2"
     d["name_long"] = "OPSC Mechanical Shapes: GT2 Pulley"
-    d["description"] = "Legacy opsc GT2 pulley shape migrated into the component system."
+    d["description"] = "GT2 2 mm tooth profile with explicit fit allowances and no implicit shaft bore."
     d["category"] = "OPSC Mechanical Shapes"
     d["shape_aliases"] = ["pulley_gt2"]
     d["returns"] = "List of geometry component dicts."
-    d["variables"] = []
+    d["variables"] = [
+        {"name": "number_of_teeth", "type": "number", "default": 24, "description": "Integer tooth count, at least 8."},
+        {"name": "depth", "type": "number", "default": 6, "description": "Toothed length, bottom anchored, in mm."},
+        {"name": "additional_tooth_width", "type": "number", "default": 0.2, "description": "Extra tooth pocket width in mm."},
+        {"name": "additional_tooth_depth", "type": "number", "default": 0, "description": "Extra tooth pocket depth in mm."},
+    ]
     return d
 
 
@@ -37,7 +43,20 @@ def action(**kwargs):
     params = copy.deepcopy(kwargs)
     params.setdefault("type", "positive")
     params["shape"] = "pulley_gt2"
-    return [opsc.opsc_easy(**params)]
+    teeth = params.get("number_of_teeth", 24)
+    if isinstance(teeth, bool) or not isinstance(teeth, (int, float)) or not math.isfinite(teeth) or teeth < 8 or int(teeth) != teeth:
+        raise ValueError("number_of_teeth must be an integer of at least 8")
+    depth = params.get("depth", 6)
+    if isinstance(depth, bool) or not isinstance(depth, (int, float)) or not math.isfinite(depth) or depth <= 0:
+        raise ValueError("depth must be a positive finite number")
+    result = opsc.opsc_easy(**params)
+    # Preserve component keywords without changing the OPSC global whitelist.
+    for name, default, maximum in [("additional_tooth_width", 0.2, 0.5), ("additional_tooth_depth", 0, 0.3)]:
+        value = params.get(name, default)
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not 0 <= value <= maximum:
+            raise ValueError(f"{name} must be between zero and {maximum}")
+        result[name] = value
+    return [result]
 
 
 def _resolve_scad_asset(filename):
@@ -59,6 +78,8 @@ def render(params):
     return pulley_scad.pulley_gt2(
         number_of_teeth=params.get("number_of_teeth", 24),
         depth=params.get("depth", 6),
+        tooth_width_clearance=params.get("additional_tooth_width", 0.2),
+        tooth_depth_clearance=params.get("additional_tooth_depth", 0),
     )
 
 

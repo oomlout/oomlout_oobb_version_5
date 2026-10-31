@@ -1,3 +1,4 @@
 solidpython2
 PyYAML
 Pillow
+Shapely>=2.1

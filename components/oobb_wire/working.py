@@ -13,8 +13,8 @@ if _PROJECT_ROOT not in sys.path:
 # dimensions do not scale with the OOBB grid.
 # (centre X, entry width, entry top Y, step Y, run width)
 WIRE_CHANNELS = {
-    "basic": (1.27, 5.62, 10.16, -3.81, 7.62),
-    "power": (0.00, 3.08, 2.54, -3.81, 5.08),
+    "basic": (1.27, 5.62, 11.43, -2.54, 7.62),
+    "power": (0.00, 3.08, 11.43, -2.54, 5.08),
     "motor": (0.00, 3.08, 10.16, 3.81, 5.08),
     "motor_stepper": (0.00, 8.16, 10.16, 3.81, 10.16),
     "i2c": (1.27, 8.16, 10.16, 3.81, 10.16),
@@ -23,6 +23,8 @@ WIRE_POCKET_LENGTH = 2.54 + 0.54
 WIRE_POCKET_EXTRA_WIDTH = 2 * 2.54
 WIRE_POCKET_FRONT_CLEARANCE = 6.18
 WIRE_HOUSING_LENGTH = 14.0
+# Extra clearance on each XY side of the header bar and inner housing.
+WIRE_FIT_CLEARANCE = 0.2
 WIRE_EXIT_NOTCH_TYPES = ("basic", "power", "i2c")
 WIRE_EXIT_NOTCH_RADIUS = 1.5
 WIRE_EXIT_NOTCH_GAP = 3
@@ -109,7 +111,8 @@ def action(**kwargs):
     # the host grid. Extend toward the entry, keeping the pocket/exit fixed.
     run_length = max(WIRE_HOUSING_LENGTH, step_y - run_bottom)
     pocket_z = depth - cutout_depth
-    rect(cx, run_bottom + run_length / 2, run_width, run_length,
+    rect(cx, run_bottom + run_length / 2,
+         run_width + 2 * WIRE_FIT_CLEARANCE, run_length + 2 * WIRE_FIT_CLEARANCE,
          pocket_z, cutout_depth + 1)
 
     if wire_type in ("motor", "motor_stepper"):
@@ -117,7 +120,8 @@ def action(**kwargs):
     else:
         exit_cx, exit_width = cx - 1.27, run_width + 2.54
     rect(exit_cx, (run_bottom + pocket_bottom) / 2,
-         exit_width + WIRE_POCKET_EXTRA_WIDTH, run_bottom - pocket_bottom,
+         exit_width + WIRE_POCKET_EXTRA_WIDTH + 2 * WIRE_FIT_CLEARANCE,
+         run_bottom - pocket_bottom + 2 * WIRE_FIT_CLEARANCE,
          pocket_z, cutout_depth + 1)
     rect(exit_cx, pocket_bottom - 10, exit_width, 20, pocket_z, cutout_depth + 1)
 

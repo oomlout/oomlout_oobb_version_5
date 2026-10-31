@@ -19,6 +19,7 @@
 | [gridfinity_tray_default](gridfinity_tray_default/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [gridfinity_tray_default_label](gridfinity_tray_default_label/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [gridfinity_tray_fractional_test](gridfinity_tray_fractional_test/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
+| [gridfinity_tray_quarter_increment](gridfinity_tray_quarter_increment/) | Tray with whole, half and quarter bottom feet; quarter steps on one axis only. | Gridfinity |
 | [gridfinity_tray_raw](gridfinity_tray_raw/) | Returns a raw OpenSCAD wrapper around the vendored Gridfinity Extended basic cup, using repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [gridfinity_tray_raw_offset](gridfinity_tray_raw_offset/) | Returns a local wrapper around gridfinity_tray_raw from the tray_raw component directory, using the same repo-style public size inputs where gridfinity_width is X, gridfinity_height is Y, and gridfinity_depth is Z. | Gridfinity |
 | [hole](hole/) | Legacy opsc cylindrical hole shape migrated into the component system. | OPSC Composite Shapes |
@@ -31,7 +32,9 @@
 | [oobb_cube_hexagon_cutout](oobb_cube_hexagon_cutout/) | A cube with a tiling hexagonal cutout pattern. A solid border is preserved around all edges and between neighbouring cutouts. The hex grid rotation can be adjusted with rotation_cutout. | OOBB Geometry Primitives |
 | [oobb_cube_new](oobb_cube_new/) | Cube with full rotation-object support and mode filtering. | OOBB Geometry Primitives |
 | [oobb_cylinder](oobb_cylinder/) | Cylinder geometry across all render modes, supporting named, explicit, or dual-end radii and z-centering. | OOBB Geometry Primitives |
+| [oobb_cylinder_d_shaft](oobb_cylinder_d_shaft/) | Cylinder with a flat cut from the +Y side. cut_d is the material removed in mm; the remaining flat-to-back size is 2 * radius - cut_d. | OOBB Geometry Primitives |
 | [oobb_cylinder_hollow](oobb_cylinder_hollow/) | Hollow cylinder (positive outer minus negative inner) wrapped in a rotation object. | OOBB Geometry Primitives |
+| [oobb_funnel_rounded_rectangle](oobb_funnel_rounded_rectangle/) | Open rounded rectangular funnel with a straight inset spout and a tapered, constant-width wall. | OOBB Geometry Primitives |
 | [oobb_gear_spur](oobb_gear_spur/) | Metric involute spur gear via BOSL2. Pressure angle fixed at 20°. Optional chamfer bevel on top and bottom faces. | OOBB Motion |
 | [oobb_hole](oobb_hole/) | Cylindrical screw hole for all render modes, resolved from a named or explicit radius. | OOBB Geometry Primitives |
 | [oobb_hole_new](oobb_hole_new/) | Cylindrical hole with rotation-object support, mode filtering, and named/explicit radius. | OOBB Geometry Primitives |
@@ -42,6 +45,8 @@
 | [oobb_rot](oobb_rot/) | Helper that extracts and returns a [rx,ry,rz] rotation list from kwargs. | OOBB Geometry Helpers |
 | [oobb_rounded_rectangle_hollow](oobb_rounded_rectangle_hollow/) | Hollow rounded rectangle (positive outer minus negative inner wall) wrapped in a rotation object. | OOBB Geometry Primitives |
 | [oobb_rounded_rectangle_rounded](oobb_rounded_rectangle_rounded/) | Rounded rectangle with rounded top and bottom edges (sphere-swept corners) wrapped in a rotation object. | OOBB Geometry Primitives |
+| [oobb_rounded_rectangle_rounded_draft_angle](oobb_rounded_rectangle_rounded_draft_angle/) | Rounded rectangle with rounded top and bottom edges and side walls that taper inward toward the bottom for injection-moulding design. | OOBB Geometry Primitives |
+| [oobb_rounded_rectangle_rounded_hollow](oobb_rounded_rectangle_rounded_hollow/) | Hollow rounded rectangle with rounded outer top and bottom edges. Optional depth_top and depth_bottom values add solid end caps; zero keeps that end open. The default edge radius is half the wall thickness so the edge is covered by the bead. | OOBB Geometry Primitives |
 | [oobb_screw](oobb_screw/) | Screw cutout (socket_cap, countersunk, or self_tapping) with optional through-hole, nut pocket, overhang, and clearance. | Fasteners |
 | [oobb_screw_countersunk](oobb_screw_countersunk/) | Countersunk screw cutout; wrapper over oobb_screw with style='countersunk' pre-set. | Fasteners |
 | [oobb_screw_exact](oobb_screw_exact/) | Part builder that accepts the preferred OOBB screw naming format and maps it to the GitHub BelfrySCAD BOSL2 screw wrapper. | Fasteners |
@@ -55,14 +60,16 @@
 | [oobb_text](oobb_text/) | Legacy OOBB text helper that creates centered extruded text with OOBB defaults. | OOBB Geometry Primitives |
 | [oobb_tube](oobb_tube/) | Tube cutout (hollow cylinder) across all render modes, with named/explicit radius and rotation support. | OOBB Geometry Primitives |
 | [oobb_tube_new](oobb_tube_new/) | Tube cutout with updated rendering pipeline; identical interface to oobb_tube. | OOBB Geometry Primitives |
-| [oobb_wire](oobb_wire/) | Wire-holder clearances for basic, power, motor, motor_stepper and i2c, with an optional plate. | OOBB Electronic Components |
+| [oobb_wire](oobb_wire/) | Wire-holder clearances for five 2.54 mm connector styles, with an optional plain plate. | OOBB Electronic Components |
 | [oobe_holes](oobe_holes/) | M3 screw holes on the OOBE 7.5 mm half-grid. Identical patterns to oobb_holes but spacing is fixed at 7.5 mm and hole size is fixed at M3. No both_holes option — there is no smaller grid. | OOBB Geometry Helpers |
 | [oring](oring/) | Legacy opsc o-ring profile shape migrated into the component system. | OPSC Mechanical Shapes |
+| [patreon_logo](patreon_logo/) | Circular or rounded-square badge with the Patreon logo subtracted from the top face for engraving or colour inlay. | OOBB Custom Components |
 | [polyg](polyg/) | Legacy opsc polygon-prism shape migrated into the component system. | OPSC Composite Shapes |
 | [polyg_tube](polyg_tube/) | Legacy opsc polygon tube shape migrated into the component system. | OPSC Composite Shapes |
 | [polyg_tube_half](polyg_tube_half/) | Legacy opsc half polygon tube shape migrated into the component system. | OPSC Composite Shapes |
 | [polygon](polygon/) | Extruded polygon primitive exposed through the component system. | OPSC Geometry Primitives |
 | [pulley_gt2](pulley_gt2/) | Legacy opsc GT2 pulley shape migrated into the component system. | OPSC Mechanical Shapes |
+| [qr_code](qr_code/) | QR code geometry generated from a data string. Dark modules are extruded to the requested depth; use as a positive for a raised code or as a negative to engrave it into a face. | OOBB Custom Components |
 | [raw_scad](raw_scad/) | Imports or inlines raw OpenSCAD modules through the component system. | OPSC Composite Shapes |
 | [rounded_octagon](rounded_octagon/) | Legacy opsc rounded octagon shape migrated into the component system. | OPSC Composite Shapes |
 | [rounded_rectangle](rounded_rectangle/) | Legacy opsc rounded rectangle shape migrated into the component system. | OPSC Composite Shapes |
@@ -78,4 +85,11 @@
 | [tube](tube/) | Legacy opsc tube shape migrated into the component system. | OPSC Composite Shapes |
 | [tube_new](tube_new/) | Legacy opsc tapered tube shape migrated into the component system. | OPSC Composite Shapes |
 | [vpulley](vpulley/) | Legacy opsc V-pulley profile shape migrated into the component system. | OPSC Mechanical Shapes |
+| [withering_10north_logo](withering_10north_logo/) | Rounded-square 10 North badge with the SVG regions subtracted from the top face for engraving or colour inlay. | OOBB Custom Components |
+| [withering_built_logo](withering_built_logo/) | Rounded-square BUILT building-expertise badge with the SVG regions subtracted from the top face for engraving or colour inlay. | OOBB Custom Components |
+| [withering_bvu_logo](withering_bvu_logo/) | Rounded-square BVU geometric badge with the black SVG regions subtracted from the top face for engraving or colour inlay. | OOBB Custom Components |
+| [withering_hbbd_logo](withering_hbbd_logo/) | Rounded-square HBBD checkerboard badge with the black SVG regions subtracted from the top face for engraving or colour inlay. | OOBB Custom Components |
+| [withering_mtli_logo](withering_mtli_logo/) | Rounded-square MTLi logistics badge with the SVG regions subtracted from the top face for engraving or colour inlay. | OOBB Custom Components |
+| [withering_rise_logo](withering_rise_logo/) | Rounded-square RISE athlete-village badge with the traced SVG regions subtracted from the top face for engraving or colour inlay. | OOBB Custom Components |
+| [withering_root_logo](withering_root_logo/) | Rounded-square ROOT elder-care badge with the SVG regions subtracted from the top face for engraving or colour inlay. | OOBB Custom Components |
 | [withuering_wall_logo](withuering_wall_logo/) | Circular wall logo disk using the W squared SVG. The logo is subtracted from the top face; when depth_engraving is omitted, the logo cuts fully through. | OOBB Custom Components |

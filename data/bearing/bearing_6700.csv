@@ -2,6 +2,7 @@ Here's the data in CSV format:
 
 ```
 Size,Inner Dimension,Outer Dimension,Width,Dynamic(Cr),Static(Cor),Weight(lb)
+6700,10,15,4,,,
 6701,12,18,4,205,119,0.004
 6702,15,21,4,191,110,0.005
 6703,17,23,4,216,137,0.006

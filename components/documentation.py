@@ -378,6 +378,11 @@ def _build_default_detail_markdown(entry: dict[str, Any]) -> str:
 
 def _markdown_inline_to_html(text: str) -> str:
     escaped = html.escape(text, quote=False)
+    escaped = re.sub(
+        r"!\[([^\]]*)\]\(([^)]+)\)",
+        r'<img src="\2" alt="\1" style="max-width:260px;height:auto">',
+        escaped,
+    )
     escaped = re.sub(r"`([^`]+)`", r"<code>\1</code>", escaped)
     escaped = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", escaped)
     escaped = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", escaped)

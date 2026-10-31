@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gridfinity_tray_quarter_increment Documentation</title>
+  <style>
+    :root {
+      --bg: #f7f5ff;
+      --panel: rgba(255,255,255,0.92);
+      --border: #ddd5ff;
+      --text: #2f2850;
+      --subtle: #635c7e;
+      --accent: #7b68ee;
+      --accent-soft: #efeaff;
+      --shadow: 0 14px 40px rgba(78, 58, 140, 0.12);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #fff9ef, var(--bg) 45%, #eef6ff 100%);
+      color: var(--text);
+    }
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 18px 40px;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(244,240,255,0.92));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 22px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 34px;
+      line-height: 1.1;
+    }
+    .name-long {
+      color: var(--subtle);
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      margin: 0;
+      line-height: 1.7;
+      color: var(--subtle);
+      font-size: 16px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .meta-chip {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+    .panel-intro {
+      margin: 0 0 18px;
+      color: var(--subtle);
+      line-height: 1.6;
+    }
+    .sample-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .sample-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.82);
+    }
+    .sample-image-wrap {
+      background: linear-gradient(180deg, #faf7ff, #f1ebff);
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+    .sample-image-wrap img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 10px 28px rgba(74, 52, 112, 0.14);
+    }
+    .sample-missing {
+      color: var(--subtle);
+      font-size: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+    .sample-body {
+      padding: 16px;
+      color: var(--subtle);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .sample-body h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--text);
+    }
+    .sample-body p {
+      margin: 0 0 12px;
+    }
+    .sample-link-row {
+      margin-bottom: 10px;
+    }
+    .sample-link {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: #efe8ff;
+      color: #4f3ca7;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 8px 12px;
+      border: 1px solid #d6c7ff;
+    }
+    .sample-link-disabled {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: #f3f1f8;
+      color: var(--subtle);
+      font-weight: 700;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+    }
+    .sample-thumbs {
+      display: flex;
+      gap: 10px;
+      padding: 0 14px 12px;
+      flex-wrap: wrap;
+    }
+    .sample-thumb {
+      border: 1px solid var(--border);
+      background: #faf8ff;
+      border-radius: 12px;
+      padding: 4px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--subtle);
+      font-size: 12px;
+    }
+    .sample-thumb img {
+      display: block;
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    details {
+      margin-top: 10px;
+      background: #faf8ff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .sample-empty {
+      margin-top: 10px;
+      color: var(--subtle);
+      line-height: 1.6;
+    }
+    pre {
+      margin: 10px 0 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #261f45;
+      color: #f7f4ff;
+      padding: 14px;
+      border-radius: 14px;
+      overflow: auto;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--subtle);
+    }
+    .markdown-table-wrap {
+      overflow-x: auto;
+    }
+    .markdown-table {
+      margin-top: 12px;
+    }
+    p, ul, ol {
+      line-height: 1.7;
+      color: var(--subtle);
+    }
+    h3, h4 {
+      margin-top: 1.2em;
+      color: var(--text);
+    }
+    @media (max-width: 720px) {
+      .page { padding: 14px; }
+      .hero, .panel { padding: 18px; border-radius: 18px; }
+      h1 { font-size: 28px; }
+      .sample-image-wrap { min-height: 180px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Component Detail</div>
+      <h1>gridfinity_tray_quarter_increment</h1>
+      <div class="name-long">Gridfinity: Tray Quarter Increment</div>
+      <p>Tray with whole, half and quarter bottom feet; quarter steps on one axis only.</p>
+      <div class="meta">
+        <div class="meta-chip"><strong>Category:</strong> Gridfinity</div>
+        <div class="meta-chip"><strong>Returns:</strong> Raw SCAD geometry component dict.</div>
+        <div class="meta-chip"><strong>Aliases:</strong> None</div>
+      </div>
+    </section>
+
+    
+
+    <section class="panel">
+      <h2>Variables</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>gridfinity_width</code></td><td>Width in Gridfinity units along X.</td><td>number</td><td><code>2</code></td></tr><tr><td><code>gridfinity_height</code></td><td>Height in Gridfinity units along Y.</td><td>number</td><td><code>1</code></td></tr><tr><td><code>gridfinity_depth</code></td><td>Depth in Gridfinity units along Z.</td><td>number</td><td><code>3</code></td></tr><tr><td><code>filled_in</code></td><td>Fill the cup into a solid block or fill the lip.</td><td>string</td><td><code>&quot;disabled&quot;</code></td></tr><tr><td><code>wall_thickness</code></td><td>Outer wall thickness in mm. Zero uses upstream auto sizing.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>headroom</code></td><td>Undersize the top by this amount for easier stacking.</td><td>number</td><td><code>0.8</code></td></tr><tr><td><code>lip_style</code></td><td>Cup lip style.</td><td>string</td><td><code>&quot;normal&quot;</code></td></tr><tr><td><code>vertical_chambers</code></td><td>Number of vertical chambers.</td><td>number</td><td><code>1</code></td></tr><tr><td><code>horizontal_chambers</code></td><td>Number of horizontal chambers.</td><td>number</td><td><code>1</code></td></tr><tr><td><code>enable_magnets</code></td><td>Enable base magnet holes.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>enable_screws</code></td><td>Enable base screw holes.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>magnet_size</code></td><td>Magnet diameter and height [d,h] in mm.</td><td>list</td><td><code>[6.5,2.4]</code></td></tr><tr><td><code>screw_size</code></td><td>Screw diameter and height [d,h] in mm.</td><td>list</td><td><code>[3,6]</code></td></tr><tr><td><code>floor_thickness</code></td><td>Minimum thickness above cutouts in the base.</td><td>number</td><td><code>0.7</code></td></tr><tr><td><code>efficient_floor</code></td><td>Efficient floor mode.</td><td>string</td><td><code>&quot;on&quot;</code></td></tr><tr><td><code>sub_pitch</code></td><td>Bottom pad subdivision pitch.</td><td>number</td><td><code>1</code></td></tr><tr><td><code>flat_base</code></td><td>Internal base style.</td><td>string</td><td><code>&quot;off&quot;</code></td></tr><tr><td><code>label_style</code></td><td>Label style.</td><td>string</td><td><code>&quot;disabled&quot;</code></td></tr><tr><td><code>label_position</code></td><td>Label position.</td><td>string</td><td><code>&quot;left&quot;</code></td></tr><tr><td><code>sliding_lid_enabled</code></td><td>Enable the sliding lid geometry.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>fingerslide</code></td><td>Finger slide style.</td><td>string</td><td><code>&quot;none&quot;</code></td></tr><tr><td><code>tapered_corner</code></td><td>Tapered corner style.</td><td>string</td><td><code>&quot;none&quot;</code></td></tr><tr><td><code>wallpattern_enabled</code></td><td>Enable wall cutout patterns.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>floorpattern_enabled</code></td><td>Enable floor patterns.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>wallcutout_vertical</code></td><td>Vertical wall cutout mode.</td><td>string</td><td><code>&quot;disabled&quot;</code></td></tr><tr><td><code>wallcutout_horizontal</code></td><td>Horizontal wall cutout mode.</td><td>string</td><td><code>&quot;disabled&quot;</code></td></tr><tr><td><code>extension_x_enabled</code></td><td>Extendable tab mode on X.</td><td>string</td><td><code>&quot;disabled&quot;</code></td></tr><tr><td><code>extension_y_enabled</code></td><td>Extendable tab mode on Y.</td><td>string</td><td><code>&quot;disabled&quot;</code></td></tr><tr><td><code>text_1</code></td><td>Add the bin size to the bottom text.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>text_2</code></td><td>Enable custom bottom text.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>text_2_text</code></td><td>Custom bottom text value.</td><td>string</td><td><code>&quot;Gridfinity Extended&quot;</code></td></tr><tr><td><code>pitch</code></td><td>Gridfinity pitch [x,y,z] in mm.</td><td>list</td><td><code>[42,42,7]</code></td></tr><tr><td><code>clearance</code></td><td>Clearance [x,y,z] in mm.</td><td>list</td><td><code>[0.5,0.5,0]</code></td></tr><tr><td><code>set_colour</code></td><td>Color handling mode for the upstream renderer.</td><td>string</td><td><code>&quot;enable&quot;</code></td></tr><tr><td><code>render_position</code></td><td>Upstream render position mode.</td><td>string</td><td><code>&quot;center&quot;</code></td></tr><tr><td><code>fa</code></td><td>OpenSCAD fragment angle.</td><td>number</td><td><code>6</code></td></tr><tr><td><code>fs</code></td><td>OpenSCAD fragment size.</td><td>number</td><td><code>0.4</code></td></tr><tr><td><code>fn</code></td><td>OpenSCAD fragment count override.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>random_seed</code></td><td>Random seed for procedural features.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>force_render</code></td><td>Force render on costly upstream components.</td><td>bool</td><td><code>True</code></td></tr><tr><td><code>pos</code></td><td>3-element [x,y,z] position.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td><code>rot</code></td><td>Rotation [rx,ry,rz] in degrees.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td><code>type</code></td><td>Geometry type: positive or negative.</td><td>string</td><td><code>&quot;positive&quot;</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel"><h2>More Details</h2><h1>Gridfinity tray with quarter increments</h1>
+<p>OOBB shape: <code>gridfinity_tray_quarter_increment</code>.</p>
+<p>Uses the existing Gridfinity Extended tray and pad profiles, with a separate bottom mask that splits fractional feet. The original <code>gridfinity_tray_raw</code> component and its vendored sources are unchanged.</p>
+<p>Width is X, height is Y, and depth is Z, all in Gridfinity units (42/42/7 mm). Both <code>gridfinity_width</code>/<code>gridfinity_height</code>/<code>gridfinity_depth</code> and the shorter <code>width</code>/<code>height</code>/<code>depth</code> aliases work. Position and rotation work as usual.</p>
+<div class="markdown-table-wrap"><table class="markdown-table"><thead><tr><th>Tray footprint</th><th>Bottom feet</th></tr></thead><tbody><tr><td>0.75 × 1</td><td>0.5 × 1 + 0.25 × 1</td></tr><tr><td>1 × 0.75</td><td>1 × 0.5 + 1 × 0.25</td></tr><tr><td>0.75 × 0.5</td><td>0.5 × 0.5 + 0.25 × 0.5</td></tr><tr><td>0.5 × 0.25</td><td>0.5 × 0.25</td></tr><tr><td>1.25 × 1</td><td>1 × 1 + 0.25 × 1</td></tr><tr><td>1.75 × 1</td><td>1 × 1 + 0.5 × 1 + 0.25 × 1</td></tr></tbody></table></div>
+<p>Only one axis may end in .25 or .75. The other must be a multiple of 0.5. Dimensions must be positive multiples of 0.25; unsupported dimensions raise an error. Whole-unit feet come first, then any half-unit and quarter-unit remainder. The <code>near</code> alignment places the remainder at the far end; <code>far</code> mirrors it. Center alignment is unsupported. <code>sub_pitch</code> and <code>flat_base</code> are retained in the common parameter signature but the component controls them to preserve this foot layout and the standard floor height.</p>
+<p>The interior now follows the bottom feet by default, like the default tray's efficient floor. Each whole/half/quarter foot has its own recess, with material left across the seams to keep the tray closed. The nominal 0.7 mm floor has an additional 0.01 mm boolean clearance. Use <code>efficient_floor="off"</code> to retain a flat interior floor.</p>
+<pre><code>oobb.append_full(
+    thing,
+    shape=&quot;gridfinity_tray_quarter_increment&quot;,
+    gridfinity_width=0.75,
+    gridfinity_height=1,
+    gridfinity_depth=18 / 7,
+    wall_thickness=1.25,
+    lip_style=&quot;none&quot;,
+)</code></pre>
+<p>Validation: <code>python -m pytest -q tests/test_gridfinity_tray_quarter_increment.py</code>. The geometry tests require OpenSCAD with the Manifold backend, trimesh and numpy. They check individual foot dimensions, one connected watertight mesh, closed foot bottoms, and the depth of the recesses, with both efficient and flat floors. Physical fit still requires a print check.</p></section>
+  </main>
+  <script>
+    document.querySelectorAll('.sample-thumb').forEach((button) => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const fullSrc = button.getAttribute('data-full');
+        const altText = button.getAttribute('data-alt');
+        const target = document.getElementById(targetId);
+        if (!target || !fullSrc) return;
+        target.src = fullSrc;
+        if (altText) {
+          target.alt = altText;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+$fn = 50;
+
+difference() {
+	union() {
+		translate(v = [0, 0, 0]) {
+			rotate(a = [0, 0, 0]) {
+				difference() {
+					union() {
+						hull() {
+							translate(v = [-17.0, 17.0, 0]) {
+								cylinder(h = 4, r = 5);
+							}
+							translate(v = [17.0, 17.0, 0]) {
+								cylinder(h = 4, r = 5);
+							}
+							translate(v = [-17.0, -17.0, 0]) {
+								cylinder(h = 4, r = 5);
+							}
+							translate(v = [17.0, -17.0, 0]) {
+								cylinder(h = 4, r = 5);
+							}
+						}
+					}
+					union() {
+						translate(v = [-1.54, 3.8100000000000005, -1]) {
+							cube(size = [3.08, 6.35, 6]);
+						}
+						translate(v = [-2.54, -12.74, 1.2000000000000002]) {
+							cube(size = [5.08, 16.55, 3.8]);
+						}
+						translate(v = [-5.08, -15.82, 1.2000000000000002]) {
+							cube(size = [10.16, 3.08, 3.8]);
+						}
+						translate(v = [-2.54, -35.82, 1.2000000000000002]) {
+							cube(size = [5.08, 20, 3.8]);
+						}
+					}
+				}
+			}
+		}
+	}
+	union();
+}

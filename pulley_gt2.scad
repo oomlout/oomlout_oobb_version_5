@@ -140,9 +140,13 @@ metric_nut_width_across_points = 2*((nut_width/2)/cos(30)); // This is needed fo
 
 #pulley_gt2(8,12);
 
-module pulley_gt2(number_of_teeth,depth){
-
-  {pulley("GT2 2mm" , tooth_spacing (2,0.254, number_of_teeth) , 0.764 , 1.494, number_of_teeth, depth); }
+module pulley_gt2(number_of_teeth,depth,tooth_width_clearance=0.2,tooth_depth_clearance=0){
+  assert(number_of_teeth >= 8 && floor(number_of_teeth) == number_of_teeth);
+  assert(depth > 0);
+  // Keep the inherited GT2 polygon. Callers supply bores; fit is per instance.
+  pulley("GT2 2mm",tooth_spacing(2,0.254,number_of_teeth),0.764,1.494,number_of_teeth,depth,
+    additional_tooth_width=tooth_width_clearance,
+    additional_tooth_depth=tooth_depth_clearance,motor_shaft=0);
 }
 //if ( profile == 13 ){pulley("GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
 //if ( profile == 14 ){pulley("GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
@@ -159,7 +163,7 @@ function tooth_spacing(tooth_pitch,pitch_line_offset, number_of_teeth)
 // ================================================================================
 // Main Module
 // ================================================================================
-module pulley( belt_type , pulley_OD , tooth_depth , tooth_width, number_of_teeth,toothed_part_length ){
+module pulley( belt_type , pulley_OD , tooth_depth , tooth_width, number_of_teeth,toothed_part_length, additional_tooth_width=0.2, additional_tooth_depth=0, motor_shaft=0.2 ){
   echo (str("Belt type = ",belt_type,"; Number of teeth = ",number_of_teeth,"; Pulley Outside Diameter = ",pulley_OD,"mm "));
   tooth_distance_from_centre = sqrt( pow(pulley_OD/2,2) - pow((tooth_width+additional_tooth_width)/2,2));
   tooth_width_scale = (tooth_width + additional_tooth_width ) / tooth_width;
@@ -193,7 +197,7 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width, number_of_teet
               translate([0,-tooth_distance_from_centre,base_height]){
                 scale ([ tooth_width_scale , tooth_depth_scale , 1 ]){
                 if ( profile == 1  ) { MXL();}
-                if ( profile == 2  ) { 40DP();}
+                if ( profile == 2  ) { profile_40DP();}
                 if ( profile == 3  ) { XL();}
                 if ( profile == 4  ) { H();}
                 if ( profile == 5  ) { T2_5();}
@@ -234,7 +238,7 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width, number_of_teet
     } // end of translation before union
    
     //hole for motor shaft
-    translate([0,0,-1]){
+    if (motor_shaft > 0) translate([0,0,-1]){
       cylinder(r=motor_shaft/2,h=base_height + idler_height + toothed_part_length + retainer_height + 2,$fn=motor_shaft*20);
     }
           
@@ -308,7 +312,7 @@ module MXL()
   linear_extrude(height=toothed_part_length+2) polygon([[-0.660421,-0.5],[-0.660421,0],[-0.621898,0.006033],[-0.587714,0.023037],[-0.560056,0.049424],[-0.541182,0.083609],[-0.417357,0.424392],[-0.398413,0.458752],[-0.370649,0.48514],[-0.336324,0.502074],[-0.297744,0.508035],[0.297744,0.508035],[0.336268,0.502074],[0.370452,0.48514],[0.39811,0.458752],[0.416983,0.424392],[0.540808,0.083609],[0.559752,0.049424],[0.587516,0.023037],[0.621841,0.006033],[0.660421,0],[0.660421,-0.5]]);
   }
 
-module 40DP()
+module profile_40DP()
   {
   linear_extrude(height=toothed_part_length+2) polygon([[-0.612775,-0.5],[-0.612775,0],[-0.574719,0.010187],[-0.546453,0.0381],[-0.355953,0.3683],[-0.327604,0.405408],[-0.291086,0.433388],[-0.248548,0.451049],[-0.202142,0.4572],[0.202494,0.4572],[0.248653,0.451049],[0.291042,0.433388],[0.327609,0.405408],[0.356306,0.3683],[0.546806,0.0381],[0.574499,0.010187],[0.612775,0],[0.612775,-0.5]]);
   }

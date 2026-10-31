@@ -21,7 +21,12 @@ def initialize_variables():
 
     bearing_d["606"] = {"id":6, "id_e":0, "od":17, "od_e":0.075, "depth":6, "depth_e":0, "inner_holes":0}
     bearing_d["676"] = {"id":6, "id_e":0, "od":10, "od_e":0.05, "depth":3, "depth_e":0, "inner_holes":0}
+    # Match the CSV bearing component's shielded MR106 (6 x 10 x 3 mm).
+    # The open MR106 is 2.5 mm wide; this entry follows Width ZZ/2RS.
+    bearing_d["MR106"] = {"id":6, "id_e":0, "od":10, "od_e":0.05, "depth":3, "depth_e":0, "inner_holes":0}
+    bearing_d["mr106"] = bearing_d["MR106"].copy()
     bearing_d["696"] = {"id":6, "id_e":0, "od":15, "od_e":0.05, "depth":5, "depth_e":0, "inner_holes":0}
+    bearing_d["6700"] = {"id":10, "id_e":0, "od":15, "od_e":0.2, "depth":4, "depth_e":0, "inner_holes":1}
     bearing_d["6701"] = {"id":12, "id_e":0, "od":18, "od_e":0.2, "depth":4, "depth_e":0, "inner_holes":1}
     bearing_d["6702"] = {"id":15, "id_e":0, "od":21, "od_e":0.2, "depth":4, "depth_e":0, "inner_holes":1}
     bearing_d["6703"] = {"id":17, "id_e":0, "od":23, "od_e":0.2, "depth":4, "depth_e":0, "inner_holes":1}
@@ -418,6 +423,11 @@ def initialize_variables():
     for x in range(1,50):
         vl[f"i2d54x{x}"] = [2.54*x, 2.54*x, (2.54*x)+ex]
     vl["electronics_socket_i2d54_depth"] = [8.5, 8.5, 8.5+ex]
+
+    # Timing pulley M4 countersunk additions.
+    vl["screw_countersunk_radius_m4"] = [4.0, 4.1, 4.7]
+    vl["screw_countersunk_height_m4"] = [2.3, 2.3, 2.5]
+    vl["screw_countersunk_depth_m4"] = [2.3, 2.3, 2.5]
 
     for var in vl:
         values = vl[var]

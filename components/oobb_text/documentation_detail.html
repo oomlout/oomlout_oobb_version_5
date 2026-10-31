@@ -299,6 +299,8 @@
   &quot;font&quot;: &quot;\&quot;Candara:Light\&quot;&quot;,
   &quot;halign&quot;: &quot;\&quot;center\&quot;&quot;,
   &quot;valign&quot;: &quot;\&quot;center\&quot;&quot;,
+  &quot;minkowski_radius&quot;: 0,
+  &quot;minkowski&quot;: 0,
   &quot;type&quot;: &quot;\&quot;positive\&quot;&quot;,
   &quot;m&quot;: &quot;\&quot;\&quot;&quot;
 }</code></pre></details><div><strong>rule:</strong> preserve the OOBB defaults for font and centered alignment.</div>
@@ -332,6 +334,8 @@
   &quot;font&quot;: &quot;\&quot;Candara:Light\&quot;&quot;,
   &quot;halign&quot;: &quot;\&quot;center\&quot;&quot;,
   &quot;valign&quot;: &quot;\&quot;center\&quot;&quot;,
+  &quot;minkowski_radius&quot;: 0,
+  &quot;minkowski&quot;: 0,
   &quot;type&quot;: &quot;\&quot;positive\&quot;&quot;,
   &quot;m&quot;: &quot;\&quot;\&quot;&quot;
 }</code></pre></details><div><strong>rule:</strong> convert `bearing_plate_set` to `bps` before rendering.</div>
@@ -351,7 +355,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>pos</code></td><td>3-element [x,y,z] position.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td><code>text</code></td><td>Text string to render.</td><td>string</td><td><code>&quot;&quot;</code></td></tr><tr><td><code>concate</code></td><td>Legacy abbreviation flag: keep the first character and each character after an underscore.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>height</code></td><td>Extrusion height in mm.  depth and h are accepted as aliases.</td><td>number</td><td><code>0.3</code></td></tr><tr><td><code>depth</code></td><td>Alias for height, with priority over h and height when supplied.</td><td>number</td><td><code>-</code></td></tr><tr><td><code>h</code></td><td>Alias for height, used when depth is not supplied.</td><td>number</td><td><code>-</code></td></tr><tr><td><code>size</code></td><td>OpenSCAD text size.</td><td>number</td><td><code>7</code></td></tr><tr><td><code>font</code></td><td>OpenSCAD font name.</td><td>string</td><td><code>&quot;Candara:Light&quot;</code></td></tr><tr><td><code>halign</code></td><td>Horizontal alignment: left, center, or right.</td><td>string</td><td><code>&quot;center&quot;</code></td></tr><tr><td><code>valign</code></td><td>Vertical alignment: top, center, baseline, or bottom.</td><td>string</td><td><code>&quot;center&quot;</code></td></tr><tr><td><code>type</code></td><td>Geometry type/modifier context, usually positive or negative.</td><td>string</td><td><code>&quot;positive&quot;</code></td></tr><tr><td><code>m</code></td><td>OpenSCAD modifier prefix, e.g. #, %, *.</td><td>string</td><td><code>&quot;&quot;</code></td></tr>
+          <tr><td><code>pos</code></td><td>3-element [x,y,z] position.</td><td>list</td><td><code>[0,0,0]</code></td></tr><tr><td><code>text</code></td><td>Text string to render.</td><td>string</td><td><code>&quot;&quot;</code></td></tr><tr><td><code>concate</code></td><td>Legacy abbreviation flag: keep the first character and each character after an underscore.</td><td>bool</td><td><code>False</code></td></tr><tr><td><code>height</code></td><td>Extrusion height in mm.  depth and h are accepted as aliases.</td><td>number</td><td><code>0.3</code></td></tr><tr><td><code>depth</code></td><td>Alias for height, with priority over h and height when supplied.</td><td>number</td><td><code>-</code></td></tr><tr><td><code>h</code></td><td>Alias for height, used when depth is not supplied.</td><td>number</td><td><code>-</code></td></tr><tr><td><code>size</code></td><td>OpenSCAD text size.</td><td>number</td><td><code>7</code></td></tr><tr><td><code>font</code></td><td>OpenSCAD font name.</td><td>string</td><td><code>&quot;Candara:Light&quot;</code></td></tr><tr><td><code>halign</code></td><td>Horizontal alignment: left, center, or right.</td><td>string</td><td><code>&quot;center&quot;</code></td></tr><tr><td><code>valign</code></td><td>Vertical alignment: top, center, baseline, or bottom.</td><td>string</td><td><code>&quot;center&quot;</code></td></tr><tr><td><code>minkowski_radius</code></td><td>Radius in mm of a circular 2D Minkowski expansion applied before extrusion. Zero keeps the legacy plain-text path.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>minkowski</code></td><td>Legacy-friendly alias for minkowski_radius.</td><td>number</td><td><code>0</code></td></tr><tr><td><code>type</code></td><td>Geometry type/modifier context, usually positive or negative.</td><td>string</td><td><code>&quot;positive&quot;</code></td></tr><tr><td><code>m</code></td><td>OpenSCAD modifier prefix, e.g. #, %, *.</td><td>string</td><td><code>&quot;&quot;</code></td></tr>
         </tbody>
       </table>
     </section>
