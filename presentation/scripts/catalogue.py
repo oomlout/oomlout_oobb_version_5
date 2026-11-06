@@ -8,7 +8,6 @@ import re
 import shutil
 import subprocess
 import sys
-from urllib.parse import quote
 
 import yaml
 import trimesh
@@ -128,16 +127,23 @@ def record(folder, root):
 
 def build_part(r, root, cache, no_render):
     folder, d, variants, config = r['folder'], r['data'], r['variants'], r['config']
-    images = []
     for v in variants:
         if not (cache / v['key'] / 'top.png').exists() or not (cache / v['key'] / 'angle.png').exists():
             if no_render and (folder / v['image']).exists():
-                continue
+                old_path = folder / 'presentation/manifest.json'
+                old = json.loads(old_path.read_text(encoding='utf-8')) if old_path.exists() else {}
+                if any(p.get('key') == v['key'] and p.get('source') == v['source'] for p in old.get('variants', [])):
+                    shutil.copyfile(folder / v['image'], folder / (Path(v['source']).stem + '_presentation.png'))
+                    continue
             raise FileNotFoundError(f"Render missing for {folder.name}/{v['source']}; run without --readme-only")
-        sheet(cache / v['key'], folder / v['image'], v['label'], v['dimensions_mm'])
+        sheet_key = hashlib.sha256((sha(Path(__file__)) + v['label'] + str(v['dimensions_mm'])).encode()).hexdigest()[:16]
+        cached_sheet = cache / v['key'] / ('sheet-' + sheet_key + '.png')
+        if not cached_sheet.exists():
+            sheet(cache / v['key'], cached_sheet, v['label'], v['dimensions_mm'])
+        (folder / v['image']).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(cached_sheet, folder / v['image'])
         # Canonical presentation image plus the required copy beside its STL.
         shutil.copyfile(folder / v['image'], folder / (Path(v['source']).stem + '_presentation.png'))
-        images.append(v['image'])
     label = r['title']
     code = str(d.get('md5_6_alpha') or '—')
     board_dimensions = [d.get('breakout_pcb_width'), d.get('breakout_pcb_height')]
@@ -151,11 +157,12 @@ def build_part(r, root, cache, no_render):
         body += 'Catalogue reference. No printable mesh is available.\n\n'
     body += '## Parts\n\n'
     if variants:
-        body += 'Choose one plate variant. Quantities are for one board.\n\n'
+        body += 'One board and one plate. Choose a plate variant.\n\n'
     body += '| Part | Type | Specification | Qty | MD5 alpha |\n| --- | --- | --- | ---: | --- |\n'
     for v in variants:
         size = ' × '.join(f'{n:g}' for n in v['dimensions_mm'])
-        body += f"| [{v['label']}]({v['source']}) | Printed | {size} mm | 1 alternative | — |\n"
+        short_label = 'Default plate' if v['source'] == '3dpr.stl' else 'OOBB wire-holder plate'
+        body += f"| [{short_label}]({v['source']}) | Printed | {size} mm | 1 | — |\n"
     body += f'| [{cell(label)}](working.yaml) | Hardware | {cell(dims + ("; " + spec if spec else ""))} | 1 | [{code}](working.yaml) |\n'
     for part in config.get('hardware', []):
         body += f"| [{cell(part['name'])}]({part['url']}) | Hardware | {cell(part['specification'])} | {part['quantity']} | "
@@ -193,7 +200,9 @@ def build_index(records, root):
     example = next((r for r in records if r['data'].get('md5_6_alpha') == '1owcj'), records[0])
     relative = example['folder'].relative_to(root).as_posix()
     body = '# Electronic breakout mounting plates\n\n' + NOTICE + '\n\n'
-    body += f"![AI-generated CAD render of the Raspberry Pi Pico mounting plate]({relative}/{example['variants'][0]['image']})\n\n" if example['variants'] else ''
+    if example['variants']:
+        hero = example['variants'][-1]
+        body += f"![AI-generated CAD render: {cell(example['title'])}, {hero['label']}]({relative}/{hero['image']})\n\n"
     body += f'{len(records)} catalogue entries. Open a part for plate renders, STL downloads and linked parts.\n\n'
     body += f'[Worked example: {example["title"]}]({relative}) · [Rebuild instructions](presentation/README.md)\n\n'
     groups = {}

@@ -78,6 +78,11 @@ class CatalogueTests(unittest.TestCase):
         self.assertTrue((folder / '3dpr_presentation.png').exists())
         manifest = json.loads((folder / 'presentation/manifest.json').read_text())
         self.assertEqual(manifest['variants'][0]['dimensions_mm'], [59, 89, 3])
+        # An existing PNG must not hide a changed source when the render cache is absent.
+        trimesh.creation.box((60, 89, 3)).export(folder / '3dpr.stl')
+        stale = self.run_tool(folder, '--readme-only')
+        self.assertNotEqual(stale.returncode, 0)
+        self.assertIn('Render missing', stale.stderr)
 
 
 if __name__ == '__main__':

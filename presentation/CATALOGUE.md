@@ -86,3 +86,13 @@ Each reviewed hardware row accepts `name`, `specification`, `quantity`, `url` an
 [Pico mounting plates](https://github.com/oomlout/oomp_electronic_breakout_version_5/tree/main/parts/electronic_breakout_microcontroller_rp2040_pico_without_headers_21_mm_width_51_mm_height_40_pin_raspberry_pi_pico) use board code `1owcj`. The legacy record has a 21 × 51 mm board envelope but no board mounting-hole specification. Its default STL measures 59 × 88.98 × 3 mm. The presentation lists the board and both alternative prints; no board screws or completed assembly are implied.
 
 Keep source-review evidence and browser review results in the downstream `presentation/README.md`. Before committing, stage only owned generated files; other catalogue work may be in progress.
+
+## Maintenance
+
+Run the source and link audit after a catalogue build:
+
+```powershell
+python C:\gh\oomlout_oobb_version_5\presentation\scripts\verify_catalogue.py C:\gh\oomp_electronic_breakout_version_5
+```
+
+Run `python presentation/scripts/test_catalogue.py` from the base repository after editing the generator. The regression cases cover manual-text preservation, malformed markers, tracked-only discovery, missing CAD, missing or stale renders, source preservation and paths containing spaces. A README-only rebuild will not accept an existing PNG whose manifest identifies a different source mesh or renderer.
