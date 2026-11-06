@@ -17,7 +17,7 @@ def digest(path):
 def verify(root):
     entries = json.loads((root / 'presentation/catalogue.json').read_text(encoding='utf-8'))
     pages = [root / 'README.md']
-    meshes, image_count = set(), 0
+    meshes, image_count, galleries = set(), 0, 0
     for entry in entries:
         folder = root / entry['folder']
         data = yaml.safe_load((folder / 'working.yaml').read_text(encoding='utf-8'))
@@ -36,6 +36,11 @@ def verify(root):
             assert digest(copy) == digest(image), copy
             meshes.add(variant['sha256'])
             image_count += 1
+        for name in manifest.get('galleries', {}).values():
+            with Image.open(folder / name) as im:
+                assert im.size == (1600, 760), name
+                im.verify()
+            galleries += 1
         pages.append(folder / 'README.md')
     for page in pages:
         content = page.read_text(encoding='utf-8')
@@ -47,7 +52,7 @@ def verify(root):
             if not parsed.scheme and parsed.path:
                 path = page.parent / unquote(parsed.path)
                 assert path.exists(), f'{page}: missing link {target}'
-    return dict(records=len(entries), readmes=len(pages), sheets=image_count, unique_meshes=len(meshes),
+    return dict(records=len(entries), readmes=len(pages), sheets=image_count, galleries=galleries, unique_meshes=len(meshes),
                 result='Source hashes, alpha codes, images and relative links match.')
 
 

@@ -114,15 +114,37 @@ def record(folder, root):
     config_path = folder / 'presentation/config.json'
     config = json.loads(config_path.read_text(encoding='utf-8')) if config_path.exists() else {}
     variants = []
-    for source, label in VARIANTS:
+    variant_file = folder / 'mounting_variants.json'
+    definitions = json.loads(variant_file.read_text(encoding='utf-8'))['variants'] if variant_file.exists() else [dict(source=s,label=l) for s,l in VARIANTS]
+    for definition in definitions:
+        source, label = definition['source'], definition['label']
         path = folder / source
         if path.exists():
             mesh = trimesh.load_mesh(path)
             dimensions = [round(float(v), 3) for v in mesh.extents]
             key = hashlib.sha256((sha(path) + sha(HERE / 'render_catalogue.py')).encode()).hexdigest()[:24]
-            variants.append(dict(source=source, label=label, sha256=sha(path), key=key,
+            variants.append(dict(definition, sha256=sha(path), key=key,
                                  dimensions_mm=dimensions, image=f'presentation/images/{path.stem}.png'))
+        elif variant_file.exists():
+            raise FileNotFoundError(f'Missing declared variant: {path}')
     return dict(folder=folder, data=d, config=config, title=config.get('title', title(d)), variants=variants)
+
+
+def gallery(folder, variants, family):
+    canvas = Image.new('RGB', (1600, 760), '#f6f4ef')
+    draw = ImageDraw.Draw(canvas)
+    draw.text((48, 32), family + ' mounting plates', fill='#243a3b', font=font(38))
+    names = {'full_wrap':'Full wrap', 'short_sides':'Two short sides', 'long_side':'One long side'}
+    for i, v in enumerate(variants):
+        im = Image.open(folder / v['image']).crop((40,105,760,825)).resize((490,490),Image.Resampling.LANCZOS)
+        x=30+i*530
+        canvas.paste(im,(x,104))
+        draw.text((x+12,610), names[v['layout']], fill='#243a3b', font=font(29))
+        draw.text((x+12,657), ' × '.join(f'{n:g}' for n in v['dimensions_mm'])+' mm',fill='#3b4b4b',font=font(24))
+    draw.text((42,716),'AI-generated CAD illustration. Errors possible.',fill='#616966',font=font(21))
+    path='presentation/images/'+family.lower()+'-layouts.png'
+    canvas.save(folder/path,optimize=True)
+    return path
 
 
 def build_part(r, root, cache, no_render):
@@ -144,6 +166,11 @@ def build_part(r, root, cache, no_render):
         shutil.copyfile(cached_sheet, folder / v['image'])
         # Canonical presentation image plus the required copy beside its STL.
         shutil.copyfile(folder / v['image'], folder / (Path(v['source']).stem + '_presentation.png'))
+    galleries = {}
+    for family in ('Standard', 'Wire-holder'):
+        group = [v for v in variants if v.get('family') == family]
+        if len(group) == 3:
+            galleries[family] = gallery(folder, group, family)
     label = r['title']
     code = str(d.get('md5_6_alpha') or '—')
     board_dimensions = [d.get('breakout_pcb_width'), d.get('breakout_pcb_height')]
@@ -151,8 +178,13 @@ def build_part(r, root, cache, no_render):
     spec = plain(d.get('type_4'))
     body = f'# {label}\n\n{NOTICE}\n\n'
     if variants:
-        body += f"![AI-generated CAD render of {cell(label)} default mounting plate]({variants[0]['image']})\n\n"
+        hero = galleries.get('Standard', variants[0]['image'])
+        body += f"![AI-generated CAD renders of {cell(label)} mounting plates]({hero})\n\n"
         body += 'Mounting plates for the listed board. Board not shown.\n\n'
+        if galleries and all(v.get('geometry', {}).get('m6_hole_diameter_mm') == 6.5 and
+                             v.get('geometry', {}).get('head_clear_diameter_mm') == 13
+                             for v in variants):
+            body += 'M6: Ø6.5 mm holes, Ø13 mm head/nut clearance, 15 mm pitch.\n\n'
     else:
         body += 'Catalogue reference. No printable mesh is available.\n\n'
     body += '## Parts\n\n'
@@ -161,13 +193,15 @@ def build_part(r, root, cache, no_render):
     body += '| Part | Type | Specification | Qty | MD5 alpha |\n| --- | --- | --- | ---: | --- |\n'
     for v in variants:
         size = ' × '.join(f'{n:g}' for n in v['dimensions_mm'])
-        short_label = 'Default plate' if v['source'] == '3dpr.stl' else 'OOBB wire-holder plate'
+        short_label = v['label'] if v.get('family') else ('Default plate' if v['source'] == '3dpr.stl' else 'OOBB wire-holder plate')
         body += f"| [{short_label}]({v['source']}) | Printed | {size} mm | 1 | — |\n"
     body += f'| [{cell(label)}](working.yaml) | Hardware | {cell(dims + ("; " + spec if spec else ""))} | 1 | [{code}](working.yaml) |\n'
     for part in config.get('hardware', []):
         body += f"| [{cell(part['name'])}]({part['url']}) | Hardware | {cell(part['specification'])} | {part['quantity']} | "
         body += f"[{part['md5_6_alpha']}]({part['url']}) |\n" if part.get('md5_6_alpha') else '— |\n'
-    if len(variants) > 1:
+    if 'Wire-holder' in galleries:
+        body += f"\n## Wire-holder plates\n\n![AI-generated CAD renders of wire-holder plate layouts]({galleries['Wire-holder']})\n"
+    elif len(variants) > 1 and not galleries:
         body += f"\n## OOBB variant\n\n![AI-generated CAD render of the OOBB wire-holder mounting plate]({variants[1]['image']})\n"
     if config.get('installation'):
         body += '\n## Installation\n\n' + '\n'.join(f'{i}. {step}' for i, step in enumerate(config['installation'], 1)) + '\n'
@@ -180,15 +214,15 @@ def build_part(r, root, cache, no_render):
     markdown(folder / 'README.md', body)
     manifest = dict(schema=1, id=d['id'], title=label, md5_6_alpha=d.get('md5_6_alpha'),
                     source='working.yaml', source_sha256=sha(folder / 'working.yaml'),
-                    board_dimensions_mm=board_dimensions, variants=variants,
+                    board_dimensions_mm=board_dimensions, variants=variants, galleries=galleries,
                     notice=NOTICE, generator='oomlout_oobb_version_5/presentation/scripts/catalogue.py')
     dump(folder / 'presentation/manifest.json', manifest)
     notes = ('# Source notes\n\n' + NOTICE + '\n\n'
              'The STL meshes are mounting plates. They are rendered without changing their geometry. '
              'Overall sizes are measured from mesh bounds in millimetres. Board sizes and MD5 alpha '
-             'codes come from working.yaml. The board record code does not identify either printed plate.\n\n'
+             'codes come from working.yaml. The board record code does not identify a printed plate.\n\n'
              'No electronic board, wire holder or unspecified fastener is added to the scene. '
-             'The two printed variants are alternatives. Board fastening, electrical wiring, '
+             'The printed variants are alternatives. Board fastening, electrical wiring, '
              'print settings and physical fit are not inferred from a render.\n\n'
              'Full source metadata remains in working.yaml; the README is the shortened public pass. '
              'Use presentation/config.json for reviewed titles, hardware, installation actions and source links. '
@@ -202,7 +236,9 @@ def build_index(records, root):
     body = '# Electronic breakout mounting plates\n\n' + NOTICE + '\n\n'
     if example['variants']:
         hero = example['variants'][-1]
-        body += f"![AI-generated CAD render: {cell(example['title'])}, {hero['label']}]({relative}/{hero['image']})\n\n"
+        has_standard_gallery = len([v for v in example['variants'] if v.get('family') == 'Standard']) == 3
+        hero_image = 'presentation/images/standard-layouts.png' if has_standard_gallery else hero['image']
+        body += f"![AI-generated CAD renders: {cell(example['title'])} mounting plates]({relative}/{hero_image})\n\n"
     body += f'{len(records)} catalogue entries. Open a part for plate renders, STL downloads and linked parts.\n\n'
     body += f'[Worked example: {example["title"]}]({relative}) · [Rebuild instructions](presentation/README.md)\n\n'
     groups = {}

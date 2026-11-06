@@ -29,7 +29,7 @@ def render(job):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
     scene.render.engine = 'CYCLES'
-    scene.cycles.samples = 32
+    scene.cycles.samples = 24
     scene.cycles.use_denoising = True
     prefs = bpy.context.preferences.addons['cycles'].preferences
     try:
@@ -64,9 +64,7 @@ def render(job):
     size = hi - lo
     part.data.materials.append(material('Satin teal PLA', (0, 177, 183)))
     # No remeshing, bevel modifier or smoothing of real holes and sharp edges.
-    bpy.ops.mesh.primitive_plane_add(size=max(size) * 200, location=(0, 0, -.00015))
-    bpy.context.object.is_shadow_catcher = True
-    bpy.context.object.data.materials.append(material('Warm white', (246, 244, 239), .8))
+    # An open background keeps through-holes legible; floor shadows can resemble hardware.
     span = max(size)
     for name, pos, energy, radius in [
         ('Key', (-2, -3, 5), 22, 4), ('Fill', (3, -1, 3), 12, 3),

@@ -59,10 +59,33 @@ At the repository root, `--all` creates a grouped README index and `presentation
 1. Read `working.yaml` and inspect the source CAD. These two STL filenames identify mounting plates in this catalogue, not electronic boards. Add another explicit adapter before applying this script to a different file convention.
 2. Render each available variant with an orthographic angled view and a top view. Use actual geometry, satin teal PLA, soft studio lighting and a warm background. Do not add a board, fastener or wire holder without its reviewed model and position.
 3. Label the measured mesh bounding size in millimetres. Keep board dimensions separate. A dimensioned envelope is not a hole-spacing drawing. Do not infer mounting compatibility from the envelope.
-4. Use one parts table with linked names, quantities and MD5 alpha codes. The board's code identifies the board record, not its plate. The two plates are alternatives. Link local STLs and catalogue metadata using relative paths. Do not invent a URL shortener; a verified code is compact link text.
+4. Use one parts table with linked names, quantities and MD5 alpha codes. The board's code identifies the board record, not its plate. The printed variants are alternatives. Link local STLs and catalogue metadata using relative paths. Do not invent a URL shortener; a verified code is compact link text.
 5. Keep full source notes, then shorten the public copy. Use plain headings and the brief AI notice. Add Installation actions only when supported by reviewed source information. Omit generic testing sections. If no mesh exists, publish a reference page without a simulated plate.
 6. Preserve user text outside the generated README markers. Store overrides in `presentation/config.json`. A malformed marker pair stops the build.
 7. Inspect the example at GitHub reading width before running the whole catalogue. After an authorised sync, open the live README and example in a browser. Check wrapping, source links, image loading and small-screen layout; refine and sync again.
+
+## Multiple layouts
+
+A part-level `mounting_variants.json` replaces the default two-file discovery:
+
+```json
+{
+  "schema": 1,
+  "variants": [
+    {"source": "3dpr.stl", "label": "Standard — Full wrap", "family": "Standard", "layout": "full_wrap"},
+    {"source": "3dpr_short_sides.stl", "label": "Standard — Two short sides", "family": "Standard", "layout": "short_sides"},
+    {"source": "3dpr_long_side.stl", "label": "Standard — One long side", "family": "Standard", "layout": "long_side"}
+  ]
+}
+```
+
+Use the same three layout identifiers for the `Wire-holder` family, with `working_oobb` filename stems. Every declared STL must exist. Optional `geometry` stores the CAD planner's dimensions, clearances and hole centres. The renderer does not modify CAD or establish mechanical clearance.
+
+Each complete family receives a 1600 × 760 comparison image at `presentation/images/standard-layouts.png` or `wire-holder-layouts.png`. Every alternative also receives the usual 1600 × 1000 angled/top sheet and adjacent `_presentation.png`. Comparison views fit individually and state their measured size. The public page uses the comparisons and lists every STL in one parts table.
+
+Use an open warm background for perforated plates. A floor shadow seen through a hole can look like inserted hardware. Keep source geometry, material and lighting consistent; do not simulate screw heads or nuts. The worker hash invalidates images after render changes.
+
+The downstream [M6 layout rules and CAD builder](https://github.com/oomlout/oomp_electronic_breakout_version_5/blob/main/presentation/M6_LAYOUTS.md) define Ø6.5 mm bores, Ø13 mm head/nut space, edge orientation and compact trimming. Run the CAD builder before `oobb-present`; do not repopulate unrelated catalogue records. The base batch remains callable from any part folder once the base repository is on PATH.
 
 ## Overrides
 

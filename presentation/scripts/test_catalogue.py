@@ -61,6 +61,34 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue((local / 'README.md').exists())
 
+    def test_layout_manifest_requires_declared_meshes_and_builds_gallery(self):
+        folder = self.part('layouts', mesh=True)
+        variants = [dict(source=stem+'.stl', family='Standard', layout=layout, label=label)
+                    for stem, layout, label in [('3dpr', 'full_wrap', 'Full wrap'),
+                                               ('3dpr_short_sides', 'short_sides', 'Two short sides'),
+                                               ('3dpr_long_side', 'long_side', 'One long side')]]
+        (folder/'mounting_variants.json').write_text(json.dumps(dict(schema=1, variants=variants)))
+        with self.assertRaises(FileNotFoundError):
+            catalogue.record(folder, self.root)
+        for v in variants[1:]:
+            (folder/v['source']).write_bytes((folder/'3dpr.stl').read_bytes())
+        record = catalogue.record(folder, self.root)
+        for variant in record['variants']:
+            cache = self.root/'presentation/.cache'/variant['key']
+            cache.mkdir(parents=True, exist_ok=True)
+            for view in ('top', 'angle'):
+                Image.new('RGBA', (32,32), (0,177,183,255)).save(cache/(view+'.png'))
+        result = self.run_tool(folder, '--readme-only')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        manifest = json.loads((folder/'presentation/manifest.json').read_text())
+        self.assertEqual(len(manifest['variants']), 3)
+        with Image.open(folder/manifest['galleries']['Standard']) as im:
+            self.assertEqual(im.size, (1600,760))
+        readme = (folder/'README.md').read_text(encoding='utf-8')
+        for v in variants:
+            self.assertIn(']('+v['source']+')', readme)
+        self.assertNotIn('head/nut clearance', readme)  # No clearance evidence supplied.
+
     def test_missing_render_fails_then_cached_build_keeps_source(self):
         folder = self.part('mesh', mesh=True)
         digest = catalogue.sha(folder / '3dpr.stl')
