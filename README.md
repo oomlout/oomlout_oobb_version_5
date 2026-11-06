@@ -2,6 +2,10 @@
 
 Working repository for OOBB part and shape generation.
 
+For presentation colours, assembly views and exploded diagrams, see the [OOBB render style guide](RENDER_STYLE.md).
+
+For catalogue renders and linked parts tables, add this folder to PATH and run `oobb-present` from a breakout part folder, or `oobb-present --all` from its repository root. See the [catalogue presentation workflow](presentation/CATALOGUE.md).
+
 This repo appears to be the workshop version of the OOBB generator rather than a packaged end-user release. It contains the Python/OpenSCAD tooling, component definitions, dimensional data, generated previews, and migration scaffolding used to build and document OOBB geometry.
 
 ## What This Repo Is For

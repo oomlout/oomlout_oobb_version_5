@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "revision": "3",
+  "date": "2026-11-06",
+  "title": "KALLAX filament holders",
+  "readme_filename": "readme.md",
+  "quantity_columns": [
+    "Per cell",
+    "Two cells"
+  ],
+  "printed_parts": [
+    {
+      "ref": "P1",
+      "name": "Short side frame",
+      "quantity": 4,
+      "spec": "149 x 44 x 9 mm",
+      "part": "side_10_width_3_height_9_mm_depth_short_extra",
+      "stl": "parts/project_github_oomlout_three_d_printing_filament_storage_kallax_side_10_width_3_height_9_mm_depth_short_extra/3dpr.stl",
+      "verification": "Existing source STL; physical fit untested",
+      "md5_6_alpha": null,
+      "code_verified": "No md5_6_alpha field in the local catalogue record; direct STL link retained"
+    },
+    {
+      "ref": "P2",
+      "name": "Tall side frame",
+      "quantity": 4,
+      "spec": "149 x 119 x 9 mm",
+      "part": "side_10_width_8_height_9_mm_depth_short_extra",
+      "stl": "parts/project_github_oomlout_three_d_printing_filament_storage_kallax_side_10_width_8_height_9_mm_depth_short_extra/3dpr.stl",
+      "verification": "Existing source STL; physical fit untested",
+      "md5_6_alpha": null,
+      "code_verified": "No md5_6_alpha field in the local catalogue record; direct STL link retained"
+    },
+    {
+      "ref": "P3",
+      "name": "Long sleeve",
+      "quantity": 8,
+      "spec": "99.67 mm long; one-end hex pocket",
+      "part": "spacer_1_width_1_height_99_67_mm_depth_one_end_nut_extra",
+      "stl": "parts/project_github_oomlout_three_d_printing_filament_storage_kallax_spacer_1_width_1_height_99_67_mm_depth_one_end_nut_extra/3dpr.stl",
+      "verification": "Existing source STL; physical fit untested",
+      "md5_6_alpha": null,
+      "code_verified": "No md5_6_alpha field in the local catalogue record; direct STL link retained"
+    },
+    {
+      "ref": "P4",
+      "name": "Centre sleeve",
+      "quantity": 4,
+      "spec": "67.67 mm long; one-end hex pocket",
+      "part": "spacer_1_width_1_height_67_67_mm_depth_one_end_nut_extra",
+      "stl": "parts/project_github_oomlout_three_d_printing_filament_storage_kallax_spacer_1_width_1_height_67_67_mm_depth_one_end_nut_extra/3dpr.stl",
+      "verification": "Existing source STL; physical fit untested",
+      "md5_6_alpha": null,
+      "code_verified": "No md5_6_alpha field in the local catalogue record; direct STL link retained"
+    },
+    {
+      "ref": "P5",
+      "name": "Coupling housing",
+      "quantity": 4,
+      "spec": "18 mm long; full hex bore",
+      "part": "spacer_1_width_1_height_18_mm_depth_full_nut_extra",
+      "stl": "parts/project_github_oomlout_three_d_printing_filament_storage_kallax_spacer_1_width_1_height_18_mm_depth_full_nut_extra/3dpr.stl",
+      "verification": "Existing source STL; physical fit untested",
+      "md5_6_alpha": null,
+      "code_verified": "No md5_6_alpha field in the local catalogue record; direct STL link retained"
+    },
+    {
+      "ref": "P6",
+      "name": "Retaining nut cover",
+      "quantity": 4,
+      "spec": "7 mm long; full hex bore",
+      "part": "spacer_1_width_1_height_7_mm_depth_full_nut_extra",
+      "stl": "parts/project_github_oomlout_three_d_printing_filament_storage_kallax_spacer_1_width_1_height_7_mm_depth_full_nut_extra/3dpr.stl",
+      "verification": "Existing source STL; physical fit untested",
+      "md5_6_alpha": null,
+      "code_verified": "No md5_6_alpha field in the local catalogue record; direct STL link retained"
+    },
+    {
+      "ref": "P7",
+      "name": "Slotted cover",
+      "quantity": 4,
+      "spec": "7 mm long; open slot",
+      "part": "spacer_1_width_1_height_7_mm_depth_slotted_extra",
+      "stl": "parts/project_github_oomlout_three_d_printing_filament_storage_kallax_spacer_1_width_1_height_7_mm_depth_slotted_extra/3dpr.stl",
+      "verification": "Existing source STL; physical fit untested",
+      "md5_6_alpha": null,
+      "code_verified": "No md5_6_alpha field in the local catalogue record; direct STL link retained"
+    }
+  ],
+  "hardware": [
+    {
+      "ref": "H1",
+      "name": "M6 threaded rod",
+      "quantity": 4,
+      "spec": "300 mm cut length; M6 x 1.0",
+      "url": "https://www.ecfibreglasssupplies.co.uk/grade-48-zinc-threaded-rod-m6-x-300-mm",
+      "oomp_id": null,
+      "verification": "Supplier product verified 2026-11-06: M6 x 300 mm fully threaded zinc-plated steel; no verified OOMP ID"
+    },
+    {
+      "ref": "H2",
+      "name": "M6 hex nut",
+      "quantity": 8,
+      "spec": "10 mm AF; 5 mm nominal thickness",
+      "url": "https://github.com/oomlout/oomlout_oomp_version_1_messy/tree/main/parts/hardware_nut_m6",
+      "oomp_id": "hardware_nut_m6",
+      "verification": "OOMP identity verified 2026-11-06; actual thickness to be checked",
+      "md5_6_alpha": "hcps",
+      "code_verified": "Public OOMP record inspected 2026-11-06"
+    },
+    {
+      "ref": "H3",
+      "name": "M6 coupling nut",
+      "quantity": 4,
+      "spec": "DIN 6334; 18 mm long; 10 mm AF",
+      "url": "https://github.com/oomlout/oomlout_oomp_version_1_messy/tree/main/parts/hardware_nut_m6_coupling",
+      "oomp_id": "hardware_nut_m6_coupling",
+      "verification": "OOMP identity verified 2026-11-06; 18 mm dimensions from Accu",
+      "md5_6_alpha": "1qsz8",
+      "code_verified": "Public OOMP record inspected 2026-11-06"
+    },
+    {
+      "ref": "H4",
+      "name": "M6 x 25 hex-head bolt, fully threaded",
+      "quantity": 4,
+      "spec": "25 mm under head; M6 x 1.0; DIN 933",
+      "url": "https://github.com/oomlout/oomp_hardware_bolt_version_5/tree/main/parts/hardware_set_screw_m6_25_mm_length",
+      "oomp_id": "hardware_set_screw_m6_25_mm_length",
+      "verification": "OOMP full-thread hex-head identity verified 2026-11-06; no grub screw",
+      "md5_6_alpha": "9dg7e",
+      "code_verified": "Public OOMP record inspected 2026-11-06"
+    }
+  ],
+  "geometry": {
+    "opening_nominal_mm": 335,
+    "span_mm": 335.01,
+    "rod_mm": 300,
+    "bolt_mm": 25,
+    "coupler_mm": 18,
+    "clip_mm": 7,
+    "nut_cover_mm": 7,
+    "rod_engagement_mm": 5.99,
+    "bolt_engagement_mm": 7,
+    "tip_gap_mm": 5.01,
+    "printed_count": 32,
+    "axial_stack": [
+      [
+        "Frame 1",
+        0,
+        9
+      ],
+      [
+        "Long sleeve",
+        9,
+        108.67
+      ],
+      [
+        "Frame 2",
+        108.67,
+        117.67
+      ],
+      [
+        "Centre sleeve",
+        117.67,
+        185.34
+      ],
+      [
+        "Frame 3",
+        185.34,
+        194.34
+      ],
+      [
+        "Long sleeve",
+        194.34,
+        294.01
+      ],
+      [
+        "Coupling housing",
+        294.01,
+        312.01
+      ],
+      [
+        "Slotted cover",
+        312.01,
+        319.01
+      ],
+      [
+        "Retaining nut cover",
+        319.01,
+        326.01
+      ],
+      [
+        "Frame 4",
+        326.01,
+        335.01
+      ]
+    ],
+    "hardware_intervals": {
+      "fixed_nut": [
+        0,
+        5
+      ],
+      "rod": [
+        0,
+        300
+      ],
+      "coupling": [
+        294.01,
+        312.01
+      ],
+      "retaining_nut": [
+        321.01,
+        326.01
+      ],
+      "bolt_shank": [
+        305.01,
+        330.01
+      ],
+      "bolt_head": [
+        330.01,
+        334.01
+      ]
+    }
+  },
+  "readme": {
+    "summary": "Two independent holders per KALLAX cell: five front reels and five raised rear refills. Four side frames and two M6 rails per holder.",
+    "validation_status": "",
+    "hero_alt": "AI-generated CAD render: five front reels and five raised rear refills in one KALLAX cell",
+    "hero_image": "cell.png",
+    "configuration": "Front: 4 short frames. Rear: 4 tall frames. Rail heights: 37 / 112 mm. Row centres: 187 mm. Nominal cell width: 335 mm.\n\nIllustrated rolls: front diameter 200 x 60 mm wide; rear diameter 200 x 58 mm wide. Five rolls at 62 mm centres occupy 308 mm.",
+    "configuration_alt": "AI-generated CAD render: two populated cells in a 4 by 4 KALLAX shelving unit",
+    "configuration_image": "cabinet.png",
+    "quantity_basis": "one complete cell",
+    "quantity_note": "Double for two cells. Print all 32 plastic parts in black.",
+    "hardware_notes": "Click an MD5 alpha code for its OOMP record. H2 includes fixed and retaining nuts. H4 is a fully threaded hex-head set screw.",
+    "preparation": "Measure the opening. Check the 5 mm hex pockets against the nuts and bolt heads. Cut and deburr four 300 mm M6 rods. Prepare a 10 mm spanner.",
+    "assembly_alt": "AI-generated CAD render: exploded short holder showing four side frames and two threaded rails",
+    "assembly_image": "exploded.png",
+    "assembly_steps": [
+      "Seat two H2 nuts in the first frame's outer hex pockets. Thread in H1 rods; keep the ends flush.",
+      "Fit both rails in this order: P3 sleeve / second frame / P4 sleeve / third frame / P3 sleeve. Face the last sleeve's hex pocket toward the coupling.",
+      "Insert H3 couplings into P5 housings. Thread onto the rods to approximately 6 mm engagement.",
+      "Face the final frame's hex pockets outward. Insert H4 bolts. Add H2 retaining nuts loosely. Slide P6 hex covers onto the bolts.",
+      "Thread H4 into H3. Set the span. Seat the bolt heads. Slide P6 aside, tighten H2 against the inner frame face, then cover the nuts.",
+      "Clip P7 over each exposed thread section. Check all end fasteners are recessed. Repeat with tall frames."
+    ],
+    "detail_alt": "AI-generated engineering section: one coupling, 7 mm clip, retaining nut in a 7 mm hex cover and recessed bolt head",
+    "detail_image": "end-section.png",
+    "adjustment": "Per rail: one 18 mm coupling, one M6 x 25 bolt, one retaining M6 nut, one 7 mm hex cover and one 7 mm slotted cover.\n\nTo adjust: remove P7; slide P6 aside; loosen H2; release the bolt head from its recess; turn H4. Reseat the head, tighten H2 and refit both covers.",
+    "installation_steps": [
+      "Place the tall holder at the rear and the short holder at the front. Seat all feet on the shelf.",
+      "Check width and fastener seating before loading. Do not force the cabinet sides apart.",
+      "Load strapped rear refills, then front reels. Check clearance and frame stability."
+    ],
+    "dimensions": "Nominal rail stack: `4 x 9 + 2 x 99.67 + 67.67 + 18 + 7 + 7 = 335.01 mm`.\n\nM6 x 25 bolt: 7 mm nominal coupling engagement; 5.01 mm tip clearance. Rod engagement: 5.99 mm. Slotted cover length for another opening: `opening - 328.01 mm`; recheck engagement before use.",
+    "verification": "",
+    "sources": "[STL files](scad_output) \u00b7 [Catalogue parts](parts) \u00b7 [Coupling dimensions](https://www.accu.co.uk/hexagonal-stud-connector-nuts/62290-HTBN-M6-A2) \u00b7 [KALLAX reference](https://www.ikea.com/gb/en/p/kallax-shelving-unit-white-30275861/) \u00b7 [Research notes](presentation/research.md)"
+  }
+}
