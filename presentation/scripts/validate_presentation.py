@@ -24,15 +24,27 @@ def validate(root):
     readme=root/data.get('readme_filename','README.md')
     md=readme.read_text(encoding='utf-8')
     if 'AI-generated' not in md:errors.append('Missing README AI notice')
-    links=re.findall(r'!?\[[^\]]*\]\(([^)]+)\)',md)
+    links=re.findall(r'\]\(([^)]+)\)',md)
     checked=0
     for link in links:
         if urlsplit(link).scheme or link.startswith('#'):continue
         path=unquote(link.split('#',1)[0])
         if not (readme.parent/path).exists():errors.append('Missing README target: '+path)
         checked+=1
-    for image in (p/'images').glob('*.png'):
+    for image in (p/'images').rglob('*.png'):
         with Image.open(image) as im:im.verify()
+    if data.get('readme',{}).get('layout') == 'four-section':
+        if re.findall(r'^## (.+)$',md,re.M) != ['Summary','Details','Parts','Assembly']:
+            errors.append('README headings differ from the four-section format')
+        for i,step in enumerate(data['readme']['assembly_steps'],1):
+            thumb=p/'images/thumbnails'/f'step-{i:02d}.png'
+            if not thumb.is_file():
+                errors.append('Missing assembly thumbnail: '+str(thumb))
+            else:
+                with Image.open(thumb) as im:
+                    if max(im.size)>480:errors.append('Oversized thumbnail: '+str(thumb))
+            full='presentation/images/'+step['image']
+            if f']({full})' not in md:errors.append('Missing full-size image link: '+full)
     doc=fitz.open(p/'assembly-guide.pdf')
     for i,page in enumerate(doc):
         if 'AI-generated' not in page.get_text():errors.append(f'Missing AI footer: PDF page {i+1}')

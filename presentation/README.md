@@ -30,6 +30,8 @@ presentation/
 
 The root README uses relative image and STL paths so it works in a clone and on a branch. It contains one generated block between `<!-- oobb-presentation:start -->` and `<!-- oobb-presentation:end -->`. Content outside that block is preserved. A first build prepends the block; inspect the existing README and explicitly remove obsolete boilerplate or broken links during migration.
 
+The main README has exactly four sections: **Summary**, **Details**, **Parts**, **Assembly**. Summary shows the finished project in use; Details shows assembled printed parts only; Parts shows an exploded assembly or a named catalogue sample. Assembly has no hero: each numbered step contains a generated thumbnail linked to its full-size image. Follow [STYLE.md](STYLE.md#readme-design) for hardware-only tables and complete versus representative lists.
+
 Keep production geometry in its existing folders. Copy the final relevant PNGs beside the actual catalogue STLs as required by the render rules. Treat `presentation/` as the published package; `raw/`, scenes and QA files are working assets.
 
 ## Agent procedure
@@ -40,7 +42,7 @@ Keep production geometry in its existing folders. Copy the final relevant PNGs b
 4. Research two or three relevant primary examples. Record what is adopted and why. Keep the writing specific to the build; avoid copying navigation chrome or marketing language from the reference websites.
 5. Run `python presentation/scripts/adopt_template.py <project-directory>` from this base repository. It copies helpers and a README template; it does not replace CAD or the project README. Use `--update-tools` only when refreshing an existing vendored copy intentionally.
 6. Create `presentation/project.json` using [the data contract](DATA.md) and the worked example. Add a project-specific CAD renderer and manual builder. Keep original meshes intact. Use generic hardware only when its assumed dimensions and simplifications are disclosed.
-7. Render the assembled object, its setting, an empty assembly, an exploded assembly and a close detail of hidden fastening. Use an orthographic camera and actual source meshes. Adjust camera aspect ratio to the subject so small hardware is legible. Use a true section drawing where a render cannot show a captive nut.
+7. Render the finished object in use, assembled printed parts without hardware, an exploded assembly or named sample, and the individual assembly stages. Use an orthographic camera and actual source meshes. Adjust camera aspect ratio so small hardware is legible. Use a section drawing where a render cannot show a captive nut. Generate actual thumbnail files for the numbered Assembly steps.
 8. Build the README, CSV, PDF and published image variants. Include the AI notice in the README, the manual, every published image and the build notes. Use the same part references and quantities throughout. Generate the BOM from the manifest rather than manually retyping it.
 9. Audit the scene counts and hardware positions with a project-specific read-only script. Run the generic validator. Render every PDF page and visually inspect it at readable size. Check the actual README preview, image captions, table wrapping, long links and the mobile-width fallback. Fix defects and rebuild only what changed.
 10. Hand off the local files, not a claim of physical validation. Document build commands, software versions, assumptions, superseded variants, source hashes and remaining checks. Do not commit, push or publish unless requested.
@@ -53,9 +55,9 @@ python presentation/scripts/build_readme.py 'C:/path/to/project'
 python presentation/scripts/validate_presentation.py 'C:/path/to/project'
 ```
 
-`build_readme.py` and `adopt_template.py` use the Python standard library. `manual_layout.py` needs ReportLab. Validation needs Pillow and PyMuPDF. Blender runs the project renderer with its bundled Python. The example used Blender 5.2 with Cycles/OptiX and a Windows Segoe UI font; the manual helper falls back to Helvetica if Segoe UI is unavailable.
+`build_readme.py` uses Pillow to generate assembly thumbnails; `adopt_template.py` uses the Python standard library. `manual_layout.py` needs ReportLab. Validation needs Pillow and PyMuPDF. Blender runs the project renderer with its bundled Python. The example used Blender 5.2 with Cycles/OptiX and a Windows Segoe UI font; the manual helper falls back to Helvetica if Segoe UI is unavailable.
 
-The published table combines printed parts and hardware with one quantity column and clickable MD5 alpha codes. State the quantity basis above the table. The CSV also includes the doubled quantity. Codes must be read from catalogue metadata; use the canonical URL when no short URL has been verified.
+The main README table lists hardware only. State whether quantities cover one complete assembly or a named sample. Keep the complete printed/hardware inventory in the CSV and manifest. Hardware names and OOMP IDs link to canonical OOMP pages; alpha codes read from catalogue metadata link to `https://oom.lt/a/{code}`. Record redirect verification separately from code identity. Do not substitute supplier links. Missing records remain pending only with an accepted draft exception.
 
 Write in two passes: retain the full technical draft as source notes, then reduce published text to short actions and essential dimensions. Use "Installation", not "Installation and checks". Keep validation records in the agent handoff; omit testing commentary from the public instructions.
 

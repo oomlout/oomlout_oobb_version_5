@@ -277,10 +277,50 @@ def empty_scene():
     cradle(0,187,0,True)
     camera((0,85,70),(450,-700,470),540);lighting((0,85,70),.9)
 
+def printed_scene():
+    empty_scene()
+    for obj in scene.objects:
+        if obj.type in ('MESH','CURVE') and steel in list(obj.data.materials):
+            obj.hide_render = True
+
+def fixed_end_scene():
+    a=-167.505
+    cad(SHORT,'First short frame',(a,0,22),SIDE_ROT)
+    for y in (-67.5,67.5):
+        thread('M6 x 300 mm threaded rod',a+150,y,37,300)
+        coupling(a+2.5,y,37,5)
+    scene.render.resolution_y=1400
+    camera((-10,0,25),(430,-650,390),440);lighting((0,0,25),.7)
+
+def sleeves_scene():
+    cradle()
+    # Leave the first three frames, both rods, fixed nuts and long sleeves.
+    for obj in scene.objects:
+        if obj.type not in ('MESH','CURVE'):continue
+        keep=(obj.name.startswith(('A |','B |','M6 x 300','M6 captive fixed')) or
+              (obj.name.startswith('Short side frame') and obj.location.x < .1))
+        obj.hide_render=not keep
+    scene.render.resolution_y=1400
+    camera((0,0,25),(430,-650,390),440);lighting((0,0,25),.7)
+
+def coupling_scene():
+    spacer(99.67,(0,0,0),'one_end_nut',True)
+    thread('Rod end',-30,0,0,90)
+    coupling(35,0,0)
+    spacer(18,(65,0,0),'full_nut')
+    for obj in scene.objects:
+        if obj.type in ('MESH','CURVE'):obj.location.z+=.025
+    scene.render.resolution_y=1250
+    camera((-15,0,25),(160,-420,180),230);lighting((-15,0,25),.45)
+
 if SHOT=='parts':parts_scene()
 elif SHOT=='exploded':hardware_scene()
 elif SHOT=='rail':rail_scene()
 elif SHOT=='empty':empty_scene()
+elif SHOT=='printed':printed_scene()
+elif SHOT=='step-fixed':fixed_end_scene()
+elif SHOT=='step-sleeves':sleeves_scene()
+elif SHOT=='step-coupling':coupling_scene()
 elif SHOT=='adjust':adjust_scene()
 elif SHOT=='cabinet':
     w,b=shelf(4)
@@ -311,6 +351,6 @@ elif SHOT=='loaded':
     camera((0,0,140),(450,-800,470),540);lighting((0,0,130),.9)
 else:raise ValueError(SHOT)
 cube('Studio floor',(0,0,-10),(20000,20000,20),paper,0)
-scene.render.filepath=str(OUT/'raw'/f'{SHOT}.png')
-bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'scenes'/f'{SHOT}.blend'))
+scene.render.filepath=f'//../raw/{SHOT}.png'
+bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'scenes'/f'{SHOT}.blend'),relative_remap=False)
 bpy.ops.render.render(write_still=True)

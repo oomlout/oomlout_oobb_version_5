@@ -233,7 +233,7 @@ def dimensions(**kwargs):
             if grub_from_flange >= coupler["height_cylindrical"]:
                 raise ValueError("Grub-screw centre must lie within the coupler barrel")
             # Recess the complete flange and the nuts beneath it. The barrel
-            # may project above the pulley; the clamshell seam stays central.
+            # may project above the pulley.
             coupler_flange_top = bottom + coupler["flange_thickness"] + oobb.gv("nut_depth_" + mounting_radius_name, "3dpr")
             coupler_flange_bottom = coupler_flange_top - coupler["flange_thickness"]
             coupler_top = coupler_flange_top + coupler["height_cylindrical"]
@@ -241,12 +241,17 @@ def dimensions(**kwargs):
             centre_keepout = shaft_diameter / 2
             access_z = coupler_flange_top + grub_from_flange
             access_diameter = number("allen_key_access_diameter", kwargs.get("allen_key_access_diameter", 4 if mounting_radius_name == "m3" else 5), 3)
-            access_open_top = access_z + access_diameter / 2 + minimum_web >= top
+            access_open_top = access_z - access_diameter / 2 < top <= access_z + access_diameter / 2
             if coupler_flange_top + oobb.gv("screw_countersunk_height_" + mounting_radius_name, "3dpr") > top:
                 raise ValueError("Recessed flange leaves insufficient depth for countersunk screws")
             # Shared screws can clamp the lower half only if a sound plastic
             # roof remains between the flange and the central mating plane.
             shared_joining_fasteners = coupler_flange_top + minimum_web <= split_z
+            if not shared_joining_fasteners:
+                # Put the flange seating shoulder on the mating face instead
+                # of leaving a thin ledge across the split. Both halves still
+                # print mating-face-down, with the shoulder on the bed.
+                split_z = coupler_flange_top
 
     head_radius = max(oobb.gv("screw_countersunk_radius_m3", "3dpr"), oobb.gv("nut_radius_m3", "3dpr"))
     if belt_profile == "htd5m" and style == "basic":
@@ -409,15 +414,10 @@ def _assembled(parameters):
             # A shallow seat is needed only when the flange overlaps the normal
             # lower face. Never change the belt channel or outer body thickness.
             append("oobb_cylinder", "negative", radius=coupler["diameter_baseplate"] / 2 + values["coupler_radial_clearance"], depth=values["coupler_flange_recess_depth"] + 1, zz="bottom", pos=[0, 0, values["bottom"] - 1])
-        # One +X keyway. Near the top, remove the thin roof and use a
-        # rectangular slot so its full width remains accessible from above.
+        # One cylindrical +X clearance, including where it breaks through
+        # the top face. Never replace its circular section with a box.
         access_radius = values["allen_key_access_diameter"] / 2
-        if values["allen_key_access_open_top"]:
-            slot_bottom = values["allen_key_access_z"] - access_radius
-            if slot_bottom < values["top"]:
-                append("cube", "negative", size=[values["flange_radius"] + 2, 2 * access_radius, values["top"] - slot_bottom + 1], pos=[0, -access_radius, slot_bottom])
-        else:
-            append("oobb_hole", "negative", radius=access_radius, depth=values["flange_radius"] + 2, pos=[0, 0, values["allen_key_access_z"]], rot=[0, 90, 0])
+        append("oobb_cylinder", "negative", radius=access_radius, depth=values["flange_radius"] + 2, zz="bottom", pos=[0, 0, values["allen_key_access_z"]], rot=[0, 90, 0])
 
     append("oobb_hole", "negative", radius=values["shaft_diameter"] / 2, depth=values["top"] - values["bottom"] + 2, pos=[0, 0, values["bottom"] - 1])
 

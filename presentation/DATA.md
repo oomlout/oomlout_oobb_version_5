@@ -14,13 +14,19 @@ Required top-level fields:
 | `hardware` | Array of purchased-part records. |
 | `readme` | Strings matching the README template variables. |
 
-Each part needs `ref`, `name`, `quantity`, `spec` and `verification`. Printed parts also need a repository-relative `stl` path. Hardware should include its verified `url` and `oomp_id`; use an empty URL and null ID when no exact record has been found, with an explanation. A catalogue ID is an identity reference, not proof of a supplier's dimensions.
+Each part needs `ref`, `name`, `quantity`, `spec` and `verification`. Printed parts also need a repository-relative `stl` path. Hardware needs its verified OOMP `url`, `oomp_id` and alpha code. A user-accepted draft exception uses `catalogue_status: pending`, null catalogue fields and an explanation. A catalogue ID is an identity reference, not proof of a supplier's dimensions.
 
-`readme` contains all variables in `templates/README.template.md` except `title` and `parts_table`, which are supplied by the generator. `assembly_steps` and `installation_steps` are arrays of short actions and become numbered lists. Other fields are Markdown strings. No template field may be silently omitted; Python's strict substitution reports a missing key.
+For the current template, set `readme.layout` to `four-section`. Supply `summary`, `hero_image`, `hero_alt`, `details`, `details_image`, `details_alt`, `downloads`, `parts_image`, `parts_alt`, `parts_caption`, `parts_scope`, `hardware_notes` and `assembly_steps`. `title` and the hardware-only `parts_table` come from the generator. No template field is silently omitted.
 
-Use `md5_6_alpha` only when verified in a catalogue record. The combined table uses the code as a compact clickable label for `url`. If a real short URL has also been verified, store it in `short_url`; otherwise keep the canonical catalogue URL. Use null for missing codes. Preserve the full draft in `presentation/source-notes.json`; keep the manifest's published text terse.
+`summary` is a self-contained plain-English introduction, not a caption or shortened title. Identify the kind of project, its purpose and its setting or compatibility before describing its main capability. It must make sense without the title or image. Follow [Summary writing](STYLE.md#summary-writing).
 
-`hero_image`, `configuration_image`, `assembly_image` and `detail_image` are filenames relative to `presentation/images/`. Their corresponding `_alt` fields describe the view. `quantity_basis` states what the first quantity represents. Include measured dimensions, unknowns, and explicit physical-test status in `dimensions` and `verification`.
+`parts_scope` explicitly states whether the hardware list is complete for one assembly or representative/non-exhaustive for a named sample. A multiple-object repository uses one sample in its images and does not imply that a sample quantity is the repository total. Keep printed downloads in `downloads`; retain printed records for the CSV and scene audit.
+
+Each assembly step is an object: `{"text":"Seat the nut.","image":"step-01.png","alt":"AI-generated CAD render: nut seated in its recess"}`. Images are relative to `presentation/images/`. The builder generates `images/thumbnails/step-01.png` etc., bounded to 480 × 480 px, and links each thumbnail to the original. There is no assembly hero image. Old string steps remain supported only with an older template and without the `four-section` layout flag.
+
+Use `md5_6_alpha` only when verified in a catalogue record. The current hardware table requires `oomp_id`, its canonical OOMP repository `url`, and the verified code. Its code link is `https://oom.lt/a/{code}`. A user-accepted unresolved entry may instead set `catalogue_status: pending` and leave ID/code/URL null. No supplier URL is substituted. Preserve the full draft in `presentation/source-notes.json`; keep published text terse.
+
+`hero_image`, `details_image`, `parts_image` and step `image` fields are relative to `presentation/images/`. Alt text identifies each generated view. Put essential dimensions in Details and keep extended calculations, assumptions and physical-test status in the manifest and handoff notes. Legacy fields such as `configuration_image` and `installation_steps` are not used by the four-section template.
 
 The validator checks local paths, duplicate references, positive quantities, images, AI notices and PDF text bounds. It does not infer mechanical correctness or perform a new remote hardware check. The project must add a geometry audit for recesses, seating, repeated pieces and thread engagement.
 

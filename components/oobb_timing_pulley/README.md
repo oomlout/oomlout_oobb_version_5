@@ -71,14 +71,17 @@ Nuts sit below the metal flange, with their bottom faces at the pulley bottom.
 `coupler_grub_screw_from_flange=5` places the grub screw halfway along the
 10 mm barrel. The flange is raised by its 2 mm thickness plus the 3 mm M3 nut
 depth, into a 5 mm underside recess. The barrel projects above the pulley.
-The split stays at Z=0, giving equal 4.25 mm halves for a 6 mm belt and equal
-5.75 mm halves for a 9 mm belt. Both mating faces remain on the print bed.
+For the 6/9 mm belts, the split follows the flange seating face: Z=+0.75/-0.75
+mm respectively. The lower half is 5 mm deep; the upper is 3.5/6.5 mm deep.
+The complete flange seats flat against the upper mating face, with its shoulder
+on the print bed. Deeper pulleys keep the central split when enough material
+remains above the flange for shared mounting screws. Both mating faces remain
+on the print bed.
 
-There is one 4 mm wide Allen-key access on +X. When a round port would leave
-less than `minimum_web` above it, the access becomes a flat-bottomed slot with
-straight vertical sides opening through the top. For 6/9 mm belts, its floor
-is at Z=3.75/2.25 mm respectively. Thicker pulleys retain a round port when
-there is enough roof material. M6 grid holes pass through the keyway. The four
+There is one cylindrical 4 mm diameter grub-screw clearance on +X, cut with
+`oobb_cylinder` for every recessed flange version. Its circular section is
+retained when it opens through the top face. For 6/9 mm belts, its lowest point
+is at Z=3.75/2.25 mm respectively. M6 grid holes pass through the keyway. The four
 coupler screws retain their countersunk seats above the recessed flange.
 
 `coupler_reference(**kwargs)` provides the measured metal flange/barrel/bore/

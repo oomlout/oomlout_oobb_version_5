@@ -93,31 +93,36 @@
       "name": "M6 threaded rod",
       "quantity": 4,
       "spec": "300 mm cut length; M6 x 1.0",
-      "url": "https://www.ecfibreglasssupplies.co.uk/grade-48-zinc-threaded-rod-m6-x-300-mm",
+      "url": null,
       "oomp_id": null,
-      "verification": "Supplier product verified 2026-11-06: M6 x 300 mm fully threaded zinc-plated steel; no verified OOMP ID"
+      "verification": "User requested OOMP record pending on 2026-11-07; no supplier link in README.",
+      "md5_6_alpha": null,
+      "short_url": null,
+      "catalogue_status": "pending"
     },
     {
       "ref": "H2",
       "name": "M6 hex nut",
       "quantity": 8,
       "spec": "10 mm AF; 5 mm nominal thickness",
-      "url": "https://github.com/oomlout/oomlout_oomp_version_1_messy/tree/main/parts/hardware_nut_m6",
+      "url": "https://github.com/oomlout/oomp_hardware_bolt_version_5/tree/main/parts/hardware_nut_m6",
       "oomp_id": "hardware_nut_m6",
       "verification": "OOMP identity verified 2026-11-06; actual thickness to be checked",
       "md5_6_alpha": "hcps",
-      "code_verified": "Public OOMP record inspected 2026-11-06"
+      "code_verified": "Exact ID and md5_6_alpha checked in public OOMP working.yaml, 2026-11-07. Short URL follows requested format; redirect unavailable to verification tool.",
+      "short_url": "https://oom.lt/a/hcps"
     },
     {
       "ref": "H3",
       "name": "M6 coupling nut",
       "quantity": 4,
       "spec": "DIN 6334; 18 mm long; 10 mm AF",
-      "url": "https://github.com/oomlout/oomlout_oomp_version_1_messy/tree/main/parts/hardware_nut_m6_coupling",
+      "url": "https://github.com/oomlout/oomp_hardware_bolt_version_5/tree/main/parts/hardware_nut_m6_coupling",
       "oomp_id": "hardware_nut_m6_coupling",
       "verification": "OOMP identity verified 2026-11-06; 18 mm dimensions from Accu",
       "md5_6_alpha": "1qsz8",
-      "code_verified": "Public OOMP record inspected 2026-11-06"
+      "code_verified": "Exact ID and md5_6_alpha checked in public OOMP working.yaml, 2026-11-07. Short URL follows requested format; redirect unavailable to verification tool.",
+      "short_url": "https://oom.lt/a/1qsz8"
     },
     {
       "ref": "H4",
@@ -128,7 +133,8 @@
       "oomp_id": "hardware_set_screw_m6_25_mm_length",
       "verification": "OOMP full-thread hex-head identity verified 2026-11-06; no grub screw",
       "md5_6_alpha": "9dg7e",
-      "code_verified": "Public OOMP record inspected 2026-11-06"
+      "code_verified": "Exact ID and md5_6_alpha checked in public OOMP working.yaml, 2026-11-07. Short URL follows requested format; redirect unavailable to verification tool.",
+      "short_url": "https://oom.lt/a/9dg7e"
     }
   ],
   "geometry": {
@@ -223,26 +229,50 @@
     }
   },
   "readme": {
-    "summary": "Two independent holders per KALLAX cell: five front reels and five raised rear refills. Four side frames and two M6 rails per holder.",
+    "summary": "This project provides 3D-printable holders for storing 3D printer filament in an IKEA KALLAX shelving unit. Two holders store five reels at the front and five filament refills without spools on a raised row at the back.",
     "validation_status": "",
-    "hero_alt": "AI-generated CAD render: five front reels and five raised rear refills in one KALLAX cell",
+    "hero_alt": "AI-generated CAD render: finished filament storage in a KALLAX cell",
     "hero_image": "cell.png",
     "configuration": "Front: 4 short frames. Rear: 4 tall frames. Rail heights: 37 / 112 mm. Row centres: 187 mm. Nominal cell width: 335 mm.\n\nIllustrated rolls: front diameter 200 x 60 mm wide; rear diameter 200 x 58 mm wide. Five rolls at 62 mm centres occupy 308 mm.",
     "configuration_alt": "AI-generated CAD render: two populated cells in a 4 by 4 KALLAX shelving unit",
     "configuration_image": "cabinet.png",
     "quantity_basis": "one complete cell",
     "quantity_note": "Double for two cells. Print all 32 plastic parts in black.",
-    "hardware_notes": "Click an MD5 alpha code for its OOMP record. H2 includes fixed and retaining nuts. H4 is a fully threaded hex-head set screw.",
+    "hardware_notes": "Threaded rod: OOMP record pending.",
     "preparation": "Measure the opening. Check the 5 mm hex pockets against the nuts and bolt heads. Cut and deburr four 300 mm M6 rods. Prepare a 10 mm spanner.",
     "assembly_alt": "AI-generated CAD render: exploded short holder showing four side frames and two threaded rails",
     "assembly_image": "exploded.png",
     "assembly_steps": [
-      "Seat two H2 nuts in the first frame's outer hex pockets. Thread in H1 rods; keep the ends flush.",
-      "Fit both rails in this order: P3 sleeve / second frame / P4 sleeve / third frame / P3 sleeve. Face the last sleeve's hex pocket toward the coupling.",
-      "Insert H3 couplings into P5 housings. Thread onto the rods to approximately 6 mm engagement.",
-      "Face the final frame's hex pockets outward. Insert H4 bolts. Add H2 retaining nuts loosely. Slide P6 hex covers onto the bolts.",
-      "Thread H4 into H3. Set the span. Seat the bolt heads. Slide P6 aside, tighten H2 against the inner frame face, then cover the nuts.",
-      "Clip P7 over each exposed thread section. Check all end fasteners are recessed. Repeat with tall frames."
+      {
+        "text": "Cut and deburr four 300 mm M6 rods. Seat two M6 nuts in a short frame’s outer recesses. Thread in two rods with their ends flush.",
+        "image": "step-fixed.png",
+        "alt": "AI-generated CAD render: fixed-end frame, recessed nuts and two rods"
+      },
+      {
+        "text": "On both rods, fit a 99.67 mm sleeve, second frame, 67.67 mm sleeve, third frame and 99.67 mm sleeve. Face the last sleeve’s hex pocket toward the coupling.",
+        "image": "step-sleeves.png",
+        "alt": "AI-generated CAD render: three frames and long sleeves on the two rods"
+      },
+      {
+        "text": "Insert each M6 coupling nut into an 18 mm housing. Thread it onto the rod by approximately 6 mm.",
+        "image": "step-coupling.png",
+        "alt": "AI-generated CAD render: rod end, M6 coupling nut and printed housing"
+      },
+      {
+        "text": "Face the final frame’s hex recesses outward. Insert the M6 × 25 mm bolts. Add retaining nuts loosely, then slide on the 7 mm hex covers. Thread the bolts into the couplings.",
+        "image": "adjust.png",
+        "alt": "AI-generated CAD render: coupling, covers, retaining nut, final frame and adjustment bolt"
+      },
+      {
+        "text": "Set the span to the measured opening; nominally 335 mm. Seat the bolt heads in their recesses. Tighten the retaining nuts against the inner frame face, replace the hex covers and clip the 7 mm slotted covers over the exposed thread.",
+        "image": "end-section.png",
+        "alt": "AI-generated section drawing: recessed bolt head, retaining nut and end covers"
+      },
+      {
+        "text": "Repeat with four tall frames. Place the tall holder at the rear and the short holder at the front. Load strapped rear refills, then front reels.",
+        "image": "cell.png",
+        "alt": "AI-generated CAD render: both holders installed and loaded in a KALLAX cell"
+      }
     ],
     "detail_alt": "AI-generated engineering section: one coupling, 7 mm clip, retaining nut in a 7 mm hex cover and recessed bolt head",
     "detail_image": "end-section.png",
@@ -254,6 +284,17 @@
     ],
     "dimensions": "Nominal rail stack: `4 x 9 + 2 x 99.67 + 67.67 + 18 + 7 + 7 = 335.01 mm`.\n\nM6 x 25 bolt: 7 mm nominal coupling engagement; 5.01 mm tip clearance. Rod engagement: 5.99 mm. Slotted cover length for another opening: `opening - 328.01 mm`; recheck engagement before use.",
     "verification": "",
-    "sources": "[STL files](scad_output) \u00b7 [Catalogue parts](parts) \u00b7 [Coupling dimensions](https://www.accu.co.uk/hexagonal-stud-connector-nuts/62290-HTBN-M6-A2) \u00b7 [KALLAX reference](https://www.ikea.com/gb/en/p/kallax-shelving-unit-white-30275861/) \u00b7 [Research notes](presentation/research.md)"
-  }
+    "sources": "[STL files](scad_output) · [Catalogue parts](parts) · [Coupling dimensions](https://www.accu.co.uk/hexagonal-stud-connector-nuts/62290-HTBN-M6-A2) · [KALLAX reference](https://www.ikea.com/gb/en/p/kallax-shelving-unit-white-30275861/) · [Research notes](presentation/research.md)",
+    "layout": "four-section",
+    "details": "Each holder uses four side frames and two adjustable M6 rails. The short and tall holders are independent. Nominal width: 335 mm. Rail heights: 37 and 112 mm. Print all 32 plastic pieces in black.",
+    "details_image": "printed.png",
+    "details_alt": "AI-generated CAD render: assembled printed parts, with hardware, filament and cabinet omitted",
+    "downloads": "[Print files](parts) · [Full BOM](presentation/parts.csv) · [Assembly guide](presentation/assembly-guide.pdf) · [Build notes](presentation/README.md)",
+    "parts_image": "exploded.png",
+    "parts_alt": "AI-generated CAD render: exploded short holder with frames, sleeves and hardware",
+    "parts_caption": "Short holder shown. The rear holder uses tall frames.",
+    "parts_scope": "Hardware quantities for one complete cell. Double for two cells."
+  },
+  "readme_revision": "4",
+  "readme_date": "2026-11-07"
 }

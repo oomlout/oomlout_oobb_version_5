@@ -1,51 +1,33 @@
 # $title
 
-$summary
+AI-generated images and instructions. Errors possible.
 
-*AI-generated images and instructions. Errors possible.*
+## Summary
+
+$summary
 
 ![$hero_alt](presentation/images/$hero_image)
 
-[Guide (PDF)](presentation/assembly-guide.pdf) Â· [BOM (CSV)](presentation/parts.csv) Â· [Build notes](presentation/README.md)
+## Details
 
-## Configuration
+$details
 
-$configuration
+![$details_alt](presentation/images/$details_image)
 
-![$configuration_alt](presentation/images/$configuration_image)
+$downloads
 
 ## Parts
 
-Quantities are for $quantity_basis. $quantity_note
+![$parts_alt](presentation/images/$parts_image)
+
+$parts_caption
+
+$parts_scope
 
 $parts_table
 
 $hardware_notes
 
-## Preparation
-
-$preparation
-
 ## Assembly
 
-![$assembly_alt](presentation/images/$assembly_image)
-
 $assembly_steps
-
-## Adjustment
-
-![$detail_alt](presentation/images/$detail_image)
-
-$adjustment
-
-## Installation
-
-$installation_steps
-
-## Dimensions
-
-$dimensions
-
-## Sources
-
-$sources

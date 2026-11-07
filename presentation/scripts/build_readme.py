@@ -1,6 +1,6 @@
 """Generate a marked README block and CSV from presentation/project.json.
 
-Standard library only. Copies of this script and its template can be vendored in
+Requires Pillow for linked assembly thumbnails. Copies can be vendored in
 a downstream project. No network access, CAD changes or shell execution.
 """
 import argparse
@@ -8,9 +8,52 @@ import csv
 import json
 from pathlib import Path
 from string import Template
+from urllib.parse import urlsplit
+from PIL import Image
 
 START = '<!-- oobb-presentation:start -->'
 END = '<!-- oobb-presentation:end -->'
+
+
+def hardware_table(data):
+    rows = ['| Ref. | Part | Specification | Qty. | OOMP ID | Code |',
+            '| --- | --- | --- | ---: | --- | --- |']
+    for part in data['hardware']:
+        identifier, code, url = part.get('oomp_id'), part.get('md5_6_alpha'), part.get('url')
+        if identifier:
+            parsed = urlsplit(url or '')
+            if parsed.netloc != 'github.com' or not parsed.path.rstrip('/').endswith('/parts/'+identifier) or not code:
+                raise ValueError('Hardware requires its OOMP page and verified code: '+part['ref'])
+            name = f"[{part['name']}]({url})"
+            identity = f'[`{identifier}`]({url})'
+            short = f'[{code}](https://oom.lt/a/{code})'
+        elif part.get('catalogue_status') == 'pending':
+            name, identity, short = part['name'], 'Pending', '—'
+        else:
+            raise ValueError('Resolve hardware record or explicitly mark pending: '+part['ref'])
+        rows.append(f"| {part['ref']} | {name} | {part['spec']} | {part['quantity']} | {identity} | {short} |")
+    return '\n'.join(rows)
+
+
+def illustrated_steps(root, steps):
+    lines = []
+    directory = root/'presentation/images/thumbnails'
+    directory.mkdir(parents=True, exist_ok=True)
+    for index, step in enumerate(steps, 1):
+        if not isinstance(step, dict) or not all(step.get(k) for k in ('text', 'image', 'alt')):
+            raise ValueError('Each assembly step needs text, image and alt')
+        source = (root/'presentation/images'/step['image']).resolve()
+        if not source.is_relative_to((root/'presentation/images').resolve()):
+            raise ValueError('Step image must stay inside presentation/images')
+        thumbnail = directory/f'step-{index:02d}.png'
+        with Image.open(source) as image:
+            image = image.convert('RGB')
+            image.thumbnail((480, 480), Image.Resampling.LANCZOS)
+            image.save(thumbnail, optimize=True)
+        full = source.relative_to(root).as_posix()
+        small = thumbnail.relative_to(root).as_posix()
+        lines.append(f"{index}. {step['text']}\n\n   [![{step['alt']}]({small})]({full})")
+    return '\n\n'.join(lines)
 
 
 def table(parts, printed, labels):
@@ -45,9 +88,13 @@ def build(root, template):
     labels=data.get('quantity_columns',['One assembly','Two assemblies'])
     fields['printed_table'] = table(data['printed_parts'], True, labels)
     fields['hardware_table'] = table(data['hardware'], False, labels)
-    fields['parts_table'] = combined_table(data)
-    for key in ('assembly_steps', 'installation_steps'):
-        fields[key] = '\n\n'.join(f'{i}. {s}' for i, s in enumerate(fields[key], 1))
+    if fields.get('layout') == 'four-section':
+        fields['parts_table'] = hardware_table(data)
+        fields['assembly_steps'] = illustrated_steps(root, fields['assembly_steps'])
+    else:
+        fields['parts_table'] = combined_table(data)
+        for key in ('assembly_steps', 'installation_steps'):
+            fields[key] = '\n\n'.join(f'{i}. {s}' for i, s in enumerate(fields[key], 1))
     content = Template(Path(template).read_text(encoding='utf-8')).substitute(fields).strip()
     block = f'{START}\n{content}\n{END}'
     readme = root / data.get('readme_filename', 'README.md')

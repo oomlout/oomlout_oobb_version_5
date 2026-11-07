@@ -17,10 +17,11 @@ from manual_layout import Manual,INK,GREY,ACCENT
 from build_readme import build as build_readme
 
 SHOTS=('cell','cabinet','loaded','empty','rail','exploded','adjust')
+README_SHOTS=('printed','step-fixed','step-sleeves','step-coupling')
 
 def publish_images():
     font=ImageFont.truetype('C:/Windows/Fonts/segoeui.ttf',30) if Path('C:/Windows/Fonts/segoeui.ttf').exists() else ImageFont.load_default(size=30)
-    for shot in SHOTS:
+    for shot in SHOTS+README_SHOTS:
         src=Image.open(P/'raw'/f'{shot}.png').convert('RGB')
         out=Image.new('RGB',(src.width,src.height+70),'white');out.paste(src,(0,0))
         ImageDraw.Draw(out).text((32,src.height+15),'AI-generated CAD illustration. Errors possible.',font=font,fill='#4B5350')
@@ -168,17 +169,23 @@ def copy_beside_parts(data):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--render',action='store_true')
+    parser.add_argument('--readme-only',action='store_true',help='Refresh README images, thumbnails and CSV without rebuilding the PDF')
     parser.add_argument('--blender',default='blender')
     args=parser.parse_args()
     for directory in ('raw','images','scenes','qa'):(P/directory).mkdir(exist_ok=True)
     if args.render:
-        for shot in SHOTS:
+        for shot in (README_SHOTS if args.readme_only else SHOTS+README_SHOTS):
             with (P/'qa'/f'render_{shot}.log').open('w') as stream:
                 subprocess.run([args.blender,'--background','--python-exit-code','1','--python',str(ROOT/'render_kallax.py'),'--',shot],stdout=stream,stderr=subprocess.STDOUT,check=True)
     data=json.loads((P/'project.json').read_text(encoding='utf-8'))
-    publish_images();make_pdf(data);export_pages()
+    publish_images()
+    if not args.readme_only:
+        make_pdf(data);export_pages()
     build_readme(ROOT,P/'templates/README.template.md')
-    copy_beside_parts(data)
+    if not args.readme_only:
+        copy_beside_parts(data)
     # Stable legacy download path resolves to the current guide as well.
-    shutil.copy2(P/'assembly-guide.pdf',ROOT/'output/pdf/kallax_filament_visual_assembly_guide.pdf')
-    print('Built guide, seven page previews, published renders, README and CSV.')
+    if not args.readme_only:
+        shutil.copy2(P/'assembly-guide.pdf',ROOT/'output/pdf/kallax_filament_visual_assembly_guide.pdf')
+    print('Built README, thumbnails, published renders and CSV.' if args.readme_only else
+          'Built guide, page previews, published renders, README, thumbnails and CSV.')

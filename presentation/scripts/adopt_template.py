@@ -16,4 +16,11 @@ for src,rel in [('scripts/build_readme.py','scripts/lib/build_readme.py'),('scri
         print('Kept existing',target)
     else:
         shutil.copy2(BASE/src,target);print('Copied',target)
+# Python templates often ignore every directory called lib. These are source tools.
+ignore = root/'.gitignore'
+if ignore.exists():
+    text = ignore.read_text(encoding='utf-8')
+    if 'lib/' in text.splitlines() and '!presentation/scripts/lib/' not in text.splitlines():
+        ignore.write_text(text.rstrip()+'\n\n# Vendored presentation source tools\n!presentation/scripts/lib/\n!presentation/scripts/lib/*.py\n', encoding='utf-8')
+        print('Made vendored presentation tools visible to Git')
 print('Next: create project.json using the documented schema and a project-specific render/build script.')
