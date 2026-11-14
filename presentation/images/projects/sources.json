@@ -1,0 +1,248 @@
+{
+  "description": "Existing CAD renders, downsampled for the project index. Full source frames retained; thumbnails add an AI notice. No geometry changes.",
+  "command": "python presentation/scripts/build_project_thumbnails.py",
+  "images": [
+    {
+      "project": "oomlout_oobb_part_plate_version_5",
+      "source_path": "parts/oobb_part_plate_basic_5_width_5_height_3_depth/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_plate_version_5/main/parts/oobb_part_plate_basic_5_width_5_height_3_depth/3dpr_presentation.png",
+      "source_sha256": "946354f4fbb0515f0d16837cd31ccb69f4d18b9114d5e74a283d40dcde756aca",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "flat-plates.png",
+      "thumbnail_sha256": "93fa7d34d2865ade60d2c02aa78acc9e2bef5d9f673cb58071824fd9c31e1eab",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ],
+      "hero": "plate-5x5x3.png",
+      "hero_sha256": "0a6096320fadc683b4573d22662138ced97ed299d1cd2764a77567ef01a3732c"
+    },
+    {
+      "project": "oomlout_oobb_part_plate_circle_version_5",
+      "source_path": "parts/oobb_part_plate_circle_5_width_5_height_3_depth/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_plate_circle_version_5/main/parts/oobb_part_plate_circle_5_width_5_height_3_depth/3dpr_presentation.png",
+      "source_sha256": "060ba063cb6412e69ee5075e30ff6b88ceed707e820443db7076ad47e355e42b",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "circle-plates.png",
+      "thumbnail_sha256": "e9f3cf71597edc26087ab2566541616842152fee9bf638a48746ebb831074669",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_plate_l_version_5",
+      "source_path": "parts/oobb_part_plate_bracket_l_12_width_12_height_15_mm_depth/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_plate_l_version_5/main/parts/oobb_part_plate_bracket_l_12_width_12_height_15_mm_depth/3dpr_presentation.png",
+      "source_sha256": "ed09a256a51f132974f60f60c23d1fdd8565f978e1c447c8b6a0c366d7978155",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "l-plates.png",
+      "thumbnail_sha256": "bac964386c9955614e01887252a8cb3490b758cd2d3af956a2b0755a7c521342",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_plate_u_version_5",
+      "source_path": "parts/oobb_part_plate_u_10_width_10_height_15_mm_depth/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_plate_u_version_5/main/parts/oobb_part_plate_u_10_width_10_height_15_mm_depth/3dpr_presentation.png",
+      "source_sha256": "e90d14cf8534e56866f9cdc659b5eb68c3e6ae48ff9a97c687f854e19e596939",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "u-plates.png",
+      "thumbnail_sha256": "5e4c95c69497d3a834fc3328ca70b0e48fa1b7827e71099067797677c7f70dee",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_plate_90_degree_version_5",
+      "source_path": "parts/oobb_part_plate_90_degree_1_width_10_height_14_mm_depth/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_plate_90_degree_version_5/main/parts/oobb_part_plate_90_degree_1_width_10_height_14_mm_depth/3dpr_presentation.png",
+      "source_sha256": "4643f07299a18e3342396190cbbb2f0cf83df5f70b8526e634ffacb093a8b9a6",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "90-degree-plates.png",
+      "thumbnail_sha256": "ea4fd6379390cd4c2b264e40f0957a36c65770c7ff2d6b5a08d59be181d9ed39",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_plate_cutout_version_5",
+      "source_path": "parts/oobb_part_plate_cutout_30_diameter_cutout_1_multiple_buffer_middle_5_width_5_height_3_depth/3dpr.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_plate_cutout_version_5/main/parts/oobb_part_plate_cutout_30_diameter_cutout_1_multiple_buffer_middle_5_width_5_height_3_depth/3dpr.png",
+      "source_sha256": "400fec75b9ed73e1555ee0cffeb93e57852d934a26edfa77c8c00cf653c8bc00",
+      "source_dimensions": [
+        512,
+        512
+      ],
+      "thumbnail": "plate-cutouts.png",
+      "thumbnail_sha256": "54e416fc35e25d0af34feeb659f14ba4e386ceefe02e9f007059a1b5b2076cd0",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_holder_bearing_version_5",
+      "source_path": "parts/oobb_part_holder_90_degree_bearing_606_bearing_size_3_width_3_height_12_depth/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_holder_bearing_version_5/main/parts/oobb_part_holder_90_degree_bearing_606_bearing_size_3_width_3_height_12_depth/3dpr_presentation.png",
+      "source_sha256": "0a67238d312a13094c0792dc4fd37ca7c6b3c701246002994f14f99c3c8f746e",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "bearing-holders.png",
+      "thumbnail_sha256": "f6c8057b342c21dcac668433a3b2edb86452f78cc26156c536a365a1848919b0",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_electronic_version_5",
+      "source_path": "parts/oobb_part_electronic_spacer_big_plate_3_width_3_height_4_depth/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_electronic_version_5/main/parts/oobb_part_electronic_spacer_big_plate_3_width_3_height_4_depth/3dpr_presentation.png",
+      "source_sha256": "a4d362d77e547dd87ff8ad970366b37d0bf8a57f36a148f0f4c55f6a0df85ccb",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "electronic-parts.png",
+      "thumbnail_sha256": "4d9bff51c536671d1d646797e0b4312abdc7caf690a6daf02420d9ad5dd004da",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_gear_version_5",
+      "source_path": "parts/oobb_part_gear_big_scale_1_diameter_10_teeth_standard_style_6_mm_depth/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_gear_version_5/main/parts/oobb_part_gear_big_scale_1_diameter_10_teeth_standard_style_6_mm_depth/3dpr_presentation.png",
+      "source_sha256": "9c63bada34115d1e9f52b0a93dbd44f9b48aeafab2f77cab89daeae02b4bd131",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "gears.png",
+      "thumbnail_sha256": "8a64d821cf1dbd79cd226969153baf28424949d054ffcb2feeef03ea3e94dcca",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_timing_pulley_version_5",
+      "source_path": "parts/oobb_part_timing_belt_coupler_gt2_6_depth_draw_tensioner_m3/3dpr_presentation.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_timing_pulley_version_5/main/parts/oobb_part_timing_belt_coupler_gt2_6_depth_draw_tensioner_m3/3dpr_presentation.png",
+      "source_sha256": "0f86bd73fac9415257df69b7b0a0abc57d231cd626add385cc2d3d9804a4432f",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "timing-pulleys.png",
+      "thumbnail_sha256": "bcb07b1ca3a95e2e55d8f241225bb1289022aa11517aedb34393927e27589cb5",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_motor_gearbox_cycloidal_version_5",
+      "source_path": "presentation/images/in-use.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5/main/presentation/images/in-use.png",
+      "source_sha256": "2f5ee6af2e2cc3d2e1ec298f879bc44ac908edba5afba7e2958c2b0edf626b02",
+      "source_dimensions": [
+        1600,
+        1360
+      ],
+      "thumbnail": "cycloidal-gearbox.png",
+      "thumbnail_sha256": "1ec6eddb10366f850a598a1fd1880239f69e92ae42b0cd94bed3da83d4148147",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_holder_motor_version_5",
+      "source_path": "parts/oobb_part_holder_motor_gear_tt_5_width_3_height_23d5_depth_bearing_6704_version2/assembled_printed.png",
+      "source_url": null,
+      "source_sha256": "742d910de9bd408bae194c3c6110eafac81e638cc9105d33785dde7bb1abd584",
+      "source_dimensions": [
+        900,
+        700
+      ],
+      "thumbnail": "motor-holders.png",
+      "thumbnail_sha256": "6747f08944e5bcaf472b8db38652d1abd03c5fe77d3f982206ff41a5928a8677",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_timing_belt_storage_version_5",
+      "source_path": "parts/oobb_part_timing_belt_storage_reel_gt2_belt_size_11_diameter_6_depth/3dpr_presentation.png",
+      "source_url": null,
+      "source_sha256": "a4612eecb66323df67dcf84dd2458dae3580e94cdf5894123a8b7b10d0817d00",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "timing-belt-storage.png",
+      "thumbnail_sha256": "819a040bedabb97de0a0a463759ad01a8de36021368f96a42c3ef1cf94551896",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_tool_precision_screwdriver_version_5",
+      "source_path": "parts/tool_precision_screwdriver_version_1_bit_lock/3dpr_presentation.png",
+      "source_url": null,
+      "source_sha256": "966bb5048af7bcd202e399dee5ba2c03cf2b512f4834dfd94030b9c5f6fff7e2",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "precision-screwdriver.png",
+      "thumbnail_sha256": "8f1ce137d8e763622f64c02eb90618675b7e9ca1f79ee6ce2ef74ebe3cbdcb05",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_plate_captive_nut_version_5",
+      "source_path": "parts/oobb_part_plate_captive_nut_m6_basic_3_width_3_height_12_assembly_depth_base_9_depth/3dpr_presentation.png",
+      "source_url": null,
+      "source_sha256": "067807857a883e3b94c149bef4bc9e48dd091a72a8bab2f8ef810cf7d208fe4c",
+      "source_dimensions": [
+        1600,
+        1000
+      ],
+      "thumbnail": "captive-nut-plates.png",
+      "thumbnail_sha256": "97ce44b01d3949fabf64f5ab2f462e12a1084f11adbe208b89d4e910e98729bf",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    }
+  ]
+}
