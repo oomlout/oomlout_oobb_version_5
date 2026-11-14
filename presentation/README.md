@@ -8,6 +8,8 @@ Read [STYLE.md](STYLE.md), [the research notes](research.md) and the parent [ren
 
 For a catalogue of individual mounting plates, use [the catalogue workflow](CATALOGUE.md). The root `oobb-present.bat` command runs from a part folder through PATH; `oobb-present --all` builds the tracked catalogue and its README index.
 
+For a compact version-five OOBB catalogue refresh, follow [CATALOGUE_REFRESH.md](CATALOGUE_REFRESH.md) and its [project rollout notes](CATALOGUE_REFRESH_PROJECTS.md). That standard uses folder-based discovery, no full part/file inventory in public READMEs, and one canonical copy of each finished render. It also covers generation-code repairs and full-catalogue validation; [history replacement](CATALOGUE_HISTORY_RESET.md) is a separate final phase when authorized. Its catalogue-specific rules take precedence over the older catalogue index and duplicate-image layout described here; multipart assembly packages keep their existing workflow.
+
 ## Deliverables
 
 Each downstream project has a `presentation/` directory:
@@ -30,7 +32,7 @@ presentation/
 
 The root README uses relative image and STL paths so it works in a clone and on a branch. It contains one generated block between `<!-- oobb-presentation:start -->` and `<!-- oobb-presentation:end -->`. Content outside that block is preserved. A first build prepends the block; inspect the existing README and explicitly remove obsolete boilerplate or broken links during migration.
 
-The main README has exactly four sections: **Summary**, **Details**, **Parts**, **Assembly**. Summary shows the finished project in use; Details shows assembled printed parts only; Parts shows an exploded assembly or a named catalogue sample. Assembly has no hero: each numbered step contains a generated thumbnail linked to its full-size image. Follow [STYLE.md](STYLE.md#readme-design) for hardware-only tables and complete versus representative lists.
+The main README has exactly four sections: **Summary**, **Details**, **Parts**, **Assembly**. Summary shows the finished project in use and explains that this is an entirely AI-generated coding project: the included outputs usually work, but the main reason for publishing is to provide a starting point for others' modifications with their own AI tools. Details shows assembled printed parts only; Parts shows an exploded assembly or a named catalogue sample. Assembly has no hero: each numbered step contains a generated thumbnail linked to its full-size image. Follow [STYLE.md](STYLE.md#readme-design) for hardware-only tables and complete versus representative lists.
 
 Keep production geometry in its existing folders. Copy the final relevant PNGs beside the actual catalogue STLs as required by the render rules. Treat `presentation/` as the published package; `raw/`, scenes and QA files are working assets.
 
@@ -64,6 +66,7 @@ Write in two passes: retain the full technical draft as source notes, then reduc
 ## Review checklist
 
 - Assembly quantities match the user-confirmed arrangement.
+- Summary includes the AI-generated coding origin, included outputs and purpose as a starting point for others' AI modifications.
 - Recessed heads, retaining nuts, spacers and couplings are geometrically present, not merely named in captions.
 - Nominal, measured, inferred and tested statements are clearly distinguished.
 - Purchased part identity, thread, head form and length are checked against the linked record.

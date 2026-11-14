@@ -15,6 +15,8 @@ Use the object and its assembly as the primary visual information. This guidance
 
 ## README design
 
+For compact OOBB part catalogues, apply the specific [catalogue refresh rules](CATALOGUE_REFRESH.md): keep the four sections and AI notices, show one representative example, link discovery and part choices to directories, and omit full catalogue/file/download tables. Store each finished catalogue render once beside its canonical mesh and reference it from navigation. These catalogue rules refine the general assembly-package image and download layout below; retain real hardware and assembly documentation for multipart projects.
+
 Use the project title followed by the AI notice and exactly four level-two headings, in this order:
 
 1. **Summary** — explain what the project is, what it does and where it is used in plain English. Assume the reader knows only the project name or a search result. Main image: the finished object in use.
@@ -30,7 +32,7 @@ Image captions must explain the view and its assumptions. Alternative text shoul
 
 ## Summary writing
 
-Write a short, self-contained paragraph, usually two or three sentences. A person arriving from search, a discovering agent or a search engine should be able to identify the project from this paragraph alone.
+Write a short, self-contained introduction, usually two or three sentences, followed by a brief paragraph explaining the project's AI origin and purpose as a starting point. A person arriving from search, a discovering agent or a search engine should be able to identify the project from this introduction alone.
 
 - Start with the kind of thing this is: for example, 3D-printable storage holders, a motor mount or a collection of circuit-board mounting plates. State its purpose and relevant setting or compatibility.
 - Say what the repository provides when useful: printable files, CAD source or assembly instructions. Do not assume the title or image explains the object.
@@ -38,8 +40,11 @@ Write a short, self-contained paragraph, usually two or three sentences. A perso
 - Use concrete nouns and ordinary language. Introduce unfamiliar terms briefly. Avoid unexplained abbreviations, slogans, keyword lists and repeating the project title without explaining it.
 - Use relevant names naturally, such as IKEA KALLAX and 3D printer filament. Write for understanding; do not add search-engine claims or keyword stuffing.
 - Before finishing, read the paragraph without its title or image. It should still answer: what is it, what is it for, and where does it fit?
+- In Summary, explicitly state that this is an entirely AI-generated coding project. Explain that the generated outputs are included and usually work, while the main reason for publishing is to let others use it as a starting point for their own AI-assisted modifications. Keep the separate AI-generated image/instruction notice as well.
 
 Example: "This project provides 3D-printable holders for storing 3D printer filament in an IKEA KALLAX shelving unit. Two holders store five reels at the front and five filament refills without spools on a raised row at the back."
+
+Follow with: "This is an entirely AI-generated coding project. The generated outputs are included and usually work, but the main purpose of publishing it is to give others a starting point for modifying the project with their own AI tools."
 
 ## Writing
 

@@ -44,7 +44,9 @@ clearances, assembled bounds, and print spacing. Use the same function for
 catalogue metadata and geometry checks.
 
 OOBB mounting holes are enabled by default: M6 at centred 15 mm grid positions,
-M3 at intervening 7.5 mm positions. The central bore is retained. A hole is added
+falling back to M3 at the same position when M6 cannot fit, and M3 at intervening
+7.5 mm positions. Every fallback repeats all clearance checks, including the
+M3-specific Allen-key exclusion. The central bore is retained. A hole is added
 only when its full mode-aware envelope clears the tooth roots, centre pocket or
 metal flange, joining and coupling hardware. M3 holes also clear the single +X
 Allen-key window; M6 holes may cross it. The minimum
@@ -55,6 +57,12 @@ preserve eight M3 positions at (+/-15, +/-7.5) and (+/-7.5, +/-15).
 The nearby axial M6 positions are excluded where they overlap those screws.
 Set `oobb_holes=False` to omit the
 additional pattern. `dimensions()` records accepted positions and exclusions.
+
+The 60-tooth GT2 basic and 606 idler pulleys gain four M3 holes at
+(-15, 0), (15, 0), (0, -15), and (0, 15) mm. Their print-adjusted diameter is
+3.6 mm and the conservative tooth-root wall is 1.145 mm. The 144-tooth GT2
+pulleys also gain four M3 holes at (+/-30, +/-30) mm, with a 0.456 mm root wall,
+above the existing 0.3 mm minimum. All existing M6 holes remain M6.
 
 The populated coupling style has the same belt-width-based body thickness as
 basic: 6.5/9.5 mm channels for 6/9 mm belts, plus two 1 mm flanges. The 10.4 mm

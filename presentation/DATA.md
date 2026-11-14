@@ -18,7 +18,7 @@ Each part needs `ref`, `name`, `quantity`, `spec` and `verification`. Printed pa
 
 For the current template, set `readme.layout` to `four-section`. Supply `summary`, `hero_image`, `hero_alt`, `details`, `details_image`, `details_alt`, `downloads`, `parts_image`, `parts_alt`, `parts_caption`, `parts_scope`, `hardware_notes` and `assembly_steps`. `title` and the hardware-only `parts_table` come from the generator. No template field is silently omitted.
 
-`summary` is a self-contained plain-English introduction, not a caption or shortened title. Identify the kind of project, its purpose and its setting or compatibility before describing its main capability. It must make sense without the title or image. Follow [Summary writing](STYLE.md#summary-writing).
+`summary` is a self-contained plain-English introduction, not a caption or shortened title. Identify the kind of project, its purpose and its setting or compatibility before describing its main capability. It must make sense without the title or image. Include a short paragraph stating that this is an entirely AI-generated coding project: its generated outputs are included and usually work, but it is published primarily as a starting point for others to modify with their own AI tools. This explanation is additional to the image/instruction notice. Follow [Summary writing](STYLE.md#summary-writing).
 
 `parts_scope` explicitly states whether the hardware list is complete for one assembly or representative/non-exhaustive for a named sample. A multiple-object repository uses one sample in its images and does not imply that a sample quantity is the repository total. Keep printed downloads in `downloads`; retain printed records for the CSV and scene audit.
 

@@ -4,6 +4,8 @@ AI-generated images and instructions. Errors possible.
 
 Use this workflow for a repository with `parts/<id>/working.yaml` and exported mounting plates. Use the [assembly workflow](README.md) for multipart mechanisms requiring reviewed hardware positions and exploded views.
 
+For newly refreshed OOBB part catalogues, use [the compact catalogue refresh standard](CATALOGUE_REFRESH.md). It supersedes this document's generated root index, file/download tables and duplicate final-image copies for those projects. The command and examples below describe the existing electronics-breakout adapter; it has not yet been changed to implement the new standard for arbitrary OOBB families. See [rollout notes](CATALOGUE_REFRESH_PROJECTS.md) before adapting it, and [the separate Git procedure](CATALOGUE_HISTORY_RESET.md) for an authorized history reset.
+
 ## Run
 
 Install Python 3.10+, Blender 4.2+ and the Python dependencies:

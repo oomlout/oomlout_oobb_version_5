@@ -21,7 +21,7 @@ def describe():
     variables.append({"name": "coupler_mount_rotation", "type": "number", "default": 45, "description": "Diagonal flange bolt pattern, leaving the orthogonal grub-screw access paths clear."})
     variables.append({"name": "coupler_grub_screw_from_flange", "type": "number", "default": 5, "description": "Grub-screw centre measured along the barrel from the flange top face; accessed from +X."})
     variables.append({"name": "bearing_radial_clearance", "type": "number", "default": 0.15, "description": "Radial allowance on the 17 mm 606 outer race."})
-    variables.append({"name": "oobb_holes", "type": "bool", "default": True, "description": "Available M6 holes on the 15 mm grid and intervening M3 holes on the 7.5 mm grid."})
+    variables.append({"name": "oobb_holes", "type": "bool", "default": True, "description": "M6 holes on the 15 mm grid, falling back to M3 where M6 cannot fit, plus intervening M3 holes on the 7.5 mm grid."})
     variables.append({"name": "oobb_hole_minimum_web", "type": "number", "default": 0.3, "description": "Minimum material between grid holes and the tooth roots or hardware envelopes, in mm."})
     variables.append({"name": "joining_rotation", "type": "number", "default": 45, "description": "Joining pattern offset: recessed couplers default to 0 degrees on the axes, other styles to 45 degrees."})
     variables.append({"name": "pos", "type": "list", "default": [0, 0, 0], "description": "Position after layout and rotation."})
@@ -70,6 +70,22 @@ def get_oobb_hole_layout(values):
         # A through screw must also clear the real metal flange projection.
         centre_radius = max(centre_radius, values["coupler"]["diameter_baseplate"] / 2)
 
+    def exclusion_reason(position, radius_name, radius):
+        distance = math.hypot(*position)
+        if distance + radius + web > values["root_radius"]:
+            return "tooth_root"
+        if distance - radius - web < centre_radius:
+            return "centre_feature"
+        if any(math.dist(position, joining) < radius + values["joining_head_radius"] + web for joining in values["joining_positions"]):
+            return "joining_fastener"
+        if any(math.dist(position, mount) < radius + values["mounting_head_radius"] + web for mount in values["mounting_positions"]):
+            return "coupler_fastener"
+        if values["allen_key_access_diameter"] and radius_name != "m6":
+            port_clearance = values["allen_key_access_diameter"] / 2 + radius + web
+            if position[0] >= 0 and abs(position[1]) < port_clearance:
+                return "allen_key_window"
+        return ""
+
     for grid_x in range(-extent, extent + 1):
         for grid_y in range(-extent, extent + 1):
             if grid_x == 0 and grid_y == 0:
@@ -79,29 +95,22 @@ def get_oobb_hole_layout(values):
             distance = math.hypot(*position)
             if distance > values["root_radius"]:
                 continue
-            radius_name = "m3"
-            if grid_x % 2 == 0 and grid_y % 2 == 0:
-                radius_name = "m6"
-            radius = max(oobb.gv("hole_radius_" + radius_name, mode) for mode in ["3dpr", "true", "laser"])
-            hole = {"position": position, "radius_name": radius_name, "radius": radius}
-            reason = ""
-            if distance + radius + web > values["root_radius"]:
-                reason = "tooth_root"
-            elif distance - radius - web < centre_radius:
-                reason = "centre_feature"
-            elif any(math.dist(position, joining) < radius + values["joining_head_radius"] + web for joining in values["joining_positions"]):
-                reason = "joining_fastener"
-            elif any(math.dist(position, mount) < radius + values["mounting_head_radius"] + web for mount in values["mounting_positions"]):
-                reason = "coupler_fastener"
-            elif values["allen_key_access_diameter"] and radius_name != "m6":
-                port_clearance = values["allen_key_access_diameter"] / 2 + radius + web
-                if position[0] >= 0 and abs(position[1]) < port_clearance:
-                    reason = "allen_key_window"
-            if reason:
-                hole["reason"] = reason
-                excluded.append(hole)
+            # Keep every usable M6 position. A rejected M6 candidate does not
+            # rule out a smaller M3 at the same OOBB coordinate; retry all
+            # keepouts, including the M3-specific Allen-key clearance.
+            sizes = ("m6", "m3") if grid_x % 2 == 0 and grid_y % 2 == 0 else ("m3",)
+            first_exclusion = None
+            for radius_name in sizes:
+                radius = max(oobb.gv("hole_radius_" + radius_name, mode) for mode in ["3dpr", "true", "laser"])
+                hole = {"position": position, "radius_name": radius_name, "radius": radius}
+                reason = exclusion_reason(position, radius_name, radius)
+                if not reason:
+                    positions.append(hole)
+                    break
+                if first_exclusion is None:
+                    first_exclusion = dict(hole, reason=reason)
             else:
-                positions.append(hole)
+                excluded.append(first_exclusion)
     return positions, excluded
 
 

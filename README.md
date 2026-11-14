@@ -6,6 +6,8 @@ For presentation colours, assembly views and exploded diagrams, see the [OOBB re
 
 For catalogue renders and linked parts tables, add this folder to PATH and run `oobb-present` from a breakout part folder, or `oobb-present --all` from its repository root. See the [catalogue presentation workflow](presentation/CATALOGUE.md).
 
+For the newer compact OOBB catalogue style, use the [catalogue refresh standard](presentation/CATALOGUE_REFRESH.md): folder links, text-only navigation, canonical studio renders, generator repairs and validated regeneration. The [project rollout notes](presentation/CATALOGUE_REFRESH_PROJECTS.md) identify the first targets; the [Git reset procedure](presentation/CATALOGUE_HISTORY_RESET.md) covers an authorized clean-history restart. These are implementation instructions; the existing `oobb-present` adapter has not yet been converted to this style.
+
 This repo appears to be the workshop version of the OOBB generator rather than a packaged end-user release. It contains the Python/OpenSCAD tooling, component definitions, dimensional data, generated previews, and migration scaffolding used to build and document OOBB geometry.
 
 ## What This Repo Is For
