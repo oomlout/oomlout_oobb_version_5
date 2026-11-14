@@ -27,7 +27,7 @@ SOURCES = [
     ("bearing-holders", "oomlout_oobb_part_holder_bearing_version_5", "parts/oobb_part_holder_90_degree_bearing_606_bearing_size_3_width_3_height_12_depth/3dpr_presentation.png"),
     ("electronic-parts", "oomlout_oobb_electronic_version_5", "parts/oobb_part_electronic_spacer_big_plate_3_width_3_height_4_depth/3dpr_presentation.png"),
     ("gears", "oomlout_oobb_gear_version_5", "parts/oobb_part_gear_big_scale_1_diameter_10_teeth_standard_style_6_mm_depth/3dpr_presentation.png"),
-    ("timing-pulleys", "oomlout_oobb_part_timing_pulley_version_5", "parts/oobb_part_timing_belt_coupler_gt2_6_depth_draw_tensioner_m3/3dpr_presentation.png"),
+    ("timing-pulleys", "oomlout_oobb_part_timing_pulley_version_5", "parts/oobb_part_timing_pulley_3_diameter_72_number_of_teeth_basic_9_depth_gt2/3dpr_presentation.png"),
     ("cycloidal-gearbox", "oomlout_oobb_part_motor_gearbox_cycloidal_version_5", "presentation/images/in-use.png"),
     ("motor-holders", "oomlout_oobb_part_holder_motor_version_5", "parts/oobb_part_holder_motor_gear_tt_5_width_3_height_23d5_depth_bearing_6704_version2/assembled_printed.png"),
     ("timing-belt-storage", "oomlout_oobb_part_timing_belt_storage_version_5", "parts/oobb_part_timing_belt_storage_reel_gt2_belt_size_11_diameter_6_depth/3dpr_presentation.png"),
