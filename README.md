@@ -1,98 +1,69 @@
-# oomlout_oobb_version_5
+# OOBB version 5
 
-Working repository for OOBB part and shape generation.
+AI-generated images and instructions. Errors possible.
 
-For presentation colours, assembly views and exploded diagrams, see the [OOBB render style guide](RENDER_STYLE.md).
+## Summary
 
-For catalogue renders and linked parts tables, add this folder to PATH and run `oobb-present` from a breakout part folder, or `oobb-present --all` from its repository root. See the [catalogue presentation workflow](presentation/CATALOGUE.md).
+OOBB version 5 provides parametric, 3D-printable parts for modular mounting and mechanical projects: plates, brackets, bearing holders, gears and complete mechanisms. This repository is the shared Python/OpenSCAD generator and the starting point for finding the separate project catalogues.
 
-For the newer compact OOBB catalogue style, use the [catalogue refresh standard](presentation/CATALOGUE_REFRESH.md): folder links, text-only navigation, canonical studio renders, generator repairs and validated regeneration. The [project rollout notes](presentation/CATALOGUE_REFRESH_PROJECTS.md) identify the first targets; the [Git reset procedure](presentation/CATALOGUE_HISTORY_RESET.md) covers an authorized clean-history restart. These are implementation instructions; the existing `oobb-present` adapter has not yet been converted to this style.
+This is an entirely AI-generated coding project. The generated outputs are included and usually work, but the main purpose of publishing it is to give others a starting point for modifying the project with their own AI tools.
 
-This repo appears to be the workshop version of the OOBB generator rather than a packaged end-user release. It contains the Python/OpenSCAD tooling, component definitions, dimensional data, generated previews, and migration scaffolding used to build and document OOBB geometry.
+[Browse the projects below](#details), or open the [generator and component guide](README_GENERATOR.md) to make or modify parts.
 
-## What This Repo Is For
+[![AI-generated CAD render of the OOBB cycloidal gearbox with teal housing, black output ring and yellow input journal](https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5/main/presentation/images/in-use.png)](https://github.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5)
 
-- Developing and tuning OOBB geometry and fastener/component helpers
-- Discovering components from per-folder `working.py` files under `components/`
-- Rendering OpenSCAD outputs and preview images
-- Generating JSON, HTML, and Markdown documentation for components
-- Keeping migration and regression tests around while the codebase is being restructured
+Example: the [cycloidal gearbox](https://github.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5). This CAD render shows the operating arrangement; the external motor, frame and load are omitted.
 
-## What This Repo Contains
+## Details
 
-- Core runtime modules such as `oobb.py`, `opsc.py`, and `oobb_variables.py`
-- `components/` with 60+ component folders, each centered on a `working.py`
-- Generated per-component docs such as `components/*/README.md` and `components/*/documentation_detail.html`
-- Test coverage under `tests/` plus generated test artifacts in `tests/test_runs/`
-- CSV-backed reference data in `data/oring/`
-- Archived legacy code and migration notes in `old/`
+### Published projects
 
-## Quick Tour
+Choose a project for its overview and build instructions, or use the last column to go straight to its part folders. Public links checked on 14 November 2026.
 
-- [`oobb.py`](./oobb.py): main OOBB runtime, variable access, dispatch, and part-building helpers
-- [`opsc.py`](./opsc.py): OpenSCAD/SolidPython rendering pipeline and image generation helpers
-- [`oobb_variables.py`](./oobb_variables.py): shared dimensional data, tolerances, screw sizes, bearings, and mode-specific values
-- [`components/`](./components/): component library, per-component docs, tests, and discovery-based tooling
-- [`components/documentation.py`](./components/documentation.py): exports JSON/HTML/Markdown documentation
-- [`components/run_tests.py`](./components/run_tests.py): per-folder object/set test runner
-- [`components/generate_all_component_tests.py`](./components/generate_all_component_tests.py): regenerates component preview assets
-- [`templates/`](./templates/): documentation templates used by the batch scripts
-- [`data/`](./data/): supporting data, including O-ring CSV tables and sample architecture experiments
-- [`tests/`](./tests/): regression tests, snapshots, and generated reports
-- [`old/`](./old/): archived code, migration helpers, and the current `oobb_arch` compatibility path
+| Project | What it provides | Find a part |
+| --- | --- | --- |
+| [Flat plates](https://github.com/oomlout/oomlout_oobb_part_plate_version_5) | General mounting and prototyping plates. | [Browse variants](https://github.com/oomlout/oomlout_oobb_part_plate_version_5/tree/main/navigation_oobb/oobb/part/plate/basic/) |
+| [Circle plates](https://github.com/oomlout/oomlout_oobb_part_plate_circle_version_5) | Circular mounting plates in several diameters. | [Browse variants](https://github.com/oomlout/oomlout_oobb_part_plate_circle_version_5/tree/main/navigation_oobb/oobb/part/plate/circle/) |
+| [L plates](https://github.com/oomlout/oomlout_oobb_part_plate_l_version_5) | Upright brackets, L plates and angle variants. | [Browse variants](https://github.com/oomlout/oomlout_oobb_part_plate_l_version_5/tree/main/navigation_oobb/oobb/part/) |
+| [U plates](https://github.com/oomlout/oomlout_oobb_part_plate_u_version_5) | U-shaped plates for mounting around an opening. | [Browse variants](https://github.com/oomlout/oomlout_oobb_part_plate_u_version_5/tree/main/navigation_oobb/oobb/part/plate_u/) |
+| [90-degree plates](https://github.com/oomlout/oomlout_oobb_part_plate_90_degree_version_5) | Plates for perpendicular mounting. | [Browse variants](https://github.com/oomlout/oomlout_oobb_part_plate_90_degree_version_5/tree/main/navigation_oobb/oobb/part/plate_90_degree/1_width/) |
+| [Plate cutouts](https://github.com/oomlout/oomlout_oobb_part_plate_cutout_version_5) | Plates with circular openings; a printable 30 mm demo and a wider source catalogue. | [Browse parts](https://github.com/oomlout/oomlout_oobb_part_plate_cutout_version_5/tree/main/parts/) |
+| [Bearing holders](https://github.com/oomlout/oomlout_oobb_part_holder_bearing_version_5) | Mounts selected by bearing size and holder style. | [Browse variants](https://github.com/oomlout/oomlout_oobb_part_holder_bearing_version_5/tree/main/navigation_oobb/oobb/part/) |
+| [Electronic parts](https://github.com/oomlout/oomlout_oobb_electronic_version_5) | Spacers and mounting parts for electronics. | [Browse variants](https://github.com/oomlout/oomlout_oobb_electronic_version_5/tree/main/navigation_oobb/oobb/part/electronic/) |
+| [Gears](https://github.com/oomlout/oomlout_oobb_gear_version_5) | Standard, flange, split, bearing and bevel variants. | [Browse variants](https://github.com/oomlout/oomlout_oobb_gear_version_5/tree/main/navigation_oobb/oobb/part/gear/) |
+| [Timing pulleys and couplers](https://github.com/oomlout/oomlout_oobb_part_timing_pulley_version_5) | Belt pulleys, idlers, couplers and tensioners. | [Browse variants](https://github.com/oomlout/oomlout_oobb_part_timing_pulley_version_5/tree/main/navigation_oobb/oobb/part/) |
+| [Cycloidal gearbox](https://github.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5) | A printable reduction mechanism with an illustrated assembly guide. | [Open V2 parts](https://github.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5/tree/main/parts/oobb_part_motor_gearbox_cycloidal_simple_double_bearing_version_2_20_to_1_reduction/) |
 
-## Installation / Setup
+The refreshed catalogues use text-only navigation. Follow the size or variant choices to a canonical part folder containing its README, metadata, CAD and available printable files. Width and height may be OOBB grid units rather than millimetres; use the selected project's dimensions and print instructions.
 
-Setup is currently manual.
+### Using the generator
 
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-```
+The [generator and component guide](README_GENERATOR.md) covers installation, the component library, preview generation, documentation commands and the current development setup. Start with its [component reference](README_GENERATOR.md#component-reference) when choosing shapes, holes or fastener cutouts.
 
-Also install OpenSCAD and make sure `openscad` or `openscad.com` is available on `PATH`.
+### Local projects
 
-Notes:
+Motor holders, timing-belt storage, the precision screwdriver and captive-nut plates are also present in the development workspace. They do not yet have verified public project pages with downloadable content. See the [local project locations](README_GENERATOR.md#local-projects) for their folder names and status.
 
-- The rendering pipeline in [`opsc.py`](./opsc.py) shells out to OpenSCAD for `.scad` and preview image generation.
-- Some older scripts appear to expect adjacent local tooling or paths, including OOMP/`oomB`, generated-parts repos, and Windows-specific absolute paths.
-- The component/documentation system currently imports `oobb_arch` from [`old/`](./old/), which is intentional in this repo state.
+## Parts
 
-## Examples
+These examples reuse the projects' published CAD renders. Click an image to open the corresponding part folder.
 
-Representative preview images already checked into the repo:
+### Flat plate
 
-### `oobb_screw`
+[![AI-generated CAD render of a teal OOBB 5 by 5 plate, shown in angled and top views](https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_plate_version_5/main/parts/oobb_part_plate_basic_5_width_5_height_3_depth/3dpr_presentation.png)](https://github.com/oomlout/oomlout_oobb_part_plate_version_5/tree/main/parts/oobb_part_plate_basic_5_width_5_height_3_depth/)
 
-![oobb_screw preview](./components/oobb_screw/test/test_1/image_400.png)
+A 5 by 5 OOBB plate, 3 mm thick, with a 74 by 74 mm outer envelope. The sheet shows the print-adjusted model.
 
-### `rounded_rectangle`
+### Bearing holder
 
-![rounded_rectangle preview](./components/rounded_rectangle/test/test_1/image_400.png)
+[![AI-generated CAD render of a 90-degree 606 bearing holder in its two-piece print layout](https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_holder_bearing_version_5/main/parts/oobb_part_holder_90_degree_bearing_606_bearing_size_3_width_3_height_12_depth/3dpr_presentation.png)](https://github.com/oomlout/oomlout_oobb_part_holder_bearing_version_5/tree/main/parts/oobb_part_holder_90_degree_bearing_606_bearing_size_3_width_3_height_12_depth/)
 
-More examples live under `components/*/test/`.
+A 90-degree holder for a 606 bearing. The sheet shows the printable pieces laid out separately; purchased bearings and mounting hardware are omitted.
 
-## Documentation Generation
+Hardware requirements belong to the selected project and variant. For the illustrated mechanism, use the gearbox's [hardware list](https://github.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5#parts) and [complete parts manifest](https://github.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5/blob/main/presentation/parts.csv).
 
-Documentation output is generated into:
+## Assembly
 
-- [`components/documentation_data.json`](./components/documentation_data.json)
-- [`components/documentation.html`](./components/documentation.html)
-- per-component `README.md` files under `components/*/`
-- per-component `documentation_detail.html` files under `components/*/`
+Open the chosen part folder and follow its print preparation and assembly instructions. Multipart projects specify their own bearings, fasteners, fit adjustments and assembly order; the gearbox includes an [illustrated sequence](https://github.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5#assembly) and an [assembly manual](https://github.com/oomlout/oomlout_oobb_part_motor_gearbox_cycloidal_version_5/blob/main/presentation/assembly-guide.pdf).
 
-The batch scripts regenerate those outputs and, in the `all` variant, also refresh component preview/test assets before regenerating docs again.
-
-## Related Repositories
-
-- [`oomlout/oomlout_oomp_version_5`](https://github.com/oomlout/oomlout_oomp_version_5): appears to be related OOMP data/tooling used elsewhere in the Oomlout stack
-- [`oomlout/oomlout_roboclick`](https://github.com/oomlout/oomlout_roboclick): related automation/action repo; this repo includes `data/sample architecture/` material that references RoboClick-style actions
-
-## Notes / Current State
-
-- This repo is mid-transition from older generator code to a per-component discovery architecture.
-- `old/` is not just archive material; some live compatibility imports still come from there.
-- A few scripts still contain hard-coded Windows paths or references to older generated-parts repositories.
-- Some generated `.scad` test artifacts contain absolute include paths, so this repo is best treated as a developer/workshop environment rather than a clean portable package.
+To create documentation for another OOBB project, use the [presentation workflow](presentation/README.md), [technical style](presentation/STYLE.md) and [render style](RENDER_STYLE.md). For a part catalogue, follow the [compact catalogue standard](presentation/CATALOGUE_REFRESH.md).
