@@ -1,8 +1,8 @@
 # OOBB project instructions
 
-Link catalogue names and thumbnails to the project, version or part's main README. Put the complete numbered assembly sequence and illustrations under its Assembly heading. Link HTML viewers and PDF downloads separately. Generate these destinations and written steps from the same project definitions on rebuild.
+Link catalogue names and thumbnails to the project, version or part's main README. Put the complete numbered assembly sequence and illustrations under its Assembly heading. Link the main assembly viewer to the live GitHub Pages site. Label offline copies and PDF downloads separately. Generate these destinations and written steps from the same project definitions on rebuild.
 
-For illustrated step-by-step assembly manuals, follow [the assembly instructions guide](ASSEMBLY_INSTRUCTIONS_GUIDE.md): signature-padded books with four numbered panels per landscape A4 instruction page, cumulative CAD without arrows, thumbnail quantity overlays and compact MD5-alpha typography, authored in the normal populate pipeline.
+For illustrated step-by-step assembly manuals, follow [the assembly instructions guide](ASSEMBLY_INSTRUCTIONS_GUIDE.md): signature-padded books with four numbered panels per landscape A4 instruction page, cumulative CAD without arrows, quantity labels 1 mm outside each thumbnail’s lower-right edge and compact MD5-alpha typography, authored in the normal populate pipeline.
 
 The HTML assembly viewer must default to those same four-step landscape A4 pages, starting with steps 1-4. Navigate by page and preserve the 2 x 2 grid on narrow screens with zoom/pan. Individual step images are secondary assets, not the default viewer layout.
 
