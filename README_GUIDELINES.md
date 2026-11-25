@@ -21,3 +21,5 @@ Put preparation, numbered assembly actions, illustrations and fit notes in the m
 The primary HTML assembly link opens the four-step landscape A4 page viewer, initially showing steps 1-4. Its pages must match the PDF. Keep individual panel images available from the detailed written instructions; do not make a one-step slideshow the primary assembly link.
 
 Define descriptions, credits and version rows in the project's populate code and generate the landing README through the usual populate → working_oomp → working_scad progression. Changes must survive regeneration. This version-index layout takes precedence over the older four-section landing layout for multipart assembly projects; individual part catalogues retain their catalogue conventions. Store graphics and instructions inside each version's parts directory.
+
+Link directly to the part folder and its individual manufacturing files. Publish models, artwork and instructions as loose files and omit generated ZIP downloads.

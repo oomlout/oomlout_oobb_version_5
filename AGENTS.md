@@ -13,3 +13,7 @@ For project README images, illustrated assembly instructions or repeatable prese
 For project READMEs, follow [the README guidelines](README_GUIDELINES.md). Place the project description and verified inspiration credit at the top. Explain that this is an entirely AI-generated coding project, the source is largely unreadable by humans, usable generated files are included, and publication lets others modify it with their own AI tools. The image/error notice alone does not replace this explanation. Multipart assembly projects use a versions table with an image, description, version README, hosted HTML instructions and PDF download.
 
 For a version-five catalogue refresh, read [the catalogue refresh standard](presentation/CATALOGUE_REFRESH.md), [project rollout notes](presentation/CATALOGUE_REFRESH_PROJECTS.md) and, when a history reset is authorized, [the Git reset procedure](presentation/CATALOGUE_HISTORY_RESET.md). The refresh includes focused generator/build-code repairs, compact READMEs without file inventories, directory-based discovery, text-only navigation and canonical studio images. These documents define planned work; they do not themselves authorize changing other repositories or resetting history.
+
+## Manufacturing files in Git
+
+Publish SCAD, STL, DXF, artwork and instructions as individual files in their part folder. Link to those files or the folder from the README. Omit ZIP bundles from generation, staging and commits, including print kits, label packs and navigation copies.
