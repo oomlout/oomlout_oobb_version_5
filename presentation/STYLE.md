@@ -4,6 +4,8 @@ Use the object and its assembly as the primary visual information. This guidance
 
 ## Page design
 
+For multipart assembly books, [ASSEMBLY_INSTRUCTIONS_GUIDE.md](../ASSEMBLY_INSTRUCTIONS_GUIDE.md) overrides the general page suggestions below. Use four steps per landscape A4 page in both the PDF and primary HTML viewer. The browser opens at steps 1-4 and keeps the same page grid, with zoom for narrow screens.
+
 - White page, dark grey text, restrained teal for dimension lines and leaders. Keep the existing warm studio background within renders.
 - One plain descriptive title per page. Use sentence case. Omit breadcrumb headers, slash-separated metadata bands, pills, dashboards, decorative cards and slogans.
 - Default example size: 900 x 675 pt landscape, 42 pt margins. Title 28 pt, body 10.5-11 pt, captions 9.5 pt, footer 8 pt. Use a plain sans-serif font with one bold weight. Increase type size for a different output scale rather than squeezing text.
@@ -14,6 +16,8 @@ Use the object and its assembly as the primary visual information. This guidance
 - Use only the page number and an AI notice in the footer. Put revision/date once near the front and in the manifest.
 
 ## README design
+
+For multipart assembly project landing pages, the [README guidelines](../README_GUIDELINES.md) take precedence: lead with the description, credit and AI notice, then show a versions table with browser-viewable HTML assembly instructions. Keep detailed parts and assembly text in each version's README.
 
 For compact OOBB part catalogues, apply the specific [catalogue refresh rules](CATALOGUE_REFRESH.md): keep the four sections and AI notices, show one representative example, link discovery and part choices to directories, and omit full catalogue/file/download tables. Store each finished catalogue render once beside its canonical mesh and reference it from navigation. These catalogue rules refine the general assembly-package image and download layout below; retain real hardware and assembly documentation for multipart projects.
 

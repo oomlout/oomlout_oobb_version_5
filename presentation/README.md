@@ -12,6 +12,12 @@ For a compact version-five OOBB catalogue refresh, follow [CATALOGUE_REFRESH.md]
 
 ## Deliverables
 
+Put the written assembly sequence and its illustrations directly in the main README for the project or build. Use that README as the primary destination for its catalogue entry and thumbnail. Give the HTML viewer and PDF their own labelled links.
+
+Multipart assembly instructions follow [the assembly book guide](../ASSEMBLY_INSTRUCTIONS_GUIDE.md): both PDF and primary HTML viewer show four steps per landscape A4 page in a 2 x 2 grid. Open the viewer at steps 1-4 and navigate by whole pages. Keep individual step images for companion notes. The reusable [page viewer template](templates/assembly_page_viewer.html) preserves PDF page images, hardware hyperlink overlays, zoom and landscape browser printing.
+
+For multipart assembly project landing pages, follow the newer [README guidelines](../README_GUIDELINES.md): description, inspiration credit, standard AI notice and a versions table linking each build's README, hosted HTML instructions and PDF. That layout takes precedence over the four-section landing layout below.
+
 Each downstream project has a `presentation/` directory:
 
 ```text

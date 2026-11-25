@@ -37,6 +37,8 @@ def describe():
     v.append({"name": 'size', "description": 'Overall [x,y,z] dimensions in mm.', "type": 'list', "default": '[20,10,5]'})
     v.append({"name": 'radius', "description": 'Corner radius of the base shape.', "type": 'number', "default": 5})
     v.append({"name": 'radius_rounded', "description": 'Rounding radius for top/bottom edges.', "type": 'number', "default": 2.5})
+    v.append({"name": 'radius_top', "description": 'Optional top-edge radius; 0 leaves it square. Omitted uses radius_rounded.', "type": 'number', "default": None})
+    v.append({"name": 'radius_bottom', "description": 'Optional bottom-edge radius; 0 leaves it square. Omitted uses radius_rounded.', "type": 'number', "default": None})
     v.append({"name": 'extra', "description": 'Extra variant/modifier string.', "type": 'string', "default": '""'})
     v.append({"name": 'rot', "description": 'Rotation [rx,ry,rz] in degrees.', "type": 'list', "default": '[0,0,0]'})
     v.append({"name": 'rot_x', "description": 'X rotation in degrees.', "type": 'number', "default": 0})
@@ -53,7 +55,49 @@ def define():
     defined_variable = {}
     defined_variable.update(d)
     return defined_variable
+def _independent_edges(**kwargs):
+    """Opt-in edge radii; the existing implementation remains the default."""
+    import math
+    import opsc
+    size = list(kwargs.get("size", [20, 10, 5]))
+    radius = kwargs.get("radius", 5)
+    default = kwargs.get("radius_rounded", 2.5)
+    top = kwargs.get("radius_top")
+    bottom = kwargs.get("radius_bottom")
+    top = default if top is None else top
+    bottom = default if bottom is None else bottom
+    values = size + [radius, top, bottom]
+    if len(size) != 3 or any(isinstance(v, bool) or not isinstance(v, (float, int)) or not math.isfinite(v) for v in values):
+        raise ValueError("Size and edge radii must be finite numbers")
+    if min(size) <= 0 or not 0 < radius <= min(size[:2])/2:
+        raise ValueError("Size must be positive and plan radius must fit the outline")
+    if min(top, bottom) < 0 or max(top, bottom) > radius or top + bottom > size[2]:
+        raise ValueError("Edge radii must be nonnegative, fit the plan radius and sum to at most the depth")
+    source = '''module oobb_rounded_rectangle_edges(size, radius, radius_top, radius_bottom) {
+      rt=radius_top; rb=radius_bottom; depth=size[2]; n=16;
+      lower=rb==0 ? [[radius,0]] :
+        [for(i=[0:n]) let(a=-90+90*i/n) [radius-rb+rb*cos(a),rb+rb*sin(a)]];
+      upper=rt==0 ? [[radius,depth]] :
+        [for(i=[0:n]) let(a=90*i/n) [radius-rt+rt*cos(a),depth-rt+rt*sin(a)]];
+      hull() for(x=[-size[0]/2+radius,size[0]/2-radius])
+        for(y=[-size[1]/2+radius,size[1]/2-radius])
+          translate([x,y,0]) rotate_extrude()
+            polygon(concat([[0,0]],lower,upper,[[0,depth]]));
+    }'''
+    raw = opsc.opsc_easy(shape="raw_scad", type="positive", pos=[0,0,0],
+        source=source, module="oobb_rounded_rectangle_edges",
+        module_kwargs=dict(size=size, radius=radius, radius_top=top, radius_bottom=bottom))
+    result = dict(type="rotation", typetype=kwargs.get("type", "p"),
+        pos=copy.deepcopy(kwargs.get("pos", [0,0,0])), rot=get_rot(**kwargs), objects=[raw])
+    for key in ("inclusion", "m"):
+        if key in kwargs:
+            result[key] = kwargs[key]
+    return [result]
+
+
 def action(**kwargs):
+    if kwargs.get("radius_top") is not None or kwargs.get("radius_bottom") is not None:
+        return _independent_edges(**kwargs)
     import oobb
     import opsc
     """Geometry component."""

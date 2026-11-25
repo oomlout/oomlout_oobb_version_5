@@ -146,6 +146,7 @@ Checked on 14 November 2026. These folders are siblings of this repository in th
 
 | Project | Folder beside this checkout | Availability |
 | --- | --- | --- |
+| [Tool holders](https://github.com/oomlout/oomlout_oobb_part_holder_tool_version_5#readme) | `oomlout_oobb_part_holder_tool_version_5/` | Link the project name and thumbnail to the main README. The [Assembly section](https://github.com/oomlout/oomlout_oobb_part_holder_tool_version_5#assembly) contains the four illustrated sequences. [Print booklets (PDF)](presentation/tool-holders/README.md). |
 | Motor holders | `oomlout_oobb_part_holder_motor_version_5/` | Local TT, servo and NEMA work; no Git remote configured. |
 | Timing-belt storage | `oomlout_oobb_part_timing_belt_storage_version_5/` | Local storage-reel catalogue; no Git remote configured. |
 | Precision screwdriver | `oomlout_oobb_tool_precision_screwdriver_version_5/` | Local components, fit samples and assembly notes; no Git remote configured. |

@@ -102,15 +102,15 @@
     },
     {
       "project": "oomlout_oobb_part_holder_bearing_version_5",
-      "source_path": "parts/oobb_part_holder_90_degree_bearing_606_bearing_size_3_width_3_height_12_depth/3dpr_presentation.png",
-      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_holder_bearing_version_5/main/parts/oobb_part_holder_90_degree_bearing_606_bearing_size_3_width_3_height_12_depth/3dpr_presentation.png",
-      "source_sha256": "0a67238d312a13094c0792dc4fd37ca7c6b3c701246002994f14f99c3c8f746e",
+      "source_path": "parts/oobb_part_holder_bearing_6810_bearing_size_7_width_5_height_15_depth/assembly.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_part_holder_bearing_version_5/main/parts/oobb_part_holder_bearing_6810_bearing_size_7_width_5_height_15_depth/assembly.png",
+      "source_sha256": "1654deb2e9cf9ff3f4c29e8fa83b5e9e11968b1d231d2993d38c236a22e5930b",
       "source_dimensions": [
-        1600,
-        1000
+        1800,
+        1200
       ],
       "thumbnail": "bearing-holders.png",
-      "thumbnail_sha256": "f6c8057b342c21dcac668433a3b2edb86452f78cc26156c536a365a1848919b0",
+      "thumbnail_sha256": "5d070088b5a137e57e4339a092527389b6c4931a00a05a916b82936365f24dc8",
       "thumbnail_dimensions": [
         280,
         210
@@ -118,15 +118,15 @@
     },
     {
       "project": "oomlout_oobb_electronic_version_5",
-      "source_path": "parts/oobb_part_electronic_spacer_big_plate_3_width_3_height_4_depth/3dpr_presentation.png",
-      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_electronic_version_5/main/parts/oobb_part_electronic_spacer_big_plate_3_width_3_height_4_depth/3dpr_presentation.png",
-      "source_sha256": "a4d362d77e547dd87ff8ad970366b37d0bf8a57f36a148f0f4c55f6a0df85ccb",
+      "source_path": "parts/oobb_part_electronic_wire_basic_plate_3_width_3_height_4_depth/basic_wire_assembled.png",
+      "source_url": "https://raw.githubusercontent.com/oomlout/oomlout_oobb_electronic_version_5/main/parts/oobb_part_electronic_wire_basic_plate_3_width_3_height_4_depth/basic_wire_assembled.png",
+      "source_sha256": "7736283430dfda23c72453e5a9671d5007a1da5f4f5a6e65fbe65ceb87919732",
       "source_dimensions": [
         1600,
-        1000
+        1080
       ],
       "thumbnail": "electronic-parts.png",
-      "thumbnail_sha256": "4d9bff51c536671d1d646797e0b4312abdc7caf690a6daf02420d9ad5dd004da",
+      "thumbnail_sha256": "dce704fd58f76fa97c2ba4192a4cde116f4bcc7582a0772da981d5a95547bbb7",
       "thumbnail_dimensions": [
         280,
         210
@@ -175,6 +175,22 @@
       ],
       "thumbnail": "cycloidal-gearbox.png",
       "thumbnail_sha256": "1ec6eddb10366f850a598a1fd1880239f69e92ae42b0cd94bed3da83d4148147",
+      "thumbnail_dimensions": [
+        280,
+        210
+      ]
+    },
+    {
+      "project": "oomlout_oobb_part_holder_tool_version_5",
+      "source_path": "parts/oobb_part_holder_tool_pliers_needle_nose_130mm_1_place_5x5x12/3dpr_presentation.png",
+      "source_url": null,
+      "source_sha256": "0712d30b9e4b9bee790448c00954a57b7101f46b98eb298faf4c3019c1419820",
+      "source_dimensions": [
+        1280,
+        724
+      ],
+      "thumbnail": "tool-holders.png",
+      "thumbnail_sha256": "766051260e8556981cfd606618f53722d47c40436209c0fa54b745e15ae7b850",
       "thumbnail_dimensions": [
         280,
         210

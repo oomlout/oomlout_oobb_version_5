@@ -2,7 +2,7 @@
 
 Run: python presentation/scripts/build_project_thumbnails.py
 Sibling checkouts supply local images. Public sources can be downloaded when a
-checkout is absent; the four local projects require their source checkout.
+checkout is absent; the local projects require their source checkout.
 """
 
 from pathlib import Path
@@ -24,28 +24,32 @@ SOURCES = [
     ("u-plates", "oomlout_oobb_part_plate_u_version_5", "parts/oobb_part_plate_u_10_width_10_height_15_mm_depth/3dpr_presentation.png"),
     ("90-degree-plates", "oomlout_oobb_part_plate_90_degree_version_5", "parts/oobb_part_plate_90_degree_1_width_10_height_14_mm_depth/3dpr_presentation.png"),
     ("plate-cutouts", "oomlout_oobb_part_plate_cutout_version_5", "parts/oobb_part_plate_cutout_30_diameter_cutout_1_multiple_buffer_middle_5_width_5_height_3_depth/3dpr.png"),
-    ("bearing-holders", "oomlout_oobb_part_holder_bearing_version_5", "parts/oobb_part_holder_90_degree_bearing_606_bearing_size_3_width_3_height_12_depth/3dpr_presentation.png"),
-    ("electronic-parts", "oomlout_oobb_electronic_version_5", "parts/oobb_part_electronic_spacer_big_plate_3_width_3_height_4_depth/3dpr_presentation.png"),
+    ("bearing-holders", "oomlout_oobb_part_holder_bearing_version_5", "parts/oobb_part_holder_bearing_6810_bearing_size_7_width_5_height_15_depth/assembly.png"),
+    ("electronic-parts", "oomlout_oobb_electronic_version_5", "parts/oobb_part_electronic_wire_basic_plate_3_width_3_height_4_depth/basic_wire_assembled.png"),
     ("gears", "oomlout_oobb_gear_version_5", "parts/oobb_part_gear_big_scale_1_diameter_10_teeth_standard_style_6_mm_depth/3dpr_presentation.png"),
     ("timing-pulleys", "oomlout_oobb_part_timing_pulley_version_5", "parts/oobb_part_timing_pulley_3_diameter_72_number_of_teeth_basic_9_depth_gt2/3dpr_presentation.png"),
     ("cycloidal-gearbox", "oomlout_oobb_part_motor_gearbox_cycloidal_version_5", "presentation/images/in-use.png"),
+    ("tool-holders", "oomlout_oobb_part_holder_tool_version_5", "parts/oobb_part_holder_tool_pliers_needle_nose_130mm_1_place_5x5x12/3dpr_presentation.png"),
     ("motor-holders", "oomlout_oobb_part_holder_motor_version_5", "parts/oobb_part_holder_motor_gear_tt_5_width_3_height_23d5_depth_bearing_6704_version2/assembled_printed.png"),
     ("timing-belt-storage", "oomlout_oobb_part_timing_belt_storage_version_5", "parts/oobb_part_timing_belt_storage_reel_gt2_belt_size_11_diameter_6_depth/3dpr_presentation.png"),
     ("precision-screwdriver", "oomlout_oobb_tool_precision_screwdriver_version_5", "parts/tool_precision_screwdriver_version_1_bit_lock/3dpr_presentation.png"),
     ("captive-nut-plates", "oomlout_oobb_part_plate_captive_nut_version_5", "parts/oobb_part_plate_captive_nut_m6_basic_3_width_3_height_12_assembly_depth_base_9_depth/3dpr_presentation.png"),
 ]
-LOCAL = {"motor-holders", "timing-belt-storage", "precision-screwdriver", "captive-nut-plates"}
+LOCAL = {"tool-holders", "motor-holders", "timing-belt-storage", "precision-screwdriver", "captive-nut-plates"}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--projects-root", type=Path, default=ROOT.parent)
+    parser.add_argument("--filter", choices=[s[0] for s in SOURCES], help="Refresh one project, preserving other thumbnails and their source records")
     args = parser.parse_args()
     out = ROOT / "presentation/images/projects"
     out.mkdir(parents=True, exist_ok=True)
     font = ImageFont.load_default(size=10)
     records = []
     for slug, repo, path in SOURCES:
+        if args.filter and slug != args.filter:
+            continue
         local = args.projects_root / repo / path
         url = f"https://raw.githubusercontent.com/oomlout/{repo}/main/{path}"
         if local.is_file():
@@ -89,12 +93,18 @@ def main():
             record["hero"] = hero_path.name
             record["hero_sha256"] = hashlib.sha256(hero_path.read_bytes()).hexdigest()
         records.append(record)
-    (out / "sources.json").write_text(json.dumps({
+    manifest = out / "sources.json"
+    if args.filter and manifest.exists():
+        replaced = {r['project'] for r in records}
+        records += [r for r in json.loads(manifest.read_text(encoding='utf-8'))['images'] if r['project'] not in replaced]
+        order = {repo: i for i, (_, repo, _) in enumerate(SOURCES)}
+        records.sort(key=lambda r: order[r['project']])
+    manifest.write_text(json.dumps({
         "description": "Existing CAD renders, downsampled for the project index. Full source frames retained; thumbnails add an AI notice. No geometry changes.",
         "command": "python presentation/scripts/build_project_thumbnails.py",
         "images": records,
     }, indent=2) + "\n", encoding="utf-8")
-    print(f"Wrote {len(records)} thumbnails and one plate hero to {out}")
+    print(f"Updated {args.filter or 'all project thumbnails'}; {len(records)} source records in {out}")
 
 
 if __name__ == "__main__":

@@ -126,7 +126,7 @@ Use the same four headings and notices. Include:
 4. A small table of decision-making metadata: dimensions with units, variant,
    bearing designation, angle, belt profile or other fields appropriate to the family.
 5. All original part metadata in a collapsed `<details>` block, serialized as YAML.
-6. Actual part/assembly instructions and retained hand-written technical notes.
+6. The complete written assembly sequence and available step illustrations under Assembly, together with retained hand-written technical notes. Guide links from other catalogue pages should open this README. List the HTML viewer and printable booklet as additional formats.
 
 No `### Downloads` inventory or `File | Bytes` table. Say which variant is for
 printing when that distinction exists; the files themselves remain browsable in
